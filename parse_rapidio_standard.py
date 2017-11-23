@@ -11,13 +11,15 @@
     Sentence
     - Requirement (all sentences containing "shall" or "must") or
     - Recommendation (all sentences containing "should", "recommend")
-        
+
 """
 
 from optparse import OptionParser
 import re
 import sys
 import os
+
+PRINT_TRACE = False
 
 REVISION = "Revision"
 PART = "Part"
@@ -68,13 +70,21 @@ def validate_options(options):
         options.part_name = '*'
     return options
 
+def remove_number_prefix(s):
+    if s[0] >= '0' and s[0] <= '9':
+        return remove_number_prefix(s[1:])
+    return s
+
+# split_into_sentences and the constants below were adapted from on code at
+# https://stackoverflow.com/questions/4576077/python-split-text-on-sentences
+
 caps = "([A-Z])"
 prefixes = "(Mr|St|Mrs|Ms|Dr)[.]"
 suffixes = "(Inc|Ltd|Jr|Sr|Co)"
 starters = "(Mr|Mrs|Ms|Dr|He\s|She\s|It\s|They\s|Their\s|Our\s|We\s|But\s|However\s|That\s|This\s|Wherever)"
 acronyms = "([A-Z][.][A-Z][.](?:[A-Z][.])?)"
 websites = "[.](com|net|org|io|gov)"
-digits = "([0-9])" 
+digits = "([0-9])"
 
 def split_into_sentences(text):
     text = re.sub(prefixes,"\\1<prd>",text)
@@ -99,6 +109,7 @@ def split_into_sentences(text):
     sentences = text.split("<stop>")
     sentences = sentences[:-1]
     sentences = [s.strip() for s in sentences]
+    sentences = [remove_number_prefix(s) for s in sentences]
     return sentences
 
 # Sneaky: Remove XML but replace tags with periods.
@@ -108,18 +119,24 @@ def remove_xml(text):
     return re.sub(r'\<[^>]+\>', " . ", text)
 
 def parse_sections(sections, part_name, chapter_name, section_number):
-    REQT_KW = ["must", "shall"]
+    REQT_KW = ["must", "shall", "Do not depend"]
     REC_KW = ["should", "recommend"]
     SECTION_END = "</"
 
     reqts = []
+    section_name = chapter_name
+
     for sect in sections:
-        if sect[0] < '0' or sect[0] > '9':
-            continue
-        sect = section_number + sect
-        heading_end = sect.find(SECTION_END)
-        section_name = sect[:heading_end].strip()
-        print "section_name :" + section_name
+        heading_end = 0
+        if sect[0] >= '0' and sect[0] <= '9':
+            sect = section_number + sect
+            heading_end = sect.find(SECTION_END)
+            temp = sect[:heading_end].strip()
+            tokens = temp.split(' ')
+            if len(tokens) > 1 and (tokens[0][-1] >= '0' and tokens[0][-1] <= '9'):
+                section_name = temp
+                if PRINT_TRACE:
+                    print "section_name :" + section_name
         sect = remove_xml(sect)
         sentences = split_into_sentences(sect[heading_end + len(SECTION_END):])
         for s in sentences:
@@ -140,26 +157,33 @@ def parse_sections(sections, part_name, chapter_name, section_number):
             reqts.append(new_reqt)
     return reqts
 
-def parse_chapters(heading_1s, part_name):
-    h1_start = ">"
-    h1_end = r"</H1>"
+def parse_chapters(chapters, part_name):
+    CH_END = r"</"
 
     reqts = []
-    for h1 in heading_1s:
-        start_idx = h1.find(h1_start) + len(h1_start)
-        end_idx = start_idx + h1[start_idx:].find(h1_end) + len(h1_end)
-        chapter_name = h1[start_idx:end_idx].strip()
-        if chapter_name.find("Chapter") < 0:
+    chapter_number = None
+    section_number = None
+    section_prefix = None
+    for chapter in chapters:
+        chapter = "Chapter " + chapter
+        end_idx = chapter.find(CH_END)
+        new_chapter_name = chapter[:end_idx].strip()
+        end_idx += len(CH_END)
+        end_idx += chapter[end_idx:].find('>') + len('>')
+        chapter_number_found = re.search(r"Chapter ([0-9]*) ", new_chapter_name)
+        if chapter_number_found:
+            chapter_number = chapter_number_found.group(1).strip()
+            chapter_name = new_chapter_name
+            if PRINT_TRACE:
+                print "chapter_name: '" + chapter_name + "'"
+        if chapter_number is None:
+            if PRINT_TRACE:
+                print "No chapter number found yet, skipping"
+                print chapter
             continue
-        print "chapter_name: '" + chapter_name + "'"
-        chapter_number_found = re.search("Chapter ([0-9]*)", chapter_name)
-        if not chapter_number_found:
-            print "Skipping chapter, no number found..."
-            continue
-        chapter_number = chapter_number_found.group(1)
         section_number = chapter_number + "."
         section_prefix = r">" + chapter_number + r"."
-        sections = h1[end_idx:].split(section_prefix)
+        sections = chapter[end_idx:].split(section_prefix)
         reqts += parse_sections(sections, part_name, chapter_name, section_number)
     return reqts
 
@@ -173,20 +197,40 @@ def condition_text(text):
     text = re.sub('•', '', text)
     text = re.sub("“", '"', text)
     text = re.sub("”", '"', text)
+    text = re.sub("’", "'", text)
     text = re.sub('LogicalSpecification', 'Logical Specification', text)
     text = re.sub('SpecificationPart', 'Specification Part', text)
     text = re.sub('PhysicalLayer', 'Physical Layer', text)
     text = re.sub('DeviceInter-operability', 'Device Inter-operability', text)
+    text = re.sub('4.2.7 Type 3–4 Packet Formats \(Reserved\)',
+                  '<P>4.2.7 Type 3–4 Packet Formats (Reserved) </P>', text)
+    text = re.sub('4.2.8 Type 5 Packet Format \(Write Class\)',
+                  '<P>4.2.8 Type 5 Packet Format (Write Class) </P>', text)
     text = re.sub('RapidIOTM', 'RapidIO', text)
     text = re.sub('3.0, 10/2013 © Copyright RapidIO.org ', '', text)
+    text = re.sub('[0-9+] RapidIO.org', '', text)
+    text = re.sub('RapidIO.org [0-9+]', '', text)
     text = re.sub(r" id=\"LinkTarget_[0-9]*\">", r'>',  text)
     return text
+
+# Work around embedded specification part references in
+# Version 4.0, Part 10 Chapter 5
+def fixup_parts(parts):
+    new_parts = []
+    for part in parts:
+        chapter_number_found = re.search(r"Chapter ([0-9]*) ", part)
+        if chapter_number_found:
+            new_parts.append(part)
+        else:
+            if len(new_parts) > 0:
+               new_parts[-1] += part
+    return new_parts
 
 def parse_parts(spec_file_name, target_part):
     part_header = "RapidIO Interconnect Specification "
     annex = "Annex"
     reqts = []
-    
+
     target_number = None
     target_is_annex = None
 
@@ -194,9 +238,10 @@ def parse_parts(spec_file_name, target_part):
     if found_number:
         target_number = int(found_number.group(1))
         target_is_annex = target_part.find(annex) >= 0
-        print "target_number ", target_number
-        print "target_is_annex ", target_is_annex
-    
+        if PRINT_TRACE:
+            print "target_number ", target_number
+            print "target_is_annex ", target_is_annex
+
     spec_file = open(spec_file_name)
     all_text = spec_file.read()
     spec_file.close()
@@ -204,6 +249,7 @@ def parse_parts(spec_file_name, target_part):
     all_text = " " + all_text + "  "
     all_text = condition_text(all_text)
     parts = all_text.split( ">" + part_header)
+    parts = fixup_parts(parts)
     part_name = ''
     part_number = ''
     part_annex = False
@@ -221,19 +267,24 @@ def parse_parts(spec_file_name, target_part):
             new_part_annex = new_part_name.find("Annex") >= 0
             if (part_name == ''
                 or (new_part_annex and not part_annex)
-                or (not (new_part_annex ^ part_annex) 
+                or (not (new_part_annex ^ part_annex)
                     and (new_part_number > part_number))):
                 part_name = new_part_name
                 part_number = new_part_number
                 part_annex = new_part_annex
-        print "part_name: " + part_name
-        
-        if not target_number is None:
-            if ((not part_number == target_number)
+        if PRINT_TRACE:
+            print ("part_name: " + part_name + " number " + str(part_number)
+                 + " annex " + str(part_annex))
+
+        if target_number is not None:
+            if part_number is None or part_number == '':
+                continue
+            sys.stdout.flush()
+            if ((not int(part_number) == int(target_number))
                 or not (target_is_annex == part_annex)):
                 continue
-        heading_1s = part[len(new_part_name):].split('<H1')
-        reqts += parse_chapters(heading_1s, part_name)
+        chapters = part[len(new_part_name):].split('>Chapter ')
+        reqts += parse_chapters(chapters, part_name)
     return reqts
 
 def main(argv = None):
@@ -251,9 +302,9 @@ def main(argv = None):
     options = validate_options(options)
 
     reqts = parse_parts(options.filename_of_standard, options.part_name)
-    
+
     if len(reqts) == 0:
-        print "No requirements found for Part " + options.part_name
+        print "No requirements found for " + options.part_name
         return 0
 
     print_reqts(reqts)
