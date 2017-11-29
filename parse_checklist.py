@@ -112,21 +112,46 @@ def cleanup_text(text):
         text = text[start_txt:]
     return text.strip()
 
-# Parses the first non-empty column, looking for one of two patterns:
-# A) [0-9]*\. (digits 0-9, followed by a period)
-#    In this case, the requirement sentence is found in the next column.
-# B) ITEM [0-9]+[A-Z][0-9]*: SENTENCE"
-#    In this case, the requirement sentence is part of the checklist item.
+def make_id(chklist_id, table_num):
+    return "Table " + str(table_num) + " Item " + chklist_id.strip()
+
+def check_sentence_for_subitem_pattern(column, item_col, reqt, table_num):
+    SUBITEM_RE =  r"([0-9]+[A-Z][0-9]*)\: Detail: "
+
+    subitem_pattern = re.compile(SUBITEM_RE)
+    result = subitem_pattern.match(column)
+    if result:
+        temp = result.group(0).strip()
+        item_id_end = temp.find(":")
+        reqt[CHKLIST_ID] = make_id(temp[0:item_id_end].strip(), table_num)
+        sentence_start = len(result.group(0))
+        reqt[SENTENCE] = cleanup_text(column[sentence_start:])
+        reqt[TYPE] = "REQUIREMENT"
+        reqt[PART] = item_col
+    return reqt
+
+# Parses the first non-empty column, looking for one of the following patterns:
+# (A) [0-9]*\. (digits 0-9, followed by a period)
+#     In this case, the requirement sentence is found in the next column.
+# (B) ITEM [0-9]+[A-Z][0-9]*: SENTENCE"
+#     In this case, the requirement sentence is part of the checklist item.
+# (C) [0-9]+[A-Z][0-9]*: Detail: SENTENCE
+#
 # The return is an updated requirement with the CHECKLIST_ID and SENTENCE
 # updated based on the above.
 #
 # Additionally, the PART entry is updated with the column number which
 # should have the specification reference
+#
+# Note: in the Error Management Checklist.xml, it is possible to have both an
+# (A) item identifier and a sentence that starts with (C) in an XML table row.
+# In this case, the item identifer should be (C)
 
-def get_checklist_item_and_sentence(cols, reqt, options):
+def get_checklist_item_and_sentence(cols, reqt, options, table_num):
     ITEM_CHKLIST = "ITEM "
     CHKLIST_RE = r"([0-9]+\.)"
     checklist_pattern = re.compile(CHKLIST_RE)
+
     column = ''
     item_col = -1
 
@@ -141,10 +166,11 @@ def get_checklist_item_and_sentence(cols, reqt, options):
 
     checklist_id = None
 
-    if column[0:len(ITEM_CHKLIST)] == ITEM_CHKLIST:
+    if column.startswith(ITEM_CHKLIST):
         colon = column.find(":")
         if colon > 0:
-            reqt[CHKLIST_ID] = column[len(ITEM_CHKLIST):colon].strip()
+            x = make_id(column[len(ITEM_CHKLIST):colon].strip(), table_num)
+            reqt[CHKLIST_ID] = x
             reqt[SENTENCE] = column[colon + 1:].strip()
             reqt[TYPE] = "REQUIREMENT"
             reqt[PART] = item_col + 1
@@ -152,11 +178,15 @@ def get_checklist_item_and_sentence(cols, reqt, options):
 
     result = checklist_pattern.match(column)
     if result:
-        reqt[CHKLIST_ID] = result.group(0).strip()
+        x = make_id(result.group(0)[:-1].strip(), table_num)
+        reqt[CHKLIST_ID] = x
         reqt[SENTENCE] = cleanup_text(cols[item_col + 1])
         reqt[TYPE] = "REQUIREMENT"
         reqt[PART] = item_col + 2
+        reqt = check_sentence_for_subitem_pattern(reqt[SENTENCE], item_col + 2, reqt, table_num)
+        return reqt
 
+    reqt = check_sentence_for_subitem_pattern(column, item_col + 1, reqt, table_num)
     return reqt
 
 # Parse first column which has one or more lines of the form:
@@ -182,6 +212,22 @@ def get_part_chapter_section(cols, reqt, options):
         reqts.append(copy.copy(reqt))
     return reqts
 
+def parse_table_header_row(cols):
+    TABLE_TITLE = "<_TBTitle>Table"
+    new_table_num = None
+    for col in cols:
+        start_table_num = col.find(TABLE_TITLE)
+        if start_table_num < 0:
+            continue
+        start_table_num += len(TABLE_TITLE)
+        end_table_num = col[start_table_num:].find('.')
+        if end_table_num < 0:
+            continue
+        end_table_num += start_table_num
+        new_table_num = col[start_table_num:end_table_num].strip()
+        break
+    return new_table_num
+
 # Parse_row returns a list requirements.
 # Each requirement is a dict with the following keys:
 # - Specification Revision
@@ -195,20 +241,25 @@ def get_part_chapter_section(cols, reqt, options):
 # If multiple specification references apply to the requirement,
 # one requirement is returned for each specification reference.
 
-def parse_row(row, options):
+def parse_row(row, table_num, options):
     global REQTS
-    TABLE_COLUMN = r"<TD"
+    TABLE_COLUMN = "<TD>"
+    TABLE_HEADER = "<TH>"
+    new_table_num = None
+    reqts = None
 
-    if not row.find(TABLE_COLUMN):
-        return None
-
-    reqt = copy.copy(REQTS)
-    reqt[REVISION] = options.revision_number
-    cols = row.split(TABLE_COLUMN)
-    reqt = get_checklist_item_and_sentence(cols, reqt, options)
-    reqts = get_part_chapter_section(cols, reqt, options)
- 
-    return reqts
+    if row.find(TABLE_COLUMN) >= 0:
+        reqt = copy.copy(REQTS)
+        reqt[REVISION] = options.revision_number
+        cols = row.split(TABLE_COLUMN)
+        reqt = get_checklist_item_and_sentence(cols, reqt, options, table_num)
+        reqts = get_part_chapter_section(cols, reqt, options)
+    elif row.find(TABLE_HEADER) >= 0:
+        cols = row.split(TABLE_HEADER)
+        new_table_num = parse_table_header_row(cols)
+    else:
+        pass
+    return reqts, new_table_num
 
 def parse_checklist(options):
     reqts = []
@@ -216,10 +267,11 @@ def parse_checklist(options):
     checklist = checklist_file.read()
     checklist_file.close()
 
+    checklist = re.sub("\xc2\xa0", "", checklist)
     table_rows = checklist.split("<TR>")
-    print "Row count", len(table_rows)
+    table_num = None
     for row in table_rows:
-        new_reqts = parse_row(row, options)
+        new_reqts, new_table = parse_row(row, table_num, options)
         if new_reqts is not None:
             for reqt in new_reqts:
                 if reqt is None:
@@ -230,6 +282,8 @@ def parse_checklist(options):
                         reqts[-1][SENTENCE] += reqt[SENTENCE]
                 else:
                     reqts.append(reqt)
+        if new_table is not None:
+            table_num = new_table
         sys.stdout.flush()
     return reqts
 
