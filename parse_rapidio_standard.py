@@ -18,8 +18,7 @@ from optparse import OptionParser
 import re
 import sys
 import os
-
-PRINT_TRACE = False
+import logging
 
 REVISION = "Revision"
 PART = "Part"
@@ -135,8 +134,7 @@ def parse_sections(sections, part_name, chapter_name, section_number):
             tokens = temp.split(' ')
             if len(tokens) > 1 and (tokens[0][-1] >= '0' and tokens[0][-1] <= '9'):
                 section_name = temp
-                if PRINT_TRACE:
-                    print "section_name :" + section_name
+                logging.debug("section_name :" + section_name)
         sect = remove_xml(sect)
         sentences = split_into_sentences(sect[heading_end + len(SECTION_END):])
         for s in sentences:
@@ -174,12 +172,9 @@ def parse_chapters(chapters, part_name):
         if chapter_number_found:
             chapter_number = chapter_number_found.group(1).strip()
             chapter_name = new_chapter_name
-            if PRINT_TRACE:
-                print "chapter_name: '" + chapter_name + "'"
+            logging.debug("chapter_name: '" + chapter_name + "'")
         if chapter_number is None:
-            if PRINT_TRACE:
-                print "No chapter number found yet, skipping"
-                print chapter
+            logging.debug("No chapter number found yet, skipping " + chapter)
             continue
         section_number = chapter_number + "."
         section_prefix = r">" + chapter_number + r"."
@@ -238,9 +233,8 @@ def parse_parts(spec_file_name, target_part):
     if found_number:
         target_number = int(found_number.group(1))
         target_is_annex = target_part.find(annex) >= 0
-        if PRINT_TRACE:
-            print "target_number ", target_number
-            print "target_is_annex ", target_is_annex
+        logging.debug("target_number " + target_number)
+        logging.debug("target_is_annex " + target_is_annex)
 
     spec_file = open(spec_file_name)
     all_text = spec_file.read()
@@ -272,8 +266,7 @@ def parse_parts(spec_file_name, target_part):
                 part_name = new_part_name
                 part_number = new_part_number
                 part_annex = new_part_annex
-        if PRINT_TRACE:
-            print ("part_name: " + part_name + " number " + str(part_number)
+        logging.debug("part_name: " + part_name + " number " + str(part_number)
                  + " annex " + str(part_annex))
 
         if target_number is not None:
@@ -288,6 +281,7 @@ def parse_parts(spec_file_name, target_part):
     return reqts
 
 def main(argv = None):
+    logging.basicConfig(level=logging.WARNING)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]
