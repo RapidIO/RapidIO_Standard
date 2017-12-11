@@ -15,6 +15,7 @@
 """
 
 from optparse import OptionParser
+from collections import OrderedDict
 import re
 import sys
 import os
@@ -39,11 +40,18 @@ class RapidIOStandardParser(object):
     TYPE_RECOMMENDATION = "Recommendation"
     TYPE_REQUIREMENT = "REQUIREMENT"
 
-    def __init__(self, std_xml_file, target_part=None):
+    def __init__(self, create_outline, std_xml_file, target_part=None):
+        self.create_outline = create_outline
+        self.outline = OrderedDict()
         self.input_xml = std_xml_file
         self.target_part = target_part
         self.target_number = None
         self.part_number = None
+        self.revision = "Unknown"
+        result = re.search("([0-9]\.[0-9])", self.input_xml)
+        if result:
+            self.revision = result.group(1)
+
 
     # Sneaky: Remove XML but replace tags with periods.
     # This may result in many empty sentences, but it also results
@@ -108,8 +116,18 @@ class RapidIOStandardParser(object):
                 temp = sect[:heading_end].strip()
                 tokens = temp.split(' ')
                 if len(tokens) > 1 and (tokens[0][-1] >= '0' and tokens[0][-1] <= '9'):
+                    # If any lines have a unicode ellipsis "..." or a real
+                    # ellipsis, assume that all sections are the "outline" of
+                    # a chapter, and should be skipped.
+                    if temp.find('\u2026') >= 0:
+                        return
+                    # Skip lines with a sequence of periods "..." in them
+                    if temp.find('...') >= 0:
+                        return
                     self.section_name = temp
                     logging.debug("section_name :" + self.section_name)
+                    if self.create_outline:
+                       self.outline[self.part_name][self.chapter_name].append(self.section_name)
             sect = self.remove_xml(sect)
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
@@ -121,7 +139,7 @@ class RapidIOStandardParser(object):
                 if s_type is None:
                     continue
                 new_reqt = [None] * (max(self.REQTS.values()) + 1)
-                new_reqt[self.REQTS[RequirementFields.REVISION]] = "4.0"
+                new_reqt[self.REQTS[RequirementFields.REVISION]] = self.revision
                 new_reqt[self.REQTS[RequirementFields.PART]] = self.part_name
                 new_reqt[self.REQTS[RequirementFields.CHAPTER]] = self.chapter_name
                 new_reqt[self.REQTS[RequirementFields.SECTION]] = self.section_name
@@ -146,6 +164,8 @@ class RapidIOStandardParser(object):
                 self.chapter_number = chapter_number_found.group(1).strip()
                 self.chapter_name = new_chapter_name
                 logging.debug("chapter_name: '" + self.chapter_name + "'")
+                if self.create_outline:
+                   self.outline[self.part_name].update({self.chapter_name:[]})
             if self.chapter_number is None:
                 logging.debug("No chapter number found yet, skipping " + chapter)
                 continue
@@ -153,8 +173,12 @@ class RapidIOStandardParser(object):
             self.section_prefix = r">" + self.chapter_number + r"."
             self.sections = chapter[end_idx:].split(self.section_prefix)
             self.parse_sections()
+            if len(self.outline[self.part_name][self.chapter_name]) == 0:
+                del self.outline[self.part_name][self.chapter_name]
 
     def print_reqts(self):
+        if self.create_outline:
+            return
         if len(self.reqts) == 0:
             print "No requirements found for " + self.part_num
             return 0
@@ -162,6 +186,17 @@ class RapidIOStandardParser(object):
         print "Revision, Part, Chapter, Section, Type, Sentence"
         for reqt in self.reqts:
             print reqt
+
+    def print_outline(self):
+        if len(self.outline) == 0:
+            print "No outline available"
+            return 0
+
+        print "Revision, Part, Chapter, Section"
+        for part in self.outline:
+            for chapter in self.outline[part]:
+                for section in self.outline[part][chapter]:
+                    print "'" + self.revision + "', '" +  part + "', '" + chapter + "', '" + section + "'"
 
     # Perform character substitutions to simplify parsing of text and correct
     # some text conversion errors...
@@ -183,6 +218,7 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub('4.2.8 Type 5 Packet Format \(Write Class\)',
                       '<P>4.2.8 Type 5 Packet Format (Write Class) </P>', self.all_text)
         self.all_text = re.sub('RapidIOTM', 'RapidIO', self.all_text)
+        self.all_text = re.sub('TransportSpecification', 'Transport Specification', self.all_text)
         self.all_text = re.sub('3.0, 10/2013 © Copyright RapidIO.org ', '', self.all_text)
         self.all_text = re.sub('[0-9+] RapidIO.org', '', self.all_text)
         self.all_text = re.sub('RapidIO.org [0-9+]', '', self.all_text)
@@ -205,21 +241,21 @@ class RapidIOStandardParser(object):
         part_header = "RapidIO Interconnect Specification "
         annex = "Annex"
         self.reqts = []
-    
+
         target_number = None
         target_is_annex = None
-    
+
         found_number = re.search(" ([0-9]*)", self.target_part)
         if found_number:
             self.target_number = int(found_number.group(1))
             self.target_is_annex = self.part_num.find(annex) >= 0
             logging.debug("target_number " + self.target_number)
             logging.debug("target_is_annex " + self.target_is_annex)
-    
+
         spec_file = open(self.input_xml)
         self.all_text = spec_file.read()
         spec_file.close()
-    
+
         self.all_text = " " + self.all_text + "  "
         self.condition_all_text()
         self.parts = self.all_text.split( ">" + part_header)
@@ -239,6 +275,9 @@ class RapidIOStandardParser(object):
             if found_number:
                 new_part_number = int(found_number.group(1))
                 new_part_annex = new_part_name.find("Annex") >= 0
+                # Always skip Part 4, Parallel RapidIO
+                if new_part_number == 4 and not new_part_annex:
+                    continue
                 if (self.part_name == ''
                     or (new_part_annex and not self.part_annex)
                     or (not (new_part_annex ^ self.part_annex)
@@ -249,13 +288,16 @@ class RapidIOStandardParser(object):
                     logging.debug("part_name: " + self.part_name +
                                   " number " + str(self.part_number) +
                                   " annex " + str(self.part_annex))
-    
+                    if self.create_outline:
+                       self.outline.update({self.part_name:OrderedDict()})
+
             if self.target_number is not None:
                 if self.part_number is None or self.part_number == '':
                     continue
                 sys.stdout.flush()
                 if ((not int(self.part_number) == int(self.target_number))
                     or not (self.target_is_annex == self.part_annex)):
+                    del self.outline[self.part_name]
                     continue
             self.chapters = part[len(new_part_name):].split('>Chapter ')
             self.parse_chapters()
@@ -272,6 +314,11 @@ def create_parser():
             action = 'store', type = 'string',
             help = '"Part ##" or "Annex #".  Default is all.',
             metavar = 'FILE')
+    parser.add_option('-o', '--outline',
+            dest = 'create_outline',
+            action = 'store_true', default=False,
+            help = 'Create an outline of the standard.',
+            metavar = 'OUTLINE')
     return parser
 
 def validate_options(options):
@@ -302,10 +349,12 @@ def main(argv = None):
 
     options = validate_options(options)
 
-    std_parser = RapidIOStandardParser(options.filename_of_standard,
+    std_parser = RapidIOStandardParser(options.create_outline,
+                                       options.filename_of_standard,
                                        options.target_part)
     std_parser.parse_parts()
     std_parser.print_reqts()
+    std_parser.print_outline()
 
 if __name__ == '__main__':
     sys.exit(main())
