@@ -114,6 +114,7 @@ class RapidIOStandardParser(object):
                 sect = self.section_number + sect
                 heading_end = sect.find(SECTION_END)
                 temp = sect[:heading_end].strip()
+                temp = re.sub("  +", " ", temp)
                 tokens = temp.split(' ')
                 if len(tokens) > 1 and (tokens[0][-1] >= '0' and tokens[0][-1] <= '9'):
                     # If any lines have a unicode ellipsis "..." or a real
@@ -159,10 +160,11 @@ class RapidIOStandardParser(object):
             new_chapter_name = chapter[:end_idx].strip()
             end_idx += len(CH_END)
             end_idx += chapter[end_idx:].find('>') + len('>')
-            chapter_number_found = re.search(r"Chapter ([0-9]*) ", new_chapter_name)
+            chapter_number_found = re.search(r"Chapter ([0-9]+) ", new_chapter_name)
             if chapter_number_found:
                 self.chapter_number = chapter_number_found.group(1).strip()
-                self.chapter_name = new_chapter_name
+                self.chapter_name = new_chapter_name.strip()
+                self.chapter_name = re.sub("  +", " ", self.chapter_name)
                 logging.debug("chapter_name: '" + self.chapter_name + "'")
                 if self.create_outline:
                    self.outline[self.part_name].update({self.chapter_name:[]})
@@ -265,7 +267,7 @@ class RapidIOStandardParser(object):
         self.part_annex = False
         for part in self.parts:
             part = part_header + part
-            new_part_name = part[:part.find('<')]
+            new_part_name = part[:part.find('<')].strip()
             # Jiggery pokery below is required to weed out references to
             # specification parts found within other parts of the specification.
             # This is dependent on all of these references always being backward
@@ -282,6 +284,7 @@ class RapidIOStandardParser(object):
                     or (new_part_annex and not self.part_annex)
                     or (not (new_part_annex ^ self.part_annex)
                         and (new_part_number > self.part_number))):
+                    new_part_name = re.sub("  +", " ", new_part_name)
                     self.part_name = new_part_name
                     self.part_number = new_part_number
                     self.part_annex = new_part_annex
@@ -335,7 +338,7 @@ def validate_options(options):
     return options
 
 def main(argv = None):
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.DEBUG)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]
