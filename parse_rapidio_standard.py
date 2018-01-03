@@ -52,7 +52,6 @@ class RapidIOStandardParser(object):
         if result:
             self.revision = result.group(1)
 
-
     # Sneaky: Remove XML but replace tags with periods.
     # This may result in many empty sentences, but it also results
     # in ignoring a lot of figure/table titles, headers, etc...
@@ -81,7 +80,8 @@ class RapidIOStandardParser(object):
         text = re.sub(r"\.\.+",r"<ellipsis>",text)
         text = re.sub(WEBSITES,"<prd>\\1",text)
         text = re.sub(DIGITS + "[.]" + DIGITS,"\\1<prd>\\2",text)
-        if "Ph.D" in text: text = text.replace("Ph.D.","Ph<prd>D<prd>")
+        if "Ph.D" in text:
+           text = text.replace("Ph.D.","Ph<prd>D<prd>")
         text = re.sub("\s" + CAPS + "[.] "," \\1<prd> ",text)
         text = re.sub(ACRONYMS+" "+STARTERS,"\\1<stop> \\2",text)
         text = re.sub(CAPS + "[.]" + CAPS + "[.]" + CAPS + "[.]","\\1<prd>\\2<prd>\\3<prd>",text)
@@ -89,9 +89,12 @@ class RapidIOStandardParser(object):
         text = re.sub(" "+SUFFIXES+"[.] "+STARTERS," \\1<stop> \\2",text)
         text = re.sub(" "+SUFFIXES+"[.]"," \\1<prd>",text)
         text = re.sub(" " + CAPS + "[.]"," \\1<prd>",text)
-        if '"' in text: text = text.replace('"',"<quote>")
-        if "!" in text: text = text.replace("!\"","\"!")
-        if "?" in text: text = text.replace("?\"","\"?")
+        if '"' in text:
+            text = text.replace('"',"<quote>")
+        if "!" in text:
+            text = text.replace("!\"","\"!")
+        if "?" in text:
+            text = text.replace("?\"","\"?")
         text = text.replace(".",".<stop>")
         text = text.replace("?","?<stop>")
         text = text.replace("!","!<stop>")
@@ -202,11 +205,11 @@ class RapidIOStandardParser(object):
 
     # Perform character substitutions to simplify parsing of text and correct
     # some text conversion errors...
-    def condition_all_text(self):
+    def _condition_all_text(self):
         self.all_text = re.sub('\n', ' ', self.all_text)
         self.all_text = re.sub('\t', '', self.all_text)
         self.all_text = re.sub('\r', ' ', self.all_text)
-        self.all_text = re.sub('™', '', self.all_text)
+        self.all_text = re.sub('™', ' ', self.all_text)
         self.all_text = re.sub('•', '', self.all_text)
         self.all_text = re.sub("“", '"', self.all_text)
         self.all_text = re.sub("”", '"', self.all_text)
@@ -228,15 +231,21 @@ class RapidIOStandardParser(object):
 
     # Work around embedded specification part references in
     # Version 4.0, Part 10 Chapter 5
-    def fixup_parts(self):
+    def _fixup_parts(self):
         new_parts = []
-        for part in self.parts:
+        for i, part in enumerate(self.parts):
+            logging.info("Part %d:'%s'" % (i, part[0:50]))
             chapter_number_found = re.search(r"Chapter ([0-9]*) ", part)
             if chapter_number_found:
+                logging.info("    Added")
                 new_parts.append(part)
             else:
                 if len(new_parts) > 0:
                    new_parts[-1] += part
+                   logging.info("    Appended to part %d:'%s'"
+                                      % (i-1, new_parts[-1][0:50]))
+                else:
+                   logging.info("    Dropped.")
         self.parts = new_parts
 
     def parse_parts(self):
@@ -259,9 +268,9 @@ class RapidIOStandardParser(object):
         spec_file.close()
 
         self.all_text = " " + self.all_text + "  "
-        self.condition_all_text()
+        self._condition_all_text()
         self.parts = self.all_text.split( ">" + part_header)
-        self.fixup_parts()
+        self._fixup_parts()
         self.part_name = ''
         self.part_number = ''
         self.part_annex = False
@@ -271,7 +280,8 @@ class RapidIOStandardParser(object):
             # Jiggery pokery below is required to weed out references to
             # specification parts found within other parts of the specification.
             # This is dependent on all of these references always being backward
-            # i.e. Part 10 can refer to Part 1, but Part 1 cannot refer to Part 10
+            # i.e. Part 10   can  refer to Part 1, but
+            #      Part  1 cannot refer to Part 10
             # This dependency is true up to Revision 4.0.
             found_number = re.search(" ([0-9]*):", new_part_name)
             if found_number:
@@ -338,7 +348,7 @@ def validate_options(options):
     return options
 
 def main(argv = None):
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]
