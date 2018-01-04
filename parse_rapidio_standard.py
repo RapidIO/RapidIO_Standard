@@ -129,7 +129,7 @@ class RapidIOStandardParser(object):
                     if temp.find('...') >= 0:
                         return
                     self.section_name = temp
-                    logging.debug("section_name :" + self.section_name)
+                    logging.info("section_name :" + self.section_name)
                     if self.create_outline:
                        self.outline[self.part_name][self.chapter_name].append(self.section_name)
             sect = self.remove_xml(sect)
@@ -168,11 +168,12 @@ class RapidIOStandardParser(object):
                 self.chapter_number = chapter_number_found.group(1).strip()
                 self.chapter_name = new_chapter_name.strip()
                 self.chapter_name = re.sub("  +", " ", self.chapter_name)
-                logging.debug("chapter_name: '" + self.chapter_name + "'")
-                if self.create_outline:
+                logging.info("chapter_name: '" + self.chapter_name + "'")
+                logging.info("part_name: '" + self.part_name + "'")
+                if self.create_outline and not self.part_name == '':
                    self.outline[self.part_name].update({self.chapter_name:[]})
-            if self.chapter_number is None:
-                logging.debug("No chapter number found yet, skipping " + chapter)
+            if self.chapter_number is None or self.part_name == "":
+                logging.info("No chapter number/part name found yet, skipping " + chapter[0:50])
                 continue
             self.section_number = self.chapter_number + "."
             self.section_prefix = r">" + self.chapter_number + r"."
@@ -228,6 +229,22 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub('[0-9+] RapidIO.org', '', self.all_text)
         self.all_text = re.sub('RapidIO.org [0-9+]', '', self.all_text)
         self.all_text = re.sub(r" id=\"LinkTarget_[0-9]*\">", r'>',  self.all_text)
+        # Convert Rev 1.3 terminology to industry standard
+        self.all_text = re.sub("8B/10B", "8b/10b",  self.all_text)
+
+        # Convert Rev 1.3 Part 5 title to match subsequent specifications
+        self.all_text = re.sub("MemoryLogical", "Memory Logical",  self.all_text)
+        # Convert Rev 1.3 Part 6 title to match subsequent specifications
+        self.all_text = re.sub("1x/4x LP-Serial Physical",
+                               "LP-Serial Physical", self.all_text)
+
+        # Correct Rev 1.3 Part 8 title
+        self.all_text = re.sub("ManagementExtensions",
+                               "Management Extensions", self.all_text)
+
+        # Correct Rev 3.2 Part 7 Chapter 2 title
+        self.all_text = re.sub("andInitialization",
+                               "and Initialization", self.all_text)
 
     # Work around embedded specification part references in
     # Version 4.0, Part 10 Chapter 5
@@ -260,8 +277,8 @@ class RapidIOStandardParser(object):
         if found_number:
             self.target_number = int(found_number.group(1))
             self.target_is_annex = self.part_num.find(annex) >= 0
-            logging.debug("target_number " + self.target_number)
-            logging.debug("target_is_annex " + self.target_is_annex)
+            logging.info("target_number " + self.target_number)
+            logging.info("target_is_annex " + self.target_is_annex)
 
         spec_file = open(self.input_xml)
         self.all_text = spec_file.read()
@@ -298,7 +315,7 @@ class RapidIOStandardParser(object):
                     self.part_name = new_part_name
                     self.part_number = new_part_number
                     self.part_annex = new_part_annex
-                    logging.debug("part_name: " + self.part_name +
+                    logging.info("part_name: " + self.part_name +
                                   " number " + str(self.part_number) +
                                   " annex " + str(self.part_annex))
                     if self.create_outline:
