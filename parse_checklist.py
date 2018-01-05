@@ -130,7 +130,7 @@ def check_sentence_for_subitem_pattern(column, item_col, reqt):
     SUBITEM_RE =  r"([0-9]+[A-Z][0-9]*).* DETAIL: "
     SUBITEM_ID =  r"([0-9]+[A-Z][0-9]*)"
 
-    subitem_pattern = re.compile(SUBITEM_RE)
+    subitem_pattern = re.compile(SUBITEM_RE, flags=re.IGNORECASE | re.VERBOSE)
     subitem_identifier = re.compile(SUBITEM_ID)
     result = subitem_pattern.match(column)
     if result:
