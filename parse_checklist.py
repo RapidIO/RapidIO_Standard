@@ -168,7 +168,6 @@ def get_checklist_item_and_sentence(cols, reqt):
     CHKLIST_RE = r"([0-9]+\.)"
     checklist_pattern = re.compile(CHKLIST_RE)
 
-    
     logging.debug("    cols[0]: '%s'" % cols[0])
     if cols[0].startswith(ITEM_CHKLIST):
         logging.debug("    ITEM")
@@ -216,9 +215,11 @@ def get_part_chapter_section(cols, reqt):
     reqts = []
     col_idx = int(reqt[COL])
     temp = cleanup_text(cols[col_idx])
-    # Jiggerey pokery required for Rev 1.3 checklist to deal with multiple rows
-    # where the references are found in a merged cell, and present in the XML
-    # only for the first row...
+    # Jiggerey pokery required for Rev 1.3 checklist.
+    #
+    # When references in the original document are in a "merged" table cell,
+    # The reference in the XML are only in the first table row.  The merged
+    # table cell can span multiple XML <Table> instances.
     if temp.find("Part") >= 0:
         logging.debug("        Saving references: '%s'" % temp)
         REQTS[SAVED_REFS] = temp
