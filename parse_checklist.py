@@ -39,6 +39,7 @@ TABLE_NAME = "Table_Name"
 CHKLIST_ID = "Checklist_ID"
 COL = "Column"
 SAVED_REFS = "Column"
+REV2_PART6 = "Rev2_part6"
 
 REQTS = {REVISION:None,
          PART:None,
@@ -50,10 +51,15 @@ REQTS = {REVISION:None,
          TABLE_NAME:None,
          CHKLIST_ID:None,
          COL:None,
-         SAVED_REFS:None}
+         SAVED_REFS:None,
+         REV2_PART6:False}
 
 TYPE_RECOMMENDATION = "Recommendation"
 TYPE_REQUIREMENT = "REQUIREMENT"
+
+TABLE_ROW = "<TR>"
+TABLE_COLUMN = "<TD>"
+SECTION_NUMBER =  r"(\d+\.\d+[\.\d+]*)"
 
 def create_parser():
     parser = OptionParser()
@@ -71,6 +77,11 @@ def create_parser():
             dest = 'part_number',
             action = 'store', type = 'string', default="1",
             help = 'Part number for the checklist file.',
+            metavar = 'PART')
+    parser.add_option('-t', '--rev_two_part_six',
+            dest = 'rev_2_part_6',
+            action = 'store_true', default=False,
+            help = 'Indicate that this is a rev2.2 part 6 checklist, which requires special parsing',
             metavar = 'PART')
     return parser
 
@@ -231,6 +242,7 @@ def get_part_chapter_section(cols, reqt):
         return None
     part_chap_secs = temp.split("Part ")
     logging.debug("Extracting reference from: '%s'" % temp)
+    section_re = re.compile(SECTION_NUMBER, flags=re.IGNORECASE | re.VERBOSE)
     for pcs_line in part_chap_secs:
         if pcs_line == '':
             logging.debug("        Line empty...")
@@ -245,11 +257,66 @@ def get_part_chapter_section(cols, reqt):
             logging.debug("        No Sections...")
             continue
         logging.debug("        PCS: '%s'" % pcs)
-        reqt[PART] = pcs[0].strip()
-        reqt[SECTION] = pcs[1].strip()
+        reqt[PART] = "Part " + pcs[0].strip()
+
+        result = section_re.search(pcs[1].strip())
+        if result:
+            reqt[SECTION] = result.group(0)
+        else:
+            reqt[SECTION] = pcs[1].strip()
         reqt[CHAPTER] = "Chapter " + sections[1].strip()
         reqts.append(copy.copy(reqt))
     return reqts
+
+def rev2_part6_parse_table(table):
+    TABLE_NUMBER = r"\d+"
+    REV2p6_TABLE_ITEM = SECTION_NUMBER + "[A-Z][\.\d+]*"
+
+    table_number_re = re.compile(TABLE_NUMBER)
+    section_number = re.compile(SECTION_NUMBER)
+    table_item = re.compile(REV2p6_TABLE_ITEM)
+
+    reqts = []
+    rows = table.split(TABLE_ROW)
+    REQTS[TABLE_NAME] = None
+
+    for row in rows:
+        logging.debug("Row: '%s'" % row)
+        temp = [col.strip() for col in row.split(TABLE_COLUMN)]
+        columns = []
+        for t in temp:
+            col = cleanup_text(t)
+            if not col == "":
+               columns.append(col)
+        logging.debug("Columns: %s" % columns)
+        if len(columns) < 2:
+            logging.info("Skipping Row: '%s'" % row[0:50])
+            continue
+        if REQTS[TABLE_NAME] is None:
+            result =  table_number_re.match(columns[0])
+            if not result:
+                logging.info("No Number Row: '%s'" % row[0:50])
+                continue
+            REQTS[CHAPTER] = "Chapter %s" % result.group(0)
+            REQTS[TABLE_NAME] = "Table %s %s " % (result.group(0), columns[1])
+            logging.info("Table: '%s'" % REQTS[TABLE_NAME])
+            continue
+        # Know the table name, now get requirements...
+        reqt = copy.deepcopy(REQTS)
+        result = table_item.match(columns[0])
+        if result:
+            reqt[CHKLIST_ID] = result.group(0)
+            section = section_number.match(reqt[CHKLIST_ID])
+            if not section:
+                logging.error("Found ID but no section: '%s'" % reqt[CHKLIST_ID])
+                continue
+            reqt[SECTION] = section.group(0)
+            reqt[SENTENCE] = columns[1]
+            reqt[TYPE] = TYPE_REQUIREMENT
+            logging.info("Table REQT: '%s': '%s'"
+                       % (reqt[CHKLIST_ID], reqt[TABLE_NAME]))
+            reqts.append(reqt)
+    return reqts, None
 
 def parse_table_name(table):
     TABLE_TITLE = "<TableTitle>"
@@ -279,10 +346,11 @@ def parse_table_name(table):
 
 def parse_table(table, table_name):
     global REQTS
-    TABLE_ROW = "<TR>"
-    TABLE_COLUMN = "<TD>"
     new_table_name = None
     reqts = []
+
+    if REQTS[REV2_PART6]:
+        return rev2_part6_parse_table(table)
 
     table, new_table_name = parse_table_name(table)
     if new_table_name is not None:
@@ -328,6 +396,7 @@ def parse_checklist(options):
     REQTS[CHKLIST_FILE] = options.filename_of_checklist
     REQTS[REVISION] = options.revision_number
     REQTS[PART] = options.part_number
+    REQTS[REV2_PART6] = options.rev_2_part_6
 
     # substitution below is due to some nasty characters in a few checklists...
     checklist = re.sub("\xc2\xa0", " ", checklist)
