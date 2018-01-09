@@ -61,65 +61,6 @@ TABLE_ROW = "<TR>"
 TABLE_COLUMN = "<TD>"
 SECTION_NUMBER =  r"(\d+\.\d+[\.\d+]*)"
 
-def create_parser():
-    parser = OptionParser()
-    parser.add_option('-f', '--file',
-            dest = 'filename_of_checklist',
-            action = 'store', type = 'string',
-            help = 'Compliance checklist in XML format.',
-            metavar = 'FILE')
-    parser.add_option('-r', '--revision',
-            dest = 'revision_number',
-            action = 'store', type = 'string', default="1.0",
-            help = 'Revision identifier for the checklist file.',
-            metavar = 'REVISION')
-    parser.add_option('-p', '--part',
-            dest = 'part_number',
-            action = 'store', type = 'string', default="1",
-            help = 'Part number for the checklist file.',
-            metavar = 'PART')
-    parser.add_option('-t', '--rev_two_part_six',
-            dest = 'rev_2_part_6',
-            action = 'store_true', default=False,
-            help = 'Indicate that this is a rev2.2 part 6 checklist, which requires special parsing',
-            metavar = 'PART')
-    return parser
-
-def validate_options(options):
-    if options.filename_of_checklist is None:
-        print "Must enter file name of checklist."
-        sys.exit()
-
-    if not os.path.isfile(options.filename_of_checklist):
-        print "File '" + options.filename_of_checklist +"' does not exist."
-        sys.exit()
-
-    if options.part_number is None:
-        options.part_number = '0'
-    else:
-        part_number = 0
-        try:
-            part_number = int(options.part_number)
-        except ValueError:
-             print "Part number must be an integer."
-             sys.exit()
-        if part_number < 1 or part_number > 12:
-             print "Part number must be between 1 and 12, inclusive."
-             sys.exit()
-
-    print "options revision_number:", options.revision_number
-    pattern = r"[1-4]\.[0-3]|[1-4]\.[1-3]\.[1-3]"
-    regex = re.compile(pattern)
-    match = regex.match(options.revision_number)
-    if not match:
-        print "Revision must be of the form X.Y or X.Y.Z,"
-        print "where X, Y and Z are single digit numbers"
-        print "X is 1-4."
-        print "Y is 0-3."
-        print "Z is 1-3."
-        sys.exit()
-    return options
-
 def cleanup_text(text):
     text = re.sub('\n', ' ', text)
     text = re.sub('\t', '', text)
@@ -395,7 +336,7 @@ def parse_checklist(options):
 
     REQTS[CHKLIST_FILE] = options.filename_of_checklist
     REQTS[REVISION] = options.revision_number
-    REQTS[PART] = options.part_number
+    REQTS[PART] = "Part " + options.part_number
     REQTS[REV2_PART6] = options.rev_2_part_6
 
     # substitution below is due to some nasty characters in a few checklists...
@@ -417,6 +358,65 @@ def print_reqts(reqts):
               (reqt[SENTENCE], reqt[TYPE], reqt[REVISION], reqt[PART],
                reqt[CHAPTER], reqt[SECTION],
                reqt[CHKLIST_FILE], reqt[TABLE_NAME], reqt[CHKLIST_ID]))
+
+def create_parser():
+    parser = OptionParser()
+    parser.add_option('-f', '--file',
+            dest = 'filename_of_checklist',
+            action = 'store', type = 'string',
+            help = 'Compliance checklist in XML format.',
+            metavar = 'FILE')
+    parser.add_option('-r', '--revision',
+            dest = 'revision_number',
+            action = 'store', type = 'string', default="1.0",
+            help = 'Revision identifier for the checklist file.',
+            metavar = 'REVISION')
+    parser.add_option('-p', '--part',
+            dest = 'part_number',
+            action = 'store', type = 'string', default="1",
+            help = 'Part number for the checklist file.',
+            metavar = 'PART')
+    parser.add_option('-t', '--rev_two_part_six',
+            dest = 'rev_2_part_6',
+            action = 'store_true', default=False,
+            help = 'Indicate that this is a rev2.2 part 6 checklist, which requires special parsing',
+            metavar = 'PART')
+    return parser
+
+def validate_options(options):
+    if options.filename_of_checklist is None:
+        print "Must enter file name of checklist."
+        sys.exit()
+
+    if not os.path.isfile(options.filename_of_checklist):
+        print "File '" + options.filename_of_checklist +"' does not exist."
+        sys.exit()
+
+    if options.part_number is None:
+        options.part_number = '0'
+    else:
+        part_number = 0
+        try:
+            part_number = int(options.part_number)
+        except ValueError:
+             print "Part number must be an integer."
+             sys.exit()
+        if part_number < 1 or part_number > 12:
+             print "Part number must be between 1 and 12, inclusive."
+             sys.exit()
+
+    print "options revision_number:", options.revision_number
+    pattern = r"[1-4]\.[0-3]|[1-4]\.[1-3]\.[1-3]"
+    regex = re.compile(pattern)
+    match = regex.match(options.revision_number)
+    if not match:
+        print "Revision must be of the form X.Y or X.Y.Z,"
+        print "where X, Y and Z are single digit numbers"
+        print "X is 1-4."
+        print "Y is 0-3."
+        print "Z is 1-3."
+        sys.exit()
+    return options
 
 def main(argv = None):
     logging.basicConfig(level=logging.DEBUG)
