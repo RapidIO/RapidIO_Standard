@@ -40,17 +40,20 @@ class RapidIOStandardParser(object):
     TYPE_RECOMMENDATION = "Recommendation"
     TYPE_REQUIREMENT = "REQUIREMENT"
 
-    def __init__(self, create_outline, std_xml_file, target_part=None):
+    def __init__(self, create_outline, std_xml_file, target_part=None, rev=None):
         self.create_outline = create_outline
         self.outline = OrderedDict()
         self.input_xml = std_xml_file
         self.target_part = target_part
         self.target_number = None
         self.part_number = None
-        self.revision = "Unknown"
-        result = re.search("([0-9]\.[0-9])", self.input_xml)
-        if result:
-            self.revision = result.group(1)
+        if rev is None:
+            self.revision = "Unknown"
+            result = re.search("([0-9]\.[0-9])", self.input_xml)
+            if result:
+                self.revision = result.group(1)
+        else:
+            self.revision = rev
 
     # Sneaky: Remove XML but replace tags with periods.
     # This may result in many empty sentences, but it also results
@@ -118,6 +121,7 @@ class RapidIOStandardParser(object):
                 heading_end = sect.find(SECTION_END)
                 temp = sect[:heading_end].strip()
                 temp = re.sub("  +", " ", temp)
+                temp = self.remove_xml(temp).strip()
                 tokens = temp.split(' ')
                 if len(tokens) > 1 and (tokens[0][-1] >= '0' and tokens[0][-1] <= '9'):
                     # If any lines have a unicode ellipsis "..." or a real
@@ -207,14 +211,19 @@ class RapidIOStandardParser(object):
     # Perform character substitutions to simplify parsing of text and correct
     # some text conversion errors...
     def _condition_all_text(self):
+        # Remove carriage returns, newlines, and tabs.
         self.all_text = re.sub('\n', ' ', self.all_text)
-        self.all_text = re.sub('\t', '', self.all_text)
         self.all_text = re.sub('\r', ' ', self.all_text)
-        self.all_text = re.sub('™', ' ', self.all_text)
+        self.all_text = re.sub('\t', ' ', self.all_text)
+        
+        # Fix Rev 1.3 special characters
+        self.all_text = re.sub("™", '', self.all_text)
         self.all_text = re.sub('•', '', self.all_text)
         self.all_text = re.sub("“", '"', self.all_text)
         self.all_text = re.sub("”", '"', self.all_text)
         self.all_text = re.sub("’", "'", self.all_text)
+
+        # Fix Rev 1.3 text defects
         self.all_text = re.sub('LogicalSpecification', 'Logical Specification', self.all_text)
         self.all_text = re.sub('SpecificationPart', 'Specification Part', self.all_text)
         self.all_text = re.sub('PhysicalLayer', 'Physical Layer', self.all_text)
@@ -225,15 +234,17 @@ class RapidIOStandardParser(object):
                       '<P>4.2.8 Type 5 Packet Format (Write Class) </P>', self.all_text)
         self.all_text = re.sub('RapidIOTM', 'RapidIO', self.all_text)
         self.all_text = re.sub('TransportSpecification', 'Transport Specification', self.all_text)
-        self.all_text = re.sub('3.0, 10/2013 © Copyright RapidIO.org ', '', self.all_text)
-        self.all_text = re.sub('[0-9+] RapidIO.org', '', self.all_text)
-        self.all_text = re.sub('RapidIO.org [0-9+]', '', self.all_text)
-        self.all_text = re.sub(r" id=\"LinkTarget_[0-9]*\">", r'>',  self.all_text)
+        self.all_text = re.sub('SpecificationAnnex', 'Specification Annex', self.all_text)
+
+        # Convert Rev 1.3 Part 5 title to match subsequent specifications
+        self.all_text = re.sub("MemoryLogical", "Memory Logical", self.all_text)
+
+        # Convert Rev 1.3 Part 9 title to match subsequent specifications
+        self.all_text = re.sub("LayerExtensions", "Layer Extensions", self.all_text)
+
         # Convert Rev 1.3 terminology to industry standard
         self.all_text = re.sub("8B/10B", "8b/10b",  self.all_text)
 
-        # Convert Rev 1.3 Part 5 title to match subsequent specifications
-        self.all_text = re.sub("MemoryLogical", "Memory Logical",  self.all_text)
         # Convert Rev 1.3 Part 6 title to match subsequent specifications
         self.all_text = re.sub("1x/4x LP-Serial Physical",
                                "LP-Serial Physical", self.all_text)
@@ -241,10 +252,105 @@ class RapidIOStandardParser(object):
         # Correct Rev 1.3 Part 8 title
         self.all_text = re.sub("ManagementExtensions",
                                "Management Extensions", self.all_text)
+        # Correct Rev 2.2 XML special characters...
+        self.all_text = re.sub("&#8482;", "", self.all_text)
+        self.all_text = re.sub("&#8211;", "–", self.all_text)
+        self.all_text = re.sub("&#8226;", "", self.all_text)
+        self.all_text = re.sub("&#8221;", '"', self.all_text)
+        self.all_text = re.sub("&#8220;", '"', self.all_text)
+        self.all_text = re.sub("&gt;", ">", self.all_text)
+        self.all_text = re.sub("&lt;", "<", self.all_text)
+
+        # Correct Rev 2.2 XML issues register table references,
+        # Configuration Space Offset and Block Offset xml
+        self.all_text = re.sub("&#61472;</P>", "", self.all_text)
+        self.all_text = re.sub("&#61472;", "", self.all_text)
+        self.all_text = re.sub("\<P\>\(Configuration Space Offset",
+                               "(Configuration Space Offset", self.all_text)
+        self.all_text = re.sub("\<P\>\(Block Offset ",
+                               " (Block Offset ", self.all_text)
+        self.all_text = re.sub("CSR\(Block Offset ",
+                               "CSR (Block Offset ", self.all_text)
+        self.all_text = re.sub("\<P\>\(Offset ",
+                               " (Offset ", self.all_text)
+        self.all_text = re.sub("Header\(Block Offset ",
+                               "Header (Block Offset ", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss the start of Part 4...
+        self.all_text = re.sub("Interconnect Specification \</P\>",
+                               "Interconnect Specification ", self.all_text)
+        self.all_text = re.sub("\<P\>Part 4: Physical",
+                               "Part 4: Physical", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 7 Chapter 2 System Exploration and Initialization
+        self.all_text = re.sub("Chapter 2 System Exploration and \</P\>",
+                               "Chapter 2 System Exploration and ", self.all_text)
+        self.all_text = re.sub("\<P\>Initialization",
+                               "Initialization", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 5 Chapter 5 5.2.3.6 TLB Invalidate Entry,
+        # TLB Invalidate Entry Synchronize Operations
+        self.all_text = re.sub("Invalidate Entry Synchronize \</P\>",
+                               "Invalidate Entry Synchronize ", self.all_text)
+        self.all_text = re.sub("\<P\>Operations \</\P>",
+                               "Operations </P>", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 5 Chapter 5 6.7 Data Cache and Instruction Cache
+        # Invalidate Operations
+        #
+        # Note: "Operations" fix in previous block is also necessary for
+        #       this fix.
+        self.all_text = re.sub("Instruction Cache Invalidate \</P\>",
+                               "Instruction Cache Invalidate ", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 5 Chapter 6 6.9 TLB Invalidate Entry,
+        # TLB Invalidate Entry Synchronize Operations
+        self.all_text = re.sub("Entry, TLB Invalidate Entry \</P\>",
+                               "Entry, TLB Invalidate Entry ", self.all_text)
+        self.all_text = re.sub("\<P\>Synchronize Operations \</P\>",
+                               "Synchronize Operations </P>", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 5 Chapter 7 7.6 Resolving an Outstanding
+        # READ_TO_OWN_OWNER Transaction
+        self.all_text = re.sub("Resolving an Outstanding \</P\>",
+                               "Resolving an Outstanding ", self.all_text)
+        self.all_text = re.sub("\<P\>READ_TO_OWN_OWNER Transaction \</P\>",
+                               "READ_TO_OWN_OWNER Transaction </P>",
+                                self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 9 Chapter 2 Logical Layer Flow Control Operation
+        self.all_text = re.sub("Logical Layer Flow Control \</P\>",
+                               "Logical Layer Flow Control ", self.all_text)
+        self.all_text = re.sub("\<P\>Operation \</\P>",
+                               "Operation </P>", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 9 Chapter 4 Logical Layer Flow Control
+        # Extensions Register Bits
+        self.all_text = re.sub("Logical Layer Flow Control \</P\>",
+                               "Logical Layer Flow Control ", self.all_text)
+        self.all_text = re.sub("\<P\>Extensions Register Bits \</\P>",
+                               "Extensions Register Bits </P>", self.all_text)
 
         # Correct Rev 3.2 Part 7 Chapter 2 title
         self.all_text = re.sub("andInitialization",
                                "and Initialization", self.all_text)
+        self.all_text = re.sub('3.0, 10/2013 © Copyright RapidIO.org ', '', self.all_text)
+        self.all_text = re.sub('[0-9+] RapidIO.org', '', self.all_text)
+        self.all_text = re.sub('RapidIO.org [0-9+]', '', self.all_text)
+        self.all_text = re.sub(r" id=\"LinkTarget_[0-9]*\">", r'>',  self.all_text)
+
+        # Correct Rev 3.2 Part 9 Section 3.4.5 title
+        self.all_text = re.sub("Rules for Traffic Management Supported",
+                               "Rules for Traffic Management </P> Supported",
+                               self.all_text)
 
     # Work around embedded specification part references in
     # Version 4.0, Part 10 Chapter 5
@@ -286,6 +392,12 @@ class RapidIOStandardParser(object):
 
         self.all_text = " " + self.all_text + "  "
         self._condition_all_text()
+        output_xml = self.input_xml + ".output"
+
+        output = open(output_xml, "w")
+        output.write(self.all_text)
+        output.close()
+
         self.parts = self.all_text.split( ">" + part_header)
         self._fixup_parts()
         self.part_name = ''
@@ -306,6 +418,10 @@ class RapidIOStandardParser(object):
                 new_part_annex = new_part_name.find("Annex") >= 0
                 # Always skip Part 4, Parallel RapidIO
                 if new_part_number == 4 and not new_part_annex:
+                    logging.info("Skipping part 4: %s" % part[0:50])
+                    continue
+                # Always skip Annex 1 and 2
+                if new_part_number < 3 and new_part_annex:
                     continue
                 if (self.part_name == ''
                     or (new_part_annex and not self.part_annex)
@@ -349,6 +465,11 @@ def create_parser():
             action = 'store_true', default=False,
             help = 'Create an outline of the standard.',
             metavar = 'OUTLINE')
+    parser.add_option('-r', '--revision',
+            dest = 'override_revision',
+            action = 'store', type = 'string', default=None,
+            help = 'Override the specification revision for debug purposes.',
+            metavar = 'REVISON')
     return parser
 
 def validate_options(options):
@@ -381,7 +502,8 @@ def main(argv = None):
 
     std_parser = RapidIOStandardParser(options.create_outline,
                                        options.filename_of_standard,
-                                       options.target_part)
+                                       options.target_part,
+                                       options.override_revision)
     std_parser.parse_parts()
     std_parser.print_reqts()
     std_parser.print_outline()
