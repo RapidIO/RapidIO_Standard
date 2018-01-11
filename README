@@ -1,0 +1,11 @@
+There are currently two scripts which generate files:
+
+check_all_checklists runs parse_checklists.py on all checklist XML files,
+   and merges the results.
+
+check_all_outlines runs parse_rapidio_standard.py on all XML files for
+   RapidIO standard revisiions to create outlines, and then creates
+   files to capture the deltas between the different outlines.
+   This is a quick way to check what should have changed between
+   specification revisions, and can be used as the basis of
+   translation files between various revisions.
