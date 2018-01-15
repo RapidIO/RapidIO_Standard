@@ -122,7 +122,7 @@ class RapidIOStandardParser(object):
                 temp = sect[:heading_end].strip()
                 temp = re.sub("  +", " ", temp)
                 temp = self.remove_xml(temp).strip()
-                tokens = temp.split(' ')
+                tokens = [tok.strip() for tok in temp.split(' ')]
                 if len(tokens) > 1 and (tokens[0][-1] >= '0' and tokens[0][-1] <= '9'):
                     # If any lines have a unicode ellipsis "..." or a real
                     # ellipsis, assume that all sections are the "outline" of
@@ -132,10 +132,14 @@ class RapidIOStandardParser(object):
                     # Skip lines with a sequence of periods "..." in them
                     if temp.find('...') >= 0:
                         return
-                    self.section_name = temp
-                    logging.info("section_name :" + self.section_name)
-                    if self.create_outline:
-                       self.outline[self.part_name][self.chapter_name].append(self.section_name)
+                    # If the first token after the number does not start with a
+                    # capital letter, it's not a real section name.
+                    if (tokens[1][0] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+                        or tokens[1][1] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')):
+                        self.section_name = temp
+                        logging.info("section_name :" + self.section_name)
+                        if self.create_outline:
+                            self.outline[self.part_name][self.chapter_name].append(self.section_name)
             sect = self.remove_xml(sect)
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
@@ -284,13 +288,6 @@ class RapidIOStandardParser(object):
                                "Part 4: Physical", self.all_text)
 
         # Correct Rev 2.2 XML issue that would otherwise cause parser
-        # to miss-lable Part 7 Chapter 2 System Exploration and Initialization
-        self.all_text = re.sub("Chapter 2 System Exploration and \</P\>",
-                               "Chapter 2 System Exploration and ", self.all_text)
-        self.all_text = re.sub("\<P\>Initialization",
-                               "Initialization", self.all_text)
-
-        # Correct Rev 2.2 XML issue that would otherwise cause parser
         # to miss-lable Part 5 Chapter 5 5.2.3.6 TLB Invalidate Entry,
         # TLB Invalidate Entry Synchronize Operations
         self.all_text = re.sub("Invalidate Entry Synchronize \</P\>",
@@ -325,6 +322,29 @@ class RapidIOStandardParser(object):
                                 self.all_text)
 
         # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 6 Chapter 9 1.25 Gbaud, 2.5Gbaud, and 3.125 Gbaud LP-Serial Links
+        self.all_text = re.sub("1.25Gbaud, 2.5Gbaud, and \</P\>",
+                               "1.25 Gbaud, 2.5 Gbaud, and ", self.all_text)
+        self.all_text = re.sub("\<P\>3.125Gbaud LP-Serial Links \</P\>",
+                               "3.125 Gbaud LP-Serial Links </P>",
+                                self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 6 Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial
+        self.all_text = re.sub("5Gbaud and 6.25Gbaud LP-Serial \</P\>",
+                               "5 Gbaud and 6.25 Gbaud LP-Serial ", self.all_text)
+        self.all_text = re.sub("\<P\>Links \</P\>",
+                               "Links </P>",
+                                self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 7 Chapter 2 System Exploration and Initialization
+        self.all_text = re.sub("Chapter 2 System Exploration and \</P\>",
+                               "Chapter 2 System Exploration and ", self.all_text)
+        self.all_text = re.sub("\<P\>Initialization",
+                               "Initialization", self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
         # to miss-lable Part 9 Chapter 2 Logical Layer Flow Control Operation
         self.all_text = re.sub("Logical Layer Flow Control \</P\>",
                                "Logical Layer Flow Control ", self.all_text)
@@ -338,6 +358,9 @@ class RapidIOStandardParser(object):
                                "Logical Layer Flow Control ", self.all_text)
         self.all_text = re.sub("\<P\>Extensions Register Bits \</\P>",
                                "Extensions Register Bits </P>", self.all_text)
+
+        # Correct Rev 3.2 Part 6 Chapter 9 title
+        self.all_text = re.sub("Specificationsfor", "Specifications for", self.all_text)
 
         # Correct Rev 3.2 Part 7 Chapter 2 title
         self.all_text = re.sub("andInitialization",
