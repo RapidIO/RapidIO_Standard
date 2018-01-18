@@ -128,18 +128,29 @@ class RapidIOStandardParser(object):
                     # ellipsis, assume that all sections are the "outline" of
                     # a chapter, and should be skipped.
                     if temp.find('\u2026') >= 0:
+                        logging.debug("Section: '%s'" % sect)
+                        logging.debug("Found unicode ellipsis, not parsing any more sections...")
                         return
                     # Skip lines with a sequence of periods "..." in them
-                    if temp.find('...') >= 0:
+                    # EXCEPT when the ellipsis is of the form used to indicate a range
+                    # of register values...
+                    if temp.find('.....') >= 0:
+                        logging.debug("Section: '%s'" % sect)
+                        logging.debug("Found long ellipsis, not parsing any more sections...")
                         return
                     # If the first token after the number does not start with a
                     # capital letter, it's not a real section name.
+                    if len(tokens[1]) < 2:
+                        logging.warn("Short Token1: '%s'" % tokens[1])
+                        continue
                     if (tokens[1][0] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
                         or tokens[1][1] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')):
                         self.section_name = temp
                         logging.info("section_name :" + self.section_name)
                         if self.create_outline:
                             self.outline[self.part_name][self.chapter_name].append(self.section_name)
+                    else:
+                        logging.debug("Skipping sect: %s" % sect[0:100])
             sect = self.remove_xml(sect)
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
@@ -186,9 +197,11 @@ class RapidIOStandardParser(object):
             self.section_number = self.chapter_number + "."
             self.section_prefix = r">" + self.chapter_number + r"."
             self.sections = chapter[end_idx:].split(self.section_prefix)
+            logging.debug("Parse Sections: %s %s %d" % (self.section_number, self.section_prefix, len(self.sections)))
             self.parse_sections()
-            if len(self.outline[self.part_name][self.chapter_name]) == 0:
-                del self.outline[self.part_name][self.chapter_name]
+            if self.create_outline:
+                if len(self.outline[self.part_name][self.chapter_name]) == 0:
+                    del self.outline[self.part_name][self.chapter_name]
 
     def print_reqts(self):
         if self.create_outline:
@@ -509,7 +522,7 @@ def validate_options(options):
     return options
 
 def main(argv = None):
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.WARN)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]

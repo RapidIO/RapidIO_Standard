@@ -28,7 +28,7 @@ class RapidIOOutlineDiffMerger(object):
     def __init__(self, diff_file, base_file, confidence):
         self.diff = diff_file
         self._base_file = base_file
-        self._new_items = []
+        self._del_items = []
         self._conf = confidence
         self._merge_diff()
 
@@ -53,13 +53,13 @@ class RapidIOOutlineDiffMerger(object):
             tokens = [tok.strip() for tok in line.split("',")]
             tokens = [re.sub("'", "", tok) for tok in tokens]
             if not len(tokens) == 8 and not len(tokens) == 4:
-                raise ValueError("Line %d %d bad format: '%s'"
-                                 % (x, len(tokens), line))
+                raise ValueError("File %s Line %d %d bad format: '%s'"
+                                 % (self._base_file, x, len(tokens), line))
             logging.info("Base: %s" % tokens)
             if len(tokens) > 4:
                 self._merge.append(tokens)
             else:
-                self._new_items.append(tokens)
+                self._del_items.append(tokens)
 
     def _read_diff(self):
         diff_file = open(self.diff)
@@ -87,17 +87,20 @@ class RapidIOOutlineDiffMerger(object):
     # - 8 CSV tokens, indicating a mapping from new content to old that should
     #                 override the current matching algorithm.
     def _mark_diff_with_base(self):
-        for base_idx, base in enumerate(self._new_items):
+        for base_idx, base in enumerate(self._del_items):
             try:
                 b = self._new_lines.index(base)
                 del self._new_lines[b]
             except:
-                raise ValueError("Base line %d NEW not found: %s"
+                logging.error("Base line %d NEW not found: %s"
                                  % (base_idx, base))
+                raise
 
         for b, base in enumerate(self._merge):
             found_new = False
+            logging.info(base[0:4])
             for n, new in enumerate(self._new_lines):
+                logging.info(new)
                 diff = False
                 for x, tok in enumerate(base[0:4]):
                     if not new[x] == tok:
@@ -108,7 +111,7 @@ class RapidIOOutlineDiffMerger(object):
                 self._new_lines[n].extend(base[4:])
                 found_new = True
             if not found_new:
-                raise ValueError("Base line %d NEW not found: %s" % (b, base[4:8]))
+                raise ValueError("Reference to new specification not found in diff: %s" % base[0:4])
             found_old = False
             for o, old in enumerate(self._old_lines):
                 diff = False
@@ -121,7 +124,8 @@ class RapidIOOutlineDiffMerger(object):
                 self._old_lines[o].extend(base[0:4])
                 found_old = True
             if not found_old:
-                raise ValueError("Base line %d OLD not found: %s" % (b, base[0:4]))
+                logging.warn("Reference to old specification not found in diff: %s" % base[4:8])
+
     def _merge_lines(self):
         for n, new in enumerate(self._new_lines):
             # If line already has a match from _mark_diff_with_base, continue...
@@ -274,7 +278,7 @@ def validate_options(options):
             sys.exit()
 
 def main(argv = None):
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.WARN)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]
