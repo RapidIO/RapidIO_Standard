@@ -158,6 +158,7 @@ def get_checklist_item_and_sentence(cols, reqt):
 
 # Parse first column which has one or more lines of the form:
 # Part X, Sec. Chapter.Y.Z...
+# Part X, Sec.Chapter.Y.Z...
 # Returns one requirement for each line, with the fields
 # Part, Chapter, and Section set according to the above.
 def get_part_chapter_section(cols, reqt):
@@ -170,9 +171,12 @@ def get_part_chapter_section(cols, reqt):
     # Jiggerey pokery required for Rev 1.3 checklist.
     #
     # When references in the original document are in a "merged" table cell,
-    # The reference in the XML are only in the first table row.  The merged
+    # the references in the XML are only in the first table row.  The merged
     # table cell can span multiple XML <Table> instances.
-    if temp.find("Part") >= 0:
+    #
+    # In Rev 1.3 Table 3-16 Item 6B where the reference pulls in the subsequent
+    # Chapter 4 text.  This is detected and overridden by the length check.
+    if temp.find("Part") >= 0 and len(temp) < 200:
         logging.debug("        Saving references: '%s'" % temp)
         REQTS[SAVED_REFS] = temp
     else:
@@ -193,7 +197,21 @@ def get_part_chapter_section(cols, reqt):
         if len(pcs) < 2:
             logging.debug("        No PCS...")
             continue
-        sections = pcs[1].strip().split('.')
+        sections = [tok.strip() for tok in pcs[1].strip().split(' ')]
+        logging.debug("    B4 Sections: '%s'" % sections)
+        if len(sections) == 1:
+            # Some section references leave out the space.
+            # Check that the reference starts with "Sec.",
+            # and tack on the section number to sections list.
+            if sections[0].startswith("Sec."):
+                sections.append(sections[0][len("Sec."):].strip())
+                sections[1] = sections[0][len("Sec."):].strip()
+            # Some section references leave out the "Sec.".
+            # Check that the reference starts with a digit,
+            # and tack on the section number to the sections list.
+            if sections[0][0] in "0123456789":
+                sections.append(sections[0])
+        logging.debug("    Sections: '%s'" % sections)
         if len(sections) < 2:
             logging.debug("        No Sections...")
             continue
@@ -205,7 +223,16 @@ def get_part_chapter_section(cols, reqt):
             reqt[SECTION] = result.group(0)
         else:
             reqt[SECTION] = pcs[1].strip()
-        reqt[CHAPTER] = "Chapter " + sections[1].strip()
+        reqt[CHAPTER] = "Chapter " + sections[1][0]
+        logging.debug("        Part: '%s' Chapter: '%s' Section: '%s'"
+                      % (reqt[PART], reqt[CHAPTER], reqt[SECTION]))
+        if (reqt[REVISION] == "1.3"
+            and reqt[PART] == "Part 6"
+            and reqt[CHAPTER] == "Chapter 4"
+            and (reqt[SECTION] == "Table 4-1" or reqt[SECTION] == "Table 4-2")):
+            logging.debug("        Skipping table references...")
+            continue
+
         reqts.append(copy.copy(reqt))
     return reqts
 
@@ -222,7 +249,6 @@ def rev2_part6_parse_table(table):
     REQTS[TABLE_NAME] = None
 
     for row in rows:
-        logging.debug("Row: '%s'" % row)
         temp = [col.strip() for col in row.split(TABLE_COLUMN)]
         columns = []
         for t in temp:
@@ -252,6 +278,8 @@ def rev2_part6_parse_table(table):
                 logging.error("Found ID but no section: '%s'" % reqt[CHKLIST_ID])
                 continue
             reqt[SECTION] = section.group(0)
+            if reqt[SECTION][-1] == ".":
+                reqt[SECTION] = reqt[SECTION][:-1]
             reqt[SENTENCE] = columns[1]
             reqt[TYPE] = TYPE_REQUIREMENT
             logging.info("Table REQT: '%s': '%s'"
@@ -419,7 +447,7 @@ def validate_options(options):
     return options
 
 def main(argv = None):
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.WARN)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]
