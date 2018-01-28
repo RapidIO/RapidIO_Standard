@@ -14737,43 +14737,9 @@ compliance list
 </TR>
 
 <TR>
-<TD>• 6E. DETAIL: Selection of the specific associate </TD>
+<TD>• 6E. DETAIL: Selection of the specific associate operation is controlled by bits 25 and 26 (Assoc_Cmd) in the Multicast Associate Operation CSR. </TD>
 
-<TD>Part 11, Sec. 3.7 </TD>
-
-<TD>Generic </TD>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>operation is controlled by bits 25 and 26 </TD>
-
-<TD>Part 11, Sec. 4.3 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>(Assoc_Cmd) in the Multicast Associate Operation CSR. </TD>
-
-<TD>Part 11, Sec. 4.4 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TD>• 6F. DETAIL: Multicast Assoc_Cmd commands </TD>
-
-<TD>Part 11, Sec. 3.4 </TD>
+<TD>Part 11, Sec. 3.7 Part 11, Sec. 4.3 Part 11, Sec. 4.4 </TD>
 
 <TD>Generic </TD>
 
@@ -14781,52 +14747,11 @@ compliance list
 </TR>
 
 <TR>
-<TH/>
+<TD>• 6F. DETAIL: Multicast Assoc_Cmd commands operate correctly when bit 1 in the Switch Multicast Information CAR has a value of 1 and the value in the Ingress_Port field is less than the value of the Port_Total field in the Switch Port Information CAR. </TD>
 
-<TD>operate correctly when bit 1 in the Switch </TD>
+<TD> Part 11, Sec. 3.4 Part 11, Sec. 3.7 Part 11, Sec. 4.3 Part 11, Sec. 4.4 </TD>
 
-<TD>Part 11, Sec. 3.7 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>Multicast Information CAR has a value of 1 and </TD>
-
-<TD>Part 11, Sec. 4.3 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>the value in the Ingress_Port field is less than the value of the Port_Total field in the Switch Port </TD>
-
-<TD>Part 11, Sec. 4.4 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>Information CAR. </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
+<TD>Generic </TD>
 
 <TR>
 <TD>• 6G. DETAIL: Multicast Assoc_Cmd commands operate correctly when bit 0 in the Switch Multicast Information CAR has: a value of 1 AND the value in the Mcast_Mask_Num field of the Switch Multicast Select CSR added to the value of the Assoc_Blksize field in the Multicast Associate Operation CSR is less than the value of the MaxMcastMasks field in the Switch Multicast Information CAR. </TD>
@@ -14905,50 +14830,11 @@ compliance list
 </TR>
 
 <TR>
-<TD>• 6J3. DETAIL: A read of the Multicast Associate </TD>
+<TD>• 6J3. DETAIL: A read of the Multicast Associate Operation CSR returns 1 in bit 31 to indicate an association exists between the destination ID and multicast mask specified by the current values of the Large_DestID, DestID and Mcast_Mask_Num fields in the Multicast Associate Select CSR and the value of the Large_Transport and Ingress Port (if bit 1 in the Switch Multicast Information CAR has a value of 1) fields in the Multicast Associate Operation CSR only if the Assoc_Cmd field value is 0b00. </TD>
 
-<TD>Part 11, Sec. 3.4 </TD>
+<TD>Part 11, Sec. 3.4 Part 11, Sec. 3.6 Part 11, Sec. 3.7 Part 11, Sec. 4.4.6 </TD>
 
 <TD>Generic </TD>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>Operation CSR returns 1 in bit 31 to indicate an </TD>
-
-<TD>Part 11, Sec. 3.6 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>association exists between the destination ID and </TD>
-
-<TD>Part 11, Sec. 3.7 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>multicast mask specified by the current values of the Large_DestID, DestID and Mcast_Mask_Num fields in the Multicast Associate Select CSR and the value of the Large_Transport and Ingress Port (if bit 1 in the Switch Multicast Information CAR has a value of 1) fields in the Multicast Associate Operation CSR only if the Assoc_Cmd field value is 0b00. </TD>
-
-<TD>Part 11, Sec. 4.4.6 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
 
 <TR>
 <TD>• 6K. DETAIL: The capability to perform Delete_Assoc commands must be present. </TD>
@@ -14995,60 +14881,13 @@ compliance list
 </TR>
 
 <TR>
-<TD>• 6K3. DETAIL: The associations deleted in 6K2 </TD>
+<TD>• 6K3. DETAIL: The associations deleted in 6K2 are between the first destination ID and the first multicast mask, the second destination ID and the second multicast mask, the third destination ID and the third multicast mask, and so on. </TD>
 
 <TD>Generic </TD>
 
 <TD/>
 </TR>
 
-<TR>
-<TH/>
-
-<TD>are between the first destination ID and the first </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>multicast mask, the second destination ID and the </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>second multicast mask, the third destination ID </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>and the third multicast mask, and so on. </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
 
 <TR>
 <TD>• 6K4. DETAIL: If bit 1 in the Switch Multicast Information CAR has a value of 1, the associations in 6K1 and 6K2 are removed only on the ingress port selected by the Ingress_Port field value. </TD>
@@ -15059,55 +14898,16 @@ compliance list
 </TR>
 
 <TR>
-<TD>• 6K5. DETAIL: WHEN </TD>
+<TD>• 6K5. DETAIL: WHEN • the Delete_Assoc command is written to the Multicast Associate Operation CSR •  bit 0 of the Switch Multicast Information CAR has a value of 1, •  bit 0 in the Switch Multicast Support CAR has a value of 1, •  the Assoc_Blksize field in the Multicast Associate Operation CSR has a value of MaxMCastMasks - 1 • the Mcast_Mask_Num field value is 0 •  AND the Large_DestID/DestID fields added to the value of Assoc_Blksize is not greater than the maximum destination ID, as indicated by the Large_Transport field in the Switch Multicast Operation CSR • THEN the associations specified in 6K3 will be removed. </TD>
 
-<TD>Part 11, Sec. 3.3 </TD>
+<TD>Part 11, Sec. 3.3 Part 11, Sec. 3.4 Part 11, Sec. 3.6 Part 11, Sec. 3.7 Part 11, Sec. 4.3 Part 11, Sec. 4.4.5 </TD>
 
 <TD>Generic </TD>
 
 <TD/>
 </TR>
 
-<TR>
-<TH/>
 
-<TD>• the Delete_Assoc command is written to the </TD>
-
-<TD>Part 11, Sec. 3.4 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>Multicast Associate Operation CSR </TD>
-
-<TD>Part 11, Sec. 3.6 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>•  bit 0 of the Switch Multicast Information CAR has a value of 1, •  bit 0 in the Switch Multicast Support CAR has a value of 1, </TD>
-
-<TD>Part 11, Sec. 3.7 Part 11, Sec. 4.3 Part 11, Sec. 4.4.5 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>•  the Assoc_Blksize field in the Multicast Associate Operation CSR has a value of MaxMCastMasks - 1 • the Mcast_Mask_Num field value is 0 •  AND the Large_DestID/DestID fields added to the value of Assoc_Blksize is not greater than the maximum destination ID, as indicated by the Large_Transport field in the Switch Multicast Operation CSR • THEN the associations specified in 6K3 will be removed. </TD>
 
 <TD/>
 
@@ -15155,50 +14955,19 @@ compliance list
 </TR>
 
 <TR>
-<TD>• 6L2. DETAIL: WHEN </TD>
+<TD>• 6L2. DETAIL: WHEN • the Block_Assoc field in the Switch Multicast Information CAR has a value of 1 • the Multicast Associate Operation CSR is written with an Assoc_Cmd field value of 0b11 •  AND the Large_DestID/DestID fields added to the value of Assoc_Blksize is not greater than the maximum destination ID controlled by the Large_Transport field in the Switch Multicast Operation CSR •  THEN associations are created between the block of destination IDs and multicast masks specified by the current values of the Large_DestID, DestID and Mcast_Mask_Num fields in the Multicast Associate Select CSR and the value of the Large_Transport, Assoc_Blksize and Ingress Port (if bit 1 in the Switch Multicast Information CAR has a value of 1) fields in the Multicast Associate Operation CSR. </TD>
 
-<TD>Part 11, Sec. 3.4 </TD>
+<TD>Part 11, Sec. 3.4 Part 11, Sec. 3.6 Part 11, Sec. 3.7 Part 11, Sec. 4.4.3 </TD>
 
 <TD>Generic </TD>
 
 <TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>• the Block_Assoc field in the Switch Multicast </TD>
-
-<TD>Part 11, Sec. 3.6 </TD>
 
 <TD/>
 
 <TD/>
 </TR>
 
-<TR>
-<TH/>
-
-<TD>Information CAR has a value of 1 </TD>
-
-<TD>Part 11, Sec. 3.7 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TH/>
-
-<TD>• the Multicast Associate Operation CSR is written with an Assoc_Cmd field value of 0b11 •  AND the Large_DestID/DestID fields added to the value of Assoc_Blksize is not greater than the maximum destination ID controlled by the Large_Transport field in the Switch Multicast Operation CSR •  THEN associations are created between the block of destination IDs and multicast masks specified by the current values of the Large_DestID, DestID and Mcast_Mask_Num fields in the Multicast Associate Select CSR and the value of the Large_Transport, Assoc_Blksize and Ingress Port (if bit 1 in the Switch Multicast Information CAR has a value of 1) fields in the Multicast Associate Operation CSR. </TD>
-
-<TD>Part 11, Sec. 4.4.3 </TD>
-
-<TD/>
-
-<TD/>
-</TR>
 
 <TR>
 <TD>• 6L3. DETAIL: The associations created in 6L2 are between the first destination ID and the first multicast mask, the second destination ID and the second multicast mask, the third destination ID and the third multicast mask, and so on. </TD>

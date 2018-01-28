@@ -359,6 +359,9 @@ def parse_table(table, table_name):
         if reqt[SENTENCE] is None:
             logging.debug("No sentence, skipping...")
             continue
+        # Skip item duplicated in original 1.3 checklists.
+        if reqt[TABLE_NAME] == 'Table 6-3. General device message passing logical layer source transaction support list' and reqt[CHKLIST_ID] == '1C':
+            continue
         new_reqts = get_part_chapter_section(columns, reqt)
         if new_reqts is not None:
             reqts += new_reqts
