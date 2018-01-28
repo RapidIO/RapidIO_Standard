@@ -65,7 +65,6 @@ def cleanup_text(text):
     text = re.sub('\n', ' ', text)
     text = re.sub('\t', '', text)
     text = re.sub('\r', ' ', text)
-
     text = re.sub(r'\<[^>]+\>', "", text)
 
     end_partial_xml = ">"
@@ -73,6 +72,9 @@ def cleanup_text(text):
     if start_txt >= 0:
         start_txt += len(end_partial_xml)
         text = text[start_txt:]
+    text = re.sub('&quot;', '"', text)
+    text = re.sub('&gt;', '>', text)
+    text = re.sub('&lt;', '<', text)
     return text.strip()
 
 def make_id(chklist_id):
