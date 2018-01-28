@@ -75,6 +75,13 @@ def cleanup_text(text):
     text = re.sub('&quot;', '"', text)
     text = re.sub('&gt;', '>', text)
     text = re.sub('&lt;', '<', text)
+
+    # Correct some spelling/grammatical errors in original tables.
+    # Problem in 1.3 Error Management Checklist Table 2 items 12F, 12G, and 12I
+    text = re.sub('an packet', 'a packet', text)
+    # Problem in 1.3 Error Management Checklist Table 2 item 20C
+    text = re.sub('APort', 'A Port', text)
+ 
     return text.strip()
 
 def make_id(chklist_id):
