@@ -25,7 +25,7 @@ import logging
 
 class ChecklistMerger(object):
     OUTLINE_HEADER = "Revision, Part, Chapter, Section"
-    CHECKLIST_HEADER = "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID"
+    CHECKLIST_HEADER = "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
     def __init__(self, checklists, outlines):
         self.checklists = checklists
         self.outlines = outlines
@@ -96,7 +96,7 @@ class ChecklistMerger(object):
             for x, line in enumerate(lines[2:]):
                 line_num = x + 1
                 tokens = [re.sub("'", "", tok.strip()) for tok in line.split("', ")]
-                if not len(tokens) == 9:
+                if not len(tokens) == 10:
                     raise ValueError("Bad format: File %s line %d: %s"
                                  % (checklist_path, line_num, tokens))
                 # Skip erroneous requirement reference found in
@@ -144,7 +144,7 @@ class ChecklistMerger(object):
         if self.sorted_merge == []:
             print "Nothing in sorted checklist."
 
-        print "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID"
+        print self.CHECKLIST_HEADER
         for item in self.sorted_merge:
             print "'" + "', '".join(item) + "'"
 

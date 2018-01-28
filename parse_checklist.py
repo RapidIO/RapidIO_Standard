@@ -37,6 +37,7 @@ SENTENCE = "Sentence"
 CHKLIST_FILE = "Checklist_File"
 TABLE_NAME = "Table_Name"
 CHKLIST_ID = "Checklist_ID"
+OPTIONAL = "Optional"
 COL = "Column"
 SAVED_REFS = "Column"
 REV2_PART6 = "Rev2_part6"
@@ -50,6 +51,7 @@ REQTS = {REVISION:None,
          CHKLIST_FILE:None,
          TABLE_NAME:None,
          CHKLIST_ID:None,
+         OPTIONAL:None,
          COL:None,
          SAVED_REFS:None,
          REV2_PART6:False}
@@ -370,6 +372,7 @@ def parse_table(table, table_name):
 
 def parse_checklist(options):
     reqts = []
+
     checklist_file = open(options.filename_of_checklist)
     checklist = checklist_file.read()
     checklist_file.close()
@@ -378,6 +381,7 @@ def parse_checklist(options):
     REQTS[REVISION] = options.revision_number
     REQTS[PART] = "Part " + options.part_number
     REQTS[REV2_PART6] = options.rev_2_part_6
+    REQTS[OPTIONAL] = "STANDARD"
 
     # substitution below is due to some nasty characters in a few checklists...
     checklist = re.sub("\xc2\xa0", " ", checklist)
@@ -392,12 +396,13 @@ def parse_checklist(options):
     return reqts
 
 def print_reqts(reqts):
-    print "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID"
+    print "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
     for reqt in reqts:
-        print ("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" %
+        print ("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" %
               (reqt[SENTENCE], reqt[TYPE], reqt[REVISION], reqt[PART],
                reqt[CHAPTER], reqt[SECTION],
-               reqt[CHKLIST_FILE], reqt[TABLE_NAME], reqt[CHKLIST_ID]))
+               reqt[CHKLIST_FILE], reqt[TABLE_NAME], reqt[CHKLIST_ID],
+               reqt[OPTIONAL]))
 
 def create_parser():
     parser = OptionParser()
