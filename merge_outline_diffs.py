@@ -25,9 +25,10 @@ class RapidIOOutlineDiffMerger(object):
     part_match = "RapidIO Interconnect Specification Part "
     pmidx = len(part_match) + 3
 
-    def __init__(self, diff_file, base_file, confidence):
+    def __init__(self, diff_file, new_sections, manual_trans, confidence):
         self.diff = diff_file
-        self._base_file = base_file
+        self._new_sections_file = new_sections
+        self._manual_trans_file = manual_trans
         self._del_items = []
         self._conf = confidence
         self._merge_diff()
@@ -37,29 +38,43 @@ class RapidIOOutlineDiffMerger(object):
         self._merge = []
         self._versions = {'>':None, '<':None}
 
-        self._read_base()
+        self._read_new_sections_file()
+        self._read_manual_trans_file()
         self._read_diff()
         self._mark_diff_with_base()
         self._merge_lines()
 
-    def _read_base(self):
-        if self._base_file is None:
+    def _read_new_sections_file(self):
+        if self._new_sections_file is None:
             return
-        base_file = open(self._base_file)
-        lines = [line.strip() for line in base_file.readlines()]
-        base_file.close()
+        new_sections = open(self._new_sections_file)
+        lines = [line.strip() for line in new_sections.readlines()]
+        new_sections.close()
 
         for x, line in enumerate(lines):
             tokens = [tok.strip() for tok in line.split("',")]
             tokens = [re.sub("'", "", tok) for tok in tokens]
-            if not len(tokens) == 8 and not len(tokens) == 4:
+            if not len(tokens) == 4:
                 raise ValueError("File %s Line %d %d bad format: '%s'"
-                                 % (self._base_file, x, len(tokens), line))
-            logging.info("Base: %s" % tokens)
-            if len(tokens) > 4:
-                self._merge.append(tokens)
-            else:
-                self._del_items.append(tokens)
+                            % (self._new_sections_file, x, len(tokens), line))
+            logging.info("New Section: %s" % tokens)
+            self._del_items.append(tokens)
+
+    def _read_manual_trans_file(self):
+        if self._manual_trans_file is None:
+            return
+        manual_trans = open(self._manual_trans_file)
+        lines = [line.strip() for line in manual_trans.readlines()]
+        manual_trans.close()
+
+        for x, line in enumerate(lines):
+            tokens = [tok.strip() for tok in line.split("',")]
+            tokens = [re.sub("'", "", tok) for tok in tokens]
+            if not len(tokens) == 8:
+                raise ValueError("File %s Line %d %d bad format: '%s'"
+                            % (self._manual_trans_file, x, len(tokens), line))
+            logging.info("New Section: %s" % tokens)
+            self._merge.append(tokens)
 
     def _read_diff(self):
         diff_file = open(self.diff)
@@ -82,11 +97,9 @@ class RapidIOOutlineDiffMerger(object):
                 else:
                     self._new_lines.append(tokens)
 
-    # base file consists of two types of lines:
-    # - 4 CSV tokens, indicating new content with no match in old
-    # - 8 CSV tokens, indicating a mapping from new content to old that should
-    #                 override the current matching algorithm.
     def _mark_diff_with_base(self):
+        # Remove all sections that are new from the diff file,
+        # as these will not have any translation.
         for base_idx, base in enumerate(self._del_items):
             try:
                 b = self._new_lines.index(base)
@@ -96,6 +109,16 @@ class RapidIOOutlineDiffMerger(object):
                                  % (base_idx, base))
                 raise
 
+        # At this stage _merge contains only manual_trans translations.
+        #
+        # For each manual_trans line, ensure that the "new" line in the diff
+        # is set to already have a translation i.e. do not attempt to translate
+        # twice...
+        #
+        # Also, confirm that the manual_trans references exist in the old and
+        # new diff lines.  It is an error if the new reference does not exist.
+        # The translation to the old section is a warning, as the old section
+        # title may exist unchanged in the new and old.
         for b, base in enumerate(self._merge):
             found_new = False
             logging.info(base[0:4])
@@ -251,10 +274,15 @@ def create_parser():
             action = 'store', type = 'string', default = None,
             help = 'Outline diff file(s) created by check_all_outlines',
             metavar = 'FILE')
-    parser.add_option('-b', '--base',
-            dest = 'translation_base_file',
+    parser.add_option('-n', '--new',
+            dest = 'new_sections_file',
             action = 'store', type = 'string', default = None,
-            help = 'Base translation file used by check_all_outlines',
+            help = 'List of sections that appeared for the first time in a specification revision.',
+            metavar = 'FILE')
+    parser.add_option('-m', '--manual_translation',
+            dest = 'manual_trans_file',
+            action = 'store', type = 'string', default = None,
+            help = 'Hard coded translations from an older specification revision to a newer specification revision.  These translations cannot be correctly determined by the matching algorithm, as the section names may have changed.',
             metavar = 'FILE')
     parser.add_option('-c', '--confidence',
             dest = 'confidence',
@@ -272,10 +300,19 @@ def validate_options(options):
         print "File '" + options.outline_diff_filename +"' does not exist."
         sys.exit()
 
-    if options.translation_base_file is not None:
-        if not os.path.isfile(options.translation_base_file):
-            print "File '" + options.translation_base_file +"' does not exist."
+    if options.new_sections_file is not None:
+        if not os.path.isfile(options.new_sections_file):
+            print "File '" + options.new_sections_file +"' does not exist."
             sys.exit()
+
+    if options.manual_trans_file is not None:
+        if not os.path.isfile(options.manual_trans_file):
+            print "File '" + options.manual_trans_file +"' does not exist."
+            sys.exit()
+
+    if (options.confidence > 1.0) or (options.confidence < 0.0):
+        print "Confidence must be between 0.0 and 1.0."
+        sys.exit()
 
 def main(argv = None):
     logging.basicConfig(level=logging.WARN)
@@ -293,7 +330,8 @@ def main(argv = None):
     validate_options(options)
 
     merger = RapidIOOutlineDiffMerger(options.outline_diff_filename,
-                                      options.translation_base_file,
+                                      options.new_sections_file,
+                                      options.manual_trans_file,
                                       options.confidence)
     name = os.path.basename(os.path.normpath(options.outline_diff_filename))
     path = os.path.dirname(options.outline_diff_filename)

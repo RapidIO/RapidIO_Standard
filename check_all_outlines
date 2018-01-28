@@ -26,14 +26,14 @@ diff Standards/outline_1.3.txt Standards/outline_2.2.txt > Standards/1.3to2.2.tx
 sed -i -r "s#'test'#'1.3'#g" Standards/outline_1.3.txt
 sed -i -r "s#< 'test#< '1.3#g" Standards/1.3to2.2.txt
 sed -i -r "s#> 'test#> '2.2#g" Standards/1.3to2.2.txt
-./merge_outline_diffs.py -f Standards/1.3to2.2.txt -b Standards/base_1.3to2.2.txt -c 0.75
+./merge_outline_diffs.py -f Standards/1.3to2.2.txt -n Standards/new_sections_2.2.txt -m Standards/manual_1.3to2.2.txt -c 0.75
 check_rc 1.3to2.2
 
 diff Standards/outline_2.2.txt Standards/outline_3.2.txt > Standards/2.2to3.2.txt
 sed -i -r "s#'test'#'2.2'#g" Standards/outline_2.2.txt
 sed -i -r "s#< 'test#< '2.2#g" Standards/2.2to3.2.txt
 sed -i -r "s#> 'test#> '3.2#g" Standards/2.2to3.2.txt
-./merge_outline_diffs.py -f Standards/2.2to3.2.txt -b Standards/base_2.2to3.2.txt -c 0.75
+./merge_outline_diffs.py -f Standards/2.2to3.2.txt -n Standards/new_sections_3.2.txt -m Standards/manual_2.2to3.2.txt -c 0.75
 check_rc 2.2to3.2
 
 diff Standards/outline_3.2.txt Standards/outline_4.0.txt > Standards/3.2to4.0.txt
@@ -41,6 +41,6 @@ sed -i -r "s#'test'#'3.2'#g" Standards/outline_3.2.txt
 sed -i -r "s#'test'#'4.0'#g" Standards/outline_4.0.txt
 sed -i -r "s#< 'test#< '3.2#g" Standards/3.2to4.0.txt
 sed -i -r "s#> 'test#> '4.0#g" Standards/3.2to4.0.txt
-./merge_outline_diffs.py -f Standards/3.2to4.0.txt -b Standards/base_3.2to4.0.txt -c 0.75
+./merge_outline_diffs.py -f Standards/3.2to4.0.txt -n Standards/new_sections_4.0.txt -c 0.75
 check_rc 3.2to4.0
 
