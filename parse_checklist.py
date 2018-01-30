@@ -28,386 +28,395 @@ import logging
 
 PRINT_TRACE = False
 
-REVISION = "Revision"
-PART = "Part"
-CHAPTER = "Chapter"
-SECTION = "Section"
-TYPE = "TYPE"
-SENTENCE = "Sentence"
-CHKLIST_FILE = "Checklist_File"
-TABLE_NAME = "Table_Name"
-CHKLIST_ID = "Checklist_ID"
-OPTIONAL = "Optional"
-COL = "Column"
-SAVED_REFS = "Column"
-REV2_PART6 = "Rev2_part6"
+class ChecklistRequirement(object):
+    def __init__(self, filename=None, part_number=None, rev=None):
+        self.sentence = None
+        self.reqt_type = None
+        self.revision = rev
+        self.part = part_number
+        self.chapter = None
+        self.section = None
+        self.checklist_file = filename
+        self.table_name = None
+        self.chklist_id = None
+        self.optional = "STANDARD"
 
-REQTS = {REVISION:None,
-         PART:None,
-         CHAPTER:None,
-         SECTION:None,
-         TYPE:None,
-         SENTENCE:None,
-         CHKLIST_FILE:None,
-         TABLE_NAME:None,
-         CHKLIST_ID:None,
-         OPTIONAL:None,
-         COL:None,
-         SAVED_REFS:None,
-         REV2_PART6:False}
+    def __str__(self):
+        return ("'%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s'" %
+               (self.sentence, self.reqt_type, self.revision, self.part,
+                self.chapter, self.section, self.checklist_file,
+                self.table_name, self.chklist_id, self.optional))
 
-TYPE_RECOMMENDATION = "Recommendation"
-TYPE_REQUIREMENT = "REQUIREMENT"
+class ChecklistParser(object):
+    TYPE_RECOMMENDATION = "Recommendation"
+    TYPE_REQUIREMENT = "REQUIREMENT"
 
-TABLE_ROW = "<TR>"
-TABLE_COLUMN = "<TD>"
-SECTION_NUMBER =  r"(\d+\.\d+[\.\d+]*)"
+    TABLE_ROW = "<TR>"
+    TABLE_COLUMN = "<TD>"
+    SECTION_NUMBER =  r"(\d+\.\d+[\.\d+]*)"
 
-def cleanup_text(text):
-    text = re.sub('\n', ' ', text)
-    text = re.sub('\t', '', text)
-    text = re.sub('\r', ' ', text)
-    text = re.sub(r'\<[^>]+\>', "", text)
+    def __init__(self, checklist_filename, part_number=None,
+                       revision=None, rev2_part6=False):
+        SUBITEM_RE =  r"([0-9]+[A-Z][0-9]*).* DETAIL: "
+        SUBITEM_ID =  r"([0-9]+[A-Z][0-9]*)"
+        CHKLIST_RE = r"([0-9]+\.)"
 
-    end_partial_xml = ">"
-    start_txt = text.find(end_partial_xml)
-    if start_txt >= 0:
-        start_txt += len(end_partial_xml)
-        text = text[start_txt:]
-    text = re.sub('&quot;', '"', text)
-    text = re.sub('&gt;', '>', text)
-    text = re.sub('&lt;', '<', text)
+        self.rev2_part6 = rev2_part6
+        self.default_reqt = ChecklistRequirement(filename=checklist_filename,
+                                                rev=revision,
+                                           part_number = "Part " + part_number)
+        self.saved_refs = None
+        self.part_chapter_section_col = None
+        self.reqts = []
 
-    # Correct some spelling/grammatical errors in original tables.
-    # Problem in 1.3 Error Management Checklist Table 2 items 12F, 12G, and 12I
-    text = re.sub('an packet', 'a packet', text)
-    # Problem in 1.3 Error Management Checklist Table 2 item 20C
-    text = re.sub('APort', 'A Port', text)
- 
-    return text.strip()
+        self.checklist_pattern = re.compile(CHKLIST_RE)
+        self.subitem_pattern = re.compile(SUBITEM_RE,
+                                          flags=re.IGNORECASE | re.VERBOSE)
+        self.subitem_identifier = re.compile(SUBITEM_ID)
+        self.section_number = re.compile(self.SECTION_NUMBER,
+                                          flags=re.IGNORECASE | re.VERBOSE)
 
-def make_id(chklist_id):
-    return "Item " + chklist_id.strip()
+        checklist_file = open(checklist_filename)
+        self.checklist = checklist_file.read()
+        checklist_file.close()
 
-def check_sentence_for_subitem_pattern(column, item_col, reqt):
-    SUBITEM_RE =  r"([0-9]+[A-Z][0-9]*).* DETAIL: "
-    SUBITEM_ID =  r"([0-9]+[A-Z][0-9]*)"
+        self.parse_checklist()
 
-    subitem_pattern = re.compile(SUBITEM_RE, flags=re.IGNORECASE | re.VERBOSE)
-    subitem_identifier = re.compile(SUBITEM_ID)
-    result = subitem_pattern.match(column)
-    if result:
+    def parse_checklist(self):
+        # substitution below is due to some nasty characters
+        # in a few checklists...
+        self.checklist = re.sub("\xc2\xa0", " ", self.checklist)
+        self.checklist = re.sub("\xe2\x80\xa2", " ", self.checklist)
+        self.tables = self.checklist.split("<Table>")
+        self.default_reqt.table_name = None
+        for table in self.tables:
+            logging.debug("Split table: %s" % table[0:100])
+            self.parse_table(table)
+
+    # Remove all XML and other extraneous characters/expressions in the text
+    @staticmethod
+    def cleanup_text(text):
+        text = re.sub('\n', ' ', text)
+        text = re.sub('\t', '', text)
+        text = re.sub('\r', ' ', text)
+        text = re.sub(r'\<[^>]+\>', "", text)
+
+        end_partial_xml = ">"
+        start_txt = text.find(end_partial_xml)
+        if start_txt >= 0:
+            start_txt += len(end_partial_xml)
+            text = text[start_txt:]
+        text = re.sub('&quot;', '"', text)
+        text = re.sub('&gt;', '>', text)
+        text = re.sub('&lt;', '<', text)
+
+        # Correct some spelling/grammatical errors in original tables.
+        # Problem in 1.3 Error Management Checklist Table 2 items 12F,
+        # 12G, and 12I
+        text = re.sub('an packet', 'a packet', text)
+        # Problem in 1.3 Error Management Checklist Table 2 item 20C
+        text = re.sub('APort', 'A Port', text)
+        return text.strip()
+
+    def check_sentence_for_subitem_pattern(self, sentence,
+                                           part_chapter_section_col):
+        result = self.subitem_pattern.match(sentence)
+        if not result:
+            logging.debug("        NO SUBITEM")
+            return False
+
         logging.debug("        SUBITEM_RE: '%s'" % result.group(0))
-        temp = subitem_identifier.match(result.group(0))
-        reqt[CHKLIST_ID] = temp.group(0)
+        temp = self.subitem_identifier.match(result.group(0))
+        self.reqt.chklist_id = temp.group(0)
         logging.debug("        SUBITEM_ID: '%s'" % temp.group(0))
         sentence_start = len(result.group(0))
-        reqt[SENTENCE] = cleanup_text(column[sentence_start:])
-        reqt[TYPE] = "REQUIREMENT"
-        reqt[COL] = item_col
-    else:
-        logging.debug("        NO SUBITEM")
-    return reqt
+        self.reqt.sentence = self.cleanup_text(sentence[sentence_start:])
+        self.reqt.reqt_type = "REQUIREMENT"
+        self.part_chapter_section_col = part_chapter_section_col
+        return True
 
-# Parses the first non-empty column, looking for one of the following patterns:
-# (A) [0-9]*\. (digits 0-9, followed by a period)
-#     In this case, the requirement sentence is found in the next column.
-# (B) ITEM [0-9]+[A-Z][0-9]*: SENTENCE"
-#     In this case, the requirement sentence is part of the checklist item.
-# (C) [0-9]+[A-Z][0-9]*: Detail: SENTENCE
-#
-# The return is an updated requirement with the CHECKLIST_ID and SENTENCE
-# updated based on the above.
-#
-# Additionally, the COL entry is updated with the column number which
-# should have the specification reference
-#
-# Note: in the Error Management Checklist.xml, it is possible to have both an
-# (A) item identifier and a sentence that starts with (C) in an XML table row.
-# In this case, the item identifer should be (C)
+    # get_checklist_item_and_sentence
+    #
+    # Parses the first non-empty column, looking for one of the following
+    # patterns:
+    # (A) [0-9]*\. (digits 0-9, followed by a period)
+    #     In this case, the requirement sentence is found in the next column.
+    # (B) ITEM [0-9]+[A-Z][0-9]*: SENTENCE"
+    #     In this case, the requirement sentence is part of the checklist item.
+    # (C) [0-9]+[A-Z][0-9]*: Detail: SENTENCE
+    #
+    # The return is an updated requirement with the CHECKLIST_ID and SENTENCE
+    # updated based on the above.
+    #
+    # Additionally, the COL entry is updated with the column number which
+    # should have the specification reference
+    #
+    # Note: in the Error Management Checklist.xml, it is possible to have
+    #       both an (A) item identifier and a sentence that starts with
+    #       (C) in an XML table row.  In this case, the item identifer
+    #       used is (C)
 
-def get_checklist_item_and_sentence(cols, reqt):
-    ITEM_CHKLIST = "ITEM "
-    CHKLIST_RE = r"([0-9]+\.)"
-    checklist_pattern = re.compile(CHKLIST_RE)
+    def get_checklist_item_and_sentence(self):
+        ITEM_CHKLIST = "ITEM "
+        ITEM_PREFIX = "Item "
 
-    logging.debug("    cols[0]: '%s'" % cols[0])
-    if cols[0].startswith(ITEM_CHKLIST):
-        logging.debug("    ITEM")
-        colon = cols[0].find(":")
-        if colon > 0:
-            x = make_id(cols[0][len(ITEM_CHKLIST):colon].strip())
-            reqt[CHKLIST_ID] = x
-            reqt[SENTENCE] = cols[0][colon + 1:].strip()
-            reqt[TYPE] = "REQUIREMENT"
-            reqt[COL] = 1
-            logging.debug("    Reqt: %s" % reqt)
-            return reqt
+        logging.debug("    columns[0]: '%s'" % self.columns[0])
+        if self.columns[0].startswith(ITEM_CHKLIST):
+            logging.debug("    ITEM")
+            colon = self.columns[0].find(":")
+            if colon > 0:
+                self.reqt.chklist_id = (ITEM_PREFIX
+                                     + self.columns[0][len(ITEM_CHKLIST):colon].strip())
+                self.reqt.sentence = self.columns[0][colon + 1:].strip()
+                self.reqt.reqt_type = "REQUIREMENT"
+                self.part_chapter_section_col = 1
+                logging.debug("    Reqt: %s" % self.reqt)
+            else:
+                logging.debug("    No colon...")
         else:
-            logging.debug("    No colon...")
-    else:
-        logging.debug("    No ITEM")
+            logging.debug("    No ITEM")
 
-    result = checklist_pattern.match(cols[0])
-    if result:
-        logging.debug("    NUMBER")
-        x = make_id(result.group(0)[:-1].strip())
-        reqt[CHKLIST_ID] = x
-        reqt[SENTENCE] = cols[1]
-        reqt[TYPE] = "REQUIREMENT"
-        reqt[COL] = 2
-        logging.debug("    Reqt B4: %s" % reqt)
-        reqt = check_sentence_for_subitem_pattern(reqt[SENTENCE], 2, reqt)
-        logging.debug("    Reqt: %s" % reqt)
-        return reqt
-    else:
+        result = self.checklist_pattern.match(self.columns[0])
+        if result:
+            logging.debug("    NUMBER")
+            self.reqt.chklist_id = (ITEM_PREFIX
+                                  + result.group(0)[:-1].strip())
+            self.reqt.sentence = self.columns[1]
+            self.reqt.reqt_type = "REQUIREMENT"
+            self.part_chapter_section_col = 2
+            logging.debug("    Reqt B4: %s" % self.reqt)
+            self.check_sentence_for_subitem_pattern(self.reqt.sentence, 2)
+            logging.debug("    Reqt: %s" % self.reqt)
+            return
+
         logging.debug("    No NUMBER")
+        self.check_sentence_for_subitem_pattern(self.columns[0], 1)
+        logging.debug("    Reqt: %s" % self.reqt)
 
-    reqt = check_sentence_for_subitem_pattern(cols[0], 1, reqt)
-    logging.debug("    Reqt: %s" % reqt)
-    return reqt
+    # Parse first column which has one or more lines of the form:
+    # Part X, Sec. Chapter.Y.Z...
+    # Part X, Sec.Chapter.Y.Z...
+    # Adds one requirement for each line, with
+    # part, chapter, and section set according to the above.
+    def add_one_requirement_per_reference(self):
+        logging.debug("Adding one requirement per reference...")
+        if self.part_chapter_section_col is None:
+            logging.debug("part_chapter_section_col is none, skipping...")
+            return
 
-# Parse first column which has one or more lines of the form:
-# Part X, Sec. Chapter.Y.Z...
-# Part X, Sec.Chapter.Y.Z...
-# Returns one requirement for each line, with the fields
-# Part, Chapter, and Section set according to the above.
-def get_part_chapter_section(cols, reqt):
-    if reqt[COL] is None:
-        return [reqt]
-
-    reqts = []
-    col_idx = int(reqt[COL])
-    temp = cleanup_text(cols[col_idx])
-    # Jiggerey pokery required for Rev 1.3 checklist.
-    #
-    # When references in the original document are in a "merged" table cell,
-    # the references in the XML are only in the first table row.  The merged
-    # table cell can span multiple XML <Table> instances.
-    #
-    # In Rev 1.3 Table 3-16 Item 6B where the reference pulls in the subsequent
-    # Chapter 4 text.  This is detected and overridden by the length check.
-    if temp.find("Part") >= 0 and len(temp) < 200:
-        logging.debug("        Saving references: '%s'" % temp)
-        REQTS[SAVED_REFS] = temp
-    else:
-        temp = REQTS[SAVED_REFS]
-        logging.debug("        Using saved refs: '%s'" % temp)
-    if temp is None:
-        logging.debug("        No refs, skipping...'")
-        return None
-    part_chap_secs = temp.split("Part ")
-    logging.debug("Extracting reference from: '%s'" % temp)
-    section_re = re.compile(SECTION_NUMBER, flags=re.IGNORECASE | re.VERBOSE)
-    for pcs_line in part_chap_secs:
-        if pcs_line == '':
-            logging.debug("        Line empty...")
-            continue
-        logging.debug("    Reference: '%s'" % pcs_line)
-        pcs = [p.strip() for p in pcs_line.split(',')]
-        if len(pcs) < 2:
-            logging.debug("        No PCS...")
-            continue
-        sections = [tok.strip() for tok in pcs[1].strip().split(' ')]
-        logging.debug("    B4 Sections: '%s'" % sections)
-        if len(sections) == 1:
-            # Some section references leave out the space.
-            # Check that the reference starts with "Sec.",
-            # and tack on the section number to sections list.
-            if sections[0].startswith("Sec."):
-                sections.append(sections[0][len("Sec."):].strip())
-                sections[1] = sections[0][len("Sec."):].strip()
-            # Some section references leave out the "Sec.".
-            # Check that the reference starts with a digit,
-            # and tack on the section number to the sections list.
-            if sections[0][0] in "0123456789":
-                sections.append(sections[0])
-        logging.debug("    Sections: '%s'" % sections)
-        if len(sections) < 2:
-            logging.debug("        No Sections...")
-            continue
-        logging.debug("        PCS: '%s'" % pcs)
-        reqt[PART] = "Part " + pcs[0].strip()
-
-        result = section_re.search(pcs[1].strip())
-        if result:
-            reqt[SECTION] = result.group(0)
+        temp = self.cleanup_text(self.columns[self.part_chapter_section_col])
+        logging.debug("        Raw cols: %s" % temp)
+        # Jiggerey pokery required for Rev 1.3 checklist.
+        #
+        # When references in the original document are in a "merged" table cell,
+        # the references in the XML are only in the first table row.  The merged
+        # table cell can span multiple XML <Table> instances.
+        #
+        # In Rev 1.3 Table 3-16 Item 6B the reference pulls in the subsequent
+        # Chapter 4 chapter heading text.  This is detected and overridden
+        # by the length check.
+        if temp.find("Part") >= 0 and len(temp) < 200:
+            logging.debug("        Saving references: '%s'" % temp)
+            self.saved_refs = temp
         else:
-            reqt[SECTION] = pcs[1].strip()
-        reqt[CHAPTER] = "Chapter " + sections[1][0]
-        logging.debug("        Part: '%s' Chapter: '%s' Section: '%s'"
-                      % (reqt[PART], reqt[CHAPTER], reqt[SECTION]))
-        if (reqt[REVISION] == "1.3"
-            and reqt[PART] == "Part 6"
-            and reqt[CHAPTER] == "Chapter 4"
-            and (reqt[SECTION] == "Table 4-1" or reqt[SECTION] == "Table 4-2")):
-            logging.debug("        Skipping table references...")
-            continue
+            temp = self.saved_refs
+            logging.debug("        Using saved refs: '%s'" % temp)
+        if temp is None:
+            logging.debug("        No refs, skipping...'")
+            return
 
-        reqts.append(copy.copy(reqt))
-    return reqts
+        part_chap_secs = temp.split("Part ")
+        logging.debug("Extracting reference from: '%s'" % temp)
+        for pcs_line in part_chap_secs:
+            if pcs_line == '':
+                logging.debug("        Line empty...")
+                continue
+            logging.debug("    Reference: '%s'" % pcs_line)
+            pcs = [p.strip() for p in pcs_line.split(',')]
+            if len(pcs) < 2:
+                logging.debug("        No PCS...")
+                continue
+            sections = [tok.strip() for tok in pcs[1].strip().split(' ')]
+            logging.debug("    B4 Sections: '%s'" % sections)
+            if len(sections) == 1:
+                # Some section references leave out the space.
+                # Check that the reference starts with "Sec.",
+                # and tack on the section number to sections list.
+                if sections[0].startswith("Sec."):
+                    sections.append(sections[0][len("Sec."):].strip())
+                    sections[1] = sections[0][len("Sec."):].strip()
+                # Some section references leave out the "Sec.".
+                # Check that the reference starts with a digit,
+                # and tack on the section number to the sections list.
+                if sections[0][0] in "0123456789":
+                    sections.append(sections[0])
+            logging.debug("    Sections: '%s'" % sections)
+            if len(sections) < 2:
+                logging.debug("        No Sections...")
+                continue
+            logging.debug("        PCS: '%s'" % pcs)
+            self.reqt.part = "Part " + pcs[0].strip()
 
-def rev2_part6_parse_table(table):
-    TABLE_NUMBER = r"\d+"
-    REV2p6_TABLE_ITEM = SECTION_NUMBER + "[A-Z][\.\d+]*"
+            result = self.section_number.search(pcs[1].strip())
+            if result:
+                self.reqt.section = result.group(0)
+            else:
+                self.reqt.section = pcs[1].strip()
+            self.reqt.chapter = "Chapter " + sections[1][0]
+            logging.debug("        Part: '%s' Chapter: '%s' Section: '%s'"
+                      % (self.reqt.part, self.reqt.chapter, self.reqt.section))
+            if (self.reqt.revision == "1.3"
+                and self.reqt.part == "Part 6"
+                and self.reqt.chapter == "Chapter 4"
+                and (self.reqt.section == "Table 4-1"
+                     or self.reqt.section == "Table 4-2")):
+                logging.debug("        Skipping table references...")
+                continue
+            self.reqts.append(copy.deepcopy(self.reqt))
 
-    table_number_re = re.compile(TABLE_NUMBER)
-    section_number = re.compile(SECTION_NUMBER)
-    table_item = re.compile(REV2p6_TABLE_ITEM)
-
-    reqts = []
-    rows = table.split(TABLE_ROW)
-    REQTS[TABLE_NAME] = None
-
-    for row in rows:
-        temp = [col.strip() for col in row.split(TABLE_COLUMN)]
-        columns = []
+    def rev2_part6_get_cols_from_row(self, row):
+        temp = [col.strip() for col in row.split(self.TABLE_COLUMN)]
+        self.columns = []
         for t in temp:
-            col = cleanup_text(t)
+            col = self.cleanup_text(t)
             if not col == "":
-               columns.append(col)
-        logging.debug("Columns: %s" % columns)
-        if len(columns) < 2:
-            logging.info("Skipping Row: '%s'" % row[0:50])
-            continue
-        if REQTS[TABLE_NAME] is None:
-            result =  table_number_re.match(columns[0])
-            if not result:
-                logging.info("No Number Row: '%s'" % row[0:50])
-                continue
-            REQTS[CHAPTER] = "Chapter %s" % result.group(0)
-            REQTS[TABLE_NAME] = "Table %s %s " % (result.group(0), columns[1])
-            logging.info("Table: '%s'" % REQTS[TABLE_NAME])
-            continue
-        # Know the table name, now get requirements...
-        reqt = copy.deepcopy(REQTS)
-        result = table_item.match(columns[0])
-        if result:
-            reqt[CHKLIST_ID] = result.group(0)
-            section = section_number.match(reqt[CHKLIST_ID])
-            if not section:
-                logging.error("Found ID but no section: '%s'" % reqt[CHKLIST_ID])
-                continue
-            reqt[SECTION] = section.group(0)
-            if reqt[SECTION][-1] == ".":
-                reqt[SECTION] = reqt[SECTION][:-1]
-            reqt[SENTENCE] = columns[1]
-            reqt[TYPE] = TYPE_REQUIREMENT
-            logging.info("Table REQT: '%s': '%s'"
-                       % (reqt[CHKLIST_ID], reqt[TABLE_NAME]))
-            reqts.append(reqt)
-    return reqts, None
+               self.columns.append(col)
+        logging.debug("Rev2_Part6_Columns: %s" % self.columns)
 
-def parse_table_name(table):
-    TABLE_TITLE = "<TableTitle>"
-    TABLE_TITLE_END = "</TableTitle>"
-    CAPTION = "<Caption>"
-    CAPTION_END = "</Caption>"
+    def rev2_part6_add_requirements(self):
+        REV2p6_TABLE_ITEM = self.SECTION_NUMBER + "[A-Z][\.\d+]*"
+        table_item = re.compile(REV2p6_TABLE_ITEM)
 
-    new_table_name = None
-    DELIMITERS = [[TABLE_TITLE, TABLE_TITLE_END],
-                  [    CAPTION, CAPTION_END    ]]
-    for delim in DELIMITERS:
-        start = table.find(delim[0])
-        end = table.find(delim[1])
-        if start < 0 or end < 0:
-            continue
-        new_table_name = table[start:end]
-        logging.debug("Raw table name: '%s'" % new_table_name)
-        new_table_name = cleanup_text(new_table_name)
-        logging.debug("Clean table name: '%s'" % new_table_name)
-        table = table[end + len(delim[1]):]
-        break
-    if new_table_name is None:
-        logging.debug("Table name not found in %s" % table[0:50])
-    else:
+        result = table_item.match(self.columns[0])
+        if not result:
+            return
+        self.reqt = copy.deepcopy(self.default_reqt)
+        self.reqt.chklist_id = result.group(0)
+        section = self.section_number.match(self.reqt.chklist_id)
+        if not section:
+            logging.error("Found ID, no section: '%s'" % self.reqt.chklist_id)
+            return
+        self.reqt.section = section.group(0)
+        if self.reqt.section[-1] == ".":
+            self.reqt.section = self.reqt.section[:-1]
+        self.reqt.sentence = self.columns[1]
+        self.reqt.reqt_type = self.TYPE_REQUIREMENT
+        logging.info("Table REQT: '%s': '%s'"
+                   % (self.reqt.chklist_id, self.reqt.table_name))
+        self.reqts.append(self.reqt)
+
+    def rev2_part6_parse_table(self):
+        TABLE_NUMBER = r"\d+"
+
+        table_number_re = re.compile(TABLE_NUMBER)
+
+        new_reqts = []
+        self.rows = self.table.split(self.TABLE_ROW)
+        self.default_reqt.table_name = None
+
+        for row in self.rows:
+            self.rev2_part6_get_cols_from_row(row)
+            if len(self.columns) < 2:
+                logging.info("Skipping Row: '%s'" % row[0:50])
+                continue
+            if self.default_reqt.table_name is None:
+                result =  table_number_re.match(self.columns[0])
+                if not result:
+                    logging.info("No Number Row: '%s'" % row[0:50])
+                    continue
+                self.default_reqt.chapter = "Chapter %s" % result.group(0)
+                self.default_reqt.table_name = ("Table %s %s "
+                                             % (result.group(0), self.columns[1]))
+                logging.info("Table: '%s'" % self.default_reqt.table_name)
+                continue
+            # Know the table name, now get requirements...
+            self.rev2_part6_add_requirements()
+
+    def parse_table_name(self):
+        TABLE_TITLE = "<TableTitle>"
+        TABLE_TITLE_END = "</TableTitle>"
+        CAPTION = "<Caption>"
+        CAPTION_END = "</Caption>"
+
+        new_table_name = None
+        DELIMITERS = [[TABLE_TITLE, TABLE_TITLE_END],
+                      [    CAPTION, CAPTION_END    ]]
+        for delim in DELIMITERS:
+            start = self.table.find(delim[0])
+            end = self.table.find(delim[1])
+            if start < 0 or end < 0:
+                continue
+            new_table_name = self.table[start:end]
+            logging.debug("Raw table name: '%s'" % new_table_name)
+            new_table_name = self.cleanup_text(new_table_name)
+            logging.debug("Clean table name: '%s'" % new_table_name)
+            self.table = self.table[end + len(delim[1]):]
+            break
+
+        if new_table_name is None:
+            logging.debug("Table name not found in %s" % self.table[0:50])
+            return
+
         logging.debug("Table name: %s" % new_table_name)
-    return table, new_table_name
+        self.default_reqt.table_name = new_table_name
+        self.saved_refs = None
 
-def parse_table(table, table_name):
-    global REQTS
-    new_table_name = None
-    reqts = []
+    def parse_usual_table(self):
+        new_table_name = None
 
-    if REQTS[REV2_PART6]:
-        return rev2_part6_parse_table(table)
+        if self.default_reqt.table_name is None:
+            logging.info("No table name, skipping %s" % self.table[0:50])
+            return
 
-    table, new_table_name = parse_table_name(table)
-    if new_table_name is not None:
-        logging.debug("New Table Name: %s" % new_table_name)
-        table_name = new_table_name
-        REQTS[SAVED_REFS] = None
+        logging.info("Table Name: '%s'" % self.default_reqt.table_name)
+        self.rows = self.table.split(self.TABLE_ROW)
+        for row in self.rows:
+            items = [col.strip() for col in row.split(self.TABLE_COLUMN)]
+            self.columns = []
+            for item in items:
+                temp = self.cleanup_text(item)
+                if not temp == "":
+                    self.columns.append(temp)
+            if not self.columns:
+                logging.debug("Skipping row: %s" % row)
+                continue
+            logging.debug("columns: %s" % self.columns)
+            sys.stdout.flush()
+            self.reqt = copy.deepcopy(self.default_reqt)
+            self.get_checklist_item_and_sentence()
+            if self.reqt.sentence is None:
+                logging.debug("No sentence, skipping...")
+                continue
+            # Skip item duplicated in original 1.3 checklists.
+            if self.reqt.table_name == 'Table 6-3. General device message passing logical layer source transaction support list' and self.reqt.chklist_id == '1C':
+                continue
+            self.add_one_requirement_per_reference()
 
-    if table_name is None:
-        logging.info("No table name, skipping %s" % table[0:50])
-        return reqts, table_name
+    def parse_table(self, table):
+        self.table = table
 
-    REQTS[TABLE_NAME] = table_name
-    logging.info("Table Name: '%s'" % table_name)
-    rows = table.split(TABLE_ROW)
-    for row in rows:
-        items = [col.strip() for col in row.split(TABLE_COLUMN)]
-        columns = []
-        for item in items:
-            temp = cleanup_text(item)
-            if not temp == "":
-                columns.append(temp)
-        if not columns:
-            logging.debug("Skipping row: %s" % row)
-            continue
-        logging.debug("columns: %s" % columns)
-        reqt = copy.deepcopy(REQTS)
-        reqt = get_checklist_item_and_sentence(columns, reqt)
-        if reqt[SENTENCE] is None:
-            logging.debug("No sentence, skipping...")
-            continue
-        # Skip item duplicated in original 1.3 checklists.
-        if reqt[TABLE_NAME] == 'Table 6-3. General device message passing logical layer source transaction support list' and reqt[CHKLIST_ID] == '1C':
-            continue
-        new_reqts = get_part_chapter_section(columns, reqt)
-        if new_reqts is not None:
-            reqts += new_reqts
+        if self.rev2_part6:
+            self.rev2_part6_parse_table()
+        else:
+            self.parse_table_name()
+            self.parse_usual_table()
 
-    return reqts, table_name
+    def print_reqts(self):
+        if len(self.reqts) == 0:
+            print "No requirements found"
 
-def parse_checklist(options):
-    reqts = []
-
-    checklist_file = open(options.filename_of_checklist)
-    checklist = checklist_file.read()
-    checklist_file.close()
-
-    REQTS[CHKLIST_FILE] = options.filename_of_checklist
-    REQTS[REVISION] = options.revision_number
-    REQTS[PART] = "Part " + options.part_number
-    REQTS[REV2_PART6] = options.rev_2_part_6
-    REQTS[OPTIONAL] = "STANDARD"
-
-    # substitution below is due to some nasty characters in a few checklists...
-    checklist = re.sub("\xc2\xa0", " ", checklist)
-    checklist = re.sub("\xe2\x80\xa2", " ", checklist)
-    tables = checklist.split("<Table>")
-    table_name = None
-    for table in tables:
-        logging.debug("Split table: %s" % table[0:100])
-        new_reqts, table_name = parse_table(table, table_name)
-        if new_reqts is not None:
-            reqts += new_reqts
-    return reqts
-
-def print_reqts(reqts):
-    print "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
-    for reqt in reqts:
-        print ("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" %
-              (reqt[SENTENCE], reqt[TYPE], reqt[REVISION], reqt[PART],
-               reqt[CHAPTER], reqt[SECTION],
-               reqt[CHKLIST_FILE], reqt[TABLE_NAME], reqt[CHKLIST_ID],
-               reqt[OPTIONAL]))
+        print "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
+        for reqt in self.reqts:
+            print ("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'"
+                % (reqt.sentence, reqt.reqt_type, reqt.revision, reqt.part,
+                   reqt.chapter, reqt.section,
+                   reqt.checklist_file, reqt.table_name, reqt.chklist_id,
+                   reqt.optional))
 
 def create_parser():
     parser = OptionParser()
     parser.add_option('-f', '--file',
-            dest = 'filename_of_checklist',
+            dest = 'checklist_filename',
             action = 'store', type = 'string',
             help = 'Compliance checklist in XML format.',
             metavar = 'FILE')
@@ -425,16 +434,21 @@ def create_parser():
             dest = 'rev_2_part_6',
             action = 'store_true', default=False,
             help = 'Indicate that this is a rev2.2 part 6 checklist, which requires special parsing',
-            metavar = 'PART')
+            metavar = 'REV')
+    parser.add_option('-o', '--optional',
+            dest = 'optional',
+            action = 'store', type = 'string', default=None,
+            help = 'File containing table name and item for optional requirements.',
+            metavar = 'FILE')
     return parser
 
 def validate_options(options):
-    if options.filename_of_checklist is None:
+    if options.checklist_filename is None:
         print "Must enter file name of checklist."
         sys.exit()
 
-    if not os.path.isfile(options.filename_of_checklist):
-        print "File '" + options.filename_of_checklist +"' does not exist."
+    if not os.path.isfile(options.checklist_filename):
+        print "File '" + options.checklist_filename +"' does not exist."
         sys.exit()
 
     if options.part_number is None:
@@ -461,6 +475,12 @@ def validate_options(options):
         print "Y is 0-3."
         print "Z is 1-3."
         sys.exit()
+
+    if options.optional is not None:
+        if not os.path.isfile(options.optional):
+            print "File '%s' not found" % options.optional
+            sys.exit()
+
     return options
 
 def main(argv = None):
@@ -477,14 +497,11 @@ def main(argv = None):
         return -1
 
     options = validate_options(options)
-
-    reqts = parse_checklist(options)
-
-    if len(reqts) == 0:
-        print "No requirements found"
-        return 0
-
-    print_reqts(reqts)
+    parser = ChecklistParser(checklist_filename = options.checklist_filename,
+                             revision = options.revision_number,
+                             part_number = options.part_number,
+                             rev2_part6 = options.rev_2_part_6)
+    parser.print_reqts()
 
 if __name__ == '__main__':
     sys.exit(main())
