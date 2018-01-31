@@ -1,0 +1,8 @@
+'Table 4 PCS and PMA Layers', 'Item 4.12.3A', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B1', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B2', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B3', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B4', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B5', 'OPTIONAL'
+'Table 4 PCS and PMA Layers', 'Item 4.12.3B6', 'OPTIONAL'

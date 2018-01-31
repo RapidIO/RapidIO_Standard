@@ -18,7 +18,7 @@ check_rc 'Parse ErrorManagementChecklist'
 check_rc 'Parse DataStreamingChecklist'
 ./parse_checklist.py -f Historic_Checklists/rev1_3_rio_chklist.xml -r 1.3 -o Historic_Checklists/rev1_3_rio_chklist_optional.txt > Historic_Checklists/rev1_3_rio_chklist.txt
 check_rc 'Parse Rev1.3'
-./parse_checklist.py -f Historic_Checklists/rapidio_interop_checklist_rev2_2.xml -r 2.2 -p 6 -t > Historic_Checklists/rapidio_interop_checklist_rev2_2.txt
+./parse_checklist.py -f Historic_Checklists/rapidio_interop_checklist_rev2_2.xml -r 2.2 -p 6 -t -o Historic_Checklists/rapidio_interop_checklist_rev2_2_optional.txt > Historic_Checklists/rapidio_interop_checklist_rev2_2.txt
 check_rc 'Parse Rev2.2Part6'
 ./merge_checklists.py -c Historic_Checklists/ErrorManagementChecklist.txt -c Historic_Checklists/DataStreamingChecklist.txt -c Historic_Checklists/rev1_3_rio_chklist.txt -c Historic_Checklists/rapidio_interop_checklist_rev2_2.txt -o Standards/outline_1.3.txt  -o Standards/outline_2.2.txt  > Historic_Checklists/merged_sorted_checklist.txt
 check_rc 'MERGE all checklists'
