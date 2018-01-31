@@ -55,8 +55,11 @@ class ChecklistParser(object):
     TABLE_COLUMN = "<TD>"
     SECTION_NUMBER =  r"(\d+\.\d+[\.\d+]*)"
 
-    def __init__(self, checklist_filename, part_number=None,
-                       revision=None, rev2_part6=False):
+    def __init__(self, checklist_filename,
+                       optional_filename = None,
+                       part_number=None,
+                       revision=None,
+                       rev2_part6=False):
         SUBITEM_RE =  r"([0-9]+[A-Z][0-9]*).* DETAIL: "
         SUBITEM_ID =  r"([0-9]+[A-Z][0-9]*)"
         CHKLIST_RE = r"([0-9]+\.)"
@@ -80,7 +83,30 @@ class ChecklistParser(object):
         self.checklist = checklist_file.read()
         checklist_file.close()
 
+        self.optionslist = []
+        self.optional_table_items_fn = None
+        if optional_filename is not None:
+            self.optional_table_items_fn = optional_filename
+            options_file = open(optional_filename)
+            self.optionslist = [t.strip() for t in options_file.readlines()]
+            options_file.close()
+
+        self.setup_options()
         self.parse_checklist()
+
+    def setup_options(self):
+        self.optional_table_items = []
+        for line_num, line in enumerate(self.optionslist):
+            tokens = [re.sub("'", "", tok) for tok in line.split("', ")]
+            token_str = "'" + "', '".join(tokens) + "'"
+            if not len(tokens) == 3:
+                logging.warn("File '%s' Line %d: 3 tokens expected, got %d: %s"
+                         % (self.optional_table_items_fn, line_num,
+                            len(tokens), token_str))
+                continue
+            logging.info("Optional: %s" % token_str)
+            self.optional_table_items.append(tokens)
+        
 
     def parse_checklist(self):
         # substitution below is due to some nasty characters
@@ -193,6 +219,16 @@ class ChecklistParser(object):
         self.check_sentence_for_subitem_pattern(self.columns[0], 1)
         logging.debug("    Reqt: %s" % self.reqt)
 
+    def add_requirement(self):
+        self.table_name = None
+        self.chklist_id = None
+        self.optional = "STANDARD"
+        chk_tuple = [self.reqt.table_name, self.reqt.chklist_id, "OPTIONAL"]
+        if (chk_tuple in self.optional_table_items):
+            self.reqt.optional = "OPTIONAL"
+        self.reqts.append(copy.deepcopy(self.reqt))
+        self.reqt.optional = "STANDARD"
+
     # Parse first column which has one or more lines of the form:
     # Part X, Sec. Chapter.Y.Z...
     # Part X, Sec.Chapter.Y.Z...
@@ -272,7 +308,7 @@ class ChecklistParser(object):
                      or self.reqt.section == "Table 4-2")):
                 logging.debug("        Skipping table references...")
                 continue
-            self.reqts.append(copy.deepcopy(self.reqt))
+            self.add_requirement()
 
     def rev2_part6_get_cols_from_row(self, row):
         temp = [col.strip() for col in row.split(self.TABLE_COLUMN)]
@@ -303,7 +339,7 @@ class ChecklistParser(object):
         self.reqt.reqt_type = self.TYPE_REQUIREMENT
         logging.info("Table REQT: '%s': '%s'"
                    % (self.reqt.chklist_id, self.reqt.table_name))
-        self.reqts.append(self.reqt)
+        self.add_requirement()
 
     def rev2_part6_parse_table(self):
         TABLE_NUMBER = r"\d+"
@@ -448,7 +484,7 @@ def validate_options(options):
         sys.exit()
 
     if not os.path.isfile(options.checklist_filename):
-        print "File '" + options.checklist_filename +"' does not exist."
+        print ("File %s not found." % options.checklist_filename)
         sys.exit()
 
     if options.part_number is None:
@@ -498,6 +534,7 @@ def main(argv = None):
 
     options = validate_options(options)
     parser = ChecklistParser(checklist_filename = options.checklist_filename,
+                             optional_filename = options.optional,
                              revision = options.revision_number,
                              part_number = options.part_number,
                              rev2_part6 = options.rev_2_part_6)

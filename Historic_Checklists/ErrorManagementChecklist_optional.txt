@@ -1,0 +1,3 @@
+'Table 1. Error Management Behavioral Requirements Certification List', 'Item 12', 'OPTIONAL'
+'Table 2. Error Management Register Requirements Certification List', '11G', 'OPTIONAL'
+'Table 2. Error Management Register Requirements Certification List', '20F', 'OPTIONAL'
