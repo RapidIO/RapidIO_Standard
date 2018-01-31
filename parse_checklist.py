@@ -50,6 +50,7 @@ class ChecklistRequirement(object):
 class ChecklistParser(object):
     TYPE_RECOMMENDATION = "Recommendation"
     TYPE_REQUIREMENT = "REQUIREMENT"
+    ITEM_PREFIX = "Item "
 
     TABLE_ROW = "<TR>"
     TABLE_COLUMN = "<TD>"
@@ -184,14 +185,13 @@ class ChecklistParser(object):
 
     def get_checklist_item_and_sentence(self):
         ITEM_CHKLIST = "ITEM "
-        ITEM_PREFIX = "Item "
 
         logging.debug("    columns[0]: '%s'" % self.columns[0])
         if self.columns[0].startswith(ITEM_CHKLIST):
             logging.debug("    ITEM")
             colon = self.columns[0].find(":")
             if colon > 0:
-                self.reqt.chklist_id = (ITEM_PREFIX
+                self.reqt.chklist_id = (self.ITEM_PREFIX
                                      + self.columns[0][len(ITEM_CHKLIST):colon].strip())
                 self.reqt.sentence = self.columns[0][colon + 1:].strip()
                 self.reqt.reqt_type = "REQUIREMENT"
@@ -205,7 +205,7 @@ class ChecklistParser(object):
         result = self.checklist_pattern.match(self.columns[0])
         if result:
             logging.debug("    NUMBER")
-            self.reqt.chklist_id = (ITEM_PREFIX
+            self.reqt.chklist_id = (self.ITEM_PREFIX
                                   + result.group(0)[:-1].strip())
             self.reqt.sentence = self.columns[1]
             self.reqt.reqt_type = "REQUIREMENT"
@@ -337,6 +337,7 @@ class ChecklistParser(object):
             self.reqt.section = self.reqt.section[:-1]
         self.reqt.sentence = self.columns[1]
         self.reqt.reqt_type = self.TYPE_REQUIREMENT
+        self.reqt.chklist_id = self.ITEM_PREFIX + self.reqt.chklist_id
         logging.info("Table REQT: '%s': '%s'"
                    % (self.reqt.chklist_id, self.reqt.table_name))
         self.add_requirement()
