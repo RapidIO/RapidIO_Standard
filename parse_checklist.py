@@ -362,7 +362,7 @@ class ChecklistParser(object):
                     logging.info("No Number Row: '%s'" % row[0:50])
                     continue
                 self.default_reqt.chapter = "Chapter %s" % result.group(0)
-                self.default_reqt.table_name = ("Table %s %s "
+                self.default_reqt.table_name = ("Table %s %s"
                                              % (result.group(0), self.columns[1]))
                 logging.info("Table: '%s'" % self.default_reqt.table_name)
                 continue
