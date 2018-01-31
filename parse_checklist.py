@@ -154,7 +154,7 @@ class ChecklistParser(object):
 
         logging.debug("        SUBITEM_RE: '%s'" % result.group(0))
         temp = self.subitem_identifier.match(result.group(0))
-        self.reqt.chklist_id = temp.group(0)
+        self.reqt.chklist_id = self.ITEM_PREFIX + temp.group(0)
         logging.debug("        SUBITEM_ID: '%s'" % temp.group(0))
         sentence_start = len(result.group(0))
         self.reqt.sentence = self.cleanup_text(sentence[sentence_start:])
