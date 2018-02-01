@@ -8,15 +8,15 @@
    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
       <rdf:Description rdf:about=""
             xmlns:xmp="http://ns.adobe.com/xap/1.0/">
-         <xmp:ModifyDate>2018-01-31T19:42:41-05:00</xmp:ModifyDate>
-         <xmp:CreateDate>2018-01-31T19:42:15-05:00</xmp:CreateDate>
-         <xmp:MetadataDate>2018-01-31T19:42:41-05:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2018-01-31T21:24:25-05:00</xmp:ModifyDate>
+         <xmp:CreateDate>2018-01-31T21:24:08-05:00</xmp:CreateDate>
+         <xmp:MetadataDate>2018-01-31T21:24:25-05:00</xmp:MetadataDate>
          <xmp:CreatorTool>Acrobat PDFMaker 10.1 for Excel</xmp:CreatorTool>
       </rdf:Description>
       <rdf:Description rdf:about=""
             xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/">
-         <xmpMM:DocumentID>uuid:985bb8fd-d6d6-4bbb-8a76-fcc0994fd6e6</xmpMM:DocumentID>
-         <xmpMM:InstanceID>uuid:68e57074-da03-46da-8e58-232b5a6c29ae</xmpMM:InstanceID>
+         <xmpMM:DocumentID>uuid:308f6c45-341d-43dd-8c33-f08746176421</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:276a9f4e-f92e-4852-9584-8033f38a4dd7</xmpMM:InstanceID>
       </rdf:Description>
       <rdf:Description rdf:about=""
             xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -80,7 +80,7 @@
 <destination structID="LinkTarget_6190"/>
 </bookmark>
 <bookmark title="Chap. 5">
-<destination structID="LinkTarget_4154"/>
+<destination structID="LinkTarget_4158"/>
 </bookmark>
 <bookmark title="Chap. 6">
 <destination structID="LinkTarget_2083"/>
@@ -723,7 +723,7 @@
 <TR>
 <TD>3.4C</TD>
 
-<TD>Stype0 parameter shall be implemented as defined in Part6, Table 3-3.</TD>
+<TD>Stype0 parameter shall be implemented as defined in Part 6, Table 3-3.</TD>
 </TR>
 
 <TR>
@@ -861,7 +861,7 @@
 <TR>
 <TD>3.4.3C</TD>
 
-<TD>The packet-not-accepted control symbol cause field shall be encoded as specified in Table 3-4 of Part6.  If the port issuing the control symbol is not able to specify the fault, or the fault is not one of those listed in the table, the general error encoding shall be used.</TD>
+<TD>The packet-not-accepted control symbol cause field shall be encoded as specified in Table 3-4 of Part 6.  If the port issuing the control symbol is not able to specify the fault, or the fault is not one of those listed in the table, the general error encoding shall be used.</TD>
 </TR>
 
 <TR>
@@ -1137,7 +1137,7 @@
 <TR>
 <TD>3.5.5.1A</TD>
 
-<TD>The link-request reset-device command causes the receiving device to go through its reset orpower-up sequence. </TD>
+<TD>The link-request reset-device command causes the receiving device to go through its reset or power-up sequence. </TD>
 </TR>
 
 <TR>
@@ -1405,7 +1405,7 @@
 <TR>
 <TD>4.5.3I</TD>
 
-<TD>In all other cases, the value of the running disparity at the end of the sub-block is running disparity at the beginning of the sub-block (the runningdisparity is unchanged).</TD>
+<TD>In all other cases, the value of the running disparity at the end of the sub-block is running disparity at the beginning of the sub-block (the running disparity is unchanged).</TD>
 </TR>
 
 <TR>
@@ -1605,7 +1605,7 @@
 <TR>
 <TD>4.6C</TD>
 
-<TD>If the port supports operation over more than two (2x mode), lane R shall be lane 1.</TD>
+<TD>If the port supports operation over two lanes (2x mode), lane R shall be lane 1.</TD>
 
 <TD/>
 
@@ -1717,7 +1717,7 @@
 <TR>
 <TD>4.7.1A</TD>
 
-<TD>The &#8220;clock compensation sequence&#8221; is four character sequence comprised of a K special character immediately followed by three R special characters (K,R,R,R).</TD>
+<TD>The &#8220;clock compensation sequence&#8221; is a four character sequence comprised of a K special character immediately followed by three R special characters (K,R,R,R).</TD>
 </TR>
 
 <TR>
@@ -1847,7 +1847,7 @@
 <TR>
 <TD>4.7.4F</TD>
 
-<TD>After a port using IDLE2 is initialized (the port initialization state variable port_initialized is asserted), the port may terminate an IDLE2 sequence after any character of an idle frame to transmit a control symbol or a SYNC sequence immediately followed by a link-request control symbol subject to the following requirementsrequest control symbol subject to the following requirements:</TD>
+<TD>After a port using IDLE2 is initialized (the port initialization state variable port_initialized is asserted), the port may terminate an IDLE2 sequence after any character of an idle frame to transmit a control symbol or a SYNC sequence immediately followed by a link-request control symbol subject to the following requirements:</TD>
 </TR>
 
 <TR>
@@ -2443,13 +2443,13 @@
 <TR>
 <TD>4.8.3C1</TD>
 
-<TD>The check field for the first type of trigger event shall be the four characters immediately following the K, M or R special character.  See 3.B.1 above.</TD>
+<TD>The check field for the first type of trigger event shall be the four characters immediately following the K, M or R special character.  See 4.8.3B1 above.</TD>
 </TR>
 
 <TR>
 <TD>4.8.3C2</TD>
 
-<TD>The check field for the second type of trigger event that does not end with a M special character shall be the four characters immediately following the contiguous sequence of K and/or R special characters.  See 3.B.2 above.</TD>
+<TD>The check field for the second type of trigger event that does not end with a M special character shall be the four characters immediately following the contiguous sequence of K and/or R special characters.  See 4.8.3B2 above.</TD>
 </TR>
 
 <TR>
@@ -2781,7 +2781,7 @@
 <TR>
 <TD>4.11.1C</TD>
 
-<TD>A retimers may insert up to one /R/ code-group immediately following a /K/ code-group sequence, or remove one /R/ code-group that immediately follows a /K/ code-group sequence.</TD>
+<TD>A retimer may insert up to one /R/ code-group immediately following a /K/ code-group sequence, or remove one /R/ code-group that immediately follows a /K/ code-group sequence.</TD>
 
 <TD/>
 
@@ -2835,7 +2835,7 @@
 <TR>
 <TD>4.11.1H</TD>
 
-<TD>A retimers may retime links operating at the same width only (i.e. cannot connect a link operating at 1x to a link operating at 4x).</TD>
+<TD>A retimer may retime links operating at the same width only (i.e. cannot connect a link operating at 1x to a link operating at 4x).</TD>
 
 <TD/>
 
@@ -3181,13 +3181,13 @@
 </TR>
 
 <TR>
-<TD>4.12.4.2H</TD>
+<TD>4.12.4.2H1</TD>
 
-<TD>When Vmin = 0, the behavior of this Lane_Synchronization state machine specified in Rev. 1.3 of this specification.</TD>
+<TD>When Vmin = 0, the behavior of this Lane_Synchronization state machine is identical to the state machine specified in Rev. 1.3 of this specification.</TD>
 </TR>
 
 <TR>
-<TD>4.12.4.2H</TD>
+<TD>4.12.4.2H2</TD>
 
 <TD>In the SYNC state, the state machine sets the variables lane_sync[n] to 1 and Icounter[n] to 0.  In this state it looks for /INVALID/ code-groups.  If an /INVALID/ code-group is detected, the state machine transitions to the SYNC_1 state.</TD>
 </TR>
@@ -3449,7 +3449,7 @@
 <TR>
 <TD>4.12.4.6F8</TD>
 
-<TD>If lane synchronization for both lane 0 and lane R is lost (both lane_sync[0] and lane_sync[2] de-asserted) during the DISCOVERY state, the state machine enters the SILENT state and restart the port initialization process.</TD>
+<TD>If lane synchronization for both lane 0 and lane R is lost (both lane_sync[0] and lane_sync[2] de-asserted) during the DISCOVERY state, the state machine enters the SILENT state and restarts the port initialization process.</TD>
 </TR>
 
 <TR>
@@ -3691,7 +3691,7 @@
 <Worksheet>
 <Table>
 <TR>
-<TD id="LinkTarget_4154">Item #</TD>
+<TD id="LinkTarget_4158">Item #</TD>
 
 <TD>Compliance Item</TD>
 
@@ -4057,7 +4057,7 @@
 <TR>
 <TD>5.5.3.1E</TD>
 
-<TD>Once the port has exited the link_initialized state, the port shall not resume the normal transmission of packets and control symbols until the port has re-entered both the port_initialized and link_initialized states. -- to be checked on this statement, suggest change:  Once the port has exited the link_initialized state, the port shall not resume the normal transmission of packets until the port has re-entered both the port_initialized and link_initialized states</TD>
+<TD>Once the port has exited the link_initialized state, the port shall not resume the normal transmission of packets and control symbols until the port has re-entered both the port_initialized and link_initialized states.</TD>
 </TR>
 
 <TR>
@@ -4285,7 +4285,7 @@
 <TR>
 <TD>5.6.1D</TD>
 
-<TD>The following control symbols are used to delimit packets: Start-of-packet, End-ofpacket, Stomp, Restart-from-retry and any Link-request.</TD>
+<TD>The following control symbols are used to delimit packets: Start-of-packet, End-of-packet, Stomp, Restart-from-retry and any Link-request.</TD>
 </TR>
 
 <TR>
@@ -4419,7 +4419,7 @@
 <TR>
 <TD>5.6.3A</TD>
 
-<TD>Within VC0 each packet has a priority,The priority is carried in the prio field of the packet and has four possible values: 0, 1, 2, or 3.</TD>
+<TD>Within VC0 each packet has a priority. The priority is carried in the prio field of the packet and has four possible values: 0, 1, 2, or 3.</TD>
 
 <TD/>
 
@@ -4777,7 +4777,7 @@
 <TR>
 <TD>5.8G</TD>
 
-<TD>The LP-Serial link protocol uses the ackID value carried in each packet to ensure that no RT mode packets are lost due to transmission errors. A port shall accept packets from a LP-Serial link only in sequential ackID order with one exceptions as stated in 5.8H and 5.8I.</TD>
+<TD>The LP-Serial link protocol uses the ackID value carried in each packet to ensure that no RT mode packets are lost due to transmission errors. A port shall accept packets from a LP-Serial link only in sequential ackID order with one exception as stated in 5.8H and 5.8I.</TD>
 
 <TD/>
 
@@ -4923,7 +4923,7 @@
 <TR>
 <TD>5.9.1.3A</TD>
 
-<TD>It is a requirement that implementers include this functionality (retry prtotocol) in the channel design to be backward compatible with existing RapidIO interfaces.</TD>
+<TD>It is a requirement that implementers include this functionality (retry protocol) in the channel design to be backward compatible with existing RapidIO interfaces.</TD>
 
 <TD/>
 
@@ -4991,7 +4991,7 @@
 <TR>
 <TD>5.9.1.4D</TD>
 
-<TD>When a restart-from-retry control symbol is received, exit the InputRetry-stopped state and resume packet reception.</TD>
+<TD>When a restart-from-retry control symbol is received, exit the Input Retry-stopped state and resume packet reception.</TD>
 </TR>
 
 <TR>
@@ -5437,7 +5437,7 @@
 <TR>
 <TD>5.11B6</TD>
 
-<TD>A switch processing element shall not allow a priority N maintenance packet (ftype = 8) to pass another maintenance packet of priority N or greater that takes the same path throughthe switch (same switch input port and same switch output port).</TD>
+<TD>A switch processing element shall not allow a priority N maintenance packet (ftype = 8) to pass another maintenance packet of priority N or greater that takes the same path through the switch (same switch input port and same switch output port).</TD>
 
 <TD/>
 
@@ -5485,7 +5485,7 @@
 <TR>
 <TD>5.11.C2</TD>
 
-<TD>If VC0 participates in the bandwidth reservation process, then all VCs will receivetheir expected minimum bandwidth.</TD>
+<TD>If VC0 participates in the bandwidth reservation process, then all VCs will receive their expected minimum bandwidth.</TD>
 
 <TD/>
 
@@ -5631,7 +5631,7 @@
 <TR>
 <TD>5.12G2</TD>
 
-<TD>A minimum of one maximum length packet input buffer must be reserved for each priority level.   A input buffer reserved for priority N might be restricted to only priority N packets or might be allowed to hold packets of priority greater than or equal to N, either approach complies with the rule.</TD>
+<TD>A minimum of one maximum length packet input buffer must be reserved for each priority level.   An input buffer reserved for priority N might be restricted to only priority N packets or might be allowed to hold packets of priority greater than or equal to N, either approach complies with the rule.</TD>
 </TR>
 
 <TR>
@@ -6007,7 +6007,7 @@
 <TR>
 <TD>5.13.2.3.2B4</TD>
 
-<TD>A long control symbol that does not have a end delimiter in the seventh character position after its start delimiter and with the same value as the start delimiter.</TD>
+<TD>A long control symbol that does not have an end delimiter in the seventh character position after its start delimiter and with the same value as the start delimiter.</TD>
 </TR>
 
 <TR>
@@ -6191,7 +6191,7 @@
 <TR>
 <TD>5.13.2.6C4</TD>
 
-<TD>The status or VC-status control symbol for a VC operating in RT mode shall indicate the number of receive buffers available for that VC inclusive of the buffer consumption of all packets received and accepted by the port for that VC before the event that caused the port entered the Input Error-stopped state.</TD>
+<TD>The status or VC-status control symbol for a VC operating in RT mode shall indicate the number of receive buffers available for that VC inclusive of the buffer consumption of all packets received and accepted by the port for that VC before the event that caused the port to enter the Input Error-stopped state.</TD>
 </TR>
 
 <TR>
@@ -6225,7 +6225,7 @@
 <TR>
 <TD>5.13.2.7A</TD>
 
-<TD>To recover from the Output Error-stopped state, the output side of a port takes thefollowing actions.</TD>
+<TD>To recover from the Output Error-stopped state, the output side of a port takes the following actions.</TD>
 </TR>
 
 <TR>
@@ -6885,7 +6885,7 @@
 <TR>
 <TD>6.6.7D</TD>
 
-<TD>Writing 0b1 toClr_outstanding_ackIDs bit causes all outstanding unacknowledged packets to bediscarded.</TD>
+<TD>Writing 0b1 to Clr_outstanding_ackIDs bit causes all outstanding unacknowledged packets to be discarded.</TD>
 </TR>
 
 <TR>
@@ -6983,7 +6983,7 @@
 <TR>
 <TD>6.6.8K</TD>
 
-<TD>&quot;Port Error&quot; bit indicates Input or output port has encountered an error from which hardware wasunable to recover. Once set, remains set until written with a logic 1 to clear.</TD>
+<TD>&quot;Port Error&quot; bit indicates Input or output port has encountered an error from which hardware was unable to recover. Once set, remains set until written with a logic 1 to clear.</TD>
 </TR>
 
 <TR>
@@ -7211,7 +7211,7 @@
 <TR>
 <TD>6.6.10H</TD>
 
-<TD>The &quot;1.25G/2.5G/3.125G/5.0G/6.25 G Baud Eanble&quot; bits shall reset to &quot;1&quot; if its corresponding &quot;Baud Support&quot; bits are set, otherwise reset to 0.</TD>
+<TD>The &quot;1.25G/2.5G/3.125G/5.0G/6.25 G Baud Enable&quot; bits shall reset to &quot;1&quot; if its corresponding &quot;Baud Support&quot; bits are set, otherwise reset to 0.</TD>
 </TR>
 
 <TR>
@@ -7225,7 +7225,7 @@
 <TR>
 <TD>6.7A</TD>
 
-<TD>All registers in this block are 32 bits in length, aligned to a 32-bit (4-byte) boundary and accessedas 4 byte entities, although some processing elements may optionally allow larger accesses.</TD>
+<TD>All registers in this block are 32 bits in length, aligned to a 32-bit (4-byte) boundary and accessed as 4 byte entities, although some processing elements may optionally allow larger accesses.</TD>
 </TR>
 
 <TR>
@@ -7423,37 +7423,37 @@
 </TR>
 
 <TR>
-<TD>6.7.2.4.1</TD>
+<TD>6.7.2.4.1A</TD>
 
 <TD>Block offset of Lane n Status 2 CSRs starts from 0x18, add 0x20 for each lane increment.</TD>
 </TR>
 
 <TR>
-<TD>6.7.2.4.2</TD>
+<TD>6.7.2.4.2A</TD>
 
 <TD>Block offset of Lane n Status 3 CSRs starts from 0x1C, add 0x20 for each lane increment.</TD>
 </TR>
 
 <TR>
-<TD>6.7.2.4.3</TD>
+<TD>6.7.2.4.3A</TD>
 
 <TD>Block offset of Lane n Status 4 CSRs starts from 0x20, add 0x20 for each lane increment.</TD>
 </TR>
 
 <TR>
-<TD>6.7.2.4.4</TD>
+<TD>6.7.2.4.4A</TD>
 
 <TD>Block offset of Lane n Status 5 CSRs starts from 0x24, add 0x20 for each lane increment.</TD>
 </TR>
 
 <TR>
-<TD>6.7.2.4.5</TD>
+<TD>6.7.2.4.5A</TD>
 
 <TD>Block offset of Lane n Status 6 CSRs starts from 0x28, add 0x20 for each lane increment.</TD>
 </TR>
 
 <TR>
-<TD>6.7.2.4.6</TD>
+<TD>6.7.2.4.6A</TD>
 
 <TD>Block offset of Lane n Status 7 CSRs starts from 0x2c, add 0x20 for each lane increment.</TD>
 </TR>
@@ -7541,7 +7541,7 @@
 <TR>
 <TD>6.8.2.2A</TD>
 
-<TD>Block Offset of the &quot;Port n VC Control and Status Registers&quot; starts from 0x20, add 0x20 for each port increament.</TD>
+<TD>Block Offset of the &quot;Port n VC Control and Status Registers&quot; starts from 0x20, add 0x20 for each port increment.</TD>
 </TR>
 
 <TR>
@@ -7663,37 +7663,37 @@
 </TR>
 
 <TR>
-<TD>6.8.2.3A</TD>
+<TD>6.8.2.4A</TD>
 
 <TD>Block Offset of the &quot;Port n VCx BW Allocation Registers&quot; is based on VC number, it shall be mapped according to table 6-23.</TD>
 </TR>
 
 <TR>
-<TD>6.8.2.4A</TD>
-
-<TD>Each Port n VCx BW Allocation CSR register supports 2 VCs. bit settings of the register  shall follow Part 6, Table 6-28.</TD>
-</TR>
-
-<TR>
 <TD>6.8.2.4B</TD>
 
-<TD>The bandwidth allocation value is left justified based on precision. Bits are ignored based on the precision value.</TD>
+<TD>Each Port n VCx BW Allocation CSR register supports 2 VCs. Bit settings of the register  shall follow Part 6, Table 6-28.</TD>
 </TR>
 
 <TR>
 <TD>6.8.2.4C</TD>
 
-<TD>If the VC is not enabled, its bandwidth allocation bits are treated as reserved.</TD>
+<TD>The bandwidth allocation value is left justified based on precision. Bits are ignored based on the precision value.</TD>
 </TR>
 
 <TR>
 <TD>6.8.2.4D</TD>
 
-<TD>A value of &#8216;0&#8217; for bandwidth allocation results in no service being given to that VC.</TD>
+<TD>If the VC is not enabled, its bandwidth allocation bits are treated as reserved.</TD>
 </TR>
 
 <TR>
 <TD>6.8.2.4E</TD>
+
+<TD>A value of &#8216;0&#8217; for bandwidth allocation results in no service being given to that VC.</TD>
+</TR>
+
+<TR>
+<TD>6.8.2.4F</TD>
 
 <TD>VCs initialize with a value of zero and remain inactive until allocated bandwidth.</TD>
 </TR>
@@ -7723,7 +7723,7 @@
 </TR>
 
 <TR>
-<TD>7.1</TD>
+<TD>7.1A</TD>
 
 <TD>The interface is defined either as a 1x, 2x, 4x, 8x, or 16x lane, full duplex, point-to-point interface using differential signaling. A lane implementation consists of Nx4 wires with two for the egress and two for the ingress direction.</TD>
 
@@ -7731,7 +7731,7 @@
 </TR>
 
 <TR>
-<TD>7.2</TD>
+<TD>7.2A</TD>
 
 <TD>See Table 7-1. LP-Serial Signal Description</TD>
 
@@ -7791,7 +7791,7 @@
 </TR>
 
 <TR>
-<TD>8.5.2</TD>
+<TD>8.5.2A</TD>
 
 <TD>Links shall meet the data pattern requirements specified in Section 8.5.2.</TD>
 
@@ -7799,7 +7799,7 @@
 </TR>
 
 <TR>
-<TD>8.5.3</TD>
+<TD>8.5.3A</TD>
 
 <TD>Links shall meet the signal level requirements specified in Section 8.5.3.</TD>
 
@@ -7807,7 +7807,7 @@
 </TR>
 
 <TR>
-<TD>8.5.4</TD>
+<TD>8.5.4A</TD>
 
 <TD>Links shall meet the bit error ratio requirements specified in Section 8.5.4.</TD>
 
@@ -7815,7 +7815,7 @@
 </TR>
 
 <TR>
-<TD>8.5.5</TD>
+<TD>8.5.5A</TD>
 
 <TD>Links shall meet the ground differences requirements specified in Section 8.5.5.</TD>
 
@@ -7823,7 +7823,7 @@
 </TR>
 
 <TR>
-<TD>8.5.6</TD>
+<TD>8.5.6A</TD>
 
 <TD>Links shall meet the cross talk requirements specified in Section 8.5.6.</TD>
 
@@ -7831,7 +7831,7 @@
 </TR>
 
 <TR>
-<TD>8.5.7</TD>
+<TD>8.5.7A</TD>
 
 <TD>Links shall meet the transmitter test load requirements specified in Section 8.5.7.</TD>
 
@@ -7839,7 +7839,7 @@
 </TR>
 
 <TR>
-<TD>8.5.8</TD>
+<TD>8.5.8A</TD>
 
 <TD>Links shall meet the transmitter lane-to-lane skew requirements specified in Section 8.5.8.</TD>
 
@@ -7847,7 +7847,7 @@
 </TR>
 
 <TR>
-<TD>8.5.9</TD>
+<TD>8.5.9A</TD>
 
 <TD>Links shall meet the receiver input lane-to-lane skew requirements specified in Section 8.5.9.</TD>
 
@@ -7855,7 +7855,7 @@
 </TR>
 
 <TR>
-<TD>8.5.10</TD>
+<TD>8.5.10A</TD>
 
 <TD>Links shall meet the transmitter short circuit current requirements specified in Section 8.5.10.</TD>
 
@@ -7863,7 +7863,7 @@
 </TR>
 
 <TR>
-<TD>8.5.11</TD>
+<TD>8.5.11A</TD>
 
 <TD>Links shall meet the differential resistance and return loss requirements specified in Section 8.5.11.</TD>
 
@@ -7871,7 +7871,7 @@
 </TR>
 
 <TR>
-<TD>8.5.12</TD>
+<TD>8.5.12A</TD>
 
 <TD>Links shall meet the baud rate tolerance requirements specified in Section 8.5.12.</TD>
 
@@ -7879,7 +7879,7 @@
 </TR>
 
 <TR>
-<TD>8.5.13</TD>
+<TD>8.5.13A</TD>
 
 <TD>Links shall meet the termination and DC blocking requirements specified in Section 8.5.13.</TD>
 
@@ -7913,7 +7913,7 @@
 </TR>
 
 <TR>
-<TD>9.1</TD>
+<TD>9.1A</TD>
 
 <TD>Level I short run and long run electrical interfaces operating at 1.25Gbaud, 2.5Gbaud, and 3.125Gbaud shall meet the Level I application goals detailed in Section 9.1.</TD>
 
@@ -7921,7 +7921,7 @@
 </TR>
 
 <TR>
-<TD>9.2</TD>
+<TD>9.2A</TD>
 
 <TD>The types of equalizers and, if the equalizers are adaptive, the adaptive equalizer training algorithms that may be used in Level I transmitter or receiver are subject to the restrictions detailed in Section 9.2.</TD>
 
@@ -7997,7 +7997,7 @@
 </TR>
 
 <TR>
-<TD>9.5</TD>
+<TD>9.5A</TD>
 
 <TD>Level I measurement and test requirements must be followed according to Section 9.5.</TD>
 
@@ -8031,7 +8031,7 @@
 </TR>
 
 <TR>
-<TD>10.1</TD>
+<TD>10.1A</TD>
 
 <TD>Level II short run, medium run, and long run electrical interfaces operating at 5Gbaud and 6.25Gbaud shall meet the Level II application goals detailed in Section 10.1.</TD>
 
@@ -8039,7 +8039,7 @@
 </TR>
 
 <TR>
-<TD>10.2</TD>
+<TD>10.2A</TD>
 
 <TD>The types of equalizers and, if the equalizers are adaptive, the adaptive equalizer training algorithms that may be used in Level II 5Gbaud transmitter or receiver are subject to the restrictions detailed in Section 10.2.</TD>
 
@@ -8059,7 +8059,7 @@
 </TR>
 
 <TR>
-<TD>10.4.1</TD>
+<TD>10.4.1A</TD>
 
 <TD>Jitter and Inter-operability Methodology</TD>
 
@@ -8067,7 +8067,7 @@
 </TR>
 
 <TR>
-<TD>10.4.1.1</TD>
+<TD>10.4.1.1A</TD>
 
 <TD>Level II short run link must meet the defined test patterns requirements specified in Section 10.4.1.1.</TD>
 
@@ -8075,7 +8075,7 @@
 </TR>
 
 <TR>
-<TD>10.4.1.2</TD>
+<TD>10.4.1.2A</TD>
 
 <TD>Level II short run link must meet the channel compliance requirements specified in Section 10.4.1.2</TD>
 
@@ -8083,7 +8083,7 @@
 </TR>
 
 <TR>
-<TD>10.4.1.3</TD>
+<TD>10.4.1.3A</TD>
 
 <TD>Level II short run transmitter must meet the inter-operability requirements specified in Section 10.4.1.3.</TD>
 
@@ -8091,7 +8091,7 @@
 </TR>
 
 <TR>
-<TD>10.4.1.4</TD>
+<TD>10.4.1.4A</TD>
 
 <TD>Level II short run receiver must meet the inter-operability requirements specified in Section 10.4.1.4.</TD>
 
@@ -8185,7 +8185,7 @@
 </TR>
 
 <TR>
-<TD>10.5.1.1</TD>
+<TD>10.5.1.1A</TD>
 
 <TD>Level II long run link must meet the channel compliance specifications specified in section 10.5.1.1.</TD>
 
@@ -8193,7 +8193,7 @@
 </TR>
 
 <TR>
-<TD>10.5.1.2</TD>
+<TD>10.5.1.2A</TD>
 
 <TD>Level II long run transmitter must meet the inter-operability requirements specified in Section 10.5.1.2.</TD>
 
@@ -8201,7 +8201,7 @@
 </TR>
 
 <TR>
-<TD>10.5.1.3</TD>
+<TD>10.5.1.3A</TD>
 
 <TD>Level II long run receiver must meet the inter-operability requirements specified in Section 10.5.1.3.</TD>
 
@@ -8251,7 +8251,7 @@
 </TR>
 
 <TR>
-<TD>10.5.2.2B</TD>
+<TD>10.5.2.2.8A</TD>
 
 <TD>Level II long run receiver must meet the receiver jitter tolerance requirements specified in Section 10.5.2.2.8.</TD>
 </TR>
@@ -8295,7 +8295,7 @@
 </TR>
 
 <TR>
-<TD>10.6.1.1</TD>
+<TD>10.6.1.1A</TD>
 
 <TD>Level II medium run link must meet the channel compliance specifications specified in section 10.6.1.1.</TD>
 
@@ -8303,7 +8303,7 @@
 </TR>
 
 <TR>
-<TD>10.6.1.2</TD>
+<TD>10.6.1.2A</TD>
 
 <TD>Level II medium run transmitter must meet the inter-operability requirements specified in Section 10.6.1.2.</TD>
 
@@ -8311,7 +8311,7 @@
 </TR>
 
 <TR>
-<TD>10.6.1.3</TD>
+<TD>10.6.1.3A</TD>
 
 <TD>Level II medium run receiver must meet the inter-operability requirements specified in Section 10.6.1.3.</TD>
 
@@ -8343,7 +8343,7 @@
 <TR>
 <TD>10.6.2.1B</TD>
 
-<TD>Level II medium run transmitter must meet the output jitter specifications specified in Table 10-23 and detailed in Section 10.5.2.1.</TD>
+<TD>Level II medium run transmitter must meet the output jitter specifications specified in Table 10-23 and detailed in Section 10.6.2.1.</TD>
 </TR>
 
 <TR>
@@ -8361,7 +8361,7 @@
 </TR>
 
 <TR>
-<TD>10.6.2.2B</TD>
+<TD>10.6.2.2.8A</TD>
 
 <TD>Level II medium run receiver must meet the receiver jitter tolerance requirements specified in Section 10.6.2.2.8.</TD>
 </TR>
