@@ -133,6 +133,11 @@ class ChecklistParser(object):
         if start_txt >= 0:
             start_txt += len(end_partial_xml)
             text = text[start_txt:]
+        text = re.sub('&#8226;', '', text)
+        text = re.sub('&#8221;', '"', text)
+        text = re.sub('&#8220;', '"', text)
+        text = re.sub('&#8216;', "'", text)
+        text = re.sub('&#8217;', "'", text)
         text = re.sub('&quot;', '"', text)
         text = re.sub('&gt;', '>', text)
         text = re.sub('&lt;', '<', text)
