@@ -148,6 +148,16 @@ class ChecklistParser(object):
         text = re.sub('an packet', 'a packet', text)
         # Problem in 1.3 Error Management Checklist Table 2 item 20C
         text = re.sub('APort', 'A Port', text)
+        # Conversion to ASCII removes the S-overbar notation in the
+        # 1.3 Error Management Checklist Table 2-12 items 1C3 and 1C4.
+        # This attempts to correct that.
+        text = re.sub('ackID, S, S, or rsrv', 'ackID, S, S-overbar, or rsrv', text)
+        text = re.sub('ackID, S, S, and rsrv', 'ackID, S, S-overbar, and rsrv', text)
+        # The only reference in 1.3 Error Management Checklist Table 2-13
+        # item 6 is to the previous table 2-12.  Change that to refer to the
+        # correct specification section.
+        text = re.sub('Table 2-12 above', 'Part 4, Sec. 2.4.5', text)
+
         return text.strip()
 
     def check_sentence_for_subitem_pattern(self, sentence,
