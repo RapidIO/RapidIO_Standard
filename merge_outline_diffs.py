@@ -235,8 +235,8 @@ class RapidIOOutlineDiffMerger(object):
         logging.info("Merge: %d" % len(self._merge))
         for line in self._merge:
             logging.debug("Merge: %s" % line)
-            output.write("'" + "', '".join(line[0:4]) + "'" + "\n")
-            output.write("'" + "', '".join(line[4:]) + "'" + "\n")
+            output.write("'" + "', '".join(line) + "'" + "\n")
+            #output.write("'" + "', '".join(line[4:]) + "'" + "\n")
 
         output.write("Unmatched new items, interleaved with old\n")
         part = None
