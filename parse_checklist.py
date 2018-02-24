@@ -323,6 +323,43 @@ class ChecklistParser(object):
                      or self.reqt.section == "Table 4-2")):
                 logging.debug("        Skipping table references...")
                 continue
+            # Skip erroneous requirement reference found in
+            # rev1.3 Checklists, Table 2-4, item 12A/A1/A2.
+            # This should be a references to Part 4, which is not
+            # supported by the checklists.
+            if (self.reqt.revision == "1.3"
+                and self.reqt.part == "Part 6"
+                and self.reqt.section == "5.8.2.1"):
+                    continue
+            # Correct erroneous requirement reference found in
+            # rev1.3 Checklists, Table 3-8, item 12
+            if (self.reqt.revision == "1.3"
+                and self.reqt.part == "Part 1"
+                and self.reqt.chapter == "Chapter 2"
+                and (self.reqt.section == "2.32.2")):
+                self.reqt.section = "2.3.2.2"
+            # Correct erroneous requirement reference found in
+            # rev1.3 Checklists, Table 3-12, item 1A, 1B
+            if (self.reqt.revision == "1.3"
+               and self.reqt.part == "Part 6"
+               and self.reqt.chapter == "Chapter 5"
+               and self.reqt.section == "5.10.2.3.2"):
+                    self.reqt.section = "5.11.2.3.2"
+                # Correct erroneous requirement reference found in
+                # rev1.3 Checklists, Table 4-1, item 2G
+            if (self.reqt.revision == "1.3"
+                and self.reqt.part == "Part 3"
+                and self.reqt.chapter == "Chapter 2"
+                and self.reqt.section == "2.3.1"):
+                    self.reqt.chapter = "Chapter 3"
+                    self.reqt.section = "3.4.1"
+                # Correct erroneous requirement reference found in
+                # rev1.3 Checklists, Table 6-4, item 3.
+            if (self.reqt.revision == "1.3"
+                and self.reqt.part == "Part 1"
+                and self.reqt.chapter == "Chapter 3"
+                and self.reqt.section == "3.41"):
+                    self.reqt.section = "3.4.1"
             self.add_requirement()
 
     def rev2_part6_get_cols_from_row(self, row):

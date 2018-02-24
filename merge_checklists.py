@@ -99,27 +99,6 @@ class ChecklistMerger(object):
                 if not len(tokens) == 10:
                     raise ValueError("Bad format: File %s line %d: %s"
                                  % (checklist_path, line_num, tokens))
-                # Skip erroneous requirement reference found in
-                # rev1.3 Checklists, Table 2-4, item 121/A1/A2
-                if tokens[3] == "Part 6" and tokens[5] == "5.8.2.1":
-                    continue
-                # Correct erroneous requirement reference found in
-                # rev1.3 Checklists, Table 3-8, item 12
-                if tokens[3] == "Part 1" and tokens[4] == "Chapter 2" and tokens[5] == "2.32.2":
-                    tokens[5] = "2.3.2.2"
-                # Correct erroneous requirement reference found in
-                # rev1.3 Checklists, Table 3-12, item 1A, 1B
-                if tokens[3] == "Part 6" and tokens[4] == "Chapter 5" and tokens[5] == "5.10.2.3.2":
-                    tokens[5] = "5.11.2.3.2"
-                # Correct erroneous requirement reference found in
-                # rev1.3 Checklists, Table 4-1, item 2G
-                if tokens[3] == "Part 3" and tokens[4] == "Chapter 2" and tokens[5] == "2.3.1":
-                    tokens[4] = "Chapter 3"
-                    tokens[5] = "3.4.1"
-                # Correct erroneous requirement reference found in
-                # rev1.3 Checklists, Table 6-4, item 3.
-                if tokens[3] == "Part 1" and tokens[4] == "Chapter 3" and tokens[5] == "3.41":
-                    tokens[5] = "3.4.1"
                 if len(self.outline_lines) and not tokens[3] == "Part 4":
                     # Try to translate checklist references to complete references
                     if tokens[5].startswith("Sec. "):
