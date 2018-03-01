@@ -47,3 +47,20 @@ check_rc 3.2to4.0
 ./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt > Standards/all_translations.txt
 check_rc all_translations
 
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_1.3.txt -v 4.0 > Standards/test_trans_1.3_to_4.0.txt
+check_rc 1.3_to_4.0_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_2.2.txt -v 4.0 > Standards/test_trans_2.2_to_4.0.txt
+check_rc 2.2_to_4.0_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_3.2.txt -v 4.0 > Standards/test_trans_3.2_to_4.0.txt
+check_rc 3.2_to_4.0_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_4.0.txt -v 1.3 > Standards/test_trans_4.0_to_1.3.txt
+check_rc 4.0_to_1.3_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_3.2.txt -v 1.3 > Standards/test_trans_3.2_to_1.3.txt
+check_rc 3.2_to_1.3_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_2.2.txt -v 1.3 > Standards/test_trans_2.2_to_1.3.txt
+check_rc 2.2_to_1.3_trans_test
