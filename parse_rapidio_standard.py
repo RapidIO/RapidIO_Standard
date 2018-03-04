@@ -145,6 +145,7 @@ class RapidIOStandardParser(object):
                         continue
                     if (tokens[1][0] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
                         or tokens[1][1] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')):
+                        skip_outline = False
                         self.section_name = temp
                         logging.info("section_name :" + self.section_name)
 
@@ -154,8 +155,15 @@ class RapidIOStandardParser(object):
                             and self.section_name == "1.2 Requirements"):
                             self.section_name = "1.3 Requirements"
 
-                        if self.create_outline:
+                        # Correct Rev 2.2 Part 6 Section 6.6.10 parsing
+                        if (self.section_name == "6.25 GBaud Support"
+                            or self.section_name == "6.25 GBaud Enable"):
+                            self.section_name = self.old_section
+                            skip_outline = True
+
+                        if self.create_outline and not skip_outline:
                             self.outline[self.part_name][self.chapter_name].append(self.section_name)
+                            self.old_section = self.section_name
                     else:
                         logging.debug("Skipping sect: %s" % sect[0:100])
             sect = self.remove_xml(sect)

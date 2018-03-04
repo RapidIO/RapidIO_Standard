@@ -36,8 +36,6 @@
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 LP-Serial Protocol', '5.9.1.2 Continuous Traffic VC Receivers'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.5 LP-Serial Extended Feature Blocks'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.10 Port n Control 2 CSRs (Block Offset 0x54, 74, ... , 234)'
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Support'
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Enable'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7 LP-Serial Lane Extended Features Block'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.2.2 Lane n Status 0 CSRs  . (Block Offsets 0x10, 30, ... , 3F0)'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.2.3 Lane n Status 1 CSRs  . (Block Offsets 0x14, 34, ... , 3F4)'

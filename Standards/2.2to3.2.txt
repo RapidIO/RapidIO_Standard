@@ -51,7 +51,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6.1 Multicast-Event Control Symbol'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6.2 Secondary Multicast-Event Control Symbol'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6.3 Loop-Timing Control Symbol'
-302,678c327,862
+302,676c327,862
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.1 Introduction'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.2 PCS Layer Functions'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.3 PMA Layer Functions'
@@ -188,8 +188,6 @@
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.8 Port n Error and Status CSRs (Block Offset 0x58, 78, ... , 238)'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.9 Port n Control CSRs  . (Block Offsets 0x5C, 7C, ... , 23C)'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.10 Port n Control 2 CSRs (Block Offset 0x54, 74, ... , 234)'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Support'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Enable'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7 LP-Serial Lane Extended Features Block'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.1 Register Map'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.2 LP-Serial Lane Command and Status Registers (CSRs)'
@@ -966,7 +964,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.3 Level III Transmitter Lane-to-Lane Skew'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.4 Receiver Input Lane-to-Lane Skew'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.5 Electrical IDLE'
-704a889,895
+702a889,895
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3 Space Device Definition'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.1 Basic Space Device Requirements'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.2 Enhanced Space Device Requirements'
@@ -974,7 +972,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.4 Space Switch Device Requirements'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.5 Space Endpoint Device Requirements'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.6 Space Endpoint-E Device Requirements'
-790,824c981,1030
+788,822c981,1030
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.1 Introduction'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2 Physical Layer Extensions'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.1 Port n Error Detect, Enable and Capture CSRs'
@@ -1061,14 +1059,14 @@
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.24 Port n Error Rate Threshold CSR (Block Offset 0x6C, AC, ..., 42C)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.25 Port n Link Uninit Discard Timer CSR (Block Offset 0x70, 0xB0, ..., 0x430)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.26 Port n FIFO Error Detect CSR (Block Offset 0x7C, BC,..., 43C)'
-854,855c1060,1062
+852,853c1060,1062
 < '2.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2 Processing Elements Features CAR (Offset 0x10 Word 0)'
 < '2.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.3 Port n Control CSR  . (Block Offsets 0x5C, 7C, ... , 23C)'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2 Capability Registers (CARs)'
 > '3.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2.1 Processing Elements Features CAR (Offset 0x10 Word 0)'
 > '3.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2.2 Port n Control CSR (Block Offsets 0x5C, 7C, ... , 23C)'
-912,917c1119,1136
+910,915c1119,1136
 < '2.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.2 Processing Elements Features CAR (Configuration Space Offset 0x10)'
 < '2.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.3 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
 < '2.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
@@ -1094,14 +1092,14 @@
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.7 Broadcast Multicast Mask x Clear Register y CSR'
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2Mask_size) + (y*4))'
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2Mask_size) + (4*2Mask_size)'
-943,944c1162,1164
+941,942c1162,1164
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.1 Stype2 Control Symbol'
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.2 VC_Status Symbol Linking'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.1 Stype2 Control Symbol 48'
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.2 Control Symbol 64 VoQ Backpressure'
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.3 VoQ Backpressure per VC'
-952c1172
+950c1172
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 5 Register Definitions', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - Variable, see Section 5.1.1)'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 5 Register Definitions', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'

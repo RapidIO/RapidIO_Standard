@@ -440,7 +440,5 @@
 Unmatched new items, interleaved with old
 Unmatched old items
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.2 Register Map'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Support'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Enable'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.1 Register Map'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.0 Gb/s link'

@@ -435,8 +435,6 @@ Revision, Part, Chapter, Section
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.8 Port n Error and Status CSRs (Block Offset 0x58, 78, ... , 238)'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.9 Port n Control CSRs  . (Block Offsets 0x5C, 7C, ... , 23C)'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.10 Port n Control 2 CSRs (Block Offset 0x54, 74, ... , 234)'
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Support'
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.25 GBaud Enable'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7 LP-Serial Lane Extended Features Block'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.1 Register Map'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.7.2 LP-Serial Lane Command and Status Registers (CSRs)'
