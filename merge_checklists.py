@@ -22,20 +22,43 @@ import re
 import sys
 import os
 import logging
+from create_translation import *
 
 class ChecklistMerger(object):
     OUTLINE_HEADER = "Revision, Part, Chapter, Section"
     CHECKLIST_HEADER = "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
-    def __init__(self, checklists, outlines):
+    def __init__(self, checklists, outlines, translations):
         self.checklists = checklists
         self.outlines = outlines
 
         self._read_outlines()
+        self._translator = RapidIOTranslationMerger(translations)
+        self.header = self.CHECKLIST_HEADER
+
+        self.trans_keys = sorted(self._translator.trans.keys())
+        for t_rev in self.trans_keys:
+            self.header = ("%s, %s, %s_Part, %s_Chapter, %s_Section"
+                         % (self.header, t_rev, t_rev, t_rev, t_rev))
         self._read_checklists()
+
+    def _add_outline_reference(self, revision, part_name, part_title,
+                                               ch_name, ch_title,
+                                               sec_num, sec_title):
+        if revision not in self.outline_reference:
+            self.outline_reference.update({revision:{}})
+        if part_name not in self.outline_reference[revision]:
+            self.outline_reference[revision].update({part_name: [part_title, {}]})
+        if ch_name not in self.outline_reference[revision][part_name][1]:
+            self.outline_reference[revision][part_name][1].update({ch_name: [ch_title, {}]})
+        if sec_num not in self.outline_reference[revision][part_name][1][ch_name][1]:
+            self.outline_reference[revision][part_name][1][ch_name][1].update({sec_num:sec_title})
+        else:
+            raise ValueError("Duplicate sections %s %s %s %s"
+                           % (revision, part_name, ch_name, sec_num))
 
     def _read_outlines(self):
         self.outline_lines = []
-        self.outline_reference = []
+        self.outline_reference = {}
         for outline_path in self.outlines:
             logging.info("Processing outline '%s'." % outline_path)
             outline_file = open(outline_path)
@@ -53,33 +76,32 @@ class ChecklistMerger(object):
                 if not len(tokenized_line) == 4:
                     raise ValueError("Bad format: File %s line %d: %s"
                                  % (outline_path, line_num, tokenized_line))
+                # Outline: revision, part, chapter, section
                 logging.debug("%s: %d Outline: %s" % (outline_path, x, tokenized_line))
                 self.outline_lines.append(tokenized_line)
 
                 # Parts have the format "Part <part_num>: <Part Title>"
                 # Checklist part references have the form "Part <part_num>"
                 # Lines below should create a Checklist part_name from the outline
-                part_tokens = [tok.strip() for tok in tokenized_line[1].split(" ")]
-                part_name = part_tokens[3] + " " + part_tokens[4][:-1]
+                part_toks = [tok.strip() for tok in tokenized_line[1].split(" ")]
+                part_idx = part_toks.index("Part")
+                part_name = " ".join(part_toks[part_idx:part_idx + 2])
+                part_name = part_name[:-1]
                 # Chapters have the format "Chapter <chapter_number> <Chapter_Title>"
                 # Checklist chapter references have the form "Chapter <chapter_num>"
                 # Lines below should create a Checklist chapter_name from the outline
-                chapter_tokens = [tok.strip() for tok in tokenized_line[2].split(" ")]
-                chapter_name = chapter_tokens[0] + " " + chapter_tokens[1]
+                ch_toks = [tok.strip() for tok in tokenized_line[2].split(" ")]
+                ch_name = " ".join(ch_toks[0:2])
                 # Sections have the format "<section_number> <section_title>"
                 # Checklist section references have the form "<section_num>"
                 # Lines below should create a Checklist section_number from the outline
-                section_tokens = [tok.strip() for tok in tokenized_line[3].split(" ")]
-                section_number = section_tokens[0]
+                sec_toks = [tok.strip() for tok in tokenized_line[3].split(" ")]
+                sec_num = sec_toks[0]
 
-                reference = [tokenized_line[0], part_name, chapter_name, section_number]
-                try:
-                    dup_idx = self.outline_reference.index(reference)
-                    raise ValueError("Duplicate reference: File %s lines %d and %d: %s"
-                                 % (outline_path, dup_idx, line_num, reference))
-                except ValueError:
-                    pass
-                self.outline_reference.append(reference)
+                reference = [tokenized_line[0], part_name, ch_name, sec_num]
+                self._add_outline_reference(tokenized_line[0], part_name, tokenized_line[1],
+                                           ch_name, tokenized_line[2],
+                                           sec_num, tokenized_line[3])
                 logging.debug("%s: %d Ref: %s" % (outline_path, x, reference))
 
     def _read_checklists(self):
@@ -99,22 +121,24 @@ class ChecklistMerger(object):
                 if not len(tokens) == 10:
                     raise ValueError("Bad format: File %s line %d: %s"
                                  % (checklist_path, line_num, tokens))
-                if len(self.outline_lines) and not tokens[3] == "Part 4":
-                    # Try to translate checklist references to complete references
-                    if tokens[5].startswith("Sec. "):
-                        tokens[5] = tokens[5][len("Sec. "):].strip()
-                        if len(tokens[5]) == 1:
-                            tokens[5] += ".1"
+                if not len(self.outline_lines) or tokens[3] == "Part 4":
+                    continue
+                # Try to translate checklist references to complete references
+                if tokens[5].startswith("Sec. "):
+                    tokens[5] = tokens[5][len("Sec. "):].strip()
+                    if len(tokens[5]) == 1:
+                        tokens[5] += ".1"
 
-                    reference = [tokens[2], tokens[3], tokens[4], tokens[5]]
-                    try:
-                        outline_idx = self.outline_reference.index(reference)
-                        tokens[3] = self.outline_lines[outline_idx][1] # Part title
-                        tokens[4] = self.outline_lines[outline_idx][2] # Chapter title
-                        tokens[5] = self.outline_lines[outline_idx][3] # Section title
-                    except ValueError:
-                        logging.warn("Checklist %s:%d reference '%s' not found in outlines."
-                                      % (checklist_path, line_num, reference))
+                reference = [tokens[2], tokens[3], tokens[4], tokens[5]]
+                part_title = self.outline_reference[tokens[2]][tokens[3]][0]
+                ch_title = self.outline_reference[tokens[2]][tokens[3]][1][tokens[4]][0]
+                sec_title = self.outline_reference[tokens[2]][tokens[3]][1][tokens[4]][1][tokens[5]]
+
+                # Append translations of the references.
+                for t_key in self.trans_keys:
+                    t_rev, t_part, t_chap, t_sec = self._translator.translate(
+                         tokens[2], part_title, ch_title, sec_title, t_key)
+                    tokens.extend([t_rev, t_part, t_chap, t_sec])
                 self.merge.append(tokens)
         self.sorted_merge = sorted(self.merge, key=operator.itemgetter(3, 4, 5, 2))
 
@@ -123,7 +147,7 @@ class ChecklistMerger(object):
         if self.sorted_merge == []:
             print "Nothing in sorted checklist."
 
-        print self.CHECKLIST_HEADER
+        print self.header
         for item in self.sorted_merge:
             print "'" + "', '".join(item) + "'"
 
@@ -139,6 +163,11 @@ def create_parser():
             action = 'append', type = 'string', default = [],
             help = 'Outline file(s) created by parse_rapidio_standard.py',
             metavar = 'FILE')
+    parser.add_option('-t', '--translation',
+            dest = 'translation_filenames',
+            action = 'append', type = 'string', default = [],
+            help = 'Translation file(s) created by create_translation.py',
+            metavar = 'FILE')
     return parser
 
 def validate_options(options):
@@ -152,6 +181,10 @@ def validate_options(options):
     for outline in options.outline_filenames:
         if not os.path.isfile(outline):
             raise ValueError("Outline file '%s' does not exist." % outline)
+
+    for translation in options.translation_filenames:
+        if not os.path.isfile(translation):
+            raise ValueError("Translation file '%s' does not exist." % translation)
 
 def main(argv = None):
     logging.basicConfig(level=logging.WARN)
@@ -172,7 +205,9 @@ def main(argv = None):
         print e
         sys.exit(-1)
 
-    merger = ChecklistMerger(options.checklist_filenames, options.outline_filenames)
+    merger = ChecklistMerger(options.checklist_filenames,
+                             options.outline_filenames,
+                             options.translation_filenames)
     merger.print_checklist()
 
 if __name__ == '__main__':
