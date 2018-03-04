@@ -147,6 +147,13 @@ class RapidIOStandardParser(object):
                         or tokens[1][1] in ('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')):
                         self.section_name = temp
                         logging.info("section_name :" + self.section_name)
+
+                        # Correct Rev 1.3 Part 11 Section 1.2/1.3 Requirements
+                        if (self.part_name == "RapidIO Interconnect Specification Part 11: Multicast Extensions Specification"
+                            and self.chapter_name == "Chapter 1 Overview"
+                            and self.section_name == "1.2 Requirements"):
+                            self.section_name = "1.3 Requirements"
+
                         if self.create_outline:
                             self.outline[self.part_name][self.chapter_name].append(self.section_name)
                     else:
@@ -232,7 +239,7 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub('\n', ' ', self.all_text)
         self.all_text = re.sub('\r', ' ', self.all_text)
         self.all_text = re.sub('\t', ' ', self.all_text)
-        
+
         # Fix Rev 1.3 special characters
         self.all_text = re.sub("™", '', self.all_text)
         self.all_text = re.sub('•', '', self.all_text)
@@ -269,6 +276,11 @@ class RapidIOStandardParser(object):
         # Correct Rev 1.3 Part 8 title
         self.all_text = re.sub("ManagementExtensions",
                                "Management Extensions", self.all_text)
+
+        # Correct Rev 1.3 Part 11 Section 1.1/1.2 Overview
+        self.all_text = re.sub("1.1 Overview",
+                               "1.2 Overview", self.all_text)
+
         # Correct Rev 2.2 XML special characters...
         self.all_text = re.sub("&#8482;", "", self.all_text)
         self.all_text = re.sub("&#8211;", "–", self.all_text)
