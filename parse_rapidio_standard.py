@@ -40,13 +40,14 @@ class RapidIOStandardParser(object):
     TYPE_RECOMMENDATION = "Recommendation"
     TYPE_REQUIREMENT = "REQUIREMENT"
 
-    def __init__(self, create_outline, std_xml_file, target_part=None, rev=None):
+    def __init__(self, create_outline, std_xml_file, target_part=None, rev=None, new_secs=None):
         self.create_outline = create_outline
         self.outline = OrderedDict()
         self.input_xml = std_xml_file
         self.target_part = target_part
         self.target_number = None
         self.part_number = None
+        self.new_secs = []
         if rev is None:
             self.revision = "Unknown"
             result = re.search("([0-9]\.[0-9])", self.input_xml)
@@ -54,6 +55,22 @@ class RapidIOStandardParser(object):
                 self.revision = result.group(1)
         else:
             self.revision = rev
+        self.read_new_secs(new_secs)
+
+    def read_new_secs(self, new_secs):
+        if new_secs is None:
+            return
+            
+        new_secs_file = open(new_secs)
+        new_secs_lines = [line.strip() for line in new_secs_file.readlines()]
+        new_secs_file.close()
+
+        for idx, line in enumerate(new_secs_lines):
+            toks = [tok.strip() for tok in line[1:-1].split("', '")]
+            if not len(toks) == 4:
+                raise("New secs file %s line %d bad format: %s"
+                    % (new_secs_file, idx, line))
+            self.new_secs.append(toks[1:])
 
     # Sneaky: Remove XML but replace tags with periods.
     # This may result in many empty sentences, but it also results
@@ -163,9 +180,14 @@ class RapidIOStandardParser(object):
 
                         if self.create_outline and not skip_outline:
                             self.outline[self.part_name][self.chapter_name].append(self.section_name)
-                            self.old_section = self.section_name
+                        self.old_section = self.section_name
                     else:
                         logging.debug("Skipping sect: %s" % sect[0:100])
+
+            # Only parse requirements for new sections...
+            if not [self.part_name, self.chapter_name, self.section_name] in self.new_secs:
+                continue
+                
             sect = self.remove_xml(sect)
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
@@ -526,6 +548,11 @@ def create_parser():
             action = 'store', type = 'string', default=None,
             help = 'Override the specification revision for debug purposes.',
             metavar = 'REVISON')
+    parser.add_option('-n', '--new_secs',
+            dest = 'new_secs_filepath',
+            action = 'store', type = 'string',
+            help = 'File listing new sections in this specification revision.',
+            metavar = 'FILE')
     return parser
 
 def validate_options(options):
@@ -539,6 +566,12 @@ def validate_options(options):
 
     if options.target_part is None:
         options.target_part = '*'
+
+    if options.new_secs_filepath is not None:
+        if not os.path.isfile(options.new_secs_filepath):
+            print "New sections File '" + options.new_secs_filepath +"' does not exist."
+            sys.exit()
+
     return options
 
 def main(argv = None):
@@ -559,7 +592,8 @@ def main(argv = None):
     std_parser = RapidIOStandardParser(options.create_outline,
                                        options.filename_of_standard,
                                        options.target_part,
-                                       options.override_revision)
+                                       options.override_revision,
+                                       options.new_secs_filepath)
     std_parser.parse_parts()
     std_parser.print_reqts()
     std_parser.print_outline()
