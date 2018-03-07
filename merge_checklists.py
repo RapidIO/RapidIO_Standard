@@ -27,18 +27,24 @@ from create_translation import *
 class ChecklistMerger(object):
     OUTLINE_HEADER = "Revision, Part, Chapter, Section"
     CHECKLIST_HEADER = "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
-    def __init__(self, checklists, outlines, translations):
+    def __init__(self, checklists, outlines, translations, requirements):
         self.checklists = checklists
         self.outlines = outlines
+        self.requirements = requirements
+        self.merge = []
 
         self._read_outlines()
         self._translator = RapidIOTranslationMerger(translations)
         self.header = self.CHECKLIST_HEADER
 
-        self.trans_keys = sorted(self._translator.trans.keys())
+        self.trans_keys = self._translator.trans.keys()
+        print ("Keys: %s" % " ".join(self.trans_keys))
+        self.trans_keys.sort()
+        print ("Keys sorted: %s" % " ".join(self.trans_keys))
         for t_rev in self.trans_keys:
             self.header = ("%s, %s, %s_Part, %s_Chapter, %s_Section"
                          % (self.header, t_rev, t_rev, t_rev, t_rev))
+        self._read_requirements()
         self._read_checklists()
 
     def _add_outline_reference(self, revision, part_name, part_title,
@@ -104,9 +110,41 @@ class ChecklistMerger(object):
                                            sec_num, tokenized_line[3])
                 logging.debug("%s: %d Ref: %s" % (outline_path, x, reference))
 
+    def _read_requirements(self):
+        for reqt in self.requirements:
+            reqt_file = open(reqt)
+            reqt_lines = [line.strip() for line in reqt_file.readlines()]
+            reqt_file.close()
+
+            for line in reqt_lines[1:]:
+                #    0        1      2        3       4      5
+                # Revision, Part, Chapter, Section, Type, Sentence
+                toks = [tok.strip() for tok in line[1:-1].split("', '")]
+                if not len(toks) == 6:
+                    logging.error("%s Line %s tok len %d" % (reqt, line, len(toks)))
+                # Checklist: Sentence, Type, Revision, Part, Chapter, Section,
+                #            Checklist_FileName, Checklist_Table_Name, Checklist_ID,
+                #            Optional, [rev/part/ch/sec] per translation
+                line_2_merge = [toks[5], toks[4], toks[0], toks[1], toks[2], toks[3],
+                                reqt, "N/A", "N/A", 
+                                'REQUIREMENT']
+                ref = [toks[0], toks[1], toks[2], toks[3]]
+                # The requirements are all from new sections.
+                # Only translate forward, as it's not possible
+                # to go backward.
+                for t_key in self.trans_keys:
+                    if toks[0] not in self.trans_keys:
+                        logging.warn("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
+                    if t_key < toks[0]:
+                        line_2_merge.extend(['', '', '', ''])
+                    elif t_key > toks[0]:
+                        t_rev, t_part, t_chap, t_sec = self._translator.translate(
+                             toks[0], toks[1], toks[2], toks[3], t_key)
+                        line_2_merge.extend([t_rev, t_part, t_chap, t_sec])
+                    else:
+                        line_2_merge.extend([toks[0], toks[1], toks[2], toks[3]])
+        
     def _read_checklists(self):
-        self.merge = []
-        self.headings = None
         for checklist_path in self.checklists:
             checklist_file = open(checklist_path)
             lines = [line.strip() for line in checklist_file.readlines()]
@@ -168,6 +206,12 @@ def create_parser():
             action = 'append', type = 'string', default = [],
             help = 'Translation file(s) created by create_translation.py',
             metavar = 'FILE')
+    parser.add_option('-r', '--requirements',
+            dest = 'reqt_filepaths',
+            action = 'append', type = 'string', default = [],
+            help = 'Requirements file created by parse_rapidio_standard.py',
+            metavar = 'FILE')
+ 
     return parser
 
 def validate_options(options):
@@ -185,6 +229,10 @@ def validate_options(options):
     for translation in options.translation_filenames:
         if not os.path.isfile(translation):
             raise ValueError("Translation file '%s' does not exist." % translation)
+
+    for reqt in options.reqt_filepaths:
+        if not os.path.isfile(reqt):
+            raise ValueError("Requirements file '%s' does not exist." % reqt)
 
 def main(argv = None):
     logging.basicConfig(level=logging.WARN)
@@ -207,7 +255,8 @@ def main(argv = None):
 
     merger = ChecklistMerger(options.checklist_filenames,
                              options.outline_filenames,
-                             options.translation_filenames)
+                             options.translation_filenames,
+                             options.reqt_filepaths)
     merger.print_checklist()
 
 if __name__ == '__main__':
