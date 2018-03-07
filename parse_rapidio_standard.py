@@ -249,9 +249,11 @@ class RapidIOStandardParser(object):
 
         print "Revision, Part, Chapter, Section, Type, Sentence"
         for reqt in self.reqts:
-            print reqt
+            print ("'%s'" % "', '".join(reqt))
 
     def print_outline(self):
+        if not self.create_outline:
+            return
         if len(self.outline) == 0:
             print "No outline available"
             return 0
