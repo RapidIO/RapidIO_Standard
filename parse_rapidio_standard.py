@@ -166,6 +166,11 @@ class RapidIOStandardParser(object):
                         self.section_name = temp
                         logging.info("section_name :" + self.section_name)
 
+                        # Skip misidentified heading in Revision 1.3, Part 6, Chapter 8
+                        if (self.section_name == "8.0 Gb/s link"):
+                            self.section_name = self.old_section
+                            skip_outline = True
+
                         # Correct Rev 1.3 Part 11 Section 1.2/1.3 Requirements
                         if (self.part_name == "RapidIO Interconnect Specification Part 11: Multicast Extensions Specification"
                             and self.chapter_name == "Chapter 1 Overview"
@@ -301,9 +306,8 @@ class RapidIOStandardParser(object):
         # Convert Rev 1.3 terminology to industry standard
         self.all_text = re.sub("8B/10B", "8b/10b",  self.all_text)
 
-        # Convert Rev 1.3 Part 6 title to match subsequent specifications
-        self.all_text = re.sub("1x/4x LP-Serial Physical",
-                               "LP-Serial Physical", self.all_text)
+        # Correct Rev 1.3 Part 6 Register description titles
+        self.all_text = re.sub("CSRs\(Block", "CSRs \(Block", self.all_text)
 
         # Correct Rev 1.3 Part 8 title
         self.all_text = re.sub("ManagementExtensions",
