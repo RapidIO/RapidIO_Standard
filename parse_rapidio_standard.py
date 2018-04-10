@@ -423,6 +423,22 @@ class RapidIOStandardParser(object):
         # Correct Rev 3.2 Part 6 Chapter 9 title
         self.all_text = re.sub("Specificationsfor", "Specifications for", self.all_text)
 
+        # Correct Rev 2.2 Part 6 Chapter 10 title
+        # Correct Rev 3.2 Part 6 Chapter 10 title
+        # Correct Rev 4.0 Part 6 Chapter 10 title
+        self.all_text = re.sub("Chapter 10  1.25 Gbaud, 2.5 Gbaud, and </P>    <P>3.125 Gbaud LP-Serial Links",
+                               "Chapter 10 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links", self.all_text)
+
+        # Correct Rev 2.2 Part 6 Chapter 11.4.1.1 title
+        # Correct Rev 3.2 Part 6 Chapter 11.4.1.1 title
+        # Correct Rev 4.0 Part 6 Chapter 11.4.1.1 title
+        self.all_text = re.sub("Test Patterns1", "Test Patterns", self.all_text)
+
+        # Correct Rev 2.2 Part 6 Chapter 11.7.1.2.2 title
+        # Correct Rev 3.2 Part 6 Chapter 11.7.1.2.2 title
+        # Correct Rev 4.0 Part 6 Chapter 11.7.1.2.2 title
+        self.all_text = re.sub("Band Limited1", "Band Limited", self.all_text)
+
         # Correct Rev 3.2 Part 7 Chapter 2 title
         self.all_text = re.sub("andInitialization",
                                "and Initialization", self.all_text)
