@@ -289,6 +289,10 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("”", '"', self.all_text)
         self.all_text = re.sub("’", "'", self.all_text)
 
+        # In Revision 3.2 and 4.0, superscripts were dropped.
+        # Change this case to use a '^' <carat> character
+        self.all_text = re.sub("2Mask", '2^Mask', self.all_text)
+
         # Fix Rev 1.3 text defects
         self.all_text = re.sub('LogicalSpecification', 'Logical Specification', self.all_text)
         self.all_text = re.sub('SpecificationPart', 'Specification Part', self.all_text)
@@ -486,9 +490,19 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub('RapidIO.org [0-9+]', '', self.all_text)
         self.all_text = re.sub(r" id=\"LinkTarget_[0-9]*\">", r'>',  self.all_text)
 
+        # Correct Rev 3.2 Part 8 Section 2.5.9 title
+        self.all_text = re.sub("Destination ID Capture </P>    <P>CSR   (Block Offset 0x20)",
+                               "Destination ID Capture CSR (Block Offset 0x20)",
+                               self.all_text)
+
         # Correct Rev 3.2 Part 9 Section 3.4.5 title
         self.all_text = re.sub("Rules for Traffic Management Supported",
                                "Rules for Traffic Management </P> Supported",
+                               self.all_text)
+
+        # Correct Rev 3.2 & 4.0 Part 11 Section 3.4.7 title
+        self.all_text = re.sub("Mask x Clear Register y CSR </P>     \(Offset",
+                               "Mask x Clear Register y CSR (Offset",
                                self.all_text)
 
     # Work around embedded specification part references in
