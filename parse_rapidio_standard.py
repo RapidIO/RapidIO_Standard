@@ -453,6 +453,16 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("\<P\>Extensions Register Bits \</\P>",
                                "Extensions Register Bits </P>", self.all_text)
 
+        # Correct Rev 3.2 Part 3 Section 3.7.3 title
+        self.all_text = re.sub("Routing Table Entry </H3>    <P>CSR \(Offset",
+                               "Routing Table Entry CSR (Offset",
+                               self.all_text)
+
+        # Correct Rev 3.2 Part 6 Section 3.5.5.3 title
+        self.all_text = re.sub("Port-status1 Command",
+                               "Port-status Command",
+                               self.all_text)
+
         # Correct Rev 3.2 Part 6 Chapter 9 title
         self.all_text = re.sub("Specificationsfor", "Specifications for", self.all_text)
 
