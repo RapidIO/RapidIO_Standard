@@ -183,6 +183,11 @@ class RapidIOStandardParser(object):
                             self.section_name = self.old_section
                             skip_outline = True
 
+                        # Correct Rev 2.2 Part 6 Section 10.7.4.6 parsing
+                        if (self.section_name == "10.0 Gb/s link"):
+                            self.section_name = self.old_section
+                            skip_outline = True
+
                         if self.create_outline and not skip_outline:
                             self.outline[self.part_name][self.chapter_name].append(self.section_name)
                         self.old_section = self.section_name
@@ -382,6 +387,24 @@ class RapidIOStandardParser(object):
                                "READ_TO_OWN_OWNER Transaction </P>",
                                 self.all_text)
 
+        # Correct Rev 2.2. XML issue that would otherwise cause parser 
+        # to mislable Part 6 Chapter 8 Section 8.5.11
+        self.all_text = re.sub("Transmitter and </P>    <P>Receiver",
+                               "Transmitter and Receiver",
+                                self.all_text)
+
+        # Correct Rev 2.2. XML issue that would otherwise cause parser 
+        # to mislable Part 6 Chapter 8 Section 8.7.4.5
+        self.all_text = re.sub("Cumulative Distribution </P>    <P>Function",
+                               "Cumulative Distribution Function",
+                                self.all_text)
+
+        # Correct Rev 2.2. XML issue that would otherwise cause parser 
+        # to mislable Part 6 Chapter 9 Section 9.3
+        self.all_text = re.sub("I Transmitter and </P>    <P>Receiver Specifications",
+                               "I Transmitter and Receiver Specifications",
+                                self.all_text)
+
         # Correct Rev 2.2 XML issue that would otherwise cause parser
         # to miss-lable Part 6 Chapter 9 1.25 Gbaud, 2.5Gbaud, and 3.125 Gbaud LP-Serial Links
         self.all_text = re.sub("1.25Gbaud, 2.5Gbaud, and \</P\>",
@@ -397,6 +420,12 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("\<P\>Links \</P\>",
                                "Links </P>",
                                 self.all_text)
+
+        # Correct Rev 2.2 XML issue that would otherwise cause parser
+        # to miss-lable Part 6 Section 10.1.5 
+        self.all_text = re.sub("Transmitter and Receiver </P>    <P>Specifications",
+                               "Transmitter and Receiver Specifications",
+                               self.all_text)
 
         # Correct Rev 2.2 XML issue that would otherwise cause parser
         # to miss-lable Part 7 Chapter 2 System Exploration and Initialization
@@ -438,6 +467,16 @@ class RapidIOStandardParser(object):
         # Correct Rev 3.2 Part 6 Chapter 11.7.1.2.2 title
         # Correct Rev 4.0 Part 6 Chapter 11.7.1.2.2 title
         self.all_text = re.sub("Band Limited1", "Band Limited", self.all_text)
+
+        # Correct Rev 2.2 Part 8 Section 1.2.4 title
+        self.all_text = re.sub("Rate Failed Threshold is </P>    <P>Reached",
+                               "Rate Failed Threshold is Reached",
+                                self.all_text)
+
+        # Correct Rev 2.2 Part 8 Section 1.2.4 title
+        self.all_text = re.sub("Enable and Capture </P>    <P>CSRs",
+                               "Enable and Capture CSRs",
+                                self.all_text)
 
         # Correct Rev 3.2 Part 7 Chapter 2 title
         self.all_text = re.sub("andInitialization",

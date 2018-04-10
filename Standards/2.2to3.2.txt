@@ -51,7 +51,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6.1 Multicast-Event Control Symbol'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6.2 Secondary Multicast-Event Control Symbol'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6.3 Loop-Timing Control Symbol'
-302,676c327,862
+302,675c327,862
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.1 Introduction'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.2 PCS Layer Functions'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.3 PMA Layer Functions'
@@ -239,7 +239,7 @@
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.8 Transmitter Lane-to-Lane Skew'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.9 Receiver Input Lane-to-Lane Skew'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.10 Transmitter Short Circuit Current'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.11 Differential Resistance and Return Loss, Transmitter and'
+< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.11 Differential Resistance and Return Loss, Transmitter and Receiver'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.12 Baud Rate Tolerance'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.5.13 Termination and DC Blocking'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.6 Pulse Response Channel Modelling'
@@ -264,7 +264,7 @@
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.2 Bounded Gaussian Distribution'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.3 High Probability Jitter'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.4 Total Jitter'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.5 Probability Distribution Function vs. Cumulative Distribution'
+< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.5 Probability Distribution Function vs. Cumulative Distribution Function'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.6 BathTub Curves'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.7 Specification of GJ and HPJ'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.4.8 Example of Bounded Gaussian'
@@ -274,7 +274,7 @@
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 8 Common Electrical Specifications', '8.7.5.3 Generation of Statistical Eye'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.1 Level I Application Goals'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.2 Equalization'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.3 Explanatory Note on Level I Transmitter and'
+< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.3 Explanatory Note on Level I Transmitter and Receiver Specifications'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.4 Level I Electrical Specification'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.4.1 Level I Short Run Transmitter Characteristics'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 9 1.25 Gbaud, 2.5 Gbaud, and 3.125 Gbaud LP-Serial Links', '9.4.1.1 Level I SR Transmitter Test Load'
@@ -316,7 +316,7 @@
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.1.2 Application Goals for Level II Short Run'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.1.3 Application Goals for Level II Medium Run'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.1.4 Application Goals for Long Run'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.1.5 Explanatory Note on Transmitter and Receiver'
+< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.1.5 Explanatory Note on Transmitter and Receiver Specifications'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.2 Equalization'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.3 Link Compliance Methodology'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.3.1 Overview'
@@ -426,7 +426,6 @@
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.7.4.4 Jitter Transfer'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.7.4.5 Network Analysis Measurement'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.7.4.6 Eye Mask Measurement Setup'
-< '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.0 Gb/s link'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.6.5 CRC-24 Code'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.6.6 CRC-24 Parallel Code Generation'
@@ -964,7 +963,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.3 Level III Transmitter Lane-to-Lane Skew'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.4 Receiver Input Lane-to-Lane Skew'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.5 Electrical IDLE'
-702a889,895
+701a889,895
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3 Space Device Definition'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.1 Basic Space Device Requirements'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.2 Enhanced Space Device Requirements'
@@ -972,16 +971,16 @@
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.4 Space Switch Device Requirements'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.5 Space Endpoint Device Requirements'
 > '3.2', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.6 Space Endpoint-E Device Requirements'
-788,822c981,1030
+787,821c981,1030
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.1 Introduction'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2 Physical Layer Extensions'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.1 Port n Error Detect, Enable and Capture CSRs'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.2 Error Reporting Thresholds'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.3 Error Rate Control and Status'
-< '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.4 Port Behavior When Error Rate Failed Threshold is'
+< '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.4 Port Behavior When Error Rate Failed Threshold is Reached'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.2.5 Packet Timeout Mechanism in a Switch Device'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.3 Logical and Transport Layer Extensions'
-< '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.3.1 Logical/Transport Error Detect, Enable and Capture'
+< '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.3.1 Logical/Transport Error Detect, Enable and Capture CSRs'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.3.2 Message Passing Error Detection'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.4 System Software Notification of Error'
 < '2.2', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', 'Chapter 1 Error Management Extensions', '1.5 Mechanisms for Software Debug'
@@ -1059,14 +1058,14 @@
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.24 Port n Error Rate Threshold CSR (Block Offset 0x6C, AC, ..., 42C)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.25 Port n Link Uninit Discard Timer CSR (Block Offset 0x70, 0xB0, ..., 0x430)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.26 Port n FIFO Error Detect CSR (Block Offset 0x7C, BC,..., 43C)'
-852,853c1060,1062
+851,852c1060,1062
 < '2.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2 Processing Elements Features CAR (Offset 0x10 Word 0)'
 < '2.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.3 Port n Control CSR  . (Block Offsets 0x5C, 7C, ... , 23C)'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2 Capability Registers (CARs)'
 > '3.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2.1 Processing Elements Features CAR (Offset 0x10 Word 0)'
 > '3.2', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', 'Chapter 4 Logical Layer Flow Control Extensions Register Bits', '4.2.2 Port n Control CSR (Block Offsets 0x5C, 7C, ... , 23C)'
-910,915c1119,1136
+909,914c1119,1136
 < '2.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.2 Processing Elements Features CAR (Configuration Space Offset 0x10)'
 < '2.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.3 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
 < '2.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
@@ -1092,14 +1091,14 @@
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.7 Broadcast Multicast Mask x Clear Register y CSR'
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2Mask_size) + (y*4))'
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2Mask_size) + (4*2Mask_size)'
-941,942c1162,1164
+940,941c1162,1164
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.1 Stype2 Control Symbol'
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.2 VC_Status Symbol Linking'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.1 Stype2 Control Symbol 48'
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.2 Control Symbol 64 VoQ Backpressure'
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.3 VoQ Backpressure per VC'
-950c1172
+949c1172
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 5 Register Definitions', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - Variable, see Section 5.1.1)'
 ---
 > '3.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 5 Register Definitions', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
