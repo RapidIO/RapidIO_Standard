@@ -17,8 +17,6 @@
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.8.1 Scrambling Rules'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.8.2 Descrambler Synchronization'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.8.3 Descrambler Synchronization Verification'
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.9 1x Mode Transmission Rules'
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.12 Port Initialization'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.12.3 Baud Rate Discovery'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.12.4.4 1x/2x Mode Detect State Machine'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 4 PCS and PMA Layers', '4.12.4.7 1x/2x Mode Initialization State Machine'
