@@ -316,7 +316,7 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("8B/10B", "8b/10b",  self.all_text)
 
         # Correct Rev 1.3 Part 6 Register description titles
-        self.all_text = re.sub("CSRs\(Block", "CSRs \(Block", self.all_text)
+        self.all_text = re.sub("CSRs\(Block", "CSRs (Block", self.all_text)
 
         # Correct Rev 1.3 Part 8 title
         self.all_text = re.sub("ManagementExtensions",
