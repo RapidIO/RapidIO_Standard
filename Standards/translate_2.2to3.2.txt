@@ -431,10 +431,6 @@
 Unmatched new items, interleaved with old
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.6.7 Port n Local ackID CSRs (RM-I Block Offsets 0x48, 68, ... , 228)'
 > '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.6.11 Port n Control CSRs (RM-I Block Offsets 0x5C, 7C, ... , 23C) (RM-II Block Offsets 0x5C, 9C, ... , 41C)'
-> '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.6.14 Port n Power Management CSRs (RM-II Block Offsets 0x68, A8, ... , 428)'
-> '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.9.13 Port n Timestamp Generator Synchronization CSRs (Block Offsets 0x60, 0xA0, ..., 0x420)'
-> '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.9.15 Port n Timestamp Synchronization Command CSRs (Block Offsets 0x68, 0xA8, ..., 0x428)'
-> '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.9.16 Port n Timestamp Synchronization Status CSRs (Block Offsets 0x6C, 0xAC, ..., 0x42C)'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.2 Register Map'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.7 Port n Local ackID CSRs  . (Block Offsets 0x48, 68, ... , 228)'
 < '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Registers', '6.6.9 Port n Control CSRs  . (Block Offsets 0x5C, 7C, ... , 23C)'
