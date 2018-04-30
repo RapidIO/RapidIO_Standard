@@ -1,4 +1,3 @@
-'2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 1 Overview', '1.2 Contents'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 1 Overview', '1.3 Terminology'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 1 Overview', '1.4 Conventions'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.4.5 VC-Status Control Symbol'

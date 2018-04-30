@@ -134,7 +134,7 @@ class RapidIOOutlineDiffMerger(object):
                 self._new_lines[n].extend(base[4:])
                 found_new = True
             if not found_new:
-                raise ValueError("Reference to new specification not found in diff: %s" % base[0:4])
+                raise ValueError("Manual translation reference to new specification not found in diff: %s" % base[0:4])
             found_old = False
             for o, old in enumerate(self._old_lines):
                 diff = False
@@ -147,7 +147,7 @@ class RapidIOOutlineDiffMerger(object):
                 self._old_lines[o].extend(base[0:4])
                 found_old = True
             if not found_old:
-                logging.warn("Reference to old specification not found in diff: %s" % base[4:8])
+                logging.warn("Manual translation reference to old specification not found in diff: %s" % base[4:8])
 
     def _merge_lines(self):
         for n, new in enumerate(self._new_lines):
