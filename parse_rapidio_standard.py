@@ -339,10 +339,10 @@ class RapidIOStandardParser(object):
         # Configuration Space Offset and Block Offset xml
         self.all_text = re.sub("&#61472;</P>", "", self.all_text)
         self.all_text = re.sub("&#61472;", "", self.all_text)
-        self.all_text = re.sub("\<P\>\(Configuration Space Offset",
+        self.all_text = re.sub("<P>\(Configuration Space Offset",
                                "(Configuration Space Offset", self.all_text)
-        self.all_text = re.sub("\<P\>\(Block Offset ",
-                               " (Block Offset ", self.all_text)
+        self.all_text = re.sub("<P>\(Block Offset",
+                               " (Block Offset", self.all_text)
         self.all_text = re.sub("CSR\(Block Offset ",
                                "CSR (Block Offset ", self.all_text)
         self.all_text = re.sub("\<P\>\(Offset ",
