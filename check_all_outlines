@@ -48,7 +48,7 @@ sed -i -r "s#'test'#'3.2'#g" Standards/outline_3.2.txt
 sed -i -r "s#'test'#'4.0'#g" Standards/outline_4.0.txt
 sed -i -r "s#< 'test#< '3.2#g" Standards/3.2to4.0.txt
 sed -i -r "s#> 'test#> '4.0#g" Standards/3.2to4.0.txt
-./merge_outline_diffs.py -f Standards/3.2to4.0.txt -n Standards/new_sections_4.0.txt -c 0.80
+./merge_outline_diffs.py -f Standards/3.2to4.0.txt -n Standards/new_sections_4.0.txt -c 0.75
 check_rc 3.2to4.0
 
 ./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt > Standards/all_translations.txt
