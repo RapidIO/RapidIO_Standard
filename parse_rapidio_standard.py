@@ -40,9 +40,11 @@ class RapidIOStandardParser(object):
     TYPE_RECOMMENDATION = "Recommendation"
     TYPE_REQUIREMENT = "REQUIREMENT"
 
-    def __init__(self, create_outline, std_xml_file, target_part=None, rev=None, new_secs=None):
+    def __init__(self, create_outline, extract_registers, std_xml_file, target_part=None, rev=None, new_secs=None):
         self.create_outline = create_outline
+        self.extract_registers = extract_registers
         self.outline = OrderedDict()
+        self.registers = []
         self.input_xml = std_xml_file
         self.target_part = target_part
         self.target_number = None
@@ -60,7 +62,7 @@ class RapidIOStandardParser(object):
     def read_new_secs(self, new_secs):
         if new_secs is None:
             return
-            
+
         new_secs_file = open(new_secs)
         new_secs_lines = [line.strip() for line in new_secs_file.readlines()]
         new_secs_file.close()
@@ -78,6 +80,12 @@ class RapidIOStandardParser(object):
     @staticmethod
     def remove_xml(text):
         return re.sub(r'\<[^>]+\>', " . ", text)
+
+    # Less Sneaky: Remove all XML delimiters and replace with spaces.
+    # This helps to clean up register table parsing.
+    @staticmethod
+    def replace_xml_with_whitespace(text):
+        return re.sub(r'\<[^>]+\>', " ", text)
 
     @staticmethod
     def remove_number_prefix(s):
@@ -123,6 +131,43 @@ class RapidIOStandardParser(object):
         self.sentences = self.sentences[:-1]
         self.sentences = [s.strip() for s in self.sentences]
         self.sentences = [self.remove_number_prefix(s) for s in self.sentences]
+
+    def parse_register_table(self, sect):
+        # Register tables are structured as:
+        # <Table> <Caption> table caption </Caption>
+        # <TR> <TH>Bit </TH> <TH>Field Name</TH> <TH>Description</TH> </TR>
+        # <TR> <TD>bits</TD> <TD>Field name</TD> <TD>Descrption</TD> </TR>
+        # </Table>
+        #
+        # NOTE: It is possible for tables to be split over 2 or more pages.
+        #       This results in multiple tables in a single table.
+        #
+        # Each registers row should be:
+        # <revision><part><chapter><section><bits><field><description>
+
+        rows = [r.strip() for r in sect.split("<TR>")]
+        for row in rows:
+            logging.info("Row: '%s'" % row)
+            row_start = row.find("<TD>")
+            row_end = row.rfind("</TD>")
+            if row_start == -1 or row_end == -1:
+                logging.info("Skipping %s: row %s"
+                             % (self.section_name, row))
+                continue
+            cols = [self.replace_xml_with_whitespace(c).strip()
+                    for c in row[row_start:row_end].split("</TD>")]
+            logging.info("Cols: '%s'" % cols)
+            cols = [self.replace_xml_with_whitespace(col).strip() for col in cols]
+            logging.info("Cols: '%s'" % cols)
+            if cols[0][0] < '0' or cols[0][0] > '9':
+                logging.info("Skipping %s: row %s"
+                             % (self.section_name, row))
+                continue
+            reg = [self.revision, self.part_name, self.chapter_name,
+                   self.section_name]
+            reg.extend(cols)
+            logging.info("Register: '%s'" % reg)
+            self.registers.append(reg)
 
     def parse_sections(self):
         REQT_KW = ["must", "shall", "Do not depend"]
@@ -194,10 +239,16 @@ class RapidIOStandardParser(object):
                     else:
                         logging.debug("Skipping sect: %s" % sect[0:100])
 
+            # Extract registers for all specification revisions...
+            if self.extract_registers:
+                if "Offset" in self.section_name:
+                    self.parse_register_table(sect)
+                continue
+
             # Only parse requirements for new sections...
             if not [self.part_name, self.chapter_name, self.section_name] in self.new_secs:
                 continue
-                
+
             sect = self.remove_xml(sect)
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
@@ -250,11 +301,26 @@ class RapidIOStandardParser(object):
                 if len(self.outline[self.part_name][self.chapter_name]) == 0:
                     del self.outline[self.part_name][self.chapter_name]
 
+    def print_registers(self):
+        if (not self.extract_registers) or self.create_outline:
+            return
+        if len(self.registers) == 0:
+            print "No registers found for " + self.input_xml
+            return 0
+
+        print "Section, Bits, Field, Description"
+        for reg in self.registers:
+            print ("'%s'" % "', '".join(reg[3:]))
+
+        # print "Revision, Part, Chapter, Section, Bits, Field, Description"
+        # for reg in self.registers:
+        #     print ("'%s'" % "', '".join(reg))
+
     def print_reqts(self):
-        if self.create_outline:
+        if self.create_outline or self.extract_registers:
             return
         if len(self.reqts) == 0:
-            print "No requirements found for " + self.part_num
+            print "No requirements found for " + self.input_xml
             return 0
 
         print "Revision, Part, Chapter, Section, Type, Sentence"
@@ -262,7 +328,7 @@ class RapidIOStandardParser(object):
             print ("'%s'" % "', '".join(reqt))
 
     def print_outline(self):
-        if not self.create_outline:
+        if (not self.create_outline) or self.extract_registers:
             return
         if len(self.outline) == 0:
             print "No outline available"
@@ -334,6 +400,7 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("&#8220;", '"', self.all_text)
         self.all_text = re.sub("&gt;", ">", self.all_text)
         self.all_text = re.sub("&lt;", "<", self.all_text)
+        self.all_text = re.sub("–", "-", self.all_text)
 
         # Correct Rev 2.2 XML issues register table references,
         # Configuration Space Offset and Block Offset xml
@@ -391,19 +458,19 @@ class RapidIOStandardParser(object):
                                "READ_TO_OWN_OWNER Transaction </P>",
                                 self.all_text)
 
-        # Correct Rev 2.2. XML issue that would otherwise cause parser 
+        # Correct Rev 2.2. XML issue that would otherwise cause parser
         # to mislable Part 6 Chapter 8 Section 8.5.11
         self.all_text = re.sub("Transmitter and </P>    <P>Receiver",
                                "Transmitter and Receiver",
                                 self.all_text)
 
-        # Correct Rev 2.2. XML issue that would otherwise cause parser 
+        # Correct Rev 2.2. XML issue that would otherwise cause parser
         # to mislable Part 6 Chapter 8 Section 8.7.4.5
         self.all_text = re.sub("Cumulative Distribution </P>    <P>Function",
                                "Cumulative Distribution Function",
                                 self.all_text)
 
-        # Correct Rev 2.2. XML issue that would otherwise cause parser 
+        # Correct Rev 2.2. XML issue that would otherwise cause parser
         # to mislable Part 6 Chapter 9 Section 9.3
         self.all_text = re.sub("I Transmitter and </P>    <P>Receiver Specifications",
                                "I Transmitter and Receiver Specifications",
@@ -426,7 +493,7 @@ class RapidIOStandardParser(object):
                                 self.all_text)
 
         # Correct Rev 2.2 XML issue that would otherwise cause parser
-        # to miss-lable Part 6 Section 10.1.5 
+        # to miss-lable Part 6 Section 10.1.5
         self.all_text = re.sub("Transmitter and Receiver </P>    <P>Specifications",
                                "Transmitter and Receiver Specifications",
                                self.all_text)
@@ -638,6 +705,11 @@ def create_parser():
             action = 'store', type = 'string',
             help = 'File listing new sections in this specification revision.',
             metavar = 'FILE')
+    parser.add_option('-e', '--extract_registers',
+            dest = 'extract_registers',
+            action = 'store_true', default=False,
+            help = 'Parse register tables and output register file.',
+            metavar = 'FLAG')
     return parser
 
 def validate_options(options):
@@ -657,6 +729,10 @@ def validate_options(options):
             print "New sections File '" + options.new_secs_filepath +"' does not exist."
             sys.exit()
 
+    if options.create_outline and options.extract_registers:
+        print "Cannot create outline and extract registers simultaneously."
+        sys.exit()
+
     return options
 
 def main(argv = None):
@@ -675,12 +751,14 @@ def main(argv = None):
     options = validate_options(options)
 
     std_parser = RapidIOStandardParser(options.create_outline,
+                                       options.extract_registers,
                                        options.filename_of_standard,
                                        options.target_part,
                                        options.override_revision,
                                        options.new_secs_filepath)
     std_parser.parse_parts()
     std_parser.print_reqts()
+    std_parser.print_registers()
     std_parser.print_outline()
 
 if __name__ == '__main__':
