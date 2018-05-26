@@ -112,6 +112,7 @@ class ChecklistMerger(object):
 
     def _read_requirements(self):
         for reqt in self.requirements:
+            logging.info("Processing requirements file '%s'." % reqt)
             reqt_file = open(reqt)
             reqt_lines = [line.strip() for line in reqt_file.readlines()]
             reqt_file.close()
@@ -121,7 +122,8 @@ class ChecklistMerger(object):
                 # Revision, Part, Chapter, Section, Type, Sentence
                 toks = [tok.strip() for tok in line[1:-1].split("', '")]
                 if not len(toks) == 6:
-                    logging.error("%s %d Line %s tok len %d" % (reqt, line_num+1, line, len(toks)))
+                    raise ValueError("%s %d Line %s tok len %d"
+                                  % (reqt, line_num+1, line, len(toks)))
                 # Checklist: Sentence, Type, Revision, Part, Chapter, Section,
                 #            Checklist_FileName, Checklist_Table_Name, Checklist_ID,
                 #            Optional, [rev/part/ch/sec] per translation
@@ -135,14 +137,22 @@ class ChecklistMerger(object):
                 for t_key in self.trans_keys:
                     if toks[0] not in self.trans_keys:
                         logging.warn("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
+                        raise ValueError("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
                     if t_key < toks[0]:
+                        logging.debug("%s %s Extend with Nulls"
+                                   % (t_key,toks[0]))
                         line_2_merge.extend(['', '', '', ''])
                     elif t_key > toks[0]:
                         t_rev, t_part, t_chap, t_sec = self._translator.translate(
                              toks[0], toks[1], toks[2], toks[3], t_key)
                         line_2_merge.extend([t_rev, t_part, t_chap, t_sec])
+                        logging.debug("%s %s:%s Extend with translation"
+                                   % (t_key,toks[0], [t_rev, t_part, t_chap, t_sec]))
                     else:
+                        logging.debug("%s %s Extend with items"
+                                   % (t_key,[toks[0], toks[1], toks[2], toks[3]]))
                         line_2_merge.extend([toks[0], toks[1], toks[2], toks[3]])
+                self.merge.append(line_2_merge)
         
     def _read_checklists(self):
         for checklist_path in self.checklists:
@@ -215,8 +225,8 @@ def create_parser():
     return parser
 
 def validate_options(options):
-    if not len(options.checklist_filenames):
-        raise ValueError("Must enter at least one checklist filename.")
+    if not len(options.checklist_filenames) and not len(options.reqt_filepaths):
+        raise ValueError("Must enter at least one checklist/requirements filename.")
 
     for checklist in options.checklist_filenames:
         if not os.path.isfile(checklist):
