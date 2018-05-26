@@ -116,12 +116,12 @@ class ChecklistMerger(object):
             reqt_lines = [line.strip() for line in reqt_file.readlines()]
             reqt_file.close()
 
-            for line in reqt_lines[1:]:
+            for line_num, line in enumerate(reqt_lines[1:]):
                 #    0        1      2        3       4      5
                 # Revision, Part, Chapter, Section, Type, Sentence
                 toks = [tok.strip() for tok in line[1:-1].split("', '")]
                 if not len(toks) == 6:
-                    logging.error("%s Line %s tok len %d" % (reqt, line, len(toks)))
+                    logging.error("%s %d Line %s tok len %d" % (reqt, line_num+1, line, len(toks)))
                 # Checklist: Sentence, Type, Revision, Part, Chapter, Section,
                 #            Checklist_FileName, Checklist_Table_Name, Checklist_ID,
                 #            Optional, [rev/part/ch/sec] per translation
