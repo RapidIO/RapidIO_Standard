@@ -22,6 +22,10 @@ check_rc registers_3.2
 ./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4.0.xml -e -r test > Standards/registers_4.0.txt 2>&1
 check_rc registers_4.0
 
+diff Standards/registers_1.3.txt Standards/registers_2.2.txt > Standards/1.3to2.2register.txt
+diff Standards/registers_2.2.txt Standards/registers_3.2.txt > Standards/2.2to3.2register.txt
+diff Standards/registers_3.2.txt Standards/registers_4.0.txt > Standards/3.2to4.0register.txt
+
 ./parse_rapidio_standard.py -f Standards/RapidIO\ 1.3\ Specification\ Stack.xml -o -r test > Standards/outline_1.3.txt
 check_rc outline_1.3
 ./parse_rapidio_standard.py -f Standards/Rev_2.2_specification_stack.xml -o -r test > Standards/outline_2.2.txt

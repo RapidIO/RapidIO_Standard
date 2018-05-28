@@ -146,6 +146,7 @@ class RapidIOStandardParser(object):
         # <revision><part><chapter><section><bits><field><description>
 
         rows = [r.strip() for r in sect.split("<TR>")]
+        prev_bit = '32'
         for row in rows:
             logging.info("Row: '%s'" % row)
             row_start = row.find("<TD>")
@@ -163,11 +164,28 @@ class RapidIOStandardParser(object):
                 logging.info("Skipping %s: row %s"
                              % (self.section_name, row))
                 continue
+            # The amount of XML varies in each revision of the standard,
+            # which causes inconsistent spacing in register descriptions.
+            # The clause below ensures that a single space exists between
+            # each word in a column.
+            cols = [re.sub(' +', ' ', col) for col in cols]
             reg = [self.revision, self.part_name, self.chapter_name,
                    self.section_name]
             reg.extend(cols)
+            # The Revision 3.2 Timestamp registers have some funky formatting,
+            # which causes a single table row to be split over multiple XML
+            # table rows.  The clause below attempts to fix that...
+            if (cols[0] == prev_bit) or cols[0].startswith('0b'):
+                if len(self.registers):
+                    self.registers[-1].extend(cols)
+                    continue
+            prev_bit = cols[0]
             logging.info("Register: '%s'" % reg)
             self.registers.append(reg)
+            # Sometimes there is extraneous information in following tables.
+            # Terminate parsing of the register table when bit "31" is seen.
+            if cols[0].find('31') >= 0:
+                break
 
     def parse_sections(self):
         REQT_KW = ["must", "shall", "Do not depend"]
@@ -175,6 +193,26 @@ class RapidIOStandardParser(object):
         SECTION_END = "</"
 
         self.section_name = self.chapter_name
+
+        for sect_idx, sect in enumerate(self.sections):
+            if sect.startswith("25 GBaud Support"):
+                logging.debug("6.25 Sect-1: %s" % self.sections[sect_idx-1])
+                logging.debug("6.25 Sect0: %s" % sect)
+                logging.debug("6.25 Sect+1: %s" % self.sections[sect_idx+1])
+                self.sections[sect_idx-1] += ">6." + sect
+                del self.sections[sect_idx]
+                logging.debug("6.25 NewSect-1: %s" % self.sections[sect_idx -1])
+                break
+
+        for sect_idx, sect in enumerate(self.sections):
+            if sect.startswith("25 GBaud Enable"):
+                logging.debug("6.25 Nect-1: %s" % self.sections[sect_idx-1])
+                logging.debug("6.25 Nect0: %s" % sect)
+                logging.debug("6.25 Nect+1: %s" % self.sections[sect_idx+1])
+                self.sections[sect_idx-1] += ">6." + sect
+                del self.sections[sect_idx]
+                logging.debug("6.25 NewNect-1: %s" % self.sections[sect_idx -1])
+                break
 
         for sect in self.sections:
             heading_end = 0
@@ -221,12 +259,6 @@ class RapidIOStandardParser(object):
                             and self.chapter_name == "Chapter 1 Overview"
                             and self.section_name == "1.2 Requirements"):
                             self.section_name = "1.3 Requirements"
-
-                        # Correct Rev 2.2 Part 6 Section 6.6.10 parsing
-                        if (self.section_name == "6.25 GBaud Support"
-                            or self.section_name == "6.25 GBaud Enable"):
-                            self.section_name = self.old_section
-                            skip_outline = True
 
                         # Correct Rev 2.2 Part 6 Section 10.7.4.6 parsing
                         if (self.section_name == "10.0 Gb/s link"):
@@ -394,10 +426,14 @@ class RapidIOStandardParser(object):
 
         # Correct Rev 2.2 XML special characters...
         self.all_text = re.sub("&#8482;", "", self.all_text)
+        self.all_text = re.sub("&#8216;", "'", self.all_text)
+        self.all_text = re.sub("&#8217;", "'", self.all_text)
+        self.all_text = re.sub("&#8212;", "—", self.all_text)
         self.all_text = re.sub("&#8211;", "–", self.all_text)
         self.all_text = re.sub("&#8226;", "", self.all_text)
         self.all_text = re.sub("&#8221;", '"', self.all_text)
         self.all_text = re.sub("&#8220;", '"', self.all_text)
+        self.all_text = re.sub(" ", ' ', self.all_text)
         self.all_text = re.sub("&gt;", ">", self.all_text)
         self.all_text = re.sub("&lt;", "<", self.all_text)
         self.all_text = re.sub("–", "-", self.all_text)
@@ -736,7 +772,7 @@ def validate_options(options):
     return options
 
 def main(argv = None):
-    logging.basicConfig(level=logging.WARN)
+    logging.basicConfig(level=logging.WARNING)
     parser = create_parser()
     if argv is None:
         argv = sys.argv[1:]
