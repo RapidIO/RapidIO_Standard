@@ -168,7 +168,7 @@ class RapidIOStandardParser(object):
             # which causes inconsistent spacing in register descriptions.
             # The clause below ensures that a single space exists between
             # each word in a column.
-            cols = [re.sub(' +', ' ', col) for col in cols]
+            cols = [re.sub(' +', ' ', col) for col in cols if not col == '']
             reg = [self.revision, self.part_name, self.chapter_name,
                    self.section_name]
             reg.extend(cols)
