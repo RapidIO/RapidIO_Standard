@@ -169,8 +169,21 @@ class RapidIOStandardParser(object):
             # The clause below ensures that a single space exists between
             # each word in a column.
             cols = [re.sub(' +', ' ', col) for col in cols if not col == '']
+            # Attempt to find the register block ID for this set of registers.
+            if (self.section_name.find("Block Header") >= 0
+                and cols[0].startswith('16')
+                and cols[0].endswith('31')
+                and cols[1] == "EF_ID"):
+                if len(cols) > 3:
+                    if cols[2].startswith('0x00'):
+                        self.register_block_id = cols[2].split()[0].strip()
+                if self.register_block_id == "STD_REG":
+                    self.register_block_id = 'UNKNOWN'
+                # Previous register field is always EF_PTR, which should be
+                # identified as part of this register block.
+                self.registers[-1][4] = self.register_block_id
             reg = [self.revision, self.part_name, self.chapter_name,
-                   self.section_name]
+                   self.section_name, self.register_block_id]
             reg.extend(cols)
             # The Revision 3.2 Timestamp registers have some funky formatting,
             # which causes a single table row to be split over multiple XML
@@ -214,6 +227,7 @@ class RapidIOStandardParser(object):
                 logging.debug("6.25 NewNect-1: %s" % self.sections[sect_idx -1])
                 break
 
+        self.register_block_id = "STD_REG"
         for sect in self.sections:
             heading_end = 0
             if sect[0] >= '0' and sect[0] <= '9':
@@ -340,11 +354,11 @@ class RapidIOStandardParser(object):
             print "No registers found for " + self.input_xml
             return 0
 
-        print "Section, Bits, Field, Description"
+        print "Section, Block_ID, Bits, Field, Description"
         for reg in self.registers:
             print ("'%s'" % "', '".join(reg[3:]))
 
-        # print "Revision, Part, Chapter, Section, Bits, Field, Description"
+        # print "Revision, Part, Chapter, Section, Block_ID, Bits, Field, Description"
         # for reg in self.registers:
         #     print ("'%s'" % "', '".join(reg))
 
