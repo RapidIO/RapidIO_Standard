@@ -26,7 +26,7 @@ from create_translation import *
 
 class ChecklistMerger(object):
     OUTLINE_HEADER = "Revision, Part, Chapter, Section"
-    CHECKLIST_HEADER = "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
+    CHECKLIST_HEADER = "Sentence, Sentence_num, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
     def __init__(self, checklists, outlines, translations, requirements):
         self.checklists = checklists
         self.outlines = outlines
@@ -118,16 +118,18 @@ class ChecklistMerger(object):
             reqt_file.close()
 
             for line_num, line in enumerate(reqt_lines[1:]):
-                #    0        1      2        3       4      5
-                # Revision, Part, Chapter, Section, Type, Sentence
+                #    0        1      2        3       4       5            6
+                # Revision, Part, Chapter, Section, Type, Sentence_num, Sentence
                 toks = [tok.strip() for tok in line[1:-1].split("', '")]
-                if not len(toks) == 6:
+                if not len(toks) == 7:
                     raise ValueError("%s %d Line %s tok len %d"
                                   % (reqt, line_num+1, line, len(toks)))
-                # Checklist: Sentence, Type, Revision, Part, Chapter, Section,
-                #            Checklist_FileName, Checklist_Table_Name, Checklist_ID,
+                # Checklist: Sentence, Sentence_Num, Type, Revision, Part,
+                #             Chapter, Section, Checklist_FileName,
+                #            Checklist_Table_Name, Checklist_ID,
                 #            Optional, [rev/part/ch/sec] per translation
-                line_2_merge = [toks[5], toks[4], toks[0], toks[1], toks[2], toks[3],
+                line_2_merge = [toks[6], toks[5], toks[4], toks[0], toks[1],
+                                toks[2], toks[3],
                                 reqt, "N/A", "N/A", 
                                 'REQUIREMENT']
                 ref = [toks[0], toks[1], toks[2], toks[3]]
@@ -166,29 +168,29 @@ class ChecklistMerger(object):
             for x, line in enumerate(lines[2:]):
                 line_num = x + 1
                 tokens = [re.sub("'", "", tok.strip()) for tok in line.split("', ")]
-                if not len(tokens) == 10:
+                if not len(tokens) == 11:
                     raise ValueError("Bad format: File %s line %d: %s"
                                  % (checklist_path, line_num, tokens))
-                if not len(self.outline_lines) or tokens[3] == "Part 4":
+                if not len(self.outline_lines) or tokens[4] == "Part 4":
                     continue
                 # Try to translate checklist references to complete references
-                if tokens[5].startswith("Sec. "):
-                    tokens[5] = tokens[5][len("Sec. "):].strip()
-                    if len(tokens[5]) == 1:
-                        tokens[5] += ".1"
+                if tokens[6].startswith("Sec. "):
+                    tokens[6] = tokens[6][len("Sec. "):].strip()
+                    if len(tokens[6]) == 1:
+                        tokens[6] += ".1"
 
-                reference = [tokens[2], tokens[3], tokens[4], tokens[5]]
-                part_title = self.outline_reference[tokens[2]][tokens[3]][0]
-                ch_title = self.outline_reference[tokens[2]][tokens[3]][1][tokens[4]][0]
-                sec_title = self.outline_reference[tokens[2]][tokens[3]][1][tokens[4]][1][tokens[5]]
+                reference = [tokens[3], tokens[4], tokens[5], tokens[6]]
+                part_title = self.outline_reference[tokens[3]][tokens[4]][0]
+                ch_title = self.outline_reference[tokens[3]][tokens[4]][1][tokens[5]][0]
+                sec_title = self.outline_reference[tokens[3]][tokens[4]][1][tokens[5]][1][tokens[6]]
 
                 # Append translations of the references.
                 for t_key in self.trans_keys:
                     t_rev, t_part, t_chap, t_sec = self._translator.translate(
-                         tokens[2], part_title, ch_title, sec_title, t_key)
+                         tokens[3], part_title, ch_title, sec_title, t_key)
                     tokens.extend([t_rev, t_part, t_chap, t_sec])
                 self.merge.append(tokens)
-        self.sorted_merge = sorted(self.merge, key=operator.itemgetter(3, 4, 5, 2))
+        self.sorted_merge = sorted(self.merge, key=operator.itemgetter(4, 5, 6, 2, 1))
 
 
     def print_checklist(self):

@@ -31,6 +31,7 @@ PRINT_TRACE = False
 class ChecklistRequirement(object):
     def __init__(self, filename=None, part_number=None, rev=None):
         self.sentence = None
+        self.sentence_num = 1000
         self.reqt_type = None
         self.revision = rev
         self.part = part_number
@@ -72,6 +73,7 @@ class ChecklistParser(object):
         self.saved_refs = None
         self.part_chapter_section_col = None
         self.reqts = []
+        self.sentence_num = 1000
 
         self.checklist_pattern = re.compile(CHKLIST_RE)
         self.subitem_pattern = re.compile(SUBITEM_RE,
@@ -241,6 +243,8 @@ class ChecklistParser(object):
         chk_tuple = [self.reqt.table_name, self.reqt.chklist_id, "OPTIONAL"]
         if (chk_tuple in self.optional_table_items):
             self.reqt.optional = "OPTIONAL"
+        self.reqt.sentence_num = self.sentence_num
+        self.sentence_num += 1
         self.reqts.append(copy.deepcopy(self.reqt))
         self.reqt.optional = "STANDARD"
 
@@ -494,10 +498,10 @@ class ChecklistParser(object):
         if len(self.reqts) == 0:
             print "No requirements found"
 
-        print "Sentence, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
+        print "Sentence, Sentence_num, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
         for reqt in self.reqts:
-            print ("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'"
-                % (reqt.sentence, reqt.reqt_type, reqt.revision, reqt.part,
+            print ("'%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'"
+                % (reqt.sentence, reqt.sentence_num, reqt.reqt_type, reqt.revision, reqt.part,
                    reqt.chapter, reqt.section,
                    reqt.checklist_file, reqt.table_name, reqt.chklist_id,
                    reqt.optional))

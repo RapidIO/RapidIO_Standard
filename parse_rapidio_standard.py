@@ -27,6 +27,7 @@ class RequirementFields(object):
     CHAPTER = "Chapter"
     SECTION = "Section"
     TYPE = "TYPE"
+    REQT_NUM = -1
     SENTENCE = "Sentence"
 
 class RapidIOStandardParser(object):
@@ -35,7 +36,8 @@ class RapidIOStandardParser(object):
              RequirementFields.CHAPTER:2,
              RequirementFields.SECTION:3,
              RequirementFields.TYPE:4,
-             RequirementFields.SENTENCE:5}
+             RequirementFields.REQT_NUM:5,
+             RequirementFields.SENTENCE:6}
 
     TYPE_RECOMMENDATION = "Recommendation"
     TYPE_REQUIREMENT = "REQUIREMENT"
@@ -57,6 +59,7 @@ class RapidIOStandardParser(object):
                 self.revision = result.group(1)
         else:
             self.revision = rev
+        self.prev_sect = None
         self.read_new_secs(new_secs)
 
     def read_new_secs(self, new_secs):
@@ -229,7 +232,6 @@ class RapidIOStandardParser(object):
 
         self.register_block_id = "STD_REG"
         for sect in self.sections:
-            heading_end = 0
             if sect[0] >= '0' and sect[0] <= '9':
                 sect = self.section_number + sect
                 heading_end = sect.find(SECTION_END)
@@ -295,6 +297,10 @@ class RapidIOStandardParser(object):
             if not [self.part_name, self.chapter_name, self.section_name] in self.new_secs:
                 continue
 
+            if self.prev_sect != self.section_name:
+                reqt_num = 0
+                self.prev_sect = self.section_name
+
             sect = self.remove_xml(sect)
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
@@ -305,12 +311,14 @@ class RapidIOStandardParser(object):
                     s_type = self.TYPE_RECOMMENDATION;
                 if s_type is None:
                     continue
+                reqt_num += 1
                 new_reqt = [None] * (max(self.REQTS.values()) + 1)
                 new_reqt[self.REQTS[RequirementFields.REVISION]] = self.revision
                 new_reqt[self.REQTS[RequirementFields.PART]] = self.part_name
                 new_reqt[self.REQTS[RequirementFields.CHAPTER]] = self.chapter_name
                 new_reqt[self.REQTS[RequirementFields.SECTION]] = self.section_name
                 new_reqt[self.REQTS[RequirementFields.TYPE]] = s_type
+                new_reqt[self.REQTS[RequirementFields.REQT_NUM]] = str(reqt_num)
                 new_reqt[self.REQTS[RequirementFields.SENTENCE]] = s
                 self.reqts.append(new_reqt)
 
@@ -351,10 +359,10 @@ class RapidIOStandardParser(object):
         if (not self.extract_registers) or self.create_outline:
             return
         if len(self.registers) == 0:
-            print "No registers found for " + self.input_xml
+            print ("No registers found for " + self.input_xml)
             return 0
 
-        print "Section, Block_ID, Bits, Field, Description"
+        print ("Section, Block_ID, Bits, Field, Description")
         for reg in self.registers:
             print ("'%s'" % "', '".join(reg[3:]))
 
@@ -366,10 +374,11 @@ class RapidIOStandardParser(object):
         if self.create_outline or self.extract_registers:
             return
         if len(self.reqts) == 0:
-            print "No requirements found for " + self.input_xml
+            print ("No requirements found for " + self.input_xml)
             return 0
 
-        print "Revision, Part, Chapter, Section, Type, Sentence"
+        print ("Revision, Part, Chapter, Section, Type, Reqt_Num, Sentence")
+        old_reqt = self.reqts[0]
         for reqt in self.reqts:
             print ("'%s'" % "', '".join(reqt))
 
@@ -377,14 +386,14 @@ class RapidIOStandardParser(object):
         if (not self.create_outline) or self.extract_registers:
             return
         if len(self.outline) == 0:
-            print "No outline available"
+            print ("No outline available")
             return 0
 
-        print "Revision, Part, Chapter, Section"
+        print ("Revision, Part, Chapter, Section")
         for part in self.outline:
             for chapter in self.outline[part]:
                 for section in self.outline[part][chapter]:
-                    print "'" + self.revision + "', '" +  part + "', '" + chapter + "', '" + section + "'"
+                    print ("'" + self.revision + "', '" +  part + "', '" + chapter + "', '" + section + "'")
 
     # Perform character substitutions to simplify parsing of text and correct
     # some text conversion errors...
@@ -764,11 +773,11 @@ def create_parser():
 
 def validate_options(options):
     if options.filename_of_standard is None:
-        print "Must enter file name of standard."
+        print ("Must enter file name of standard.")
         sys.exit()
 
     if not os.path.isfile(options.filename_of_standard):
-        print "File '" + options.filename_of_standard +"' does not exist."
+        print ("File '" + options.filename_of_standard +"' does not exist.")
         sys.exit()
 
     if options.target_part is None:
@@ -776,11 +785,11 @@ def validate_options(options):
 
     if options.new_secs_filepath is not None:
         if not os.path.isfile(options.new_secs_filepath):
-            print "New sections File '" + options.new_secs_filepath +"' does not exist."
+            print ("New sections File '" + options.new_secs_filepath +"' does not exist.")
             sys.exit()
 
     if options.create_outline and options.extract_registers:
-        print "Cannot create outline and extract registers simultaneously."
+        print ("Cannot create outline and extract registers simultaneously.")
         sys.exit()
 
     return options
@@ -793,7 +802,7 @@ def main(argv = None):
 
     (options, argv) = parser.parse_args(argv)
     if len(argv) != 0:
-        print 'Invalid argument!'
+        print ('Invalid argument!')
         print
         parser.print_help()
         return -1
