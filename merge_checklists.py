@@ -27,10 +27,11 @@ from create_translation import *
 class ChecklistMerger(object):
     OUTLINE_HEADER = "Revision, Part, Chapter, Section"
     CHECKLIST_HEADER = "Sentence, Sentence_num, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
-    def __init__(self, checklists, outlines, translations, requirements):
+    def __init__(self, checklists, outlines, translations, requirements, man_reqts):
         self.checklists = checklists
         self.outlines = outlines
         self.requirements = requirements
+        self.manual_requirements = man_reqts
         self.merge = []
 
         self._read_outlines()
@@ -113,49 +114,57 @@ class ChecklistMerger(object):
     def _read_requirements(self):
         for reqt in self.requirements:
             logging.info("Processing requirements file '%s'." % reqt)
-            reqt_file = open(reqt)
-            reqt_lines = [line.strip() for line in reqt_file.readlines()]
-            reqt_file.close()
+            self._process_requirements(reqt, 0)
+        for reqt in self.manual_requirements:
+            logging.info("Processing manual requirements file '%s'." % reqt)
+            self._process_requirements(reqt, 5000)
 
-            for line_num, line in enumerate(reqt_lines[1:]):
-                #    0        1      2        3       4       5            6
-                # Revision, Part, Chapter, Section, Type, Sentence_num, Sentence
-                toks = [tok.strip() for tok in line[1:-1].split("', '")]
-                if not len(toks) == 7:
-                    raise ValueError("%s %d Line %s tok len %d"
-                                  % (reqt, line_num+1, line, len(toks)))
-                # Checklist: Sentence, Sentence_Num, Type, Revision, Part,
-                #             Chapter, Section, Checklist_FileName,
-                #            Checklist_Table_Name, Checklist_ID,
-                #            Optional, [rev/part/ch/sec] per translation
-                line_2_merge = [toks[6], toks[5], toks[4], toks[0], toks[1],
-                                toks[2], toks[3],
-                                reqt, "N/A", "N/A", 
-                                'REQUIREMENT']
-                ref = [toks[0], toks[1], toks[2], toks[3]]
-                # The requirements are all from new sections.
-                # Only translate forward, as it's not possible
-                # to go backward.
-                for t_key in self.trans_keys:
-                    if toks[0] not in self.trans_keys:
-                        logging.warn("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
-                        raise ValueError("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
-                    if t_key < toks[0]:
-                        logging.debug("%s %s Extend with Nulls"
-                                   % (t_key,toks[0]))
-                        line_2_merge.extend(['', '', '', ''])
-                    elif t_key > toks[0]:
-                        t_rev, t_part, t_chap, t_sec = self._translator.translate(
-                             toks[0], toks[1], toks[2], toks[3], t_key)
-                        line_2_merge.extend([t_rev, t_part, t_chap, t_sec])
-                        logging.debug("%s %s:%s Extend with translation"
-                                   % (t_key,toks[0], [t_rev, t_part, t_chap, t_sec]))
-                    else:
-                        logging.debug("%s %s Extend with items"
-                                   % (t_key,[toks[0], toks[1], toks[2], toks[3]]))
-                        line_2_merge.extend([toks[0], toks[1], toks[2], toks[3]])
-                self.merge.append(line_2_merge)
-        
+    def _process_requirements(self, reqt, reqt_num_adj):
+        reqt_file = open(reqt)
+        reqt_lines = [line.strip() for line in reqt_file.readlines()]
+        reqt_file.close()
+
+        for line_num, line in enumerate(reqt_lines[1:]):
+            #    0        1      2        3       4       5            6
+            # Revision, Part, Chapter, Section, Type, Sentence_num, Sentence
+            toks = [tok.strip() for tok in line[1:-1].split("', '")]
+            if not len(toks) == 7:
+                raise ValueError("%s %d Line %s tok len %d"
+                              % (reqt, line_num+1, line, len(toks)))
+            # Checklist: Sentence, Sentence_Num, Type, Revision, Part,
+            #             Chapter, Section, Checklist_FileName,
+            #            Checklist_Table_Name, Checklist_ID,
+            #            Optional, [rev/part/ch/sec] per translation
+            line_2_merge = [toks[6],
+                            str(int(toks[5]) + reqt_num_adj),
+                            toks[4], toks[0], toks[1],
+                            toks[2], toks[3],
+                            reqt, "N/A", "N/A",
+                            'REQUIREMENT']
+            ref = [toks[0], toks[1], toks[2], toks[3]]
+            # The requirements are all from new sections.
+            # Only translate forward, as it's not possible
+            # to go backward.
+            for t_key in self.trans_keys:
+                if toks[0] not in self.trans_keys:
+                    logging.warn("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
+                    raise ValueError("%s not in %s, line %s" % (toks[0], self.trans_keys, toks))
+                if t_key < toks[0]:
+                    logging.debug("%s %s Extend with Nulls"
+                               % (t_key,toks[0]))
+                    line_2_merge.extend(['', '', '', ''])
+                elif t_key > toks[0]:
+                    t_rev, t_part, t_chap, t_sec = self._translator.translate(
+                         toks[0], toks[1], toks[2], toks[3], t_key)
+                    line_2_merge.extend([t_rev, t_part, t_chap, t_sec])
+                    logging.debug("%s %s:%s Extend with translation"
+                               % (t_key,toks[0], [t_rev, t_part, t_chap, t_sec]))
+                else:
+                    logging.debug("%s %s Extend with items"
+                               % (t_key,[toks[0], toks[1], toks[2], toks[3]]))
+                    line_2_merge.extend([toks[0], toks[1], toks[2], toks[3]])
+            self.merge.append(line_2_merge)
+
     def _read_checklists(self):
         for checklist_path in self.checklists:
             checklist_file = open(checklist_path)
@@ -223,7 +232,12 @@ def create_parser():
             action = 'append', type = 'string', default = [],
             help = 'Requirements file created by parse_rapidio_standard.py',
             metavar = 'FILE')
- 
+    parser.add_option('-m', '--manual_reqts',
+            dest = 'manual_reqts',
+            action = 'append', type = 'string', default = [],
+            help = 'Manually maintained requirements files.',
+            metavar = 'FILE')
+
     return parser
 
 def validate_options(options):
@@ -245,6 +259,10 @@ def validate_options(options):
     for reqt in options.reqt_filepaths:
         if not os.path.isfile(reqt):
             raise ValueError("Requirements file '%s' does not exist." % reqt)
+
+    for man_reqt in options.manual_reqts:
+        if not os.path.isfile(reqt):
+            raise ValueError("Manually maintained requirements file '%s' does not exist." % reqt)
 
 def main(argv = None):
     logging.basicConfig(level=logging.WARN)
@@ -268,7 +286,8 @@ def main(argv = None):
     merger = ChecklistMerger(options.checklist_filenames,
                              options.outline_filenames,
                              options.translation_filenames,
-                             options.reqt_filepaths)
+                             options.reqt_filepaths,
+                             options.manual_reqts)
     merger.print_checklist()
 
 if __name__ == '__main__':
