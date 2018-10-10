@@ -44,7 +44,7 @@ class ChecklistMerger(object):
         print ("%s%s" % (MERGED_CHECKLIST_SORTED_SPEC_REVS,
                          " ".join(self.trans_keys)))
         for t_rev in self.trans_keys:
-            self.header = ("%s, %s, %s_Part, %s_Chapter, %s_Section"
+            self.header = (CHECKLIST_HEADER_REV_FORMAT
                          % (self.header, t_rev, t_rev, t_rev, t_rev))
         self._read_requirements()
         self._read_checklists()
