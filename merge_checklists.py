@@ -206,6 +206,9 @@ class ChecklistMerger(object):
                     t_rev, t_part, t_chap, t_sec = self._translator.translate(
                          tokens[TOK_IDX_CHK_H_REVISION], part_title, ch_title, sec_title, t_key)
                     tokens.extend([t_rev, t_part, t_chap, t_sec])
+                tokens[TOK_IDX_CHK_H_PART] = part_title
+                tokens[TOK_IDX_CHK_H_CHAPTER] = ch_title
+                tokens[TOK_IDX_CHK_H_SECTION] = sec_title
                 self.merge.append(tokens)
         self.sorted_merge = sorted(self.merge,
                                     key=operator.itemgetter(TOK_IDX_CHK_H_PART,
