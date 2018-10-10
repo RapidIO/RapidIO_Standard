@@ -32,7 +32,7 @@ PRINT_TRACE = False
 class ChecklistRequirement(object):
     def __init__(self, filename=None, part_number=None, rev=None):
         self.sentence = None
-        self.sentence_num = 1000
+        self.sentence_num = REQT_NUM_OFFSET_CHKLIST
         self.reqt_type = None
         self.revision = rev
         self.part = part_number
@@ -74,7 +74,7 @@ class ChecklistParser(object):
         self.saved_refs = None
         self.part_chapter_section_col = None
         self.reqts = []
-        self.sentence_num = 1000
+        self.sentence_num = REQT_NUM_OFFSET_CHKLIST
 
         self.checklist_pattern = re.compile(CHKLIST_RE)
         self.subitem_pattern = re.compile(SUBITEM_RE,

@@ -20,6 +20,7 @@ import re
 import sys
 import os
 import logging
+from constants import *
 
 class RequirementFields(object):
     REVISION = "Revision"
@@ -377,8 +378,7 @@ class RapidIOStandardParser(object):
             print ("No requirements found for " + self.input_xml)
             return 0
 
-        print ("Revision, Part, Chapter, Section, Type, Reqt_Num, Sentence")
-        old_reqt = self.reqts[0]
+        print ("%s" % REQUIREMENTS_HEADER)
         for reqt in self.reqts:
             print ("'%s'" % "', '".join(reqt))
 

@@ -115,10 +115,10 @@ class ChecklistMerger(object):
     def _read_requirements(self):
         for reqt in self.requirements:
             logging.info("Processing requirements file '%s'." % reqt)
-            self._process_requirements(reqt, 0)
+            self._process_requirements(reqt, REQT_NUM_OFFSET_NONE)
         for reqt in self.manual_requirements:
             logging.info("Processing manual requirements file '%s'." % reqt)
-            self._process_requirements(reqt, 5000)
+            self._process_requirements(reqt, REQT_NUM_OFFSET_MANUAL)
 
     def _process_requirements(self, reqt, reqt_num_adj):
         reqt_file = open(reqt)
@@ -129,20 +129,26 @@ class ChecklistMerger(object):
             #    0        1      2        3       4       5            6
             # Revision, Part, Chapter, Section, Type, Sentence_num, Sentence
             toks = [tok.strip() for tok in line[1:-1].split("', '")]
-            if not len(toks) == 7:
+            if not len(toks) == REQUIREMENTS_HEADER_TOKEN_COUNT:
                 raise ValueError("%s %d Line %s tok len %d"
                               % (reqt, line_num+1, line, len(toks)))
             # Checklist: Sentence, Sentence_Num, Type, Revision, Part,
             #             Chapter, Section, Checklist_FileName,
             #            Checklist_Table_Name, Checklist_ID,
             #            Optional, [rev/part/ch/sec] per translation
-            line_2_merge = [toks[6],
-                            str(int(toks[5]) + reqt_num_adj),
-                            toks[4], toks[0], toks[1],
-                            toks[2], toks[3],
+            line_2_merge = [toks[TOK_IDX_REQTS_SENTENCE],
+                            str(int(toks[TOK_IDX_REQTS_REQT_NUM]) + reqt_num_adj),
+                            toks[TOK_IDX_REQTS_TYPE],
+                            toks[TOK_IDX_REQTS_REVISION],
+                            toks[TOK_IDX_REQTS_PART],
+                            toks[TOK_IDX_REQTS_CHAPTER],
+                            toks[TOK_IDX_REQTS_SECTION],
                             reqt, "N/A", "N/A",
                             'REQUIREMENT']
-            ref = [toks[0], toks[1], toks[2], toks[3]]
+            ref = [toks[TOK_IDX_REQTS_REVISION],
+                   toks[TOK_IDX_REQTS_PART],
+                   toks[TOK_IDX_REQTS_CHAPTER],
+                   toks[TOK_IDX_REQTS_SECTION]]
             # The requirements are all from new sections.
             # Only translate forward, as it's not possible
             # to go backward.
@@ -181,26 +187,32 @@ class ChecklistMerger(object):
                 if not len(tokens) == 11:
                     raise ValueError("Bad format: File %s line %d: %s"
                                  % (checklist_path, line_num, tokens))
-                if not len(self.outline_lines) or tokens[4] == "Part 4":
+                if (not len(self.outline_lines)
+                     or tokens[TOK_IDX_CHK_H_PART] == "Part 4"):
                     continue
                 # Try to translate checklist references to complete references
-                if tokens[6].startswith("Sec. "):
-                    tokens[6] = tokens[6][len("Sec. "):].strip()
-                    if len(tokens[6]) == 1:
-                        tokens[6] += ".1"
+                if tokens[TOK_IDX_CHK_H_SECTION].startswith("Sec. "):
+                    tokens[TOK_IDX_CHK_H_SECTION] = tokens[TOK_IDX_CHK_H_SECTION][len("Sec. "):].strip()
+                    if len(tokens[TOK_IDX_CHK_H_SECTION]) == 1:
+                        tokens[TOK_IDX_CHK_H_SECTION] += ".1"
 
-                reference = [tokens[3], tokens[4], tokens[5], tokens[6]]
-                part_title = self.outline_reference[tokens[3]][tokens[4]][0]
-                ch_title = self.outline_reference[tokens[3]][tokens[4]][1][tokens[5]][0]
-                sec_title = self.outline_reference[tokens[3]][tokens[4]][1][tokens[5]][1][tokens[6]]
+                reference = [tokens[TOK_IDX_CHK_H_REVISION], tokens[TOK_IDX_CHK_H_PART], tokens[TOK_IDX_CHK_H_CHAPTER], tokens[TOK_IDX_CHK_H_SECTION]]
+                part_title = self.outline_reference[tokens[TOK_IDX_CHK_H_REVISION]][tokens[TOK_IDX_CHK_H_PART]][0]
+                ch_title = self.outline_reference[tokens[TOK_IDX_CHK_H_REVISION]][tokens[TOK_IDX_CHK_H_PART]][1][tokens[TOK_IDX_CHK_H_CHAPTER]][0]
+                sec_title = self.outline_reference[tokens[TOK_IDX_CHK_H_REVISION]][tokens[TOK_IDX_CHK_H_PART]][1][tokens[TOK_IDX_CHK_H_CHAPTER]][1][tokens[TOK_IDX_CHK_H_SECTION]]
 
                 # Append translations of the references.
                 for t_key in self.trans_keys:
                     t_rev, t_part, t_chap, t_sec = self._translator.translate(
-                         tokens[3], part_title, ch_title, sec_title, t_key)
+                         tokens[TOK_IDX_CHK_H_REVISION], part_title, ch_title, sec_title, t_key)
                     tokens.extend([t_rev, t_part, t_chap, t_sec])
                 self.merge.append(tokens)
-        self.sorted_merge = sorted(self.merge, key=operator.itemgetter(4, 5, 6, 2, 1))
+        self.sorted_merge = sorted(self.merge,
+                                    key=operator.itemgetter(TOK_IDX_CHK_H_PART,
+                                                    TOK_IDX_CHK_H_CHAPTER,
+                                                    TOK_IDX_CHK_H_SECTION,
+                                                    TOK_IDX_CHK_H_TYPE,
+                                                    TOK_IDX_CHK_H_SENTENCE_NUM))
 
 
     def print_checklist(self):
