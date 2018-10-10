@@ -25,6 +25,7 @@ import sys
 import os
 import copy
 import logging
+from constants import *
 
 PRINT_TRACE = False
 
@@ -498,7 +499,7 @@ class ChecklistParser(object):
         if len(self.reqts) == 0:
             print "No requirements found"
 
-        print "Sentence, Sentence_num, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
+        print ("%s" % CHECKLIST_HEADER)
         for reqt in self.reqts:
             print ("'%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'"
                 % (reqt.sentence, reqt.sentence_num, reqt.reqt_type, reqt.revision, reqt.part,

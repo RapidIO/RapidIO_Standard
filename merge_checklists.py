@@ -22,11 +22,10 @@ import re
 import sys
 import os
 import logging
+from constants import *
 from create_translation import *
 
 class ChecklistMerger(object):
-    OUTLINE_HEADER = "Revision, Part, Chapter, Section"
-    CHECKLIST_HEADER = "Sentence, Sentence_num, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
     def __init__(self, checklists, outlines, translations, requirements, man_reqts):
         self.checklists = checklists
         self.outlines = outlines
@@ -36,12 +35,14 @@ class ChecklistMerger(object):
 
         self._read_outlines()
         self._translator = RapidIOTranslationMerger(translations)
-        self.header = self.CHECKLIST_HEADER
+        self.header = CHECKLIST_HEADER
 
         self.trans_keys = self._translator.trans.keys()
-        print ("Keys: %s" % " ".join(self.trans_keys))
+        print ("%s%s" % (MERGED_CHECKLIST_SPEC_REVS,
+                         " ".join(self.trans_keys)))
         self.trans_keys.sort()
-        print ("Keys sorted: %s" % " ".join(self.trans_keys))
+        print ("%s%s" % (MERGED_CHECKLIST_SORTED_SPEC_REVS,
+                         " ".join(self.trans_keys)))
         for t_rev in self.trans_keys:
             self.header = ("%s, %s, %s_Part, %s_Chapter, %s_Section"
                          % (self.header, t_rev, t_rev, t_rev, t_rev))
@@ -72,9 +73,9 @@ class ChecklistMerger(object):
             lines = [line.strip() for line in outline_file.readlines()]
             outline_file.close()
 
-            if not lines[0] == self.OUTLINE_HEADER:
+            if not lines[0] == OUTLINE_HEADER:
                 raise ValueError("Bad format: File %s first line is not %s"
-                             % (outline_path, self.OUTLINE_HEADER))
+                             % (outline_path, OUTLINE_HEADER))
 
             tokenized_lines = []
             for x, line in enumerate(lines[1:]):
@@ -171,9 +172,9 @@ class ChecklistMerger(object):
             lines = [line.strip() for line in checklist_file.readlines()]
             checklist_file.close()
 
-            if not lines[1] == self.CHECKLIST_HEADER:
+            if not lines[1] == CHECKLIST_HEADER:
                 raise ValueError("Bad format: File %s first line is not %s"
-                             % (checklist_path, self.CHECKLIST_HEADER))
+                             % (checklist_path, CHECKLIST_HEADER))
             for x, line in enumerate(lines[2:]):
                 line_num = x + 1
                 tokens = [re.sub("'", "", tok.strip()) for tok in line.split("', ")]
