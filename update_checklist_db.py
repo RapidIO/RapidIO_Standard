@@ -35,11 +35,10 @@ class ReqtDatabaseUpdater(object):
         self._read_database()
 
     def _read_checklist(self):
-        logging.info("Reading merged sorted checklist file '%s'."
+        logging.critical("Reading merged sorted checklist file '%s'."
                       % self.checklist_filepath)
-        chk_file = open(self.checklist_filepath)
-        chk_lines = [line.strip() for line in chk_file.readlines()]
-        chk_file.close()
+        with open(self.checklist_filepath, 'r') as chk_file:
+            chk_lines = [line.strip() for line in chk_file.readlines()]
 
         if not chk_lines[0].startswith(MERGED_CHECKLIST_SPEC_REVS):
             raise ValueError("Checklist line 0 does not start with '%s'." %
@@ -61,13 +60,15 @@ class ReqtDatabaseUpdater(object):
             if len(toks) < TOK_IDX_MRG_CHK_H_MIN_TOK_COUNT:
                 raise ValueError("%s %d Line %s tok len %d"
                               % (reqt, line_num+1, line, len(toks)))
-            rev = toks[TOK_IDX_CHK_H_REVISION]
-            part = toks[TOK_IDX_CHK_H_PART]
-            chap = toks[TOK_IDX_CHK_H_CHAPTER]
-            sect = toks[TOK_IDX_CHK_H_SECTION]
-            sent_num = toks[TOK_IDX_CHK_H_SENTENCE_NUM]
+            logging.info("Tokens: %s" % toks)
+            rev = copy.deepcopy(toks[TOK_IDX_CHK_H_REVISION])
+            part = copy.deepcopy(toks[TOK_IDX_CHK_H_PART])
+            chap = copy.deepcopy(toks[TOK_IDX_CHK_H_CHAPTER])
+            sect = copy.deepcopy(toks[TOK_IDX_CHK_H_SECTION])
+            sent_num = copy.deepcopy(toks[TOK_IDX_CHK_H_SENTENCE_NUM])
+            logging.info("Sentence Num: %s" % sent_num)
             if rev not in self.chk:
-	        self.chk[rev] = {part:{}}
+                self.chk[rev] = {part:{}}
             if part not in self.chk[rev]:
                 self.chk[rev][part] = {chap:{}}
             if chap not in self.chk[rev][part]:
@@ -78,33 +79,38 @@ class ReqtDatabaseUpdater(object):
                 raise ValueError("%s Line %d Duplicate Sentence Number '%s'"
                            % (self.checklist_filepath, line_num+1, sent_num))
             list_to_add = toks[0:CHECKLIST_HEADER_TOKEN_COUNT]
-            list_to_add.append({})
-            print("Line %d %s" % (line_num, "\n".join(toks)))
+            list_to_add.append(OrderedDict())
             for i, s_rev in enumerate(self.chk_revs):
                 first_tok_idx = (TOK_IDX_MRG_CHK_H_FIRST_REV +
                                  (i * TOK_IDX_MRG_CHK_H_TOK_COUNT))
                 last_tok_idx = (TOK_IDX_MRG_CHK_H_FIRST_REV +
                                 ((i + 1) * TOK_IDX_MRG_CHK_H_TOK_COUNT))
-                print("F:L %d:%d" % (first_tok_idx, last_tok_idx))
-                list_to_add[CHECKLIST_HEADER_TOKEN_COUNT][s_rev] = (
+                logging.info("F:L %d:%d" % (first_tok_idx, last_tok_idx))
+                list_to_add[CHECKLIST_HEADER_TOKEN_COUNT][s_rev] = copy.deepcopy(
                     toks[first_tok_idx:last_tok_idx])
-            self.chk[rev][part][chap][sect][sent_num] = copy.deepcopy(list_to_add);
-            
+            logging.info("Sentence Num: %s" % sent_num)
+            temp = copy.deepcopy(list_to_add)
+            self.chk[rev][part][chap][sect][sent_num] = []
+            self.chk[rev][part][chap][sect][sent_num].extend(temp)
+            logging.info("Sentence Num: %s" % sent_num)
+
     def _read_database(self):
-        logging.info("Reading database file '%s'."
+        logging.critical("Reading database file '%s'."
                       % self.database_filepath)
         try:
             db_file = open(self.database_filepath)
             db_lines = [line.strip() for line in db_file.readlines()]
             db_file.close()
         except:
+            logging.critical("Failed reading database file '%s', continuing..."
+                             % self.database_filepath)
             return
 
         if not db_lines[0].startswith(MERGED_CHECKLIST_SORTED_SPEC_REVS):
             raise ValueError("Database line 0 does not start with '%s'." %
                           MERGED_CHECKLIST_SORTED_SPEC_REVS)
         self.db_revs = [item.strip() for item in
-             db_lines[0][len(MERGED_CHECKLIST_SORTED_SPEC_REVS),].split(" ")]
+             db_lines[0][len(MERGED_CHECKLIST_SORTED_SPEC_REVS):].split(" ")]
         logging.info("Database file revs: %s" % ",".join(self.db_revs))
 
         if not db_lines[1].startswith(DATABASE_HEADER):
@@ -114,15 +120,18 @@ class ReqtDatabaseUpdater(object):
         for line_num, line in enumerate(db_lines[2:]):
             toks = [tok.strip() for tok in line[1:-1].split("', '")]
             if not len(toks) >= TOK_IDX_DB_H_FIRST_SECN:
-                raise ValueError("%s %d Line %s tok len %d"
+                raise ValueError("%s %d DB Line %s tok len %d"
                               % (reqt, line_num+1, line, len(toks)))
-            rev = toks[TOK_IDX_DB_H_REVISION]
-            part = toks[TOK_IDX_DB_H_PART]
-            chap = toks[TOK_IDX_DB_H_CHAPTER]
-            sect = toks[TOK_IDX_DB_H_SECTION]
-            sent_num = toks[TOK_IDX_DB_H_SENTENCE_NUM]
+            rev = copy.deepcopy(toks[TOK_IDX_DB_H_REVISION])
+            part = copy.deepcopy(toks[TOK_IDX_DB_H_PART])
+            chap = copy.deepcopy(toks[TOK_IDX_DB_H_CHAPTER])
+            sect = copy.deepcopy(toks[TOK_IDX_DB_H_SECTION])
+            sent_num = copy.deepcopy(toks[TOK_IDX_DB_H_SENTENCE_NUM])
+            if not sent_num.isdigit():
+                raise ValueError("%s DB Line %d Invalid Sentence Number '%s'"
+                           % (self.checklist_filepath, line_num+1, sent_num))
             if rev not in self.db:
-	        self.db[rev] = {part:{}}
+                self.db[rev] = {part:{}}
             if part not in self.db[rev]:
                 self.db[rev][part] = {chap:{}}
             if chap not in self.db[rev][part]:
@@ -130,18 +139,24 @@ class ReqtDatabaseUpdater(object):
             if sect not in self.db[rev][part][chap]:
                 self.db[rev][part][chap][sect] = {sect:{}}
             if sent_num in self.db[rev][part][chap][sect]:
-                raise ValueError("%s Line %d Duplicate Sentence Number '%s'"
+                raise ValueError("%s DB Line %d Duplicate Sentence Number '%s'"
                            % (self.checklist_filepath, line_num+1, sent_num))
-            list_to_add = toks[0:TOK_IDX_DB_H_OPTIONAL]
-            list_to_add.append({})
+            list_to_add = copy.deepcopy(toks[0:DATABASE_HEADER_TOKEN_COUNT])
+            list_to_add.append(OrderedDict())
             for i, s_rev in enumerate(self.db_revs):
-                first_tok_itx = (TOK_IDX_DB_H_FIRST_REV +
-                                 (i * TOK_IDX_MRG_DB_H_TOK_COUNT))
-                last_tok_itx = (TOK_IDX_DB_H_FIRST_REV +
-                                ((i + 1) * TOK_IDX_MRG_DB_H_TOK_COUNT) - 1)
-                list_to_append[DATABASE_HEADER_TOKEN_COUNT][s_rev] = (
-                    toks[first_tok_idx:last_tok_idx])
-            self.db[rev][part][chap][sect][sent_num] = copy.deepcopy(list_to_add);
+                first_tok_idx = (TOK_IDX_DB_H_FIRST_REV +
+                                 (i * TOK_IDX_DB_H_TOK_COUNT))
+                last_tok_idx = (TOK_IDX_DB_H_FIRST_REV +
+                                ((i + 1) * TOK_IDX_DB_H_TOK_COUNT))
+                list_to_add[DATABASE_HEADER_TOKEN_COUNT][s_rev] = (
+                    copy.deepcopy(toks[first_tok_idx:last_tok_idx]))
+            logging.info("DB %d: %s" % (line_num+2, list_to_add))
+            if not sent_num.isdigit():
+                raise ValueError("%s DB Line %d Invalid Sentence Number '%s'"
+                           % (self.checklist_filepath, line_num+1, sent_num))
+            temp = copy.deepcopy(list_to_add)
+            self.db[rev][part][chap][sect][sent_num] = []
+            self.db[rev][part][chap][sect][sent_num].extend(copy.deepcopy(list_to_add))
 
     def get_uid(self, rev, part, sect, sent_num):
         # Parts have the format "Part <part_num>: <Part Title>"
@@ -165,7 +180,7 @@ class ReqtDatabaseUpdater(object):
             reqt_type = 'm'
 
         uid = "R%sp%ss%s%s%04.0d" % (rev, part_num, sec_num, reqt_type, num)
-        print("UID: %s" % uid)
+        logging.info("UID: %s" % uid)
         return uid
 
     def update_database(self):
@@ -183,8 +198,14 @@ class ReqtDatabaseUpdater(object):
                     for sect in self.chk[rev][part][chap]:
                         if sect not in self.db[rev][part][chap]:
                             self.db[rev][part][chap][sect] = {}
+                        logging.info("Keys: %s" % self.chk[rev][part][chap][sect].keys())
+                        found_one = False
                         for sent_num in self.chk[rev][part][chap][sect]:
-                            if sent_num not in self.db[rev][part][chap]:
+                            if not sent_num.isdigit():
+                                logging.info("Invalid Checklist Sentence Number '%s'" % [rev, part, chap, sect, sent_num, self.chk[rev][part][chap][sect].keys()])
+                                found_one = True
+                                continue
+                            if sent_num not in self.db[rev][part][chap][sect]:
                                 item = self.chk[rev][part][chap][sect][sent_num]
                                 uid = self.get_uid(rev,part,sect,sent_num)
                                 db_item = [uid]
@@ -193,8 +214,11 @@ class ReqtDatabaseUpdater(object):
                                 db_item.extend(["ACTIVE"])
                                 db_item.extend([item[TOK_IDX_MRG_CHK_H_FIRST_REV]])
                                 self.db[rev][part][chap][sect][sent_num] = db_item
+                                logging.info("Adding chk: %s " % item)
                                 for item_idx, item in enumerate(db_item):
-                                    print(item_idx, item)
+                                    logging.info("%d: %s" % (item_idx, item))
+                        if not found_one:
+                            logging.info("ALL VALID Checklist Sentence Numbers '%s'" % [rev, part, chap, sect, self.chk[rev][part][chap][sect].keys()])
                             
     def write_database(self):
         print ("%s%s" %
@@ -204,16 +228,19 @@ class ReqtDatabaseUpdater(object):
             h = (CHECKLIST_HEADER_REV_FORMAT % (h, rev, rev, rev, rev))
         print ("%s" % h)
         if self.db == {}:
-            print "Nothing in sorted checklist."
+            print("Nothing in sorted checklist.")
 
         for rev in self.db_revs:
-            for part in self.db[rev]:
-                for chap in self.db[rev][part]:
-                    for sect in self.db[rev][part][chap]:
-                        for sent_num in self.db[rev][part][chap][sect]:
+            for part in sorted(self.db[rev]):
+                for chap in sorted(self.db[rev][part]):
+                    for sect in sorted(self.db[rev][part][chap]):
+                        for sent_num in sorted(self.db[rev][part][chap][sect]):
+                            if not sent_num.isdigit():
+                                logging.info("Invalid Database Sentence Number '%s'" % [rev,part,chap,sect,sent_num])
+                                continue
                             entry = self.db[rev][part][chap][sect][sent_num]
-                            consts = entry[TOK_IDX_DB_H_CONST_REF:TOK_IDX_DB_H_STATUS]
-                            line = "'%s'" % "', '".join(consts)
+                            stuff = entry[TOK_IDX_DB_H_CONST_REF:DATABASE_HEADER_TOKEN_COUNT]
+                            line = "'%s'" % "', '".join(stuff)
                             for e_rev in entry[TOK_IDX_DB_H_FIRST_REV]:
                                 rev_entry = entry[TOK_IDX_DB_H_FIRST_REV][e_rev]
                                 line = "%s, '%s'" % (line, "', '".join(rev_entry))
@@ -248,7 +275,7 @@ def main(argv = None):
 
     (options, argv) = parser.parse_args(argv)
     if len(argv) != 0:
-        print 'Invalid argument!'
+        print('Invalid argument!')
         print
         parser.print_help()
         return -1
@@ -256,12 +283,14 @@ def main(argv = None):
     try:
         validate_options(options)
     except ValueError as e:
-        print e
+        print(e)
         sys.exit(-1)
 
     updater = ReqtDatabaseUpdater(options.checklist_filepath,
                              options.database_filepath)
+    logging.critical("Updating database.")
     updater.update_database()
+    logging.critical("Writing updated database to stdout.")
     updater.write_database()
 
 if __name__ == '__main__':
