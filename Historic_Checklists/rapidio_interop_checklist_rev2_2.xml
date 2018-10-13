@@ -5459,7 +5459,7 @@
 </TR>
 
 <TR>
-<TD>5.11.C1</TD>
+<TD>5.11C1</TD>
 
 <TD>Each VC is configured to have guaranteed bandwidth. </TD>
 
@@ -5471,7 +5471,7 @@
 </TR>
 
 <TR>
-<TD>5.11.C1A</TD>
+<TD>5.11C1A</TD>
 
 <TD>If the total guaranteed bandwidth for all the supported VCs is less than or equal to 100%, demand for more than its guaranteed bandwidth shall not cause any other VCs to receive less than their guaranteed bandwidth.</TD>
 
@@ -5483,7 +5483,7 @@
 </TR>
 
 <TR>
-<TD>5.11.C2</TD>
+<TD>5.11C2</TD>
 
 <TD>If VC0 participates in the bandwidth reservation process, then all VCs will receive their expected minimum bandwidth.</TD>
 
@@ -5495,7 +5495,7 @@
 </TR>
 
 <TR>
-<TD>5.11.C3</TD>
+<TD>5.11C3</TD>
 
 <TD>If VC0 is treated with strict priority, getting whatever bandwidth is required when it has traffic to transport, the remaining VCs will divide up whatever portion of bandwidth remains.</TD>
 
@@ -5507,7 +5507,7 @@
 </TR>
 
 <TR>
-<TD>5.11.C4</TD>
+<TD>5.11C4</TD>
 
 <TD>Chapter 6, &quot;LP-Serial Registers&quot; defines a standard control register should the implementer decide to make the VC0 bandwidth allocation scheme a programmable feature.</TD>
 
