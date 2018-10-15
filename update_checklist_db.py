@@ -183,6 +183,128 @@ class ReqtDatabaseUpdater(object):
         logging.info("UID: %s" % uid)
         return uid
 
+    def _update_db_item(self, rev, part, chap, sect, sent_num):
+        chk_item = self.chk[rev][part][chap][sect][sent_num]
+        sent_num_val = int(sent_num)
+        sn_keys = sorted(self.db[rev][part][chap][sect].keys())
+
+        for i, k in enumerate(sn_keys):
+            if not k.isdigit():
+                sn_keys.remove(k)
+
+        if REQT_NUM_OFFSET_NONE <= sent_num_val <= REQT_NUM_OFFSET_SPEC_MAX:
+            ## Requirement extracted from a standard.
+            ## See if the sentence exists in this section,
+            ## and mark that requirement as "ACTIVE"
+            for srch_sent_num in sn_keys:
+                ## Only search other requirements extracted from the standard,
+                ## or that were automatically numbered...
+                if (not ((REQT_NUM_OFFSET_NONE <= int(srch_sent_num) <= REQT_NUM_OFFSET_SPEC_MAX)
+                        or
+                         (REQT_NUM_OFFSET_AUTO <= int(srch_sent_num)))):
+                    continue
+                if (   self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_SENTENCE]
+                   == chk_item[TOK_IDX_CHK_H_SENTENCE]):
+                    self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_STATUS] = "ACTIVE"
+                    logging.debug("Update REQT %s DB %s" % ([rev, part, chap, sect, sent_num], srch_sent_num))
+                    logging.debug("Update REQT CHK item %s" % chk_item)
+                    logging.debug("Update REQT DB  item %s" % self.db[rev][part][chap][sect][srch_sent_num])
+                    return True
+
+            ## The sentence has changed.
+            ## Create a new requirement.
+            if sent_num in sn_keys:
+                ## The sentence number exists.  The implication
+                ## is that the requirement has changed or the numbering
+                ## for a previously extracted requirement has changed.
+                ## Create a new requirement reference.
+                new_sent_num = max(max(sn_keys), str(REQT_NUM_OFFSET_AUTO))
+                if new_sent_num != str(REQT_NUM_OFFSET_AUTO):
+                    new_sent_num = str(int(new_sent_num) + 1)
+                logging.warning("ADD REQT NEW %s DB %s" % ([rev, part, chap, sect, sent_num], new_sent_num))
+                self._add_db_item(rev, part, chap, sect, sent_num, new_sent_num)
+                return True
+            ## The sentence number does exist.
+            ## Add the requirement.
+            logging.warning("ADD REQT FALSE")
+            return False
+
+        if REQT_NUM_OFFSET_CHKLIST <= sent_num_val <= REQT_NUM_OFFSET_CHKLIST_MAX:
+            ## Requirement extracted from a checklist.
+            ## Checklist sentence numbers are automatically generated,
+            ## and so may vary with the checklist parsing.
+            ##
+            ## Identify the requirement in the database using
+            ## the file, table title, and table reference, then
+            ## update the sentence and status of the item.
+
+            for srch_sent_num in sn_keys:
+                temp_db_item = self.db[rev][part][chap][sect][srch_sent_num]
+                if temp_db_item[TOK_IDX_DB_H_FILENAME] == '':
+                    continue
+                if (temp_db_item[TOK_IDX_DB_H_FILENAME]
+                   != chk_item[TOK_IDX_CHK_H_FILENAME]):
+                    continue
+                if (temp_db_item[TOK_IDX_DB_H_TABLE_NAME]
+                   != chk_item[TOK_IDX_CHK_H_TABLE_NAME]):
+                    continue
+                if (temp_db_item[TOK_IDX_DB_H_CHECKLIST_ID]
+                   != chk_item[TOK_IDX_CHK_H_CHECKLIST_ID]):
+                    continue
+                logging.debug("Update CHK %s DB %s" % ([rev, part, chap, sect, sent_num], srch_sent_num))
+                logging.debug("Update CHK CHK item %s" % chk_item)
+                logging.debug("Update CHK DB  item %s" % self.db[rev][part][chap][sect][srch_sent_num])
+                self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_STATUS] = "ACTIVE"
+                self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_SENTENCE] = chk_item[TOK_IDX_CHK_H_SENTENCE]
+                return True
+
+            ## Did not find that file/table/reference in this section.
+            ## Must be a new requirement in the checklist.
+            if sent_num in sn_keys:
+                ## Sentence number has already been used for a different
+                ## requirement.  Manufacture a unique sentence number
+                ## in the checklist range for this checklist item.
+                new_sent_num = max([key for key in sn_keys if (REQT_NUM_OFFSET_CHKLIST <= int(key) <= REQT_NUM_OFFSET_CHKLIST_MAX)])
+                new_sent_num = str(int(new_sent_num) + 1)
+                if int(new_sent_num) >= REQT_NUM_OFFSET_MANUAL:
+                    raise ValueError("Out of numbers: %s" % [rev, part, chap, sect, sent_num])
+                logging.warning("ADD CHK NEW %s DB %s" % ([rev, part, chap, sect, sent_num], new_sent_num))
+                self._add_db_item(rev, part, chap, sect, sent_num, new_sent_num)
+                return True
+
+            ## Sentence number has not been used previously, so just add
+            ## the requirement.
+            logging.info("ADD CHK FALSE")
+            return False
+
+        if REQT_NUM_OFFSET_MANUAL <= sent_num_val <= REQT_NUM_OFFSET_MANUAL_MAX:
+            ## Sentence number for a manually managed item.
+            ## The sentence number cannot change.
+            ##
+            ## If the item exists in the database, update the
+            ## item and call it done.
+            if sent_num in sn_keys:
+                self.db[rev][part][chap][sect][sent_num][TOK_IDX_DB_H_STATUS] = "ACTIVE"
+                self.db[rev][part][chap][sect][sent_num][TOK_IDX_DB_H_SENTENCE] = chk_item[TOK_IDX_CHK_H_SENTENCE]
+                return True
+
+            ## Manual item does not exist in the database.
+            ## Add the item.
+            return False
+
+        raise ValueError("Update bad checklist sentence number: %s" %
+            [rev, part, chap, sect, sent_num])
+
+    def _add_db_item(self, rev, part, chap, sect, chk_sent_num, db_sent_num):
+        item = self.chk[rev][part][chap][sect][chk_sent_num]
+        uid = self.get_uid(rev,part,sect,db_sent_num)
+        db_item = [uid]
+        db_item.extend(item[TOK_IDX_CHK_H_SENTENCE:CHECKLIST_HEADER_TOKEN_COUNT])
+        db_item.extend(["ACTIVE"])
+        db_item.extend([item[TOK_IDX_MRG_CHK_H_FIRST_REV]])
+        self.db[rev][part][chap][sect][db_sent_num] = copy.deepcopy(db_item)
+        logging.info("DB ADD: %s" % item)
+
     def update_database(self):
         for rev in self.chk_revs:
             if rev not in self.db:
@@ -205,21 +327,11 @@ class ReqtDatabaseUpdater(object):
                                 logging.info("Invalid Checklist Sentence Number '%s'" % [rev, part, chap, sect, sent_num, self.chk[rev][part][chap][sect].keys()])
                                 found_one = True
                                 continue
-                            if sent_num not in self.db[rev][part][chap][sect]:
-                                item = self.chk[rev][part][chap][sect][sent_num]
-                                uid = self.get_uid(rev,part,sect,sent_num)
-                                db_item = [uid]
-                                db_item.extend(item[TOK_IDX_CHK_H_SENTENCE:
-                                                  CHECKLIST_HEADER_TOKEN_COUNT])
-                                db_item.extend(["ACTIVE"])
-                                db_item.extend([item[TOK_IDX_MRG_CHK_H_FIRST_REV]])
-                                self.db[rev][part][chap][sect][sent_num] = db_item
-                                logging.info("Adding chk: %s " % item)
-                                for item_idx, item in enumerate(db_item):
-                                    logging.info("%d: %s" % (item_idx, item))
+                            if not self._update_db_item(rev, part, chap, sect, sent_num):
+                                self._add_db_item(rev, part, chap, sect, sent_num, sent_num)
                         if not found_one:
                             logging.info("ALL VALID Checklist Sentence Numbers '%s'" % [rev, part, chap, sect, self.chk[rev][part][chap][sect].keys()])
-                            
+
     def write_database(self):
         print ("%s%s" %
                (MERGED_CHECKLIST_SORTED_SPEC_REVS, " ".join(self.db_revs)))
