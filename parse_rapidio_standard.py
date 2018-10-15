@@ -61,6 +61,7 @@ class RapidIOStandardParser(object):
         else:
             self.revision = rev
         self.prev_sect = None
+        self.skip_remaining_part6_chapters = False
         self.read_new_secs(new_secs)
 
     def read_new_secs(self, new_secs):
@@ -233,6 +234,8 @@ class RapidIOStandardParser(object):
 
         self.register_block_id = "STD_REG"
         for sect in self.sections:
+            if self.skip_remaining_part6_chapters:
+                break
             if sect[0] >= '0' and sect[0] <= '9':
                 sect = self.section_number + sect
                 heading_end = sect.find(SECTION_END)
@@ -310,6 +313,11 @@ class RapidIOStandardParser(object):
                 # not contain any requirements.
                 if s.startswith("Annex A Dev32 Hierarchical Programming Model"):
                     break
+                # Skip Part 6 annexes, as they do not contain any requirements.
+                if s.startswith("Annex A Transmission Line Theory and Channel Information"):
+                    logging.critical("Skipping part 6 chapters!")
+                    self.skip_remaining_part6_chapters = True
+                    break
                 if any(sub in s for sub in REQT_KW):
                     s_type = self.TYPE_REQUIREMENT;
                 elif any(sub in s for sub in REC_KW):
@@ -334,6 +342,8 @@ class RapidIOStandardParser(object):
         self.section_number = None
         self.section_prefix = None
         for chapter in self.chapters:
+            if self.skip_remaining_part6_chapters:
+               break
             chapter = "Chapter " + chapter
             end_idx = chapter.find(CH_END)
             new_chapter_name = chapter[:end_idx].strip()
@@ -697,6 +707,7 @@ class RapidIOStandardParser(object):
         self.part_number = ''
         self.part_annex = False
         for part in self.parts:
+            self.skip_remaining_part6_chapters = False
             part = part_header + part
             new_part_name = part[:part.find('<')].strip()
             # Jiggery pokery below is required to weed out references to
