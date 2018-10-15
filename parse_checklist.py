@@ -384,7 +384,7 @@ class ChecklistParser(object):
         if not result:
             return
         self.reqt = copy.deepcopy(self.default_reqt)
-        self.reqt.chklist_id = result.group(0)
+        self.reqt.chklist_id = self.columns[0].strip()
         section = self.section_number.match(self.reqt.chklist_id)
         if not section:
             logging.error("Found ID, no section: '%s'" % self.reqt.chklist_id)
