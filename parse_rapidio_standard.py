@@ -306,6 +306,10 @@ class RapidIOStandardParser(object):
             self.split_into_sentences(sect[heading_end + len(SECTION_END):])
             for s in self.sentences:
                 s_type = None
+                # Skip Part 3 programming model informative annex, as it does
+                # not contain any requirements.
+                if s.startswith("Annex A Dev32 Hierarchical Programming Model"):
+                    break
                 if any(sub in s for sub in REQT_KW):
                     s_type = self.TYPE_REQUIREMENT;
                 elif any(sub in s for sub in REC_KW):
