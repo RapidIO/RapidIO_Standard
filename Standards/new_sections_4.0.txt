@@ -1,3 +1,4 @@
+'Revision', 'Part', 'Chapter', 'Section'
 '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.10.3 IDLE3 Idle Sequence Selection'
 '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.11.3 Ports Operating at 25.78125 Gbaud'
 '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.11.3.1 Long run 25.78125 Gbaud training'

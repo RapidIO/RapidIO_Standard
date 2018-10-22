@@ -1,3 +1,4 @@
+'Revision', 'Part', 'Chapter', 'Section'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.5.2 Dev32 Base Device ID CSR (Configuration Space Offset 0x64)'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.6 Switch Routing Table Register Block'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.6.1 Register Map'

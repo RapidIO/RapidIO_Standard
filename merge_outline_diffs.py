@@ -20,6 +20,7 @@ import re
 import sys
 import os
 import logging
+from constants import *
 
 class RapidIOOutlineDiffMerger(object):
     part_match = "RapidIO Interconnect Specification Part "
@@ -51,7 +52,13 @@ class RapidIOOutlineDiffMerger(object):
         lines = [line.strip() for line in new_sections.readlines()]
         new_sections.close()
 
-        for x, line in enumerate(lines):
+        header_items = [item.strip() for item in OUTLINE_HEADER.split(",")]
+        line_items = [item.strip() for item in lines[0][1:-1].split("', '")]
+        if not header_items == line_items:
+            raise ValueError("Bad format: File %s first line is %s not %s"
+                         % (self._new_sections_file, line_items, header_items))
+
+        for x, line in enumerate(lines[1:]):
             tokens = [tok.strip() for tok in line.split("',")]
             tokens = [re.sub("'", "", tok) for tok in tokens]
             if not len(tokens) == 4:
