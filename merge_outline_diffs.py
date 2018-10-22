@@ -74,15 +74,14 @@ class RapidIOOutlineDiffMerger(object):
         lines = [line.strip() for line in manual_trans.readlines()]
         manual_trans.close()
 
-        exp_toks = [tok.strip() for tok in OUTLINE_HEADER.split(",")]
+        exp_toks = [tok.strip() for tok in TRANSLATION_HEADER.split(",")]
         act_toks = [tok.strip() for tok in lines[0][1:-1].split("', '")]
-        if ((exp_toks != act_toks[0:len(exp_toks)]) or
-            (exp_toks != act_toks[len(exp_toks):])):
+        if (exp_toks != act_toks):
             raise ValueError("Bad format: File %s first line is %s not %s"
                          % (self._manual_trans_file, act_toks, exp_toks))
         for x, line in enumerate(lines[1:]):
             tokens = [tok.strip() for tok in line[1:-1].split("', '")]
-            if not len(tokens) == len(exp_toks)*2:
+            if not len(tokens) == len(exp_toks):
                 raise ValueError(
                       "File %s Line %d %d not %d bad format: '%s' '%s'"
                     % (self._manual_trans_file, x, len(tokens),
@@ -198,7 +197,7 @@ class RapidIOOutlineDiffMerger(object):
     def _custom_match(self, old, new):
         if old.startswith(self.part_match) and new.startswith(self.part_match):
             return 1.0, 1.0
-            
+
         # Increase number of tokens to make it easier to match...
         old = re.sub("-", " ", old)
         old_toks = [tok.strip() for tok in old.split(' ')]
@@ -211,8 +210,8 @@ class RapidIOOutlineDiffMerger(object):
         new_in_old = 0.0
         len_old = len(old_toks)
         len_new = len(new_toks)
-        # Automatically match numeric values, otherwise 
-        # comparing Chapter 6 Blah Blah Blah to Chapter 7 Blah Blah Blah  
+        # Automatically match numeric values, otherwise
+        # comparing Chapter 6 Blah Blah Blah to Chapter 7 Blah Blah Blah
         # might fail.
         for tok in old_toks:
             if not len(tok):
@@ -241,16 +240,17 @@ class RapidIOOutlineDiffMerger(object):
                       % (old, new, old_in_new, old_in_new/len_old,
                         new_in_old, new_in_old/len_new, str(rc)))
         return old_in_new/len_old, new_in_old/len_new
-            
-    def print_outline(self, filepath):
+
+    def print_translation(self, filepath):
         output = open(filepath, "w")
 
         logging.info("Versions: %s %s" % (self._versions["<"], self._versions[">"]))
         logging.info("Merge: %d" % len(self._merge))
+        header = [tok.strip() for tok in TRANSLATION_HEADER.split(",")]
+        output.write("'%s'\n" % ("', '".join(header)))
         for line in self._merge:
             logging.debug("Merge: %s" % line)
             output.write("'" + "', '".join(line) + "'" + "\n")
-            #output.write("'" + "', '".join(line[4:]) + "'" + "\n")
 
         output.write("Unmatched new items, interleaved with old\n")
         part = None
@@ -269,7 +269,7 @@ class RapidIOOutlineDiffMerger(object):
                     if old[1].startswith(part[0:self.pmidx]):
                         output.write("< '" + "', '".join(old) + "'" + "\n")
                         self._old_lines[o].extend(["Printed"])
-                         
+
                 part = line[1]
             output.write("> '" + "', '".join(line) + "'" + "\n")
 
@@ -351,7 +351,7 @@ def main(argv = None):
     path = os.path.dirname(options.outline_diff_filename)
     name = "translate_" + name
     output_file = os.path.join(path, name)
-    merger.print_outline(output_file)
+    merger.print_translation(output_file)
 
 if __name__ == '__main__':
     sys.exit(main())

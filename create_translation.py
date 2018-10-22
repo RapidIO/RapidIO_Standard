@@ -15,6 +15,7 @@ import re
 import sys
 import os
 import logging
+from constants import *
 
 class RapidIOTranslationMerger(object):
     def _add_trans(self, rev_key, part, chapter, section, translation):
@@ -46,15 +47,21 @@ class RapidIOTranslationMerger(object):
         self.trans = {}
         self.trans_revs = []
         self.dead_ends = {}
+        header = [tok.strip() for tok in TRANSLATION_HEADER.split(",")]
         for trans in sorted(self.translations):
             self.trans_file = trans
             trans_file = open(trans)
-            trans_lines = trans_file.readlines()
+            trans_lines = [line.strip() for line in trans_file.readlines()]
             trans_file.close()
+
+            actual = [tok.strip() for tok in trans_lines[0][1:-1].split("', '")]
+            if (actual != header):
+                raise ValueError("Bad format: File %s first line is %s not %s"
+                         % (self.trans_file, actual, header))
 
             skip_until_old_items = False
             process_old_items = False
-            for line_no, line in enumerate(trans_lines):
+            for line_no, line in enumerate(trans_lines[1:]):
                 line = line.strip()
                 if line == "Unmatched new items, interleaved with old":
                    skip_until_old_items = True
@@ -93,7 +100,8 @@ class RapidIOTranslationMerger(object):
         if self.trans == {}:
             print "Nothing in merged outline."
 
-        print "Revision, Part, Chapter, Section, Translations"
+        header_items = [item.strip() for item in TRANSLATION_HEADER.split(",")]
+        print ("'%s'" % ("', '".join(header_items)))
         for rev_key in sorted(self.trans.keys()):
             for part_key in sorted(self.trans[rev_key].keys()):
                 for chap_key in sorted(self.trans[rev_key][part_key].keys()):
