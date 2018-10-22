@@ -61,7 +61,7 @@ class RapidIOOutlineDiffMerger(object):
         for x, line in enumerate(lines[1:]):
             tokens = [tok.strip() for tok in line.split("',")]
             tokens = [re.sub("'", "", tok) for tok in tokens]
-            if not len(tokens) == 4:
+            if not len(tokens) == len(header_items):
                 raise ValueError("File %s Line %d %d bad format: '%s'"
                             % (self._new_sections_file, x, len(tokens), line))
             logging.info("New Section: %s" % tokens)
@@ -74,12 +74,19 @@ class RapidIOOutlineDiffMerger(object):
         lines = [line.strip() for line in manual_trans.readlines()]
         manual_trans.close()
 
-        for x, line in enumerate(lines):
-            tokens = [tok.strip() for tok in line.split("',")]
-            tokens = [re.sub("'", "", tok) for tok in tokens]
-            if not len(tokens) == 8:
-                raise ValueError("File %s Line %d %d bad format: '%s'"
-                            % (self._manual_trans_file, x, len(tokens), line))
+        exp_toks = [tok.strip() for tok in OUTLINE_HEADER.split(",")]
+        act_toks = [tok.strip() for tok in lines[0][1:-1].split("', '")]
+        if ((exp_toks != act_toks[0:len(exp_toks)]) or
+            (exp_toks != act_toks[len(exp_toks):])):
+            raise ValueError("Bad format: File %s first line is %s not %s"
+                         % (self._manual_trans_file, act_toks, exp_toks))
+        for x, line in enumerate(lines[1:]):
+            tokens = [tok.strip() for tok in line[1:-1].split("', '")]
+            if not len(tokens) == len(exp_toks)*2:
+                raise ValueError(
+                      "File %s Line %d %d not %d bad format: '%s' '%s'"
+                    % (self._manual_trans_file, x, len(tokens),
+                       2*len(exp_toks), line, tokens))
             logging.info("New Section: %s" % tokens)
             self._merge.append(tokens)
 
