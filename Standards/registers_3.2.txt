@@ -1,4 +1,4 @@
-Section, Block_ID, Bits, Field, Description
+'Section', 'Block_ID', 'Bits', 'Field', 'Description'
 '5.4.1 Device Identity CAR (Configuration Space Offset 0x0)', 'STD_REG', '0-15', 'DeviceIdentity', 'Device identifier'
 '5.4.1 Device Identity CAR (Configuration Space Offset 0x0)', 'STD_REG', '16-31', 'DeviceVendorIdentity', 'Device vendor identifier'
 '5.4.2 Device Information CAR (Configuration Space Offset 0x4)', 'STD_REG', '0-31', 'DeviceRev', 'Device revision level'

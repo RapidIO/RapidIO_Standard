@@ -377,13 +377,10 @@ class RapidIOStandardParser(object):
             print ("No registers found for " + self.input_xml)
             return 0
 
-        print ("Section, Block_ID, Bits, Field, Description")
+        print("'%s'" % "', '".join(["Section", "Block_ID", "Bits",
+                                 "Field", "Description"]))
         for reg in self.registers:
             print ("'%s'" % "', '".join(reg[3:]))
-
-        # print "Revision, Part, Chapter, Section, Block_ID, Bits, Field, Description"
-        # for reg in self.registers:
-        #     print ("'%s'" % "', '".join(reg))
 
     def print_reqts(self):
         if self.create_outline or self.extract_registers:
@@ -392,7 +389,8 @@ class RapidIOStandardParser(object):
             print ("No requirements found for " + self.input_xml)
             return 0
 
-        print ("%s" % REQUIREMENTS_HEADER)
+        header_items = [item.strip() for item in REQUIREMENTS_HEADER.split(",")]
+        print("'%s'" % "', '".join(header_items))
         for reqt in self.reqts:
             print ("'%s'" % "', '".join(reqt))
 
@@ -403,7 +401,8 @@ class RapidIOStandardParser(object):
             print ("No outline available")
             return 0
 
-        print ("Revision, Part, Chapter, Section")
+        header_items = [item.strip() for item in OUTLINE_HEADER.split(",")]
+        print("'%s'" % "', '".join(header_items))
         for part in self.outline:
             for chapter in self.outline[part]:
                 for section in self.outline[part][chapter]:

@@ -73,9 +73,11 @@ class ChecklistMerger(object):
             lines = [line.strip() for line in outline_file.readlines()]
             outline_file.close()
 
-            if not lines[0] == OUTLINE_HEADER:
-                raise ValueError("Bad format: File %s first line is not %s"
-                             % (outline_path, OUTLINE_HEADER))
+            header_items = [item.strip() for item in OUTLINE_HEADER.split(",")]
+            line_items = [item.strip() for item in lines[0][1:-1].split("', '")]
+            if not header_items == line_items:
+                raise ValueError("Bad format: File %s first line is %s not %s"
+                             % (outline_path, actual_items, header_items))
 
             tokenized_lines = []
             for x, line in enumerate(lines[1:]):

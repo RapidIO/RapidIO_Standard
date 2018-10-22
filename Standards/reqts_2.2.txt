@@ -1,4 +1,4 @@
-Revision, Part, Chapter, Section, Type, Reqt_Num, Sentence
+'Revision', 'Part', 'Chapter', 'Section', 'Type', 'Reqt_Num', 'Sentence'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.4.5 VC-Status Control Symbol', 'Recommendation', '1', 'The VC-status control symbol may be transmitted at any time and should be transmitted whenever the number of maximum length packet buffers available for reception on a VC has changed and has not been otherwise communicated to the connected port.'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.6.3 CRC-13 Code', 'REQUIREMENT', '1', 'The polynomial x13 + x10 + x8 + x5 + x2 + 1 shall be used to generate the 13-bit CRC  .'
 '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.6.3 CRC-13 Code', 'REQUIREMENT', '2', 'The 13-bit CRC shall be computed over control symbol bits 0 through 34 beginning with control symbol bit 0.'

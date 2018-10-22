@@ -1,4 +1,4 @@
-Revision, Part, Chapter, Section, Type, Reqt_Num, Sentence
+'Revision', 'Part', 'Chapter', 'Section', 'Type', 'Reqt_Num', 'Sentence'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.5.2 Dev32 Base Device ID CSR (Configuration Space Offset 0x64)', 'REQUIREMENT', '1', 'This is the Dev32 device ID of the device (must be valid for endpoint devices when bit 19 of the Processing Element Features CAR is set)  .'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.6 Switch Routing Table Register Block', 'REQUIREMENT', '1', 'A switch device which has bit 19 set in the Processing Element Features CAR shall implement this register block.'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.6.1 Register Map', 'REQUIREMENT', '1', 'The register map for the routing table registers shall be as specified by Table 3-12.'
