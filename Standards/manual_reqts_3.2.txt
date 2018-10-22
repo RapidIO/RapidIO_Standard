@@ -1,4 +1,4 @@
-Revision, Part, Chapter, Section, Type, Sentence
+'Revision', 'Part', 'Chapter', 'Section', 'Type', 'Sentence'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.19.2 Frame_Lock State Machine', 'REQUIREMENT', '1', 'Each lane shall be capable of receiving and decoding training frames which are Differential Manchester Encoded per. IEEE 802.3-2012, section 5, 72.6.10.2.2.'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.19.2 Frame_Lock State Machine', 'REQUIREMENT', '2', 'Each lane  shall be capable of identifying a 4-octet frame marker as specified in IEEE 802.3, section 5, 72.6.10.2.1'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.19.2 Frame_Lock State Machine', 'REQUIREMENT', '3', 'When placed into training mode each lane shall select a bit position to evaluate as the start of frame marker.'
