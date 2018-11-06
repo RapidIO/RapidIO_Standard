@@ -18,24 +18,33 @@ import sys
 import os
 import logging
 import copy
+from difflib import Differ
 from constants import *
 from create_translation import *
 from openpyxl import Workbook
 from openpyxl.styles import Alignment
+from openpyxl import load_workbook
 import codecs
+import subprocess
 
-class ExcelWriter(object):
-    def __init__(self, text, excel):
+class ExcelEditor(object):
+    def __init__(self, text, excel, source = "text"):
         self.text_filepath = text
         self.excel_filepath = excel
         self.header = None
         self.data = []
-        self._read_text()
+        self.lines = []
+        if source == "text":
+            self._read_text()
+            self._create_excel()
+            self._format_excel()
+        else:
+            self._read_excel()
 
     def _stripped_tokens(self, line):
         toks = []
         if line[0] == "'" and line[-1] == "'":
-            toks = [tok.strip() for tok in line.split("', '")]
+            toks = [tok.strip() for tok in line[1:-1].split("', '")]
         else:
             toks = [tok.strip() for tok in line.split(",")]
         return toks
@@ -43,10 +52,11 @@ class ExcelWriter(object):
     def _read_text(self):
         logging.info("Reading text file '%s'." % self.text_filepath)
         with open(self.text_filepath, 'r') as text_file:
-            self.text_lines = [line.strip() for line in text_file.readlines()]
+            self.lines = text_file.readlines()
         col_warning = False
 
-        for line in self.text_lines:
+        for l in self.lines:
+            line = l.strip()
             if self.header is None:
                 if line.find(',') >= 0:
                     self.header = self._stripped_tokens(line)
@@ -64,7 +74,7 @@ class ExcelWriter(object):
         if self.header is None or self.header == []:
             raise ValueError("No header found in file %s" % self.text_filepath)
 
-    def create_excel(self):
+    def _create_excel(self):
         self.wb = Workbook()
         ws = self.wb.active
         text_file_name = os.path.basename(self.text_filepath)
@@ -84,10 +94,13 @@ class ExcelWriter(object):
             for c, d_tok in enumerate(d_toks):
                 val = d_tok.decode("utf-8","ignore")
                 a_val = val.encode("ascii","ignore")
-                cell = ws.cell(row=r+2, column=c+1, value=a_val)
+                if (a_val[0] == "'"):
+                    raise ValueError("Tokens &%s& token &%s& bad &%s&." %
+                                          ("&".join(d_toks), d_tok, a_val))
+                cell = ws.cell(row=r+2, column=c+1, value=str(a_val))
                 cell.alignment = data_cell_alignment
         
-    def format_excel(self):
+    def _format_excel(self):
         ws = self.wb.active
         max_col_width = 60
         for column_cells in ws.columns:
@@ -95,8 +108,22 @@ class ExcelWriter(object):
             col_width = min(val_length, max_col_width)
             ws.column_dimensions[column_cells[0].column].width = col_width
 
+    def _read_excel(self):
+        self.wb = load_workbook(filename = self.excel_filepath)
+        for sheet in self.wb:
+            if sheet.title != self.wb.active.title:
+                continue
+            for row in sheet.iter_rows(min_row = 1):
+               line = "'%s'\n" % "', '".join([str(c.value)  for c in row])
+               self.lines.append(line)
+
     def write_excel(self):
         self.wb.save(self.excel_filepath)
+
+    def write_text(self):
+        with open(self.text_filepath, 'w') as t:
+            for l in self.lines:
+                t.write(l)
 
 def create_parser():
     parser = OptionParser(description="Create Excel spreadsheet based on text file.")
@@ -139,10 +166,13 @@ def main(argv = None):
         print(e)
         sys.exit(-1)
 
-    excel = ExcelWriter(options.text_filepath, options.excel_filepath)
-    excel.create_excel()
-    excel.format_excel()
+    excel = ExcelEditor(options.text_filepath, options.excel_filepath)
     excel.write_excel()
+    cmd = "xdg-open %s" % options.excel_filepath
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    new_excel = ExcelEditor(options.text_filepath, options.excel_filepath, "XL")
+    new_excel.write_text()
 
 if __name__ == '__main__':
     sys.exit(main())
