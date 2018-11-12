@@ -91,18 +91,18 @@ def edit_new_sections():
         chk_lines = f.readlines()
     edit_file(filepath, check_new_sections, chk_lines)
 
-def check_manual_translation_line(line, chk_parms):
-    toks = [tok.strip() for tok in line[1:-1].split("', '")]
+def strip_apostrophes(toks):
     for i, tok in enumerate(toks):
         if tok[0] == "'":
             toks[i] = toks[i][1:]
         if tok[-1] == "'":
             toks[i] = toks[i][:-1]
+
+def check_manual_translation_line(line, chk_parms):
+    toks = [tok.strip() for tok in line[1:-1].split("', '")]
+    strip_apostrophes(toks)
     new_line = "'%s'\n" % "', '".join(toks[0:4])
     old_line = "'%s'\n" % "', '".join(toks[4:])
-    #print("TOKS:%s" % toks)
-    #print("NEW :%s" % new_line)
-    #print("OLD :%s" % old_line)
     if (old_line in chk_parms["OLD"]) and (new_line in chk_parms["NEW"]):
         return True
     return False
@@ -155,9 +155,58 @@ def edit_manual_translations():
         chk_lines["NEW"] = f.readlines()
     edit_file(filepath, check_manual_translations, chk_lines)
 
+def check_manual_requirement_line(line, chk_parms):
+    if line in chk_parms["original"]:
+        return True
+
+    toks = [tok.strip() for tok in line.split("', '")]
+    strip_apostrophes(toks)
+
+    ref_line = "'%s'\n" % "', '".join(toks[0:4])
+    return ref_line in chk_parms["outline"]
+
+def check_manual_requirements(excel, chk_parms):
+    rc = ACCEPT
+    missing = False
+
+    if excel.lines[0] not in chk_parms["original"]:
+        print("Row 1 not found in %s." % (excel.text_filepath))
+        print("Row: %s" % excel.lines[0])
+        missing = True
+
+    for i, line in enumerate(excel.lines[1:]):
+        if check_manual_requirement_line(line, chk_parms):
+            continue
+        print("Row %i reference not found in outline" % (i + 2))
+        print("Row: %s" % line)
+        missing = True
+
+    if missing:
+        rc = get_quit_accept_edit()
+    return rc
+
 def edit_manual_requirements():
-    print("Not implemented...")
-    return
+    manual_requirements = ["3.2"]
+    print("Choose the manual translation:")
+    for i, rev in enumerate(manual_requirements):
+        print("%d : %s" % (i, rev))
+    inp = raw_input("Select option, or 'X' to exit:")
+    try:
+        idx = int(inp)
+    except ValueError:
+        return
+    if not (idx in range(0, len(manual_requirements))):
+        return
+    rev = manual_requirements[idx]
+
+    chk_lines = {}
+    filepath = os.path.join("Standards", "manual_reqts_%s.txt" % rev)
+    with open(filepath) as f:
+        chk_lines["original"] = f.readlines()
+    outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
+    with open(outline_path) as f:
+        chk_lines["outline"] = f.readlines()
+    edit_file(filepath, check_manual_requirements, chk_lines)
 
 new_sections = '1'
 manual_translations = '2'
