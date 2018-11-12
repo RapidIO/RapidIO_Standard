@@ -27,19 +27,6 @@ import subprocess
 
 from make_spreadsheet import *
 
-new_sections = '1'
-manual_translations = '2'
-manual_requirements = '3'
-exit_option = 'X'
-cmd_options = { new_sections:'New sections',
-                manual_translations:'Manual translations',
-                manual_requirements:'Manual requirements',
-                exit_option:'Exit' }
-
-def print_cmd_options():
-    for key in sorted(cmd_options.keys()):
-        print("%s: %s" % (key, cmd_options[key]))
-
 QUIT = 'Q'
 ACCEPT = 'A'
 EDIT = 'E'
@@ -104,13 +91,86 @@ def edit_new_sections():
         chk_lines = f.readlines()
     edit_file(filepath, check_new_sections, chk_lines)
 
+def check_manual_translation_line(line, chk_parms):
+    toks = [tok.strip() for tok in line[1:-1].split("', '")]
+    for i, tok in enumerate(toks):
+        if tok[0] == "'":
+            toks[i] = toks[i][1:]
+        if tok[-1] == "'":
+            toks[i] = toks[i][:-1]
+    new_line = "'%s'\n" % "', '".join(toks[0:4])
+    old_line = "'%s'\n" % "', '".join(toks[4:])
+    #print("TOKS:%s" % toks)
+    #print("NEW :%s" % new_line)
+    #print("OLD :%s" % old_line)
+    if (old_line in chk_parms["OLD"]) and (new_line in chk_parms["NEW"]):
+        return True
+    return False
+
+def check_manual_translations(excel, chk_parms):
+    rc = ACCEPT
+    missing = False
+
+    if excel.lines[0] not in chk_parms["original"]:
+        print("Row 1 not found in %s." % (excel.text_filepath))
+        print("Row: %s" % excel.lines[0])
+        missing = True
+
+    for i, line in enumerate(excel.lines[1:]):
+        if check_manual_translation_line(line, chk_parms):
+            continue
+        print("Row %i not found in outlines." % (i + 2))
+        print("Row: %s" % line)
+        missing = True
+
+    if missing:
+        rc = get_quit_accept_edit()
+    return rc
+
 def edit_manual_translations():
-    print("Not implemented...")
-    return
+    manual_translations = ["1.3to2.2", "2.2to3.2"]
+    print("Choose the manual translation:")
+    for i, rev in enumerate(manual_translations):
+        print("%d : %s" % (i, rev))
+    print("Enter anything else to cancel.")
+    inp = raw_input("Select option, or 'X' to exit:")
+    try:
+        idx = int(inp)
+    except ValueError:
+        return
+    if not (idx in range(0, len(manual_translations))):
+        return
+    rev = manual_translations[idx]
+    revs = [tok.strip() for tok in rev.split("to")]
+
+    chk_lines = {}
+    filepath = os.path.join("Standards", "manual_%s.txt" % rev)
+    with open(filepath) as f:
+        chk_lines["original"] = f.readlines()
+    old_path = os.path.join("Standards", "outline_%s.txt" % revs[0])
+    with open(old_path) as f:
+        chk_lines["OLD"] = f.readlines()
+    new_path = os.path.join("Standards", "outline_%s.txt" % revs[1])
+    with open(new_path) as f:
+        chk_lines["NEW"] = f.readlines()
+    edit_file(filepath, check_manual_translations, chk_lines)
 
 def edit_manual_requirements():
     print("Not implemented...")
     return
+
+new_sections = '1'
+manual_translations = '2'
+manual_requirements = '3'
+exit_option = 'X'
+cmd_options = { new_sections:'New sections',
+                manual_translations:'Manual translations',
+                manual_requirements:'Manual requirements',
+                exit_option:'Exit' }
+
+def print_cmd_options():
+    for key in sorted(cmd_options.keys()):
+        print("%s: %s" % (key, cmd_options[key]))
 
 def main(argv = None):
     global new_sections
@@ -119,7 +179,6 @@ def main(argv = None):
     logging.basicConfig(level=logging.WARN)
     temp = ''
 
-    # try:
     while temp != exit_option:
         print_cmd_options()
         temp = raw_input('Select option:')
@@ -133,9 +192,6 @@ def main(argv = None):
             break
         else:
             print("'%s' unknown option." % temp)
-    # except Exception as e:
-    #     print("Exception!!")
-    #     print(e)
     sys.exit(0)
 
 if __name__ == '__main__':
