@@ -40,15 +40,49 @@ def print_cmd_options():
     for key in sorted(cmd_options.keys()):
         print("%s: %s" % (key, cmd_options[key]))
 
-def edit_file(filepath):
+QUIT = 'Q'
+ACCEPT = 'A'
+EDIT = 'E'
+
+options = [QUIT, ACCEPT, EDIT]
+
+def get_quit_accept_edit():
+    inp = ''
+    prompt=("Enter '%s' Quit (no save), '%s' Accept (save), '%s' Edit: "
+            % (QUIT, ACCEPT, EDIT))
+    while inp not in options:
+        inp = raw_input(prompt)
+    return inp
+
+def edit_file(filepath, check, check_parms):
     filepath_xls = filepath + ".xlsx"
     excel = ExcelEditor(filepath, filepath_xls)
     excel.write_excel()
-    cmd = "xdg-open %s" % filepath_xls
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
-    updated = ExcelEditor(filepath, filepath_xls, "excel")
-    updated.write_text()
+    check_passed = ''
+
+    while not ((check_passed == ACCEPT) or (check_passed == QUIT)):
+        cmd = "xdg-open %s" % filepath_xls
+        process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
+        updated = ExcelEditor(filepath, filepath_xls, "XL")
+        check_passed = check(updated, check_parms)
+
+    if check_passed == ACCEPT:
+        updated.write_text()
+
+def check_new_sections(excel, chk_parms):
+    rc = ACCEPT
+    missing = False
+    for i, line in enumerate(excel.lines):
+        if line in chk_parms:
+            continue
+        print("Row %i not found in outline." % (i + 1))
+        print("Row: %s" % line)
+        missing = True
+
+    if missing:
+        rc = get_quit_accept_edit()
+    return rc
 
 def edit_new_sections():
     new_section_revisions = ["2.2", "3.2", "4.0"]
@@ -65,7 +99,10 @@ def edit_new_sections():
         return
     rev = new_section_revisions[idx]
     filepath = os.path.join("Standards", "new_sections_%s.txt" % rev)
-    edit_file(filepath)
+    outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
+    with open(outline_path) as f:
+        chk_lines = f.readlines()
+    edit_file(filepath, check_new_sections, chk_lines)
 
 def edit_manual_translations():
     print("Not implemented...")
