@@ -91,26 +91,32 @@ class ChecklistParser(object):
         self.optional_table_items_fn = None
         if optional_filename is not None:
             self.optional_table_items_fn = optional_filename
-            options_file = open(optional_filename)
-            self.optionslist = [t.strip() for t in options_file.readlines()]
-            options_file.close()
+            with open(optional_filename) as options_file:
+                self.optionslist = [t.strip() for t in options_file.readlines()]
 
         self.setup_options()
         self.parse_checklist()
 
     def setup_options(self):
         self.optional_table_items = []
-        for line_num, line in enumerate(self.optionslist):
+        if len(self.optionslist) == 0:
+            return
+
+        if self.optionslist[0] != OPTIONAL_CHECKLIST_ITEMS_HEADER:
+            raise ValueError("Optional items file %s has incorrect header." %
+
+                              self.optional_table_items_fn)
+        for line_num, line in enumerate(self.optionslist[1:]):
             tokens = [re.sub("'", "", tok) for tok in line.split("', ")]
             token_str = "'" + "', '".join(tokens) + "'"
-            if not len(tokens) == 3:
-                logging.warn("File '%s' Line %d: 3 tokens expected, got %d: %s"
+            if not len(tokens) == OPTIONAL_CHECKLIST_ITEMS_HEADER_TOKEN_COUNT:
+                logging.warn("File '%s' Line %d: %d tokens expected, got %d: %s"
                          % (self.optional_table_items_fn, line_num,
+                            OPTIONAL_CHECKLIST_ITEMS_HEADER_TOKEN_COUNT,
                             len(tokens), token_str))
                 continue
             logging.info("Optional: %s" % token_str)
             self.optional_table_items.append(tokens)
-        
 
     def parse_checklist(self):
         # substitution below is due to some nasty characters
