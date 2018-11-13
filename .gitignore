@@ -32,6 +32,9 @@
 # Debug output files
 *.output
 
+# Text editing files using Excel
+*.txt.xlsx
+
 # Eclipse-specific files
 .project
 .cproject
