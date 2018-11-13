@@ -256,6 +256,7 @@ class ReqtDatabaseUpdater(object):
                 logging.debug("Update CHK DB  item %s" % self.db[rev][part][chap][sect][srch_sent_num])
                 self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_STATUS] = "ACTIVE"
                 self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_SENTENCE] = chk_item[TOK_IDX_CHK_H_SENTENCE]
+                self.db[rev][part][chap][sect][srch_sent_num][TOK_IDX_DB_H_OPTIONAL] = chk_item[TOK_IDX_CHK_H_OPTIONAL]
                 return True
 
             ## Did not find that file/table/reference in this section.
