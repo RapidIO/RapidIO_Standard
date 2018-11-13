@@ -1,4 +1,4 @@
-Table_Name, Checklist_ID, Optional
+'Table_Name', 'Checklist_ID', 'Optional'
 'Table 2-1. General device 8/16 LP-LVDS physical layer general compliance list', 'Item 3', 'OPTIONAL'
 'Table 2-1. General device 8/16 LP-LVDS physical layer general compliance list', 'Item 4', 'OPTIONAL'
 'Table 2-1. General device 8/16 LP-LVDS physical layer general compliance list', 'Item 5', 'OPTIONAL'

@@ -156,9 +156,6 @@ def edit_manual_translations():
     edit_file(filepath, check_manual_translations, chk_lines)
 
 def check_manual_requirement_line(line, chk_parms):
-    if line in chk_parms["original"]:
-        return True
-
     toks = [tok.strip() for tok in line.split("', '")]
     strip_apostrophes(toks)
 
@@ -208,13 +205,87 @@ def edit_manual_requirements():
         chk_lines["outline"] = f.readlines()
     edit_file(filepath, check_manual_requirements, chk_lines)
 
+def check_optional_checklist_item_line(line, chk_parms):
+    toks = [tok.strip() for tok in line.split("', '")]
+    strip_apostrophes(toks)
+
+    name = toks[TOK_IDX_OPT_CHK_H_TABLE_NAME]
+    item = toks[TOK_IDX_OPT_CHK_H_CHECKLIST_ID]
+    if name not in chk_parms["items"]:
+        return False
+    return item in chk_parms["items"][name]
+
+def check_optional_checklist_items(excel, chk_parms):
+    rc = ACCEPT
+    missing = False
+
+    for idx in range(0,1):
+        if excel.lines[0] not in chk_parms["original"]:
+            print("Row %d not found in %s." % (idx, excel.text_filepath))
+            print("Row: %s" % excel.lines[idx])
+            missing = True
+
+    for i, line in enumerate(excel.lines[1:]):
+        if check_optional_checklist_item_line(line, chk_parms):
+            continue
+        print("Row %i table or item not found in checklist" % (i + 2))
+        print("Row: %s" % line)
+        missing = True
+
+    if missing:
+        rc = get_quit_accept_edit()
+    return rc
+
+def edit_optional_checklist_items():
+    optional_items = {"1.3":["rev1_3_rio_chklist_optional.txt",
+                             "rev1_3_rio_chklist.txt"],
+                      "2.2":["rapidio_interop_checklist_rev2_2_optional.txt",
+                             "rapidio_interop_checklist_rev2_2.txt"],
+                      "Err":["ErrorManagementChecklist_optional.txt",
+                             "ErrorManagementChecklist.txt"]
+                     }
+    revs = sorted(optional_items.keys())
+    print("Choose the checklist optional items file:")
+    for i, rev in enumerate(revs):
+        print("%d : %s, file %s" % (i, rev, optional_items[rev][0]))
+    inp = raw_input("Select option, or 'X' to exit:")
+    try:
+        idx = int(inp)
+    except ValueError:
+        return
+    if not (idx in range(0, len(optional_items))):
+        return
+    rev = revs[idx]
+    chk_lines = {}
+    filepath = os.path.join("Historic_Checklists", optional_items[rev][0])
+    with open(filepath) as f:
+        chk_lines["original"] = f.readlines()
+    items_path = os.path.join("Historic_Checklists", optional_items[rev][1])
+    with open(items_path) as f:
+        checklist = f.readlines()
+    chk_lines["items"] = {}
+    name_idx = TOK_IDX_CHK_H_TABLE_NAME
+    item_idx = TOK_IDX_CHK_H_CHECKLIST_ID
+    for line in checklist[2:]:
+        toks = [tok.strip() for tok in line[1:-1].split("', '")]
+        name = toks[name_idx]
+        item = toks[item_idx]
+        if name not in chk_lines["items"]:
+            chk_lines["items"][name] = []
+        if item not in chk_lines["items"][name]:
+            chk_lines["items"][name].append(item)
+
+    edit_file(filepath, check_optional_checklist_items, chk_lines)
+
 new_sections = '1'
 manual_translations = '2'
 manual_requirements = '3'
+optional_items = '4'
 exit_option = 'X'
 cmd_options = { new_sections:'New sections',
                 manual_translations:'Manual translations',
                 manual_requirements:'Manual requirements',
+                optional_items:'Optional checklist items',
                 exit_option:'Exit' }
 
 def print_cmd_options():
@@ -237,6 +308,8 @@ def main(argv = None):
             edit_manual_translations()
         elif temp == manual_requirements:
             edit_manual_requirements()
+        elif temp == optional_items:
+            edit_optional_checklist_items()
         elif temp == exit_option:
             break
         else:

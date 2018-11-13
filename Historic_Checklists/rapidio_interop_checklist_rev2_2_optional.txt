@@ -1,4 +1,4 @@
-Table_Name, Checklist_ID, Optional
+'Table_Name', 'Checklist_ID', 'Optional'
 'Table 4 PCS and PMA Layers', 'Item 4.12.3A', 'OPTIONAL'
 'Table 4 PCS and PMA Layers', 'Item 4.12.3B', 'OPTIONAL'
 'Table 4 PCS and PMA Layers', 'Item 4.12.3B1', 'OPTIONAL'

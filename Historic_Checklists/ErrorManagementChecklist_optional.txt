@@ -1,4 +1,4 @@
-Table_Name, Checklist_ID, Optional
+'Table_Name', 'Checklist_ID', 'Optional'
 'Table 1. Error Management Behavioral Requirements Certification List', 'Item 12', 'OPTIONAL'
-'Table 2. Error Management Register Requirements Certification List', '11G', 'OPTIONAL'
-'Table 2. Error Management Register Requirements Certification List', '20F', 'OPTIONAL'
+'Table 2. Error Management Register Requirements Certification List', 'Item 11G', 'OPTIONAL'
+'Table 2. Error Management Register Requirements Certification List', 'Item 20F', 'OPTIONAL'
