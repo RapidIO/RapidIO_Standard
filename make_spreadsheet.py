@@ -94,9 +94,11 @@ class ExcelEditor(object):
             for c, d_tok in enumerate(d_toks):
                 val = d_tok.decode("utf-8","ignore")
                 a_val = val.encode("ascii","ignore")
-                if (a_val[0] == "'"):
-                    raise ValueError("Tokens &%s& token &%s& bad &%s&." %
-                                          ("&".join(d_toks), d_tok, a_val))
+                if a_val != '':
+                    if (a_val[0] == "'"):
+                        raise ValueError("Tokens &%s& token &%s& bad &%s&." %
+                                              ("&".join(d_toks), d_tok, a_val))
+                    a_val = a_val.replace('\\n', '\n')
                 cell = ws.cell(row=r+2, column=c+1, value=str(a_val))
                 cell.alignment = data_cell_alignment
         
@@ -114,8 +116,14 @@ class ExcelEditor(object):
             if sheet.title != self.wb.active.title:
                 continue
             for row in sheet.iter_rows(min_row = 1):
-               line = "'%s'\n" % "', '".join([str(c.value)  for c in row])
-               self.lines.append(line)
+               vals = [c.value  for c in row]
+               for i, val in enumerate(vals):
+                   if val is None:
+                       vals[i] = ''
+               line = "', '".join(vals)
+               line = line.replace('\n', '\\n')
+               line_crlf = "'%s'\n" % line
+               self.lines.append(line_crlf)
 
     def write_excel(self):
         self.wb.save(self.excel_filepath)

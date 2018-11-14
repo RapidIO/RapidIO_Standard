@@ -93,6 +93,8 @@ def edit_new_sections():
 
 def strip_apostrophes(toks):
     for i, tok in enumerate(toks):
+        if len(tok) <= 0:
+            continue
         if tok[0] == "'":
             toks[i] = toks[i][1:]
         if tok[-1] == "'":
@@ -277,15 +279,84 @@ def edit_optional_checklist_items():
 
     edit_file(filepath, check_optional_checklist_items, chk_lines)
 
+def check_testcase_line(line, chk_parms):
+    rc = False
+    toks = [tok.strip() for tok in line.split("', '")]
+    strip_apostrophes(toks)
+
+    if len(toks) != TOK_IDX_TC_H_TOK_COUNT:
+        print("Column count %d, not %d" % (len(toks), TOK_IDX_TC_H_TOK_COUNT))
+        return False
+
+    uids = toks[TOK_IDX_TC_H_CONST_REFS]
+    uids = uids.replace("\\n", " ")
+    uid_toks = [tok.strip() for tok in uids.split(" ")]
+    missing = []
+    for uid in uid_toks:
+        if uid == '':
+            continue
+        if uid not in chk_parms["uids"]:
+            missing.append(uid)
+    if missing != []:
+        print("Missing references: '%s'" % "', '".join(missing))
+    return missing == []
+
+def check_testcases(excel, chk_parms):
+    rc = ACCEPT
+    missing = False
+
+    for idx in range(0,1):
+        if excel.lines[0] not in chk_parms["original"]:
+            print("Row %d not found in %s." % (idx, excel.text_filepath))
+            print("Row: %s" % excel.lines[idx])
+            missing = True
+
+    for i, line in enumerate(excel.lines[1:]):
+        if check_testcase_line(line, chk_parms):
+            continue
+        print("Row %i has error." % (i + 2))
+        print("Row: %s" % line)
+        missing = True
+
+    if missing:
+        rc = get_quit_accept_edit()
+    return rc
+
+def edit_testcases():
+    testcases = ["logical_test_plan.txt"]
+    print("Choose the testcase file:")
+    for i, rev in enumerate(testcases):
+        print("%d : %s" % (i, testcases[i]))
+    inp = raw_input("Select option, or 'X' to exit:")
+    try:
+        idx = int(inp)
+    except ValueError:
+        return
+    if not (idx in range(0, len(testcases))):
+        return
+    chk_lines = {}
+    filepath = os.path.join("Testcases", testcases[idx])
+    with open(filepath) as f:
+        chk_lines["original"] = f.readlines()
+    chkpath = os.path.join("Historic_Checklists", "merged_sorted_db.txt")
+    chk_lines["uids"] = []
+    with open(chkpath) as f:
+        for line in f.readlines():
+            toks = [tok.strip() for tok in line[1:-1].split("', '")]
+            chk_lines["uids"].append(toks[TOK_IDX_DB_H_CONST_REF])
+    edit_file(filepath, check_testcases, chk_lines)
+
 new_sections = '1'
 manual_translations = '2'
 manual_requirements = '3'
 optional_items = '4'
+testcases = '5'
 exit_option = 'X'
 cmd_options = { new_sections:'New sections',
                 manual_translations:'Manual translations',
                 manual_requirements:'Manual requirements',
                 optional_items:'Optional checklist items',
+                testcases:'Testcase definitions',
                 exit_option:'Exit' }
 
 def print_cmd_options():
@@ -310,6 +381,8 @@ def main(argv = None):
             edit_manual_requirements()
         elif temp == optional_items:
             edit_optional_checklist_items()
+        elif temp == testcases:
+            edit_testcases()
         elif temp == exit_option:
             break
         else:
