@@ -120,6 +120,7 @@ class ExcelEditor(object):
                for i, val in enumerate(vals):
                    if val is None:
                        vals[i] = ''
+                   vals[i] = str(vals[i])
                line = "', '".join(vals)
                line = line.replace('\n', '\\n')
                line_crlf = "'%s'\n" % line
