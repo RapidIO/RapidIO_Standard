@@ -323,19 +323,25 @@ def check_testcases(excel, chk_parms):
     return rc
 
 def edit_testcases():
-    testcases = ["logical_test_plan.txt", "t9_test_plan.txt", "t10_test_plan.txt"]
+    testcases = {"Part  1":["NREAD/NWRITE/NWRITE_R/SWRITE/MAINTENANCE",
+                           "part_1_test_plan.txt"],
+                 "Part  2":["Messaging and Doorbells",
+                           "part_2_test_plan.txt"],
+                 "Part 10":["Data Streaming",
+                           "part_10_test_plan.txt"]}
     print("Choose the testcase file:")
-    for i, rev in enumerate(testcases):
-        print("%d : %s" % (i, testcases[i]))
+    keys = sorted(testcases.keys())
+    for i, key in enumerate(keys):
+        print("%d : %s, %s" % (i, key, testcases[key][0]))
     inp = raw_input("Select option, or 'X' to exit:")
     try:
         idx = int(inp)
     except ValueError:
         return
-    if not (idx in range(0, len(testcases))):
+    if not (idx in range(0, len(keys))):
         return
     chk_lines = {}
-    filepath = os.path.join("Testcases", testcases[idx])
+    filepath = os.path.join("Testcases", testcases[keys[idx]][1])
     with open(filepath) as f:
         chk_lines["original"] = f.readlines()
     chkpath = os.path.join("Historic_Checklists", "merged_sorted_db.txt")
