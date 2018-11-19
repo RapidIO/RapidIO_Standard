@@ -327,6 +327,8 @@ def edit_testcases():
                            "part_1_test_plan.txt"],
                  "Part  2":["Messaging and Doorbells",
                            "part_2_test_plan.txt"],
+                 "Part  6 Ch 5":["IDLE3 State Machines",
+                           "part_6_ch5_test_plan.txt"],
                  "Part 10":["Data Streaming",
                            "part_10_test_plan.txt"]}
     print("Choose the testcase file:")
