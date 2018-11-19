@@ -323,7 +323,7 @@ def check_testcases(excel, chk_parms):
     return rc
 
 def edit_testcases():
-    testcases = ["logical_test_plan.txt", "t8_test_plan.txt"]
+    testcases = ["logical_test_plan.txt", "t8_test_plan.txt", "t9_test_plan.txt"]
     print("Choose the testcase file:")
     for i, rev in enumerate(testcases):
         print("%d : %s" % (i, testcases[i]))
