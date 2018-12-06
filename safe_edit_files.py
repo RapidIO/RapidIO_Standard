@@ -354,17 +354,35 @@ def edit_testcases():
             chk_lines["uids"].append(toks[TOK_IDX_DB_H_CONST_REF])
     edit_file(filepath, check_testcases, chk_lines)
 
+def recover_spreadsheet():
+    inp = raw_input("Enter name of spreadsheet, or X to exit:")
+    if inp == "X":
+        return
+    elif not os.path.isfile(inp):
+        print("File '%s' not found. Exiting..." % inp)
+        return
+    spreadsheet_path = inp
+
+    inp = raw_input("Enter name of text file, or X to exit:")
+    if inp == "X":
+        return
+    text_file_path = inp
+    updated = ExcelEditor(text_file_path, spreadsheet_path, "XL")
+    updated.write_text()
+
 new_sections = '1'
 manual_translations = '2'
 manual_requirements = '3'
 optional_items = '4'
 testcases = '5'
+recovery = '6'
 exit_option = 'X'
 cmd_options = { new_sections:'New sections',
                 manual_translations:'Manual translations',
                 manual_requirements:'Manual requirements',
                 optional_items:'Optional checklist items',
                 testcases:'Testcase definitions',
+                recovery:'Recover a spreadsheet, convert to file. No checking',
                 exit_option:'Exit' }
 
 def print_cmd_options():
@@ -391,6 +409,8 @@ def main(argv = None):
             edit_optional_checklist_items()
         elif temp == testcases:
             edit_testcases()
+        elif temp == recovery:
+            recover_spreadsheet()
         elif temp == exit_option:
             break
         else:
