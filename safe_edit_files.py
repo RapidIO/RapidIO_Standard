@@ -30,6 +30,7 @@ from make_spreadsheet import *
 QUIT = 'Q'
 ACCEPT = 'A'
 EDIT = 'E'
+READ_ONLY = 'R'
 
 options = [QUIT, ACCEPT, EDIT]
 
@@ -47,7 +48,9 @@ def edit_file(filepath, check, check_parms):
     excel.write_excel()
     check_passed = ''
 
-    while not ((check_passed == ACCEPT) or (check_passed == QUIT)):
+    while not ((check_passed == ACCEPT)
+            or (check_passed == QUIT)
+            or (check_passed == READ_ONLY)):
         cmd = "xdg-open %s" % filepath_xls
         process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
@@ -354,6 +357,13 @@ def edit_testcases():
             chk_lines["uids"].append(toks[TOK_IDX_DB_H_CONST_REF])
     edit_file(filepath, check_testcases, chk_lines)
 
+def review_requirements_check(unused, unused2):
+    return READ_ONLY
+
+def review_requirements():
+    text_file_path = os.path.join("Historic_Checklists", "merged_sorted_db.txt")
+    edit_file(text_file_path, review_requirements_check, {})
+
 def recover_spreadsheet():
     inp = raw_input("Enter name of spreadsheet, or X to exit:")
     if inp == "X":
@@ -375,13 +385,15 @@ manual_translations = '2'
 manual_requirements = '3'
 optional_items = '4'
 testcases = '5'
-recovery = '6'
+requirements_db = '6'
+recovery = '7'
 exit_option = 'X'
 cmd_options = { new_sections:'New sections',
                 manual_translations:'Manual translations',
                 manual_requirements:'Manual requirements',
                 optional_items:'Optional checklist items',
                 testcases:'Testcase definitions',
+                requirements_db:'Requirements Database (read only)',
                 recovery:'Recover a spreadsheet, convert to file. No checking',
                 exit_option:'Exit' }
 
@@ -409,6 +421,8 @@ def main(argv = None):
             edit_optional_checklist_items()
         elif temp == testcases:
             edit_testcases()
+        elif temp == requirements_db:
+            review_requirements()
         elif temp == recovery:
             recover_spreadsheet()
         elif temp == exit_option:
