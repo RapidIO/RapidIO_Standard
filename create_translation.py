@@ -98,10 +98,10 @@ class RapidIOTranslationMerger(object):
 
     def print_translations(self):
         if self.trans == {}:
-            print "Nothing in merged outline."
+            print("Nothing in merged outline.")
 
         header_items = [item.strip() for item in TRANSLATION_HEADER.split(",")]
-        print ("'%s'" % ("', '".join(header_items)))
+        print("'%s'" % ("', '".join(header_items)))
         for rev_key in sorted(self.trans.keys()):
             for part_key in sorted(self.trans[rev_key].keys()):
                 for chap_key in sorted(self.trans[rev_key][part_key].keys()):
@@ -109,7 +109,7 @@ class RapidIOTranslationMerger(object):
                         for trans in self.trans[rev_key][part_key][chap_key][sec_key]:
                             key_list = [rev_key, part_key, chap_key, sec_key]
                             key_list.extend(trans)
-                            print ", ".join(key_list)
+                            print(", ".join(key_list))
 
     BKWD = "backward"
     FWD = "forward"
@@ -225,7 +225,7 @@ def main(argv = None):
 
     (options, argv) = parser.parse_args(argv)
     if len(argv) != 0:
-        print 'Invalid argument!'
+        print('Invalid argument!')
         print
         parser.print_help()
         return -1
