@@ -111,6 +111,7 @@ class RapidIOStandardParser(object):
 
         text = re.sub(PREFIXES,"\\1<prd>",text)
         text = re.sub(r"\.\.+",r"<ellipsis>",text)
+        text = re.sub(r"i\.e\.",r"<for example>",text)
         text = re.sub(WEBSITES,"<prd>\\1",text)
         text = re.sub(DIGITS + "[.]" + DIGITS,"\\1<prd>\\2",text)
         if "Ph.D" in text:
