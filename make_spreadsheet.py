@@ -53,6 +53,8 @@ class ExcelEditor(object):
         logging.info("Reading text file '%s'." % self.text_filepath)
         with open(self.text_filepath, 'r') as text_file:
             self.lines = text_file.readlines()
+        for idx, line in enumerate(self.lines):
+            logging.info("Text %d: '%s'" % (idx, line))
         col_warning = False
 
         for l in self.lines:
@@ -115,6 +117,7 @@ class ExcelEditor(object):
         for sheet in self.wb:
             if sheet.title != self.wb.active.title:
                 continue
+            idx = 0
             for row in sheet.iter_rows(min_row = 1):
                vals = [c.value  for c in row]
                for i, val in enumerate(vals):
@@ -128,6 +131,8 @@ class ExcelEditor(object):
                line = line.replace('\n', '\\n')
                line_crlf = "'%s'\n" % line
                self.lines.append(line_crlf)
+               logging.info("Line from Excel %d: '%s'" % (idx, line_crlf))
+               idx += 1
 
     def write_excel(self):
         self.wb.save(self.excel_filepath)
@@ -180,9 +185,10 @@ def main(argv = None):
 
     excel = ExcelEditor(options.text_filepath, options.excel_filepath)
     excel.write_excel()
-    cmd = "xdg-open %s" % options.excel_filepath
+    cmd = "exo-open %s" % options.excel_filepath
     process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
+    inp = raw_input("Press enter when you've closed the spreadsheet.")
     new_excel = ExcelEditor(options.text_filepath, options.excel_filepath, "XL")
     new_excel.write_text()
 

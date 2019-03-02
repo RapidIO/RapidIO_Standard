@@ -51,9 +51,10 @@ def edit_file(filepath, check, check_parms):
     while not ((check_passed == ACCEPT)
             or (check_passed == QUIT)
             or (check_passed == READ_ONLY)):
-        cmd = "xdg-open %s" % filepath_xls
+        cmd = "exo-open %s" % filepath_xls
         process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
+        inp = raw_input("Press enter when you've closed the spreadsheet.")
         updated = ExcelEditor(filepath, filepath_xls, "XL")
         check_passed = check(updated, check_parms)
 
