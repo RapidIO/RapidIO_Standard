@@ -18,6 +18,8 @@ import sys
 import os
 import logging
 import copy
+import glob
+import time
 from difflib import Differ
 from constants import *
 from create_translation import *
@@ -70,7 +72,7 @@ class ExcelEditor(object):
                  logging.warning("Header: %s" % self.header)
                  logging.warning("Data  : %s" % toks)
                  raise ValueError("Halting for debug...")
-                 
+
             self.data.append(toks)
 
         if self.header is None or self.header == []:
@@ -91,7 +93,7 @@ class ExcelEditor(object):
 
         data_cell_alignment = Alignment(horizontal="left", vertical="top",
                                         wrap_text=True, shrink_to_fit=True)
-         
+
         for r, d_toks in enumerate(self.data):
             for c, d_tok in enumerate(d_toks):
                 val = d_tok.decode("utf-8","ignore")
@@ -103,7 +105,7 @@ class ExcelEditor(object):
                     a_val = a_val.replace('\\n', '\n')
                 cell = ws.cell(row=r+2, column=c+1, value=str(a_val))
                 cell.alignment = data_cell_alignment
-        
+
     def _format_excel(self):
         ws = self.wb.active
         max_col_width = 60
@@ -141,6 +143,32 @@ class ExcelEditor(object):
         with open(self.text_filepath, 'w') as t:
             for l in self.lines:
                 t.write(l)
+
+    def edit_excel(self):
+        excel_dir = os.path.dirname(self.excel_filepath);
+        excel_fn = os.path.basename(self.excel_filepath);
+        lock_fn = ".*lock*" + excel_fn + "*"
+        self.excel_lock_filepath = os.path.join(excel_dir, lock_fn)
+
+        cmd = "exo-open %s" % self.excel_filepath
+        process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
+
+	## exo-open returns immediately if the default excel editor application
+        ## is already open editing another file.
+        ##
+        ## The following while loop waits until the lock file for the
+        ## excel file has been deleted before returning control to the
+        ## calling routine.  It checks twice, as LibreOffice Calc will
+        ## release the lock temporarily whenever is saved.
+        print("Checking for lockfile ('%s')" % self.excel_lock_filepath)
+        count = 0;
+        while (count < 2):
+            time.sleep(1)
+            if ([] == glob.glob(self.excel_lock_filepath)):
+                count += 1
+            else:
+                count = 0
 
 def create_parser():
     parser = OptionParser(description="Create Excel spreadsheet based on text file.")
@@ -185,10 +213,7 @@ def main(argv = None):
 
     excel = ExcelEditor(options.text_filepath, options.excel_filepath)
     excel.write_excel()
-    cmd = "exo-open %s" % options.excel_filepath
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
-    inp = raw_input("Press enter when you've closed the spreadsheet.")
+    excel.edit_excel()
     new_excel = ExcelEditor(options.text_filepath, options.excel_filepath, "XL")
     new_excel.write_text()
 
