@@ -20,7 +20,7 @@ check_rc 'Parse DataStreamingChecklist'
 check_rc 'Parse Rev1.3'
 ./parse_checklist.py -f Historic_Checklists/rapidio_interop_checklist_rev2_2.xml -r 2.2 -p 6 -t -o Historic_Checklists/rapidio_interop_checklist_rev2_2_optional.txt > Historic_Checklists/rapidio_interop_checklist_rev2_2.txt
 check_rc 'Parse Rev2.2Part6'
-./merge_checklists.py -c Historic_Checklists/ErrorManagementChecklist.txt -c Historic_Checklists/DataStreamingChecklist.txt -c Historic_Checklists/rev1_3_rio_chklist.txt -c Historic_Checklists/rapidio_interop_checklist_rev2_2.txt -o Standards/outline_1.3.txt  -o Standards/outline_2.2.txt  -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -r Standards/reqts_2.2.txt -r Standards/reqts_3.2.txt -m Standards/manual_reqts_3.2.txt -r Standards/reqts_4.0.txt > Historic_Checklists/merged_sorted_checklist.txt
+./merge_checklists.py -c Historic_Checklists/ErrorManagementChecklist.txt -c Historic_Checklists/DataStreamingChecklist.txt -c Historic_Checklists/rev1_3_rio_chklist.txt -c Historic_Checklists/rapidio_interop_checklist_rev2_2.txt -o Standards/outline_1.3.txt  -o Standards/outline_2.2.txt  -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -r Standards/reqts_2.2.txt -r Standards/reqts_3.2.txt -m Standards/manual_reqts_3.2.txt -r Standards/reqts_4.0.txt -m Standards/manual_reqts_4.0.txt > Historic_Checklists/merged_sorted_checklist.txt
 check_rc 'MERGE all checklists'
 ./update_checklist_db.py -c Historic_Checklists/merged_sorted_checklist.txt -d Historic_Checklists/merged_sorted_db.txt > Historic_Checklists/merged_sorted_db2.txt
 check_rc 'UPDATE database'
