@@ -120,8 +120,8 @@ class ReqtDatabaseUpdater(object):
         for line_num, line in enumerate(db_lines[2:]):
             toks = [tok.strip() for tok in line[1:-1].split("', '")]
             if not len(toks) >= TOK_IDX_DB_H_FIRST_SECN:
-                raise ValueError("%s %d DB Line %s tok len %d"
-                              % (reqt, line_num+1, line, len(toks)))
+                raise ValueError("%d DB Line %s tok len %d"
+                              % (line_num+1, line, len(toks)))
             rev = copy.deepcopy(toks[TOK_IDX_DB_H_REVISION])
             part = copy.deepcopy(toks[TOK_IDX_DB_H_PART])
             chap = copy.deepcopy(toks[TOK_IDX_DB_H_CHAPTER])
