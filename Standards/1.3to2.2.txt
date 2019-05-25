@@ -552,7 +552,7 @@
 > '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.5.2.2.8 Level II LR Receiver Jitter Tolerance'
 > '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.5.3 Level II LR Link and Jitter Budgets'
 > '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.5.4 Level II LR StatEye.org Template'
-> '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.6 Level II Medium Run Interface General'
+> '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.6 Level II Medium Run Interface General Requirements'
 > '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.6.1 Medium Run Jitter and Inter-operability Methodology'
 > '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.6.1.1 Level II Medium Run Channel Compliance'
 > '2.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 10 5 Gbaud and 6.25 Gbaud LP-Serial Links', '10.6.1.2 Level II MR Transmitter Inter-operability'

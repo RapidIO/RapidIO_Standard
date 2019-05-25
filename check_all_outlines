@@ -21,10 +21,14 @@ check_rc registers_2.2
 check_rc registers_3.2
 ./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4.0.xml -e -r test > Standards/registers_4.0.txt 2>&1
 check_rc registers_4.0
+./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4-1.xml -e -r test > Standards/registers_4.1.txt 2>&1
+check_rc registers_4.1
+
 
 diff Standards/registers_1.3.txt Standards/registers_2.2.txt > Standards/1.3to2.2register.txt
 diff Standards/registers_2.2.txt Standards/registers_3.2.txt > Standards/2.2to3.2register.txt
 diff Standards/registers_3.2.txt Standards/registers_4.0.txt > Standards/3.2to4.0register.txt
+diff Standards/registers_4.0.txt Standards/registers_4.1.txt > Standards/4.0to4.1register.txt
 
 ./parse_rapidio_standard.py -f Standards/RapidIO\ 1.3\ Specification\ Stack.xml -o -r test > Standards/outline_1.3.txt
 check_rc outline_1.3
@@ -34,6 +38,9 @@ check_rc outline_2.2
 check_rc outline_3.2
 ./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4.0.xml -o -r test > Standards/outline_4.0.txt
 check_rc outline_4.0
+./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4-1.xml -o -r test > Standards/outline_4.1.txt
+check_rc outline_4.1
+
 
 ./parse_rapidio_standard.py -f Standards/Rev_2.2_specification_stack.xml -r 2.2 -n Standards/new_sections_2.2.txt > Standards/reqts_2.2.txt
 check_rc reqts_2.2
@@ -41,6 +48,9 @@ check_rc reqts_2.2
 check_rc reqts_3.2
 ./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4.0.xml -r 4.0 -n Standards/new_sections_4.0.txt > Standards/reqts_4.0.txt
 check_rc reqts_4.0
+./parse_rapidio_standard.py -f Standards/RapidIO-Specification-4-1.xml -r 4.1 -n Standards/new_sections_4.1.txt > Standards/reqts_4.1.txt
+check_rc reqts_4.1
+
 
 diff Standards/outline_1.3.txt Standards/outline_2.2.txt > Standards/1.3to2.2.txt 
 sed -i -r "s#'test'#'1.3'#g" Standards/outline_1.3.txt
@@ -58,29 +68,42 @@ check_rc 2.2to3.2
 
 diff Standards/outline_3.2.txt Standards/outline_4.0.txt > Standards/3.2to4.0.txt
 sed -i -r "s#'test'#'3.2'#g" Standards/outline_3.2.txt
-sed -i -r "s#'test'#'4.0'#g" Standards/outline_4.0.txt
 sed -i -r "s#< 'test#< '3.2#g" Standards/3.2to4.0.txt
 sed -i -r "s#> 'test#> '4.0#g" Standards/3.2to4.0.txt
 ./merge_outline_diffs.py -f Standards/3.2to4.0.txt -n Standards/new_sections_4.0.txt -c 0.75
 check_rc 3.2to4.0
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt > Standards/all_translations.txt
+diff Standards/outline_4.0.txt Standards/outline_4.1.txt > Standards/4.0to4.1.txt
+sed -i -r "s#'test'#'4.0'#g" Standards/outline_4.0.txt
+sed -i -r "s#'test'#'4.1'#g" Standards/outline_4.1.txt
+sed -i -r "s#< 'test#< '4.0#g" Standards/4.0to4.1.txt
+sed -i -r "s#> 'test#> '4.1#g" Standards/4.0to4.1.txt
+./merge_outline_diffs.py -f Standards/4.0to4.1.txt -n Standards/new_sections_4.1.txt -m Standards/manual_4.0to4.1.txt -c 0.75
+check_rc 4.0to4.1
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt > Standards/all_translations.txt
 check_rc all_translations
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_1.3.txt -v 4.0 > Standards/test_trans_1.3_to_4.0.txt
-check_rc 1.3_to_4.0_trans_test
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_1.3.txt -v 4.1 > Standards/test_trans_1.3_to_4.0.txt
+check_rc 1.3_to_4.1_trans_test
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_2.2.txt -v 4.0 > Standards/test_trans_2.2_to_4.0.txt
-check_rc 2.2_to_4.0_trans_test
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_2.2.txt -v 4.1 > Standards/test_trans_2.2_to_4.0.txt
+check_rc 2.2_to_4.1_trans_test
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_3.2.txt -v 4.0 > Standards/test_trans_3.2_to_4.0.txt
-check_rc 3.2_to_4.0_trans_test
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_3.2.txt -v 4.1 > Standards/test_trans_3.2_to_4.0.txt
+check_rc 3.2_to_4.1_trans_test
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_4.0.txt -v 1.3 > Standards/test_trans_4.0_to_1.3.txt
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_3.2.txt -v 4.1 > Standards/test_trans_3.2_to_4.0.txt
+check_rc 4.0_to_4.1_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_4.1.txt -v 1.3 > Standards/test_trans_4.0_to_1.3.txt
+check_rc 4.1_to_1.3_trans_test
+
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_4.0.txt -v 1.3 > Standards/test_trans_4.0_to_1.3.txt
 check_rc 4.0_to_1.3_trans_test
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_3.2.txt -v 1.3 > Standards/test_trans_3.2_to_1.3.txt
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_3.2.txt -v 1.3 > Standards/test_trans_3.2_to_1.3.txt
 check_rc 3.2_to_1.3_trans_test
 
-./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -o Standards/outline_2.2.txt -v 1.3 > Standards/test_trans_2.2_to_1.3.txt
+./create_translation.py -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt -t Standards/translate_3.2to4.0.txt -t Standards/translate_4.0to4.1.txt -o Standards/outline_2.2.txt -v 1.3 > Standards/test_trans_2.2_to_1.3.txt
 check_rc 2.2_to_1.3_trans_test

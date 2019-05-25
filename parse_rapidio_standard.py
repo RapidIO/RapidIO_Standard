@@ -252,7 +252,7 @@ class RapidIOStandardParser(object):
                         logging.debug("Section: '%s'" % sect)
                         logging.debug("Found unicode ellipsis, not parsing any more sections...")
                         return
-                    # Skip lines with a sequence of periods "..." in them
+                    # Skip lines with an ellipsis ("...") in them
                     # EXCEPT when the ellipsis is of the form used to indicate a range
                     # of register values...
                     if temp.find('.....') >= 0:
@@ -407,7 +407,7 @@ class RapidIOStandardParser(object):
         for part in self.outline:
             for chapter in self.outline[part]:
                 for section in self.outline[part][chapter]:
-                    print ("'" + self.revision + "', '" +  part + "', '" + chapter + "', '" + section + "'")
+                    print("'" + self.revision + "', '" +  part + "', '" + chapter + "', '" + section + "'")
 
     # Perform character substitutions to simplify parsing of text and correct
     # some text conversion errors...
@@ -654,6 +654,71 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("Mask x Clear Register y CSR </P>     \(Offset",
                                "Mask x Clear Register y CSR (Offset",
                                self.all_text)
+        # Correct Rev 4.0 Register Map section titles
+        self.all_text = re.sub("Map -I", "Map - I", self.all_text)
+
+        # Correct Rev 4.1 Part 10 & Annex 1 titles
+        self.all_text = re.sub("RapidIO\s+Interconnect\s+Specification",
+                               "RapidIO Interconnect Specification",
+                               self.all_text)
+
+        # Correct Rev 4.1 Register titles
+        self.all_text = re.sub("\s+</P>\s+\(Configuration ",
+                               " (Configuration ",
+                               self.all_text)
+        self.all_text = re.sub("\s+</P>\s+\(Block ",
+                               " (Block ",
+                               self.all_text)
+        self.all_text = re.sub("\s+</P>\s+\(Offset ",
+                               " (Offset ",
+                               self.all_text)
+        self.all_text = re.sub("[\s+</P>]*CSR[\s+</P>]*\s+\(Offset ",
+                               " CSR (Offset ",
+                               self.all_text)
+        self.all_text = re.sub("\s+</P>\s+<P>\(RM-I",
+                               " (RM-I",
+                               self.all_text)
+        self.all_text = re.sub("offset based on </P>\s*<P>VC #",
+                               "offset based on VC  . #",
+                               self.all_text)
+        self.all_text = re.sub("Capture </P>\s*<P>CSRs",
+                               "Capture CSRs",
+                               self.all_text)
+        self.all_text = re.sub(" \+ </P>    <P>\(",
+                               " + (",
+                               self.all_text)
+
+        # Correct Rev 4.1 Section Titles
+        self.all_text = re.sub("for Reliable </P>\s+\<P>Transmission",
+                               "for Reliable Transmission",
+                               self.all_text)
+        self.all_text = re.sub("Error Free Mode </P>\s+<P>Link Operation",
+                               "Error Free Mode Link Operation",
+                               self.all_text)
+        self.all_text = re.sub("Error </P>\s+<P>Recovery Option",
+                               "Error Recovery Option",
+                               self.all_text)
+        self.all_text = re.sub("and </P>\s+<P>3.125 Gbaud LP",
+                               "and 3.125 Gbaud LP",
+                               self.all_text)
+        self.all_text = re.sub("LP-Serial </P>\s+Links",
+                               "LP-Serial Links",
+                               self.all_text)
+        self.all_text = re.sub("for </P>\s+<P>10.3125",
+                               "for 10.3125",
+                               self.all_text)
+        self.all_text = re.sub("for 25 </P>\s+<P>Gbaud",
+                               "for 25Gbaud",
+                               self.all_text)
+        self.all_text = re.sub("General </P>\s+<P>Requirements",
+                               "General Requirements",
+                               self.all_text)
+        self.all_text = re.sub("Port Aggrega- tion",
+                               "Port Aggregation",
+                               self.all_text)
+        self.all_text = re.sub("Aggregation </P>\s+<P>Extensions",
+                               "Aggregation Extensions",
+                               self.all_text)
 
     # Work around embedded specification part references in
     # Version 4.0, Part 10 Chapter 5
@@ -720,13 +785,15 @@ class RapidIOStandardParser(object):
             if found_number:
                 new_part_number = int(found_number.group(1))
                 new_part_annex = new_part_name.find("Annex") >= 0
+                logging.info("Part Name '%s' Part# %d Annex %d" %
+                    (new_part_name, new_part_number, new_part_annex))
                 # Always skip Part 4, Parallel RapidIO
                 if new_part_number == 4 and not new_part_annex:
                     logging.info("Skipping part 4: %s" % part[0:50])
                     continue
                 # Always skip Annex 1 and 2
                 if new_part_number < 3 and new_part_annex:
-                    continue
+                    break
                 if (self.part_name == ''
                     or (new_part_annex and not self.part_annex)
                     or (not (new_part_annex ^ self.part_annex)

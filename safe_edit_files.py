@@ -73,7 +73,7 @@ def check_new_sections(excel, chk_parms):
     return rc
 
 def edit_new_sections():
-    new_section_revisions = ["2.2", "3.2", "4.0"]
+    new_section_revisions = ["2.2", "3.2", "4.0", "4.1"]
     print("Choose the revision for new sections:")
     for i, rev in enumerate(new_section_revisions):
         print("%d : Revision %s" % (i, rev))
@@ -131,7 +131,7 @@ def check_manual_translations(excel, chk_parms):
     return rc
 
 def edit_manual_translations():
-    manual_translations = ["1.3to2.2", "2.2to3.2"]
+    manual_translations = ["1.3to2.2", "2.2to3.2", "4.0to4.1"]
     print("Choose the manual translation:")
     for i, rev in enumerate(manual_translations):
         print("%d : %s" % (i, rev))

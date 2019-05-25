@@ -13,6 +13,10 @@
 ---
 > '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.14 Error Detection and Recovery for Error Free Mode Link Operation'
 > '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.15 Power Management'
+600c605
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
+---
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
 851,853c856,858
 < '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.1 Common to Level III Short run and Long run'
 < '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.2 Application Goals for Level III Short Run'

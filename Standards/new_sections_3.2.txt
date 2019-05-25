@@ -130,7 +130,7 @@
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.5.3.6.1 (S)MECS Master Operation'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.5.3.6.2 MECS Slave Operation'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.13.2.2.3 IDLE3 Sequence Errors'
-'3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.5.6 Register Map -II'
+'3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.5.6 Register Map - II'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.6.8 Port n Initialization Status CSRs (RM-I Block Offsets 0x4C, 6C, ... , 22C) (RM-II Block Offsets 0x4C, 8C, ... , 40C)'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.6.12 Port n Outbound ackID CSRs (RM-II Block Offsets 0x60, 0xA0, ... , 0x420)'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.6.13 Port n Inbound ackID CSRs (RM-II Block Offsets 0x64, 0xA4, ... , 0x424)'
