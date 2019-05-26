@@ -26,12 +26,14 @@ from constants import *
 from create_translation import *
 
 class ChecklistMerger(object):
-    def __init__(self, checklists, outlines, translations, requirements, man_reqts):
+    def __init__(self, checklists, outlines, translations, requirements, man_reqts, drop_reqts):
         self.checklists = checklists
         self.outlines = outlines
         self.requirements = requirements
         self.manual_requirements = man_reqts
+        self.drop_requirements = drop_reqts
         self.merge = []
+	self.drop_lines = []
 
         self._read_outlines()
         self._translator = RapidIOTranslationMerger(translations)
@@ -115,6 +117,9 @@ class ChecklistMerger(object):
                 logging.debug("%s: %d Ref: %s" % (outline_path, x, reference))
 
     def _read_requirements(self):
+        for reqt in self.drop_requirements:
+            logging.info("Processing DROP requirements file '%s'." % reqt)
+            self._drop_requirements(reqt)
         for reqt in self.requirements:
             logging.info("Processing requirements file '%s'." % reqt)
             self._process_requirements(reqt, REQT_NUM_OFFSET_NONE)
@@ -134,6 +139,11 @@ class ChecklistMerger(object):
             if not len(toks) == REQUIREMENTS_HEADER_TOKEN_COUNT:
                 raise ValueError("%s %d Line %s tok len %d"
                               % (reqt, line_num+1, line, len(toks)))
+            del_line = [toks[0], toks[1], toks[2], toks[3], toks[4], toks[6]]
+            if del_line in self.drop_lines:
+                logging.info("Dropping requirement '%s'" % "', '".join(toks))
+                continue
+
             # Checklist: Sentence, Sentence_Num, Type, Revision, Part,
             #             Chapter, Section, Checklist_FileName,
             #            Checklist_Table_Name, Checklist_ID,
@@ -173,6 +183,21 @@ class ChecklistMerger(object):
                                % (t_key,[toks[0], toks[1], toks[2], toks[3]]))
                     line_2_merge.extend([toks[0], toks[1], toks[2], toks[3]])
             self.merge.append(line_2_merge)
+
+    def _drop_requirements(self, reqt):
+        drop_file = open(reqt)
+        drop_lines = [line.strip() for line in drop_file.readlines()]
+        drop_file.close()
+
+        for line_num, line in enumerate(drop_lines[1:]):
+            #    0        1      2        3       4       5            6
+            # Revision, Part, Chapter, Section, Type, Sentence_num, Sentence
+            toks = [tok.strip() for tok in line[1:-1].split("', '")]
+            if not len(toks) == REQUIREMENTS_HEADER_TOKEN_COUNT:
+                raise ValueError("%s %d Line %s tok len %d"
+                              % (reqt, line_num+1, line, len(toks)))
+            del toks[5]
+            self.drop_lines.append(toks)
 
     def _read_checklists(self):
         for checklist_path in self.checklists:
@@ -255,6 +280,11 @@ def create_parser():
             action = 'append', type = 'string', default = [],
             help = 'Manually maintained requirements files.',
             metavar = 'FILE')
+    parser.add_option('-d', '--drop_reqts',
+            dest = 'drop_reqts',
+            action = 'append', type = 'string', default = [],
+            help = 'Manually maintained drop requirements files.',
+            metavar = 'FILE')
 
     return parser
 
@@ -279,8 +309,12 @@ def validate_options(options):
             raise ValueError("Requirements file '%s' does not exist." % reqt)
 
     for man_reqt in options.manual_reqts:
-        if not os.path.isfile(reqt):
-            raise ValueError("Manually maintained requirements file '%s' does not exist." % reqt)
+        if not os.path.isfile(man_reqt):
+            raise ValueError("Manually maintained requirements file '%s' does not exist." % man_reqt)
+
+    for drop_reqt in options.drop_reqts:
+        if not os.path.isfile(drop_reqt):
+            raise ValueError("Manually maintained requirements file '%s' does not exist." % drop_reqt)
 
 def main(argv = None):
     logging.basicConfig(level=logging.WARN)
@@ -305,7 +339,8 @@ def main(argv = None):
                              options.outline_filenames,
                              options.translation_filenames,
                              options.reqt_filepaths,
-                             options.manual_reqts)
+                             options.manual_reqts,
+                             options.drop_reqts)
     merger.print_checklist()
 
 if __name__ == '__main__':

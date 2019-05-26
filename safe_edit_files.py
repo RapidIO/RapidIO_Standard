@@ -187,7 +187,7 @@ def check_manual_requirements(excel, chk_parms):
 
 def edit_manual_requirements():
     manual_requirements = ["3.2", "4.0"]
-    print("Choose the manual translation:")
+    print("Choose the manual requirements:")
     for i, rev in enumerate(manual_requirements):
         print("%d : %s" % (i, rev))
     inp = raw_input("Select option, or 'X' to exit:")
@@ -201,6 +201,29 @@ def edit_manual_requirements():
 
     chk_lines = {}
     filepath = os.path.join("Standards", "manual_reqts_%s.txt" % rev)
+    with open(filepath) as f:
+        chk_lines["original"] = f.readlines()
+    outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
+    with open(outline_path) as f:
+        chk_lines["outline"] = f.readlines()
+    edit_file(filepath, check_manual_requirements, chk_lines)
+
+def edit_drop_requirements():
+    manual_requirements = ["3.2"]
+    print("Choose the manual drop requirements:")
+    for i, rev in enumerate(manual_requirements):
+        print("%d : %s" % (i, rev))
+    inp = raw_input("Select option, or 'X' to exit:")
+    try:
+        idx = int(inp)
+    except ValueError:
+        return
+    if not (idx in range(0, len(manual_requirements))):
+        return
+    rev = manual_requirements[idx]
+
+    chk_lines = {}
+    filepath = os.path.join("Standards", "manual_drop_%s.txt" % rev)
     with open(filepath) as f:
         chk_lines["original"] = f.readlines()
     outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
@@ -381,14 +404,16 @@ def recover_spreadsheet():
 new_sections = '1'
 manual_translations = '2'
 manual_requirements = '3'
-optional_items = '4'
-testcases = '5'
-requirements_db = '6'
-recovery = '7'
+drop_requirements = '4'
+optional_items = '5'
+testcases = '6'
+requirements_db = '7'
+recovery = '8'
 exit_option = 'X'
 cmd_options = { new_sections:'New sections',
                 manual_translations:'Manual translations',
                 manual_requirements:'Manual requirements',
+                drop_requirements:'Drop requirements',
                 optional_items:'Optional checklist items',
                 testcases:'Testcase definitions',
                 requirements_db:'Requirements Database (read only)',
@@ -415,6 +440,8 @@ def main(argv = None):
             edit_manual_translations()
         elif temp == manual_requirements:
             edit_manual_requirements()
+        elif temp == drop_requirements:
+            edit_drop_requirements()
         elif temp == optional_items:
             edit_optional_checklist_items()
         elif temp == testcases:
