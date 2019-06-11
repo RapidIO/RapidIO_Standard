@@ -1,0 +1,2 @@
+'Revision', 'Part', 'Chapter', 'Section', 'Type', 'Number', 'Sentence'
+'4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 3 Port Aggregation Extensions', '3.2 Port Aggregation Interoperability', 'REQUIREMENT', '1', 'TEST Manual Requirement'

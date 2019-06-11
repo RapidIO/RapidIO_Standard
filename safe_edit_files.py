@@ -186,7 +186,7 @@ def check_manual_requirements(excel, chk_parms):
     return rc
 
 def edit_manual_requirements():
-    manual_requirements = ["3.2", "4.0"]
+    manual_requirements = ["3.2", "4.0", "4.1"]
     print("Choose the manual requirements:")
     for i, rev in enumerate(manual_requirements):
         print("%d : %s" % (i, rev))
