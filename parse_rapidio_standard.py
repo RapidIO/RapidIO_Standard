@@ -719,6 +719,9 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("Aggregation </P>\s+<P>Extensions",
                                "Aggregation Extensions",
                                self.all_text)
+        # Correct 4.1 requirement beginning with a '
+        self.all_text = re.sub("'Y'", "Y",
+                               self.all_text)
 
     # Work around embedded specification part references in
     # Version 4.0, Part 10 Chapter 5
