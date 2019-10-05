@@ -401,6 +401,23 @@ def recover_spreadsheet():
     updated = ExcelEditor(text_file_path, spreadsheet_path, "XL")
     updated.write_text()
 
+def file_to_spreadsheet():
+    inp = raw_input("Enter name of text file, or X to exit:")
+    if inp == "X":
+        return
+    if not os.path.isfile(inp):
+        print("File '%s' not found. Exiting..." % inp)
+        return
+    text_file_path = inp
+
+    inp = raw_input("Enter name of spreadsheet, or X to exit:")
+    if inp == "X":
+        return
+    spreadsheet_path = inp
+
+    updated = ExcelEditor(text_file_path, spreadsheet_path)
+    updated.write_excel()
+
 new_sections = '1'
 manual_translations = '2'
 manual_requirements = '3'
@@ -409,6 +426,7 @@ optional_items = '5'
 testcases = '6'
 requirements_db = '7'
 recovery = '8'
+edit_any = '9'
 exit_option = 'X'
 cmd_options = { new_sections:'New sections',
                 manual_translations:'Manual translations',
@@ -418,6 +436,7 @@ cmd_options = { new_sections:'New sections',
                 testcases:'Testcase definitions',
                 requirements_db:'Requirements Database (read only)',
                 recovery:'Recover a spreadsheet, convert to file. No checking',
+                edit_any:'Convert a file to a spreadsheet.',
                 exit_option:'Exit' }
 
 def print_cmd_options():
@@ -450,6 +469,8 @@ def main(argv = None):
             review_requirements()
         elif temp == recovery:
             recover_spreadsheet()
+        elif temp == edit_any:
+            file_to_spreadsheet()
         elif temp == exit_option:
             break
         else:
