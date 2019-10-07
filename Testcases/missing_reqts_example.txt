@@ -1,0 +1,3 @@
+MISSING:
+Reqt, Description, Revision, Part, Chapter, Section
+'R3.2p6s5.19.7.1m0071', 'The LP Receive width field in the IDLE3 Status/Control ordered sequence shall be 0b101 when the state machine is in Nx_mode or Nx_recovery state and N is 16.', '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.19.7.1 1x/2x/Nx Initialization State Machine'

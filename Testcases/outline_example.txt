@@ -1,0 +1,3 @@
+'Revision', 'Part', 'Chapter', 'Section'
+'3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.19.7 Port Initialization State Machine'
+'3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.19.7.1 1x/2x/Nx Initialization State Machine'

@@ -1,0 +1,136 @@
+--------
+OVERVIEW
+--------
+
+This directory contains text files for fully documented test plans.
+
+It also contains Python executables and example files for a simpler test plan
+scheme.
+
+---------------------------
+FULLY DOCUMENTED TEST PLANS
+---------------------------
+
+The test plan text files can be edited as spreadsheets using the 
+safe_edit_files.py executable, found in the directory above this one.
+
+There is no additional support for these files at this time.
+
+------------------------
+SIMPLER TEST PLAN SCHEME
+------------------------
+
+The simpler test plan scheme uses a test description file and a
+test requirements file to create a single file, the test description and
+requirements (tc_d_r) file, with one line per test case.  It is also possible
+to combine the tc_d_r file with the merged_sorted_db.txt requirements file to
+create a test description, requirements, and requirements description
+(tc_d_r_rd) file with one line for each requirement for each testcase.
+
+This flow also allows users to confirm that the tc_d_r/tc_d_r_rd files
+completely address all requirements found in sections of merged_sorted_db.txt.
+
+An example of the flow is shown below:
+
+./TestCaseDescrAndReqts.py -d tc_descr_example.txt -r tc_reqts_example.txt > tc_d_r_example.txt
+./TC_D_R_RD.py -m tc_d_r_example.txt -d merged_sorted_db.txt > tc_d_r_rd_example.txt
+./TC_D_R_RD.py -c outline_example.txt -d merged_sorted_db.txt -x tc_d_r_rd_example.txt
+
+The first line combines the test case descriptions (tc_descr_example.txt)
+and test case requirements (tc_reqts_example.txt) files into a tc_d_r file
+(tc_d_r_example.txt)
+
+The second line combines the tc_d_r file with the requirement descriptions
+found in merged_sorted_db.txt to create a tc_d_r_rd file, tc_d_r_rd_example.txt.
+The tc_d_r_rd_example.txt file has one line for each requirement, for each
+testcase, which should make it easier to review requirements for a testcase.
+
+The last line prints all merged_sorted_db.txt requirements for the sections
+specified in the outline_example.txt file that are NOT tested according
+to the tc_d_r_rd file.  Expected output is found in missing_reqts_example.txt.
+
+-------------------------
+The Test Description File
+-------------------------
+
+The test description file is supported by TestCaseDescr.py
+  - The first line of this file must be the line "'TESTNAME', 'DESCRIPTION'",
+    including the single quotes and excluding the double quotes.
+  - Second and subsequent lines consist of a test name, and a description of
+    the test, in the format "'test name', 'description'", again 
+    including the single quotes and excluding the double quotes.
+  - To check the format of a test description file 'test_descr.txt', do as
+    follows:
+
+    TestCaseDescr.py -d test_descr.txt
+
+    This will read in the test description file, failing if formatting errors
+    are detected.  It will then print the test cases and descriptions sorted
+    by test case name.
+
+--------------------------
+The Test Requirements File
+--------------------------
+
+The test requirements file is supported by TestCaseReqts.py
+  - The first line of the test requirements file must be the line
+    'TESTNAME', 'REQUIREMENTS'
+    including the single quotes.
+  - Second and subsequent lines consist of a test name, and a comma-separated
+    list of requirement references from 
+    Historic_Checklists/merged_sorted_db.txt.
+    For example:
+    'test_name_1', 'requirement1,requirement2,requirement3'
+  - To check the format of a test requirements file 'test_reqts', do as
+    follows:
+
+    TestCaseReqts.py -r <test_reqts>
+
+    This will read in the test requirements file, failing if formatting errors
+    are detected.  It will then print the test cases and requirements sorted
+    by test case name.  Requirements will be output sorted by requirement lable.
+
+--------------------------------------------------
+The Test Description and Requirments (tc_d_r) File
+--------------------------------------------------
+
+The test description and requirements file is generated from the test
+description and test requirements files using TestCaseDescrAndReqts.py,
+as follows:
+
+TestCaseDescrAndReqts.py -d <test_descr> -r <test_reqts>
+
+For simpler test plans, the tc_d_r file can be manually edited directly or
+using a spreadsheet created by safe_edit_files.py options 8 and 9,
+found in the directory above.  It is possible to load, check, sort, and display
+a manually edited tc_d_r file as follows:
+
+TestCaseDescrAndReqts.py -m <tc_d_r>
+
+--------------------------------------------------------------------------------
+Testcase Description, Requirments and Requirements Description (tc_d_r_rd) File
+--------------------------------------------------------------------------------
+
+For review purposes it is easiest to check a requirement against a testcase to
+confirm that the testcase and requirement belong together.  TC_D_R_RD.py is used
+to generate a tc_d_r_rd file using the tc_d_r file described above, and the
+merged_sorted_db.txt file found in the ../Historic_Checklists directory.
+
+To generate the tc_d_r_rd file:
+
+TC_D_R_RD.py -m <tc_d_r> -d merged_sorted_db.txt > tc_d_r_rd.txt
+
+The TC_D_R_RD.py executable can also check that all requirements in a
+requirements database (i.e. merged_sorted_db.txt) are met by a set of testcases.
+The subset of the requirements database requirements to check is selected uing
+an outline file, with the same format as ../Standards/outline_*.txt.
+
+For example, to print all requirements in the parts of the standard listed
+in an outline.txt file are NOT met by a tc_d_r file, use:
+
+TC_D_R_RD.py -d merged_sorted_db.txt -o outline.txt -m <tc_d_r> 
+
+To do the same for a tc_d_r_rd file, use:
+
+TC_D_R_RD.py -d merged_sorted_db.txt -o outline.txt -x <tc_d_r_rd> 
+
