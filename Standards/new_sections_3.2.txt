@@ -19,7 +19,6 @@
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.7.5 Level 1 Group x Entry y Routing Table Entry CSR (Offset = (L1_Group_Ptr*0x400) + (x * 0x400) + (y*4))'
 '3.2', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', 'Chapter 3 Common Transport Registers', '3.7.6 Level 2 Group x Entry y Routing Table Entry CSR (Offset = (L2_Group_Ptr*0x400) + (x * 0x400) + (y*4))'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.4.4 Timestamp Control Symbol'
-'3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.4.7 Link-Response Control Symbol'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.4.8 Loop-Response Control Symbol'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.5.1 Reset-port Command'
 '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 3 Control Symbols', '3.5.6 Timing Control Symbols'
