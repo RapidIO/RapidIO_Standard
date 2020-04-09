@@ -97,3 +97,5 @@ TOK_IDX_TC_H_TEST_NAME = 7
 TOK_IDX_TC_H_TEST_STATUS = 8
 TOK_IDX_TC_H_COMMENTS = 9
 TOK_IDX_TC_H_TOK_COUNT = TOK_IDX_TC_H_COMMENTS + 1
+
+REGISTERS_HEADER = "'Revision', 'Part', 'Chapter', 'Section', 'Block_ID', 'Bits', 'Field', 'Description'"

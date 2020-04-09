@@ -378,10 +378,9 @@ class RapidIOStandardParser(object):
             print ("No registers found for " + self.input_xml)
             return 0
 
-        print("'%s'" % "', '".join(["Section", "Block_ID", "Bits",
-                                 "Field", "Description"]))
+        print(REGISTERS_HEADER)
         for reg in self.registers:
-            print ("'%s'" % "', '".join(reg[3:]))
+            print ("'%s'" % "', '".join(reg))
 
     def print_reqts(self):
         if self.create_outline or self.extract_registers:
