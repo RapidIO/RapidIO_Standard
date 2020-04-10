@@ -12,3 +12,7 @@ check_all_checklists runs parse_checklists.py on all checklist XML files,
    and merges the results of the checklists and the outlines/requirements
    into a single file (Historic_Checklists/merged_sorted_checklist.txt
 
+Both scripts should be executed in a Python 2.7 environment.
+
+To run the make_document.py register summary word document generation
+procedure, the python-docx package must be installed.
