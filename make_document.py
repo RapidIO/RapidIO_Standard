@@ -59,6 +59,30 @@ class WordEditor(object):
                 print ('%s' % "', '".join(
                 [bit.bit_range, bit.bit_name, bit.spec_part, bit.spec_section]))
 
+    def add_reserved_row(self, table, first_bit, last_bit):
+        rsvd_cells = table.add_row().cells
+        rsvd_cells[1].merge(rsvd_cells[3])
+        bit_lable = ""
+        if first_bit == last_bit:
+            bit_lable = str(first_bit)
+        else:
+            bit_lable = "%d:%d" % (first_bit, last_bit)
+        rsvd_cells[0].add_paragraph(bit_lable)
+        rsvd_cells[1].add_paragraph("Reserved")
+
+    def add_reserved_fields(self, table, last_bit, bit):
+        new_bits = [tok.strip() for tok in bit.bit_range.split(":")]
+        next_bit = -1
+        if len(new_bits) == 1:
+            next_bit = int(new_bits[0])
+            new_last_bit = next_bit + 1
+        else:
+            next_bit = int(new_bits[0])
+            new_last_bit = int(new_bits[1]) + 1
+        if not next_bit == last_bit:
+            self.add_reserved_row(table, last_bit, next_bit - 1)
+        return new_last_bit
+
     def create_document(self):
         document = Document()
 
@@ -69,33 +93,40 @@ class WordEditor(object):
         p.add_run('.  Generated ').bold = True
         now = datetime.datetime.now()
         p.add_run(now.strftime("%Y-%m-%d %H:%M:%S"))
+        p = document.add_paragraph('Note that registers are defined using big '
+                                   'endian notation.  Bit 0 is the most '
+                                   'significant bit!')
+        prev_block = "XXXX"
+        table = None
 
         for reg in self.regs:
-            document.add_page_break()
-            document.add_heading(reg.name, level=1)
-            document.add_paragraph(
-                'Block: %s' % reg.block, style='List Bullet'
-            )
-            document.add_paragraph(
-                'Offset: %s' % reg.offset, style='List Bullet'
-            )
-            document.add_paragraph(
-                'Bit field table:'
-            )
-
-            table = document.add_table(rows=1, cols=4)
-            hdr_cells = table.rows[0].cells
-            hdr_cells[0].text = 'Bits'
-            hdr_cells[1].text = 'Name'
-            hdr_cells[2].text = 'Part'
-            hdr_cells[3].text = 'Section'
+            if not reg.block == prev_block:
+                document.add_page_break()
+                toks = [tok.strip() for tok in reg.name.split("Header")]
+                document.add_heading('Block: %s : %s' % (reg.block, toks[0]),
+                                      level=1)
+                table = document.add_table(rows=1, cols=4)
+                hdr_cells = table.rows[0].cells
+                hdr_cells[0].text = 'Bits'
+                hdr_cells[1].text = 'Name'
+                hdr_cells[2].text = 'Part'
+                hdr_cells[3].text = 'Section'
+                prev_block = reg.block
+            reg_cells = table.add_row().cells
+            reg_cells[0].merge(reg_cells[3])
+            reg_cells[0].add_paragraph("Name: %s\nOffset: %s" %
+                                       (reg.name, reg.offset),
+                                       style=None)
+            last_bit = 0
             for bit in reg.bits:
+                last_bit = self.add_reserved_fields(table, last_bit, bit)
                 row_cells = table.add_row().cells
                 row_cells[0].text = bit.bit_range
                 row_cells[1].text = bit.bit_name
                 row_cells[2].text = bit.spec_part
                 row_cells[3].text = bit.spec_section
-            table = None
+            if not last_bit == 32:
+                self.add_reserved_row(table, last_bit, 31)
         self.doc = document
     
     def _strip_line(self, line):
