@@ -86,19 +86,15 @@ class RegisterSummaryGenerator(object):
             raise ValueError('Register file does not begin with "%s"' % REGISTERS_HEADER)
 
         for idx, line in enumerate(reg_lines[1:]):
-            do_not_add = ["Reserved", "Implementation Defined"]
+            do_not_add = ["Reserved",
+                          "Reserved (defined elsewhere)",
+                          "Implementation Defined"]
             found = False
             toks = [tok.strip() for tok in line[1:-1].split("', '")]
-            #if not len(toks) == TOK_IDX_REG_TOK_COUNT:
-            #    raise ValueError("Registers file %s line %d bad format: %s" %
-            #           (self.register_file, idx, line))
             for item in do_not_add:
-                for tok in toks:
-                    if not tok.find(item) == -1:
-                        found = True
-                        break;
-                if found:
-                    break
+                if item in toks:
+                    found = True
+                    break;
             if found:
                 continue
             reg = RegisterFields()
