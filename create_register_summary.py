@@ -48,11 +48,13 @@ class RegFields(object):
         self.fields = OrderedDict()
 
 class RegisterSummaryGenerator(object):
-    def __init__(self, register_file):
-        self.register_file = register_file
+    def __init__(self, register_files):
+        self.register_files = register_files
         self.regs = []
         self.reg_blocks = {}
-        self.read_register_file()
+        self.registers = []
+        for file_path in self.register_files:
+            self.read_register_file(file_path)
 
     def parse_bit_field(self, bit_field_desc):
         toks = [t.strip() for t in bit_field_desc.split()]
@@ -77,13 +79,13 @@ class RegisterSummaryGenerator(object):
                 return -1, -1;
         return begin_bit, end_bit
 
-    def read_register_file(self):
-        self.registers = []
-        with open(self.register_file) as reg_file:
+    def read_register_file(self, file_path):
+        with open(file_path) as reg_file:
             reg_lines = [line.strip() for line in reg_file.readlines()]
 
         if not (reg_lines[0] == REGISTERS_HEADER):
-            raise ValueError('Register file does not begin with "%s"' % REGISTERS_HEADER)
+            raise ValueError('Register file %s does not begin with "%s"' %
+                             (file_path, REGISTERS_HEADER))
 
         for idx, line in enumerate(reg_lines[1:]):
             do_not_add = ["Reserved",
@@ -106,7 +108,7 @@ class RegisterSummaryGenerator(object):
             reg.field_begin, reg.field_end = self.parse_bit_field(toks[TOK_IDX_REG_BITS])
             if reg.field_begin == -1 or reg.field_end == -1:
                 raise ValueError("Registers file %s line %d bad bit field: %s" %
-                       (self.register_file, idx, toks[TOK_IDX_REG_BITS]))
+                       (file_path, idx, toks[TOK_IDX_REG_BITS]))
             reg.field_name = toks[TOK_IDX_REG_FIELD]
             reg.field_desc = toks[TOK_IDX_REG_DESC]
             self.regs.append(reg)
@@ -162,20 +164,21 @@ class RegisterSummaryGenerator(object):
 def create_parser():
     parser = OptionParser()
     parser.add_option('-r', '--reg_file',
-            dest = 'register_file',
-            action = 'store', type = 'string',
-            help = 'Register file created by parse_rapidio_standard.py',
+            dest = 'register_files',
+            action = 'append', type = 'string', default = [],
+            help = 'Register file created by parse_rapidio_standard.py or manually',
             metavar = 'FILE')
     return parser
 
 def validate_options(options):
-    if options.register_file is None:
-        print ("Must enter register file name.")
+    if options.register_files == []:
+        print ("Must enter at least one register file name.")
         sys.exit()
 
-    if not os.path.isfile(options.register_file):
-        print ("File '" + options.register_file +"' does not exist.")
-        sys.exit()
+    for file_path in options.register_files:
+        if not os.path.isfile(file_path):
+            print ("File '%s' does not exist." % file_path)
+            sys.exit()
 
     return options
 
@@ -194,7 +197,7 @@ def main(argv = None):
 
     options = validate_options(options)
 
-    summary = RegisterSummaryGenerator(options.register_file)
+    summary = RegisterSummaryGenerator(options.register_files)
     summary.summarize_registers()
     summary.print_registers()
 

@@ -1,0 +1,19 @@
+#!/bin/bash
+function check_rc(){
+        rc=$?
+        echo ---------------------------------------
+        if [[ $rc != 0 ]];
+        then
+                echo $1 ' FAILURE!'
+                exit $rc
+        else
+                echo $1 ' SUCCESS!'
+        fi
+        echo ---------------------------------------
+}
+
+./create_register_summary.py -r Standards/registers_1.3.txt -r Standards/manual_registers_1.3.txt > Standards/register_summary_1.3.txt
+check_rc 'Create 1.3 Register Summary text'
+
+./make_document.py -t Standards/register_summary_1.3.txt -w Standards/register_summary_1.3.docx
+check_rc 'Create 1.3 Register Summary MS Word file'

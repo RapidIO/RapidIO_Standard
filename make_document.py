@@ -211,7 +211,6 @@ def main(argv = None):
         sys.exit(-1)
 
     word = WordEditor(options.text_filepath, options.word_filepath)
-    word.print_regs()
     word.create_document()
     word.write_document(options.word_filepath)
 
