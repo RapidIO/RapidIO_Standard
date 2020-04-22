@@ -147,7 +147,8 @@ class WordEditor(object):
 
             if len(toks) == 3:
                 if reg is not None:
-                    self.regs.append(reg)
+                    if not reg.block == "UNKNOWN":
+                        self.regs.append(reg)
                 reg = register_summary()
                 reg.block = toks[0]
                 reg.offset = toks[1]
@@ -164,7 +165,8 @@ class WordEditor(object):
             else:
                 raise ValueError("Unknown line %d %s!" % (num, l));
         if reg is not None:
-            self.regs.append(reg)
+            if not reg.block == "UNKNOWN":
+                self.regs.append(reg)
 
     def write_document(self, file_path):
         self.doc.save(file_path)
