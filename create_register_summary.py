@@ -103,7 +103,13 @@ class RegisterSummaryGenerator(object):
 
         for idx, line in enumerate(reg_lines[1:]):
             do_not_add = ["Reserved",
-                          "Reserved (defined elsewhere)"]
+                          "Reserved (defined elsewhere)",
+                          # Defined in Rev 1.3/2.2 Part 9,
+                          # these flow control bits have the wrong offset
+                          # so they must be excluded from the
+                          # automatically generated file and managed
+                          # manually.
+                          "4.3 Port n Control CSR (Block Offset 0x08)"]
             found = False
             toks = [tok.strip() for tok in line[1:-1].split("', '")]
             for item in do_not_add:
