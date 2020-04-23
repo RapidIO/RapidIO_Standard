@@ -163,14 +163,15 @@ class RegisterSummaryGenerator(object):
             self.regs.append(reg)
 
     def get_offset_substring(self, reg):
-        offset = reg.section.find("Offset")
+        section = reg.section.replace("Word 0", " ")
+        offset = section.find("Offset")
         if (offset < 0):
             return ""
 
         # Extract the offset portion of the section header.
         # Strip off the character after "Offset" (which could be 's' or
         # a space) and the last character, which should be a ')'
-        offset_str = reg.section[offset + len("Offset") + 1:-1].strip()
+        offset_str = section[offset + len("Offset") + 1:-1].strip()
         o_toks = [tok.strip() for tok in offset_str.split(" ")]
         if o_toks[0][-1] == ",":
             if reg.block_id == "STD_REG":
@@ -179,7 +180,7 @@ class RegisterSummaryGenerator(object):
             # The first offset token is not part of a comma separated
             # list, so it must be a single offset.  Truncate any additional
             # characters.
-            offset_str = o_toks[0]
+            offset_str = " ".join(o_toks)
         # Single hexadecimal digit offset, which breaks string based
         # sorting.  Fix it by prepending a 0.
         if len(offset_str) == 3:
