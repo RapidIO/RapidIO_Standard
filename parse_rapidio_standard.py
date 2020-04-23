@@ -20,6 +20,7 @@ import re
 import sys
 import os
 import logging
+import copy
 from constants import *
 
 class RequirementFields(object):
@@ -138,6 +139,50 @@ class RapidIOStandardParser(object):
         self.sentences = [s.strip() for s in self.sentences]
         self.sentences = [self.remove_number_prefix(s) for s in self.sentences]
 
+    # Things get a bit complicated here. The Rev 3.2 specifications
+    # define four new register blocks which use the same LP-Serial
+    # registers as in 1.3 and 2.2, but place them at new offsets.
+    # It also defines new registers to add to the new register blocks.
+    # Parsing this condensed part of the standard results in "UNKNOWN"
+    # block types for all these registers.  The routine below figures
+    # out which registers/bit fields appear in which register blocks,
+    # and adds the registers/bit fields accordingly.
+
+    def append_register(self, reg):
+        section = reg[3]
+        block_id = reg[4]
+
+        rm1_blk_ids = ["0x0001", "0x0002", "0x0003", "0x0009"]
+        rm2_blk_ids = ["0x0011", "0x0012", "0x0013", "0x0019"]
+        rm_saer_blk_ids = ["0x0002", "0x0009", "0x0012", "0x0019"]
+        ep_blk_ids  = ["0x0001", "0x0002", "0x0011", "0x0012"]
+
+        # If the register offset definition is not one of the
+        # Rev 3.2 (and later) Part 6 "Register Map" variations,
+        # just add the register to the list of registers.
+        if section.find("RM-I") == -1:
+            self.registers.append(reg)
+            return
+
+        offsets = [tok.strip() for tok in section.split("RM-I")]
+        for offset in offsets[1:]:
+            blk_ids = rm1_blk_ids;
+            if offset[0] == "I":
+                blk_ids = rm2_blk_ids;
+            filter_blk_ids = blk_ids;
+            if section.find("Link Maintenance") >= 0:
+                filter_blk_ids = rm_saer_blk_ids
+            if section.find("ackID") >= 0:
+                filter_blk_ids = rm_saer_blk_ids
+            if section.find("Port Response Timeout") >= 0:
+                filter_blk_ids = ep_blk_ids
+            for blk_id in blk_ids:
+                if blk_id not in filter_blk_ids:
+                    continue
+                reg_cpy = copy.deepcopy(reg)
+                reg_cpy[4] = blk_id
+                self.registers.append(reg_cpy)
+
     def parse_register_table(self, sect):
         # Register tables are structured as:
         # <Table> <Caption> table caption </Caption>
@@ -200,7 +245,9 @@ class RapidIOStandardParser(object):
                     continue
             prev_bit = cols[0]
             logging.info("Register: '%s'" % reg)
-            self.registers.append(reg)
+
+            self.append_register(reg)
+
             # Sometimes there is extraneous information in following tables.
             # Terminate parsing of the register table when bit "31" is seen.
             if cols[0].find('31') >= 0:
