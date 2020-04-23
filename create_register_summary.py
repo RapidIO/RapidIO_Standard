@@ -103,8 +103,7 @@ class RegisterSummaryGenerator(object):
 
         for idx, line in enumerate(reg_lines[1:]):
             do_not_add = ["Reserved",
-                          "Reserved (defined elsewhere)",
-                          "Implementation Defined"]
+                          "Reserved (defined elsewhere)"]
             found = False
             toks = [tok.strip() for tok in line[1:-1].split("', '")]
             for item in do_not_add:
