@@ -54,6 +54,8 @@ class RapidIOStandardParser(object):
         self.target_number = None
         self.part_number = None
         self.new_secs = []
+        self.found_lp_serial_header = False
+        self.multiple_reg_blocks = False
         if rev is None:
             self.revision = "Unknown"
             result = re.search("([0-9]\.[0-9])", self.input_xml)
@@ -149,13 +151,53 @@ class RapidIOStandardParser(object):
     # and adds the registers/bit fields accordingly.
 
     def append_register(self, reg):
-        section = reg[3]
-        block_id = reg[4]
-
         rm1_blk_ids = ["0x0001", "0x0002", "0x0003", "0x0009"]
         rm2_blk_ids = ["0x0011", "0x0012", "0x0013", "0x0019"]
         rm_saer_blk_ids = ["0x0002", "0x0009", "0x0012", "0x0019"]
-        ep_blk_ids  = ["0x0001", "0x0002", "0x0011", "0x0012"]
+        ep_blk_ids_22  = ["0x0001", "0x0002"]
+        ep_blk_ids_32  = ["0x0011", "0x0012"]
+
+        section = reg[3]
+
+        if ((section.find("LP-Serial Register Block Header") >= 0) and
+           self.found_lp_serial_header):
+            self.multiple_reg_blocks = False
+            self.registers.append(reg)
+            return
+
+        if ((section.find("LP-Serial Register Block Header") >= 0 or
+             section.find("Port Link Timeout Control CSR") >= 0 or
+             section.find("Port General Control CSR") >= 0) and
+           (self.register_block_id == "UNKNOWN" or
+            self.register_block_id == "STD_REG") and
+            (reg[0] > "1.3")):
+            blk_ids = rm1_blk_ids
+            if reg[0] > "2.2":
+                blk_ids.extend(rm2_blk_ids)
+            if "Host" in reg or "Master Enable" in reg:
+                blk_ids = ep_blk_ids_22
+                if reg[0] > "2.2":
+                    blk_ids.extend(ep_blk_ids_32)
+            for blk_id in blk_ids:
+                reg_cpy = copy.deepcopy(reg)
+                reg_cpy[4] = blk_id
+                self.registers.append(reg_cpy)
+            if reg[6] == "EF_ID":
+                self.found_lp_serial_header = True
+            self.multiple_reg_blocks = True
+            return
+
+        if ((section.find("Port Response Timeout Control CSR") >= 0) and
+            (self.register_block_id == "UNKNOWN")):
+            blk_ids = ep_blk_ids_22
+            if reg[0] > "2.2":
+                blk_ids.extend(ep_blk_ids_32)
+
+            for blk_id in blk_ids:
+                reg_cpy = copy.deepcopy(reg)
+                reg_cpy[4] = blk_id
+                self.registers.append(reg_cpy)
+            return
 
         # If the register offset definition is not one of the
         # Rev 3.2 (and later) Part 6 "Register Map" variations,
@@ -166,10 +208,10 @@ class RapidIOStandardParser(object):
 
         offsets = [tok.strip() for tok in section.split("RM-I")]
         for offset in offsets[1:]:
-            blk_ids = rm1_blk_ids;
+            blk_ids = rm1_blk_ids
             if offset[0] == "I":
-                blk_ids = rm2_blk_ids;
-            filter_blk_ids = blk_ids;
+                blk_ids = rm2_blk_ids
+            filter_blk_ids = blk_ids
             if section.find("Link Maintenance") >= 0:
                 filter_blk_ids = rm_saer_blk_ids
             if section.find("ackID") >= 0:
@@ -232,7 +274,8 @@ class RapidIOStandardParser(object):
                     self.register_block_id = 'UNKNOWN'
                 # Previous register field is always EF_PTR, which should be
                 # identified as part of this register block.
-                self.registers[-1][4] = self.register_block_id
+                if not self.multiple_reg_blocks:
+                    self.registers[-1][4] = self.register_block_id
             reg = [self.revision, self.part_name, self.chapter_name,
                    self.section_name, self.register_block_id]
             reg.extend(cols)
@@ -367,9 +410,9 @@ class RapidIOStandardParser(object):
                     self.skip_remaining_part6_chapters = True
                     break
                 if any(sub in s for sub in REQT_KW):
-                    s_type = self.TYPE_REQUIREMENT;
+                    s_type = self.TYPE_REQUIREMENT
                 elif any(sub in s for sub in REC_KW):
-                    s_type = self.TYPE_RECOMMENDATION;
+                    s_type = self.TYPE_RECOMMENDATION
                 if s_type is None:
                     continue
                 reqt_num += 1
@@ -413,6 +456,7 @@ class RapidIOStandardParser(object):
             self.section_prefix = r">" + self.chapter_number + r"."
             self.sections = chapter[end_idx:].split(self.section_prefix)
             logging.debug("Parse Sections: %s %s %d" % (self.section_number, self.section_prefix, len(self.sections)))
+            self.multiple_reg_blocks = False
             self.parse_sections()
             if self.create_outline:
                 if len(self.outline[self.part_name][self.chapter_name]) == 0:
