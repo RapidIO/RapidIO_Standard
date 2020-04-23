@@ -64,27 +64,50 @@ class RegisterSummaryGenerator(object):
         for file_path in self.register_files:
             self.read_register_file(file_path)
 
-    def parse_bit_field(self, bit_field_desc):
-        toks = [t.strip() for t in bit_field_desc.split()]
-        for idx, tok in enumerate(toks):
-            if tok[-1] == '-':
-                toks[idx] = tok + toks[idx + 1]
-                del toks[idx + 1:idx + 2]
+    # parse_bit_field needs to come up with the right answer
+    # for the following examples:
+    # 0
+    # 0-5
+    # 0 - 5
+    # 10 (parallel) 13 (serial)
+    # 10 (parallel) 14 (serial
+    # 13-31 (parallel) 16-31 (serial
+    # 13 - 31 (parallel) 16 - 31 (serial
 
+    def parse_bit_field(self, bit_field_desc):
         begin_bit = -1;
         end_bit = -1;
+        assign_to_end = False
+
+        bit_field_desc = bit_field_desc.replace('(', ' ')
+        bit_field_desc = bit_field_desc.replace(')', ' ')
+        bit_field_desc = bit_field_desc.replace('-', ' - ')
+        bit_field_desc = bit_field_desc.replace('parallel', ' ')
+        bit_field_desc = bit_field_desc.replace('serial', ' ')
+
+        toks = [t.strip() for t in bit_field_desc.split()]
+
         for tok in toks:
-            if "0123456789".find(tok[0]) == -1:
+            if tok == "-":
+                assign_to_end = True
                 continue
-            field_bits = [t.strip() for t in tok.split("-")]
-            begin_bit = int(field_bits[0])
+
             try:
-                if len (field_bits) > 1:
-                    end_bit = int(field_bits[1])
-                else:
-                    end_bit = begin_bit
+                temp = int(tok)
             except ValueError:
-                return -1, -1;
+                continue
+
+            if assign_to_end:
+                end_bit = temp
+                assign_to_end = False
+                continue
+
+            begin_bit = temp
+            assign_to_end = True
+
+        if assign_to_end:
+            end_bit = begin_bit
+
         return begin_bit, end_bit
 
     def read_register_file(self, file_path):
@@ -162,7 +185,7 @@ class RegisterSummaryGenerator(object):
         if len(offset_str) == 3:
             offset_str = "0x0" + offset_str[-1]
         return offset_str
-            
+
     def summarize_registers(self):
         for reg in self.regs:
             if not reg.block_id in self.reg_blocks:
