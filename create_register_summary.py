@@ -207,13 +207,6 @@ class RegisterSummaryGenerator(object):
                 self.reg_blocks[reg.block_id][offset_str] = RegFields(
                                      title, reg.revision, reg.part, reg.chapter,
                                      reg.section)
-            #if reg.field_begin in self.reg_blocks[reg.block_id][offset_str].fields:
-            #    temp = self.reg_blocks[reg.block_id][offset_str].fields[reg.field_begin]
-            #    raise ValueError("Duplicate field definition? '%s' XXX '%s'" %
-            #                     ("', '".join([reg.part, reg.section,
-            #                                  reg.block_id, offset_str,
-            #                                  str(reg.field_begin)]),
-            #                      "', '".join([temp.part, temp.section, temp.block_id, temp.field_name])))
             self.reg_blocks[reg.block_id][offset_str].fields[reg.field_begin] = reg
 
     #INFW: Currently only supports a single revision and a single definition
@@ -231,9 +224,7 @@ class RegisterSummaryGenerator(object):
                     if not reg.field_begin == reg.field_end:
                         bit_str = bit_str + ":" + str(reg.field_end)
                     print("'%s'" % "', '".join([bit_str, reg.field_name,
-                                               # reg.field_desc,
                                                reg.part,
-                                               # reg.chapter,
                                                reg.section]))
 
 def create_parser():
