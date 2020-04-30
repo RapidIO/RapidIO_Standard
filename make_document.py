@@ -41,7 +41,10 @@ class register_summary(object):
         self.block = ""
         self.offset = ""
         self.name = ""
+        self.bitlist = list(range(32))
         self.bits = []
+        self.next_bit = 0;
+        self.new_last_bit = -1;
     
 class WordEditor(object):
     def __init__(self, text, word):
@@ -70,18 +73,20 @@ class WordEditor(object):
         rsvd_cells[0].add_paragraph(bit_lable)
         rsvd_cells[1].add_paragraph("Reserved")
 
-    def add_reserved_fields(self, table, last_bit, bit):
+    def add_reserved_fields(self, table, prev_bit, bit, reg):
         new_bits = [tok.strip() for tok in bit.bit_range.split(":")]
-        next_bit = -1
         if len(new_bits) == 1:
-            next_bit = int(new_bits[0])
-            new_last_bit = next_bit + 1
+            self.next_bit = int(new_bits[0])
+            self.new_last_bit = self.next_bit + 1
         else:
-            next_bit = int(new_bits[0])
-            new_last_bit = int(new_bits[1]) + 1
-        if not next_bit == last_bit:
-            self.add_reserved_row(table, last_bit, next_bit - 1)
-        return new_last_bit
+            self.next_bit = int(new_bits[0])
+            self.new_last_bit = int(new_bits[1]) + 1
+        for bit_num in list(range(self.next_bit, self.new_last_bit)):
+            if bit_num not in reg.bitlist:
+                self.add_bit = False
+        if ((self.next_bit > prev_bit) and self.add_bit):
+            self.add_reserved_row(table, prev_bit, self.next_bit - 1)
+        return self.new_last_bit
 
     def create_document(self):
         document = Document()
@@ -100,26 +105,34 @@ class WordEditor(object):
         table = None
 
         for reg in self.regs:
-            if not reg.block == prev_block:
+            if reg.block == prev_block:
+                reg_cells = table.add_row().cells
+            else:
                 document.add_page_break()
                 toks = [tok.strip() for tok in reg.name.split("Header")]
                 document.add_heading('Block: %s : %s' % (reg.block, toks[0]),
                                       level=1)
                 table = document.add_table(rows=1, cols=4)
-                hdr_cells = table.rows[0].cells
-                hdr_cells[0].text = 'Bits'
-                hdr_cells[1].text = 'Name'
-                hdr_cells[2].text = 'Part'
-                hdr_cells[3].text = 'Section'
+                reg_cells = table.rows[0].cells
                 prev_block = reg.block
-            reg_cells = table.add_row().cells
             reg_cells[0].merge(reg_cells[3])
             reg_cells[0].add_paragraph("Name: %s\nOffset: %s" %
                                        (reg.name, reg.offset),
                                        style=None)
+            hdr_cells = table.add_row().cells
+            hdr_cells[0].text = 'Bits'
+            hdr_cells[1].text = 'Name'
+            hdr_cells[2].text = 'Part'
+            hdr_cells[3].text = 'Section'
+
             last_bit = 0
             for bit in reg.bits:
-                last_bit = self.add_reserved_fields(table, last_bit, bit)
+                self.add_bit = True
+                last_bit = self.add_reserved_fields(table, last_bit, bit, reg)
+                if not self.add_bit:
+                    continue
+                for bit_num in list(range(self.next_bit, self.new_last_bit)):
+                    reg.bitlist.remove(bit_num)
                 row_cells = table.add_row().cells
                 row_cells[0].text = bit.bit_range
                 row_cells[1].text = bit.bit_name
