@@ -34,3 +34,9 @@ check_rc 'Create 2.2 Register Summary text'
 
 ./make_document.py -t Standards/register_summary_2.2.txt -w Standards/register_summary_2.2.docx
 check_rc 'Create 2.2 Register Summary MS Word file'
+
+./create_register_summary.py -r Standards/registers_3.2.txt -r Standards/manual_registers_3.2.txt -t Standards/translate_1.3to2.2.txt -t Standards/translate_2.2to3.2.txt > Standards/register_summary_3.2.txt
+check_rc 'Create 3.2 Register Summary text'
+
+./make_document.py -t Standards/register_summary_3.2.txt -w Standards/register_summary_3.2.docx
+check_rc 'Create 3.2 Register Summary MS Word file'
