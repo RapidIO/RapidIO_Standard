@@ -141,10 +141,38 @@ class RapidIOStandardParser(object):
         self.sentences = [s.strip() for s in self.sentences]
         self.sentences = [self.remove_number_prefix(s) for s in self.sentences]
 
-    # Things get a bit complicated here. The Rev 3.2 specifications
+    def append_rev2_regs(self, reg):
+        all_blk_ids = ["0x0001", "0x0002", "0x0003", "0x0009"]
+        rm_saer_blk_ids = ["0x0002", "0x0009"]
+        ep_blk_ids  = ["0x0001", "0x0002"]
+
+        section = reg[3]
+
+        filter_blk_ids = all_blk_ids
+        if section.find("Link Maintenance") >= 0:
+            filter_blk_ids = rm_saer_blk_ids
+        if section.find("ackID") >= 0:
+            filter_blk_ids = rm_saer_blk_ids
+        if section.find("Port Response Timeout") >= 0:
+            filter_blk_ids = ep_blk_ids
+        for blk_id in all_blk_ids:
+            if blk_id not in filter_blk_ids:
+                continue
+            reg_cpy = copy.deepcopy(reg)
+            reg_cpy[4] = blk_id
+            self.registers.append(reg_cpy)
+
+    # Things get a bit complicated here. 
+    #  
+    # The Rev 2.2 specifications consolidate the register definitions
+    # separately from the block definitions, which makes it impossible to
+    # determine which register belongs to what block based on context.
+    #
+    # Even more fun, the Rev 3.2 specifications
     # define four new register blocks which use the same LP-Serial
     # registers as in 1.3 and 2.2, but place them at new offsets.
     # It also defines new registers to add to the new register blocks.
+    #
     # Parsing this condensed part of the standard results in "UNKNOWN"
     # block types for all these registers.  The routine below figures
     # out which registers/bit fields appear in which register blocks,
@@ -197,6 +225,10 @@ class RapidIOStandardParser(object):
                 reg_cpy = copy.deepcopy(reg)
                 reg_cpy[4] = blk_id
                 self.registers.append(reg_cpy)
+            return
+
+        if ((reg[0] == "2.2") and (self.register_block_id == "UNKNOWN")):
+            self.append_rev2_regs(reg);
             return
 
         # If the register offset definition is not one of the
