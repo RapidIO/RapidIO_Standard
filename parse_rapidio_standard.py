@@ -177,6 +177,9 @@ class RapidIOStandardParser(object):
     # block types for all these registers.  The routine below figures
     # out which registers/bit fields appear in which register blocks,
     # and adds the registers/bit fields accordingly.
+    #
+    # This clause also takes care of a couple of Multicast extensions additions
+    # to existing registers in the Routing Table registers block.
 
     def append_register(self, reg):
         rm1_blk_ids = ["0x0001", "0x0002", "0x0003", "0x0009"]
@@ -185,7 +188,22 @@ class RapidIOStandardParser(object):
         ep_blk_ids_22  = ["0x0001", "0x0002"]
         ep_blk_ids_32  = ["0x0011", "0x0012"]
 
+        part = reg[1]
         section = reg[3]
+
+        if ((part.find("Part 11") >= 0) and
+            ((section.find("Processing Elements Features CAR") < 0) and
+            (section.find("Switch Multicast Support CAR") < 0) and
+            (section.find("Switch Multicast Information CAR") < 0) and
+            (section.find("Multicast Mask Port CSR") < 0) and
+            (section.find("Multicast Associate Select CSR") < 0) and
+            (section.find("Multicast Associate Operation CSR") < 0)) and
+            ((self.register_block_id == "UNKNOWN" or
+             self.register_block_id == "STD_REG"))):
+            reg[4] = "0x000E"
+            self.registers.append(reg)
+            return
+        
 
         if ((section.find("LP-Serial Register Block Header") >= 0) and
            self.found_lp_serial_header):
