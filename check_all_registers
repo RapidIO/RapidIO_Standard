@@ -40,3 +40,15 @@ check_rc 'Create 3.2 Register Summary text'
 
 ./make_document.py -t Standards/register_summary_3.2.txt -w Standards/register_summary_3.2.docx
 check_rc 'Create 3.2 Register Summary MS Word file'
+
+./create_register_summary.py -r Standards/registers_4.0.txt -r Standards/manual_registers_4.0.txt > Standards/register_summary_4.0.txt
+check_rc 'Create 4.0 Register Summary text'
+
+./make_document.py -t Standards/register_summary_4.0.txt -w Standards/register_summary_4.0.docx
+check_rc 'Create 4.0 Register Summary MS Word file'
+
+./create_register_summary.py -r Standards/registers_4.1.txt -r Standards/manual_registers_4.1.txt > Standards/register_summary_4.1.txt
+check_rc 'Create 4.1 Register Summary text'
+
+./make_document.py -t Standards/register_summary_4.1.txt -w Standards/register_summary_4.1.docx
+check_rc 'Create 4.1 Register Summary MS Word file'

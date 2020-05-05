@@ -203,6 +203,13 @@ class RegisterSummaryGenerator(object):
         # sorting.  Fix it by prepending a 0.
         if len(offset_str) == 3:
             offset_str = "0x0" + offset_str[-1]
+        # Offset is 0x0yy, change to 0xyy.  This fixes some Timestamp
+        # generator register offsets.  
+        if (offset_str == "0x034"):
+            offset_str = "0x34"
+        if (offset_str == "0x038"):
+            offset_str = "0x38"
+
         # Part 3 and Part 11 Broadcast and per-port registers have the
         # same offset string, but are different registers.  Appending
         # "Broadcast" to the broadcast registers is the artificial
