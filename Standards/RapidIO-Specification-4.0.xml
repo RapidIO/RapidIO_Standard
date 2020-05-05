@@ -102619,9 +102619,7 @@ the bits and bit fields in this register are read/write. </P>
 </TR>
 </Table>
 
-<P id="LinkTarget_114247">3.4.9 	Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2Mask_size) + (4*2Mask_size) </P>
-
-<P>+ (y*4)) </P>
+<P id="LinkTarget_114247">3.4.9 	Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2Mask_size) + (4*2Mask_size) + (y*4)) </P>
 
 <P>This register shall control the multicast behavior for all ports whose Port n Multicast Info CSR Mask_Ptr field value is the same. The use and meaning of the bits and bit fields of this register shall be as specified in 
 <Link>Table 3-20. Unless otherwise specified, </Link>
