@@ -68463,25 +68463,14 @@ column indicates bits which shall be implemented in this register. An “X” in
 <TR>
 <TD>2 </TD>
 
-<TD>Timestamp Generator </TD>
+<TD>Timestamp Generator Stopped</TD>
 
-<TD>See </TD>
-
-<TD>Indicates if the Timestamp Generator counter is not </TD>
+<TD>See Footnote 1 </TD>
 
 <TD>X </TD>
 
-<TD>-</TD>
-</TR>
-
-<TR>
-<TD/>
-
-<TD>Stopped </TD>
-
-<TD>Footnote 1 </TD>
-
-<TD>advancing because it is being set to an earlier time. 0b0 - Timestamp Generator is advancing 0b1 - Timestamp Generator is temporarily not advancing </TD>
+<TD>Indicates if the Timestamp Generator counter is not
+advancing because it is being set to an earlier time. 0b0 - Timestamp Generator is advancing 0b1 - Timestamp Generator is temporarily not advancing </TD>
 
 <TD/>
 
@@ -69090,41 +69079,9 @@ must be implemented, based on the bit field values of the Timestamp CAR. </P>
 
 <TD/>
 
-<TD>1 </TD>
-
-<TD>This value controls how the Asymmetry field </TD>
-
 <TD/>
 
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TD/>
-
-<TD/>
-
-<TD/>
-
-<TD>is applied to loop delay calculations. 0b0 - Tx has higher latency than Rx. </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TD/>
-
-<TD/>
-
-<TD/>
-
-<TD>0b1 - Tx has lower latency than Rx. </TD>
+<TD>This value controls how the Asymmetry field is applied to loop delay calculations. 0b0 - Tx has higher latency than Rx. 0b1 - Tx has lower latency than Rx. </TD>
 
 <TD/>
 
