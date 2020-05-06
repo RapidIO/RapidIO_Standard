@@ -170,7 +170,7 @@ class RegisterSummaryGenerator(object):
             offsets = [tok.strip() for tok in section.split("RM-I")]
             offset_str = ""
             for offset in offsets[1:]:
-                if (reg.block_id > 0x0009):
+                if (reg.block_id > "0x0009"):
                     if (offset[0] == "I"):
                         section = offset;
                         break;
@@ -188,8 +188,14 @@ class RegisterSummaryGenerator(object):
         offset_str = section[offset + len("Offset") + 1:-1].strip()
         # Port n VoQ Control Status Register offset has a leading "-",
         # which messes up register ordering.
+        #
+        # Routine talbe registers have a leading "=", which again
+        # disrupts register ordering.
         if (offset_str[0] == '-'):
             offset_str = offset_str[1:].strip()
+        if (offset_str[0] == '='):
+            offset_str = offset_str[1:].strip()
+
         o_toks = [tok.strip() for tok in offset_str.split(" ")]
         if o_toks[0][-1] == ",":
             if reg.block_id == "STD_REG":
@@ -211,9 +217,10 @@ class RegisterSummaryGenerator(object):
             offset_str = "0x38"
 
         # Part 3 and Part 11 Broadcast and per-port registers have the
-        # same offset string, but are different registers.  Appending
+        # same offset string, but are different registers.  Prepending
         # "Broadcast" to the broadcast registers is the artificial
-        # differentiator required to get unique register definitions.
+        # differentiator required to get unique register definitions
+        # and maintain register order.
         if ((section.find("Broadcast Level") >= 0) and len(offset_str) > 5):
             offset_str += " (Broadcast)"
         return offset_str
