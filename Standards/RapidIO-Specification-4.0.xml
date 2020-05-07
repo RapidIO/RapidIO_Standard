@@ -69498,29 +69498,13 @@ column indicates bits which shall be implemented in this register. An “X” in
 <TR>
 <TD>2 </TD>
 
-<TD>Timestamp Generator </TD>
+<TD>Timestamp Generator Stopped </TD>
 
-<TD>See </TD>
+<TD>0 </TD>
 
-<TD>Indicates if the Timestamp Generator counter is not </TD>
-
-<TD>X </TD>
+<TD>Indicates if the Timestamp Generator counter is not advancing because it is being set to an earlier time. 0b0 - Timestamp Generator is advancing 0b1 - Timestamp Generator is temporarily not advancing </TD>
 
 <TD>-</TD>
-</TR>
-
-<TR>
-<TD/>
-
-<TD>Stopped </TD>
-
-<TD>Footnote 1 </TD>
-
-<TD>advancing because it is being set to an earlier time. 0b0 - Timestamp Generator is advancing 0b1 - Timestamp Generator is temporarily not advancing </TD>
-
-<TD/>
-
-<TD/>
 </TR>
 
 <TR>
@@ -70129,41 +70113,8 @@ must be implemented, based on the bit field values of the Timestamp CAR. </P>
 
 <TD/>
 
-<TD>1 </TD>
-
-<TD>This value controls how the Asymmetry field </TD>
-
 <TD/>
 
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TD/>
-
-<TD/>
-
-<TD/>
-
-<TD>is applied to loop delay calculations. </TD>
-
-<TD/>
-
-<TD/>
-
-<TD/>
-</TR>
-
-<TR>
-<TD/>
-
-<TD/>
-
-<TD/>
-
-<TD>0b0 - Tx has higher latency than Rx. 0b1 - Tx has lower latency than Rx. </TD>
 
 <TD/>
 
@@ -93565,10 +93516,7 @@ register are read/write. </P>
 </TR>
 </Table>
 
-<P id="LinkTarget_114091">2.5.9 	Logical/Transport Layer Dev32 Destination ID Capture </P>
-
-<P>CSR 
-(Block Offset 0x20) 
+<P id="LinkTarget_114091">2.5.9 	Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20) 
 </P>
 
 <P>This register contains error information. It is locked when a Logical/Transport error is detected and the corresponding enable bit is set. This register shall be implemented for devices that have bit 19 (Dev32 Support) set in the Processing Element Features CAR. The use and meaning of the bits shall be as specified in 
