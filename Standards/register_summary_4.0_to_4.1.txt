@@ -11,13 +11,13 @@
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 332,333d331
-< '0x0007', '0x20', 'Logical/Transport Layer Dev32 Destination ID Capture CSR'
+< '0x0007', ' 0x20', 'Logical/Transport Layer Dev32 Destination ID Capture CSR'
 < '0:31', 'Dev32 DestID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20)'
 483c481
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-533,535c531,533
+536,538c534,536
 < '0x000A', '((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 < '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
 < '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
@@ -25,18 +25,46 @@
 > '0x000A', '((((port number) + 1) * 0x20) + (offset based on VC . #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 > '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC . #, see Table 7-31)))'
 > '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC . #, see Table 7-31)))'
-655a654,657
+644c642,643
+< '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
+---
+> '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
+> '8:15', 'Virtual_port_count', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
+646,647c645,649
+< '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
+< '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
+---
+> '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
+> '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
+> '0x000E', ' 0x2C', 'Broadcast Port Aggregation Mask Info CSR'
+> '6:7', 'PAG_mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
+> '8:21', 'PAG_mask_ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
+660c662,663
+< '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.4 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
+---
+> '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
+> '8:15', 'Virtual_port_count', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
+662,663c665,669
+< '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.5 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
+< '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.5 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
+---
+> '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.6 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
+> '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.6 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
+> '0x000E', ' 0x4C + 20 * n', 'Port n Port Aggregation Mask Info CSR'
+> '6:7', 'PAG_mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x4C + 20 * n)'
+> '8:21', 'PAG_mask_ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x4C + 20 * n)'
+690a697,700
 > '0x000E', '(Mask_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (4*2PAG_mask_size) + (y*4)', 'Port n Port Aggregation Mask x Clear Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.17 Port n Port Aggregation Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (4*2PAG_mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 0x400) + (x * 16*2^Mask_size) + (4*2^Mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Clear Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.11 Broadcast Port Aggregation Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 16*2^Mask_size) + (4*2^Mask_size) + (y*4))'
-657c659,661
+692c702,704
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.7 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 ---
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.9 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Set Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.10 Broadcast Port Aggregation Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4))'
-659,661c663,665
+694,696c706,708
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.6 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 < '0x000E', '(Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4)', 'Port n Multicast Mask x Clear Register y CSR'
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
@@ -44,7 +72,7 @@
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.8 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size', 'Port n Multicast Mask x Clear Register y CSR'
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.15 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size)'
-663c667,675
+698c710,718
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
 ---
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.14 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
@@ -56,57 +84,31 @@
 > '24:31', 'PAG_Control', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.18 Port n Port Aggregation Mask x Control Register 0 CSR (Offset = (PAG_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (8*2PAG_mask_size))'
 > '0x000E', '(PAG_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (8*2PAG_mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Control Register y CSR'
 > '0:31', 'Private', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.19 Port n Port Aggregation Mask x Control Register y CSR (Offset = (PAG_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (8*2PAG_mask_size) + (y*4))'
-670c682,683
-< '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
----
-> '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
-> '8:15', 'Virtual_port_count', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
-672,673c685,689
-< '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
-< '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
----
-> '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
-> '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
-> '0x000E', '0x2C', 'Broadcast Port Aggregation Mask Info CSR'
-> '6:7', 'PAG_mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
-> '8:21', 'PAG_mask_ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
-686c702,703
-< '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.4 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
----
-> '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
-> '8:15', 'Virtual_port_count', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
-688,689c705,707
-< '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.5 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
-< '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.5 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
----
-> '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.6 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
-> '6:7', 'PAG_mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x48 + 20 * n)'
-> '8:21', 'PAG_mask_ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x48 + 20 * n)'
-855c873
+855c875
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-978c996
+978c998
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1096c1114
+1096c1116
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1215c1233
+1215c1235
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1320c1338
+1320c1340
 < '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
 ---
 > '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
-1391c1409
+1391c1411
 < '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
 ---
 > '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
-1395,1398c1413,1416
+1395,1398c1415,1418
 < '0', 'Block_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
@@ -116,7 +118,7 @@
 > '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '16:31', 'MaxMcastMasks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
-1442,1445c1460,1463
+1442,1445c1462,1465
 < '0:15', 'Mcast_Mask', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
@@ -126,7 +128,7 @@
 > '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '31', 'Port_Present', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
-1447,1449c1465,1467
+1447,1449c1467,1469
 < '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
@@ -134,7 +136,7 @@
 > '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
-1451,1456c1469,1474
+1451,1456c1471,1476
 < '0:15', 'Assoc_Blksize', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '16:23', 'Ingress_Port', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '24', 'Large_Transport', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'

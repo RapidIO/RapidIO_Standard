@@ -859,6 +859,15 @@ class RapidIOStandardParser(object):
         self.all_text = re.sub("Aggregation </P>\s+<P>Extensions",
                                "Aggregation Extensions",
                                self.all_text)
+
+        # INFW: Ideally the clause below should make use of re.sub
+        target = "4.4.7  Port n Port Aggregation Mask Info CSR (Block Offset 0x48 + 20 * n)"
+        loc = self.all_text.find(target)
+        if (loc >= 0):
+            self.all_text = (self.all_text[:loc]
+                            + "4.4.7  Port n Port Aggregation Mask Info CSR (Block Offset 0x4C + 20 * n)"
+                            + self.all_text[loc + len(target):])
+
         # Correct 4.1 requirement beginning with a '
         self.all_text = re.sub("'Y'", "Y",
                                self.all_text)

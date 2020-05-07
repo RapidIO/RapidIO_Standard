@@ -223,6 +223,8 @@ class RegisterSummaryGenerator(object):
         # and maintain register order.
         if ((section.find("Broadcast Level") >= 0) and len(offset_str) > 5):
             offset_str += " (Broadcast)"
+        if (offset_str[0] == '0'):
+            offset_str = " " + offset_str
         return offset_str
 
     def summarize_registers(self):

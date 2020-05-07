@@ -166,6 +166,8 @@ class WordEditor(object):
                 reg.block = toks[0]
                 reg.offset = toks[1]
                 reg.name = toks[2]
+                if (reg.offset[0] == '0'):
+                    reg.offset = " " + reg.offset
             elif len(toks) == 4:
                 if reg is None:
                     raise ValueError("Missing reg header at %d!" % num);

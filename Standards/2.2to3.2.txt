@@ -1040,7 +1040,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.6 Logical/Transport Layer Address Capture CSR (Block Offset 0x14)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.7 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.8 Logical/Transport Layer Control Capture CSR (Block Offset 0x1C)'
-> '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture'
+> '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.10 Logical/Transport Layer Dev32 Source ID Capture CSR (Block Offset 0x24)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.11 Port-Write Target deviceID CSR (Block Offset 0x28)'
 > '3.2', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.12 Packet Time-to-live CSR (Block Offset 0x2C)'
@@ -1090,7 +1090,7 @@
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.6 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.7 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 > '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
-> '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size)'
+> '3.2', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 940,941c1162,1164
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.1 Stype2 Control Symbol'
 < '2.2', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', 'Chapter 3 Control Symbol Format', '3.2 VC_Status Symbol Linking'

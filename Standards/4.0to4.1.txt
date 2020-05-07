@@ -38,6 +38,10 @@
 > '4.1', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.4 HARSH Switch Device Requirements'
 > '4.1', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.5 HARSH Endpoint Device Requirements'
 > '4.1', 'RapidIO Interconnect Specification Part 7: System and Device Inter-operability Specification', 'Chapter 3 RapidIO Device Class Requirements', '3.3.6 HARSH Endpoint-E Device Requirements'
+1032c1032
+< '4.0', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20)'
+---
+> '4.1', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', 'Chapter 2 Error Management Registers', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture'
 1130,1172c1130,1187
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 1 Overview', '1.1 Introduction'
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 1 Overview', '1.2 Overview'
@@ -64,7 +68,7 @@
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.6 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.7 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
-< '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size)'
+< '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 3 Multicast Extensions Registers', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 4 Configuration Examples', '4.1 Introduction'
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 4 Configuration Examples', '4.2 Configuring Multicast Masks'
 < '4.0', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', 'Chapter 4 Configuration Examples', '4.2.1 Clearing Multicast Masks'
@@ -111,7 +115,7 @@
 > '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
 > '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
 > '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.6 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
-> '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x48 + 20 * n)'
+> '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x4C + 20 * n)'
 > '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.8 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 > '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.9 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 > '4.1', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', 'Chapter 4 Multicast and Port Aggregation Extensions Registers', '4.4.10 Broadcast Port Aggregation Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4))'

@@ -34,7 +34,7 @@
 483a506,507
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-509,511c533,535
+512,514c536,538
 < '0x000A', '((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 < '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
 < '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
@@ -42,7 +42,7 @@
 > '0x000A', '((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 > '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
 > '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
-514a539,540
+517a542,543
 > '2', 'VC0 Supports VC bit for Priority', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 > '3', 'VC0 Enable VC Bit for Priority', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 826a853,854
