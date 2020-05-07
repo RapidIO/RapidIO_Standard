@@ -2,70 +2,22 @@
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-55c55
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-57c57
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-78d77
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-80d78
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-137c135
+137c137
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-154c152
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-156c154
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-177d174
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-179d175
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-220c216
+220c220
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-237c233
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-239c235
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-260d255
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-262d256
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-332,333d325
+332,333d331
 < '0x0007', '0x20', 'Logical/Transport Layer Dev32 Destination ID Capture CSR'
 < '0:31', 'Dev32 DestID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20)'
-483c475
+483c481
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-500c492
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-502c494
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-523d514
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-525d515
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-533,535c523,525
+533,535c531,533
 < '0x000A', '((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 < '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
 < '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
@@ -73,40 +25,18 @@
 > '0x000A', '((((port number) + 1) * 0x20) + (offset based on VC . #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 > '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC . #, see Table 7-31)))'
 > '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC . #, see Table 7-31)))'
-555,572c545,546
-< '0', 'VoQ Backpressure Symbol Generation Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '1', 'VoQ Backpressure Symbol Reception Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '2', 'VoQ Backpressure Per VC Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '3:7', 'reserved', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '8', 'Enable VoQ Symbol Generation', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '9', 'Enable VoQ Participation', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '10', 'Port XOFF', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '11', 'Enable VoQ Backpressure Per VC Transmission', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '12', 'Port Group Size 0 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '13', 'Port Group Size 1 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '14', 'Port Group Size 2 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '15', 'Port Group Size 3 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '16', 'Port Group Size 4 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '17', 'Port Group Size 5 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '18', 'Port Group Size 6 Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '19:25', 'reserved', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '26:28', 'TX Port Group Size', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-< '29:31', 'RX Port Group Size', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
----
-> '0', '0', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-> '1', '0', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-655a630,633
+655a654,657
 > '0x000E', '(Mask_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (4*2PAG_mask_size) + (y*4)', 'Port n Port Aggregation Mask x Clear Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.17 Port n Port Aggregation Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (4*2PAG_mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 0x400) + (x * 16*2^Mask_size) + (4*2^Mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Clear Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.11 Broadcast Port Aggregation Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 16*2^Mask_size) + (4*2^Mask_size) + (y*4))'
-657c635,637
+657c659,661
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.7 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 ---
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.9 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Set Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.10 Broadcast Port Aggregation Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4))'
-659,661c639,641
+659,661c663,665
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.6 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 < '0x000E', '(Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4)', 'Port n Multicast Mask x Clear Register y CSR'
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
@@ -114,7 +44,7 @@
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.8 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size', 'Port n Multicast Mask x Clear Register y CSR'
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.15 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size)'
-663c643,651
+663c667,675
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
 ---
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.14 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
@@ -126,12 +56,12 @@
 > '24:31', 'PAG_Control', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.18 Port n Port Aggregation Mask x Control Register 0 CSR (Offset = (PAG_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (8*2PAG_mask_size))'
 > '0x000E', '(PAG_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (8*2PAG_mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Control Register y CSR'
 > '0:31', 'Private', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.19 Port n Port Aggregation Mask x Control Register y CSR (Offset = (PAG_Ptr * 0x400) + (x * 16*2PAG_mask_size) + (8*2PAG_mask_size) + (y*4))'
-670c658,659
+670c682,683
 < '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
 ---
 > '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
 > '8:15', 'Virtual_port_count', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.2 Broadcast Routing Table Control CSR (Block Offset 0x20)'
-672,673c661,665
+672,673c685,689
 < '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
 < '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.3 Broadcast Multicast Info CSR (Block Offset 0x28)'
 ---
@@ -140,108 +70,53 @@
 > '0x000E', '0x2C', 'Broadcast Port Aggregation Mask Info CSR'
 > '6:7', 'PAG_mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
 > '8:21', 'PAG_mask_ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.4 Broadcast Port Aggregation Mask Info CSR (Block Offset 0x2C)'
-686c678,679
+686c702,703
 < '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.4 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
 ---
 > '6:7', 'Mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
 > '8:15', 'Virtual_port_count', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.5 Port n Routing Table Control CSR (Block Offset 0x40 + (0x20 * n))'
-688,689c681,683
+688,689c705,707
 < '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.5 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
 < '8:21', 'Mask_Ptr', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.5 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
 ---
 > '0:7', 'Num_Masks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.6 Port n Multicast Info CSR (Block Offset 0x48 + 20 * n)'
 > '6:7', 'PAG_mask_size', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x48 + 20 * n)'
 > '8:21', 'PAG_mask_ptr', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.7 Port n Port Aggregation Mask Info CSR (Block Offset 0x48 + 20 * n)'
-855c849
+855c873
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-872c866
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-874c868
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-895d888
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-897d889
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-978c970
+978c996
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-995c987
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-997c989
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1018d1009
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1020d1010
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1096c1086
+1096c1114
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1113c1103
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1115c1105
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1136d1125
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1138d1126
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1215c1203
+1215c1233
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1232c1220
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1234c1222
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1255d1242
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1257d1243
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1320c1306
+1320c1338
 < '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
 ---
 > '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
-1391c1377
+1391c1409
 < '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
 ---
 > '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
-1395,1405c1381,1384
+1395,1398c1413,1416
 < '0', 'Block_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '16:31', 'MaxMcastMasks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
-< 'STD_REG', '0x3C', 'Data Streaming Information CAR'
-< '0:15', 'MaxPDU', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.5.3 Data Streaming Information CAR (Configuration Space Offset 0x3C)'
-< '16:31', 'SegSupport', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.5.3 Data Streaming Information CAR (Configuration Space Offset 0x3C)'
-< 'STD_REG', '0x48', 'Data Streaming Logical Layer Control CSR'
-< '0:3', 'TM Types Supported (read only)', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.6.1 Data Streaming Logical Layer Control CSR (Configuration Space Offset 0x48)'
-< '4:7', 'TM Mode', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.6.1 Data Streaming Logical Layer Control CSR (Configuration Space Offset 0x48)'
-< '24:31', 'MTU', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.6.1 Data Streaming Logical Layer Control CSR (Configuration Space Offset 0x48)'
 ---
 > '0', 'Block_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '16:31', 'MaxMcastMasks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
-1442,1445c1421,1424
+1442,1445c1460,1463
 < '0:15', 'Mcast_Mask', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
@@ -251,7 +126,7 @@
 > '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '31', 'Port_Present', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
-1447,1449c1426,1428
+1447,1449c1465,1467
 < '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
@@ -259,7 +134,7 @@
 > '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
-1451,1456c1430,1435
+1451,1456c1469,1474
 < '0:15', 'Assoc_Blksize', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '16:23', 'Ingress_Port', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '24', 'Large_Transport', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
