@@ -4,88 +4,37 @@
 48a51,52
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-51c55
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-53c57
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 56a61,62
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-72d77
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-74d78
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-128a133,134
+128a135,136
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-141a148,149
+141a150,151
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-144c152
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-146c154
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-149a158,159
+149a160,161
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-165d174
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-167d175
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-205a214,215
+205a218,219
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-218a229,230
+218a233,234
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-221c233
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-223c235
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-226a239,240
+226a243,244
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-242d255
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-244d256
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-314,315d325
-< '0x0007', '0x20', 'Logical/Transport Layer Dev32 Destination ID Capture CSR'
-< '0:31', 'Dev32 DestID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20)'
-462a473,474
+462a481,482
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-475a488,489
+475a496,497
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-478c492
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-480c494
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-483a498,499
+483a506,507
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-499d514
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-501d515
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-509,511c523,525
+509,511c533,535
 < '0x000A', '((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 < '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
 < '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
@@ -93,100 +42,44 @@
 > '0x000A', '((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 > '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
 > '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
-514a529,530
+514a539,540
 > '2', 'VC0 Supports VC bit for Priority', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 > '3', 'VC0 Enable VC Bit for Priority', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
-686c702
-< '2', 'Timestamp Generator Stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.9.3 Timestamp Generator Status CSR (Block Offset 0x08)'
----
-> '2', 'Timestamp Generator', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.9.3 Timestamp Generator Status CSR (Block Offset 0x08)'
-713c729
-< '1', 'Disable Clock Compensation Sequence', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.9.13 Port n Timestamp Generator Synchronization CSRs (Block Offsets 0x60, 0xA0, ..., 0x420)'
----
-> '1', 'This value controls how the Asymmetry field', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.9.13 Port n Timestamp Generator Synchronization CSRs (Block Offsets 0x60, 0xA0, ..., 0x420)'
-826a843,844
+826a853,854
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-839a858,859
+839a868,869
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-842c862
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-844c864
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-847a868,869
+847a878,879
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-863d884
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-865d885
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-943a964,965
+943a976,977
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-956a979,980
+956a991,992
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-959c983
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-961c985
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-964a989,990
+964a1001,1002
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-980d1005
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-982d1006
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1055a1080,1081
+1055a1094,1095
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1068a1095,1096
+1068a1109,1110
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1071c1099
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1073c1101
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1076a1105,1106
+1076a1119,1120
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1092d1121
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1094d1122
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1168a1197,1198
+1168a1213,1214
 > '20', '25.78125 Gbaud Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 > '21', '25.78125 Gbaud Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1181a1212,1213
+1181a1228,1229
 > '8', 'IDLE3 Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '9', 'IDLE3 Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1184c1216
-< '13', 'Output Retry-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1186c1218
-< '15', 'Output Error-stopped', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1189a1222,1223
+1189a1238,1239
 > '24', 'DME Supported', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '25', 'DME Enabled', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.10 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1205d1238
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1207d1239
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1266a1299
+1266a1317
 > '10', 'Error Free Mode support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
