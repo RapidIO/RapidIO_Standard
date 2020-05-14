@@ -478,7 +478,7 @@
 > '1', 'Hot Swap Extensions Implemented', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.2 Error Management/Hot Swap Extension Block CAR (Block Offset 0x4)'
 > '2', 'Physical Layer Error Capture FIFO Implemented', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.2 Error Management/Hot Swap Extension Block CAR (Block Offset 0x4)'
 > '3', 'Logical/Transport Layer Error Capture FIFO Implemented', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.2 Error Management/Hot Swap Extension Block CAR (Block Offset 0x4)'
-223,233c261,278
+223,232c261,270
 < '0', 'IO error response', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 < '1', 'Message error response', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 < '2', 'GSM error response', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
@@ -489,7 +489,6 @@
 < '7', 'Packet Response Timeout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 < '8', 'Unsolicited Response', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 < '9', 'Unsupported Transaction', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
-< '24:31', 'Implementation Specific error', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 ---
 > '0', 'IO error response', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 > '1', 'Message error response', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
@@ -501,15 +500,13 @@
 > '7', 'Packet Response Timeout', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 > '8', 'Unsolicited Response', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 > '9', 'Unsupported Transaction', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
-> '10', 'Missing data streaming context', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x08)'
-> '11', 'Open existing data streaming context', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x08)'
-> '12', 'Long data streaming segment', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x08)'
-> '13', 'Short data streaming segment', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x08)'
-> '14', 'Data streaming PDU length error', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x08)'
+238c276,278
+< '24:31', 'Implementation Specific error', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.2 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
+---
 > '22', 'Lost Tick Error Status', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 > '23', 'Lost TSG Sync Error Status', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
 > '24:31', 'Implementation Specific error', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.3 Logical/Transport Layer Error Detect CSR (Block Offset 0x08)'
-235,245c280,297
+240,249c280,289
 < '0', 'IO error response enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 < '1', 'Message error response enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 < '2', 'GSM error response enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
@@ -520,7 +517,6 @@
 < '7', 'Packet Response Timeout error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 < '8', 'Unsolicited Response error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 < '9', 'Unsupported Transaction error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
-< '24:31', 'Implementation Specific error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 ---
 > '0', 'IO error response enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 > '1', 'Message error response enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
@@ -532,26 +528,24 @@
 > '7', 'Packet Response Timeout error enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 > '8', 'Unsolicited Response error enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 > '9', 'Unsupported Transaction error enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
-> '10', 'Missing data streaming context enable', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x0C)'
-> '11', 'Open existing data streaming context enable', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x0C)'
-> '12', 'Long data streaming segment enable', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x0C)'
-> '13', 'Short data streaming segment enable', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x0C)'
-> '14', 'Data streaming PDU length error enable', 'RapidIO Interconnect Specification Part 10: Data Streaming Logical Specification', '5.4 Additions to Existing Registers (Block Offset 0x0C)'
+255c295,297
+< '24:31', 'Implementation Specific error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.3 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
+---
 > '22', 'Lost Tick Error Enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 > '23', 'Lost TSG Sync Error Enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
 > '24:31', 'Implementation Specific error enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.4 Logical/Transport Layer Error Enable CSR (Block Offset 0x0C)'
-247c299
+257c299
 < '0:31', 'address[0-31]', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.4 Logical/Transport Layer High Address Capture CSR (Block Offset 0x10)'
 ---
 > '0:31', 'address[0-31]', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.5 Logical/Transport Layer High Address Capture CSR (Block Offset 0x10)'
-249,250c301,303
+259,260c301,303
 < '0:28', 'address[32-60]', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.5 Logical/Transport Layer Address Capture CSR (Block Offset 0x14)'
 < '30:31', 'xamsbs', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.5 Logical/Transport Layer Address Capture CSR (Block Offset 0x14)'
 ---
 > '0:28', 'address[32-60]', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.6 Logical/Transport Layer Address Capture CSR (Block Offset 0x14)'
 > '29', 'Implementation Specific', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.6 Logical/Transport Layer Address Capture CSR (Block Offset 0x14)'
 > '30:31', 'xamsbs', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.6 Logical/Transport Layer Address Capture CSR (Block Offset 0x14)'
-252,255c305,308
+262,265c305,308
 < '0:7', 'MSB destinationID', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.6 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
 < '8:15', 'destinationID', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.6 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
 < '16:23', 'MSB sourceID', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.6 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
@@ -561,7 +555,7 @@
 > '8:15', 'destinationID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.7 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
 > '16:23', 'MSB sourceID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.7 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
 > '24:31', 'sourceID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.7 Logical/Transport Layer Device ID Capture CSR (Block Offset 0x18)'
-257,264c310,322
+267,274c310,322
 < '0:3', 'ftype', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.7 Logical/Transport Layer Control Capture CSR (Block Offset 0x1C)'
 < '4:7', 'ttype', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.7 Logical/Transport Layer Control Capture CSR (Block Offset 0x1C)'
 < '8:15', 'msg info', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.7 Logical/Transport Layer Control Capture CSR (Block Offset 0x1C)'
@@ -584,7 +578,7 @@
 > '8:15', 'Dev8_deviceID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.11 Port-Write Target deviceID CSR (Block Offset 0x28)'
 > '16', 'Dev8_or_16', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.11 Port-Write Target deviceID CSR (Block Offset 0x28)'
 > '17', 'Dev32_PW', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.11 Port-Write Target deviceID CSR (Block Offset 0x28)'
-266c324,328
+276c324,328
 < '0:15', 'Time-to-live value', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.9 Packet Time-to-live CSR (Block Offset 0x2C)'
 ---
 > '0:15', 'Time-to-live value', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.12 Packet Time-to-live CSR (Block Offset 0x2C)'
@@ -592,7 +586,7 @@
 > '0:31', 'Dev32_deviceID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.13 Port-write Dev32 Target deviceID CSR (Block Offset 0x30)'
 > '0x0007', ' 0x34', 'Port-Write Transmission Control CSR'
 > '31', 'Port-write Transmission Disable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.14 Port-Write Transmission Control CSR (Block Offset 0x34)'
-268,284c330,350
+278,294c330,350
 < '0', 'Implementation specific error', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.10 Port n Error Detect CSR (Block Offset 0x40, 80,..., 400)'
 < '8', 'Received S-bit error', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.10 Port n Error Detect CSR (Block Offset 0x40, 80,..., 400)'
 < '9', 'Received corrupt control symbol', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.10 Port n Error Detect CSR (Block Offset 0x40, 80,..., 400)'
@@ -632,7 +626,7 @@
 > '29', 'Delineation error', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.15 Port n Error Detect CSR (Block Offset 0x40, 80,..., 400)'
 > '30', 'Unsolicited acknowledgement control symbol', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.15 Port n Error Detect CSR (Block Offset 0x40, 80,..., 400)'
 > '31', 'Link timeout', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.15 Port n Error Detect CSR (Block Offset 0x40, 80,..., 400)'
-286,302c352,372
+296,312c352,372
 < '0', 'Implementation specific error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.11 Port n Error Rate Enable CSR (Block Offset 0x44, 84,..., 404)'
 < '8', 'Received S-bit error enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.11 Port n Error Rate Enable CSR (Block Offset 0x44, 84,..., 404)'
 < '9', 'Received corrupt control symbol enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.11 Port n Error Rate Enable CSR (Block Offset 0x44, 84,..., 404)'
@@ -672,7 +666,7 @@
 > '29', 'Delineation error enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.16 Port n Error Rate Enable CSR (Block Offset 0x44, 84,..., 404)'
 > '30', 'Unsolicited acknowledgement control symbol enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.16 Port n Error Rate Enable CSR (Block Offset 0x44, 84,..., 404)'
 > '31', 'Link timeout enable', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.16 Port n Error Rate Enable CSR (Block Offset 0x44, 84,..., 404)'
-304,315c374,387
+314,325c374,387
 < '0:2', 'Info type', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.12 Port n Attributes Capture CSR (Block Offset 0x48, 88,..., 408)'
 < '3:7', 'Error type', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.12 Port n Attributes Capture CSR (Block Offset 0x48, 88,..., 408)'
 < '8:27', 'Implementation Dependent', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.12 Port n Attributes Capture CSR (Block Offset 0x48, 88,..., 408)'
@@ -700,7 +694,7 @@
 > '0:31', 'Capture 3', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.21 Port n Capture 3 CSR (Block Offset 0x58, 98,..., 418)'
 > '0x0007', ' 0x5C, 9C,..., 41C', 'Port n Capture 4 CSR'
 > '0:31', 'Capture 4', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.22 Port n Capture 4 CSR (Block Offset 0x5C, 9C,..., 41C)'
-317,323c389,419
+327,333c389,419
 < '0:7', 'Error Rate Bias', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.17 Port n Error Rate CSR (Block Offset 0x68, A8,..., 428)'
 < '14:15', 'Error Rate Recovery', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.17 Port n Error Rate CSR (Block Offset 0x68, A8,..., 428)'
 < '16:23', 'Peak Error Rate', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.3.2.17 Port n Error Rate CSR (Block Offset 0x68, A8,..., 428)'
@@ -740,17 +734,17 @@
 > '29', 'Delineation error', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.26 Port n FIFO Error Detect CSR (Block Offset 0x7C, BC,..., 43C)'
 > '30', 'Unsolicited acknowledgement control symbol', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.26 Port n FIFO Error Detect CSR (Block Offset 0x7C, BC,..., 43C)'
 > '31', 'Link timeout', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.26 Port n FIFO Error Detect CSR (Block Offset 0x7C, BC,..., 43C)'
-325,326c421,422
+335,336c421,422
 < '0:15', 'EF_PTR', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.1 LP-Serial Register Block Header (Block Offset 0x0)'
 < '16:31', 'EF_ID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.1 LP-Serial Register Block Header (Block Offset 0x0)'
 ---
 > '0:15', 'EF_PTR', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.1 LP-Serial Register Block Header (Block Offset 0x0)'
 > '16:31', 'EF_ID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.1 LP-Serial Register Block Header (Block Offset 0x0)'
-328c424
+338c424
 < '0:23', 'timeout value', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.2 Port Link Timeout Control CSR (Block Offset 0x20)'
 ---
 > '0:23', 'timeout value', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.2 Port Link Timeout Control CSR (Block Offset 0x20)'
-330,337c426,433
+340,347c426,433
 < '2', 'Discovered', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.4 Port General Control CSR (Block Offset 0x3C)'
 < '0x0009', ' 0x40, 60, ... , 220', 'Port n Link Maintenance Request CSRs'
 < '29:31', 'Command', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.5 Port n Link Maintenance Request CSRs (Block Offsets 0x40, 60, ... , 220)'
@@ -768,7 +762,7 @@
 > '3:14', 'port_status_cs64', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.6 Port n Link Maintenance Response CSRs (RM-I Block Offsets 0x44, 64, ... , 224) (RM-II Block Offsets 0x44, 84, ... , 404)'
 > '15:26', 'ackID_status', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.6 Port n Link Maintenance Response CSRs (RM-I Block Offsets 0x44, 64, ... , 224) (RM-II Block Offsets 0x44, 84, ... , 404)'
 > '27:31', 'port_status', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.6 Port n Link Maintenance Response CSRs (RM-I Block Offsets 0x44, 64, ... , 224) (RM-II Block Offsets 0x44, 84, ... , 404)'
-339,403c435,508
+349,413c435,508
 < '0', 'Clr_outstanding_ackIDs', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.7 Port n Local ackID CSRs (Block Offsets 0x48, 68, ... , 228)'
 < '2:7', 'Inbound_ackID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.7 Port n Local ackID CSRs (Block Offsets 0x48, 68, ... , 228)'
 < '3:7', 'Inbound_ackID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.6.7 Port n Local ackID CSRs (Block Offsets 0x48, 68, ... , 228)'
@@ -909,7 +903,7 @@
 > '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 > '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 > '31', 'Port Type', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.11 Port n Control CSRs (RM-I Block Offsets 0x5C, 7C, ... , 23C) (RM-II Block Offsets 0x5C, 9C, ... , 41C)'
-405,409c510,514
+415,419c510,514
 < '0:15', 'EF_PTR', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.1 VC Register Block Header (Block Offset 0x0)'
 < '16:31', 'EF_ID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.1 VC Register Block Header (Block Offset 0x0)'
 < '0x000A', '((((port number) + 1) * 0x20) +  . (offset based on VC #, see Table 6-23))', 'Port n VCx BW Allocation Registers'
@@ -921,7 +915,7 @@
 > '0x000A', '((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 > '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
 > '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
-411,414c516,519
+421,424c516,519
 < '0', 'VC0 Bandwidth Reservation Capable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 < '1', 'VC0 BW Res Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 < '8:15', 'Bandwidth Reservation Precision', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
@@ -931,7 +925,7 @@
 > '1', 'VC0 BW Res Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 > '8:15', 'Bandwidth Reservation Precision', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
 > '16:31', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.3 Port n VC0 BW Allocation Registers (Block Offset (((port number) + 1) * 0x20) + 0x04))'
-416,419c521,524
+426,429c521,524
 < '0:7', 'VC Refresh Interval', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.2 Port n VC Control and Status Registers (Block Offset ((port number) + 1) * 0x20))'
 < '8:15', 'CT Mode', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.2 Port n VC Control and Status Registers (Block Offset ((port number) + 1) * 0x20))'
 < '16:23', 'VCs Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.8.2.2 Port n VC Control and Status Registers (Block Offset ((port number) + 1) * 0x20))'
@@ -941,7 +935,7 @@
 > '8:15', 'CT Mode', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.2 Port n VC Control and Status Registers (Block Offset ((port number) + 1) * 0x20))'
 > '16:23', 'VCs Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.2 Port n VC Control and Status Registers (Block Offset ((port number) + 1) * 0x20))'
 > '24:31', 'VCs Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.2 Port n VC Control and Status Registers (Block Offset ((port number) + 1) * 0x20))'
-423,432c528,546
+433,442c528,546
 < '0x000B', 'Variable, see Section 5.1.1', 'Port n VoQ Control Status Register'
 < '0', 'VoQ Backpressure Symbol Generation Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - Variable, see Section 5.1.1)'
 < '1', 'VoQ Backpressure Symbol Reception Supported', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - Variable, see Section 5.1.1)'
@@ -972,13 +966,13 @@
 > '19:25', 'reserved', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
 > '26:28', 'TX Port Group Size', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
 > '29:31', 'RX Port Group Size', 'RapidIO Interconnect Specification Part 12: Virtual Output Queueing Extensions Specification', '5.1.2.2 Port n VoQ Control Status Register (Block Offset - 0x20 + (4* n))'
-434,435c548,549
+444,445c548,549
 < '0:15', 'EF_PTR', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.1 LP-Serial Register Block Header (Block Offset 0x0)'
 < '16:31', 'EF_ID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.1 LP-Serial Register Block Header (Block Offset 0x0)'
 ---
 > '0:15', 'EF_PTR', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.7.2.1 LP-Serial Register Block Header (Block Offset 0x0)'
 > '16:31', 'EF_ID', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.7.2.1 LP-Serial Register Block Header (Block Offset 0x0)'
-437,450c551,564
+447,460c551,564
 < '0:7', 'Port Number', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.2 Lane n Status 0 CSRs (Block Offsets 0x10, 30, ... , 3F0)'
 < '8:11', 'Lane Number', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.2 Lane n Status 0 CSRs (Block Offsets 0x10, 30, ... , 3F0)'
 < '12', 'Transmitter type', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.2 Lane n Status 0 CSRs (Block Offsets 0x10, 30, ... , 3F0)'
@@ -1008,7 +1002,7 @@
 > '25', 'lane_trained state change', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.7.2.2 Lane n Status 0 CSRs (Block Offsets 0x10, 30, ... , 3F0)'
 > '28', 'Status 1 CSR implemented', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.7.2.2 Lane n Status 0 CSRs (Block Offsets 0x10, 30, ... , 3F0)'
 > '29:31', 'Status 2-7 CSRs implemented', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.7.2.2 Lane n Status 0 CSRs (Block Offsets 0x10, 30, ... , 3F0)'
-452,461c566,1278
+462,471c566,1278
 < '0', 'IDLE2 received', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.3 Lane n Status 1 CSRs (Block Offsets 0x14, 34, ... , 3F4)'
 < '1', 'IDLE2 information current', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.3 Lane n Status 1 CSRs (Block Offsets 0x14, 34, ... , 3F4)'
 < '2', 'Values changed', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.7.2.3 Lane n Status 1 CSRs (Block Offsets 0x14, 34, ... , 3F4)'
@@ -1733,7 +1727,7 @@
 > '8:15', 'Receive Width Command Timeout', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.18 Port n Link Timers Control 3 CSRs (RM-II Block Offsets 0x78, 0xB8, ... , 0x438)'
 > '16:21', 'Keep-alive Transmission Period', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.18 Port n Link Timers Control 3 CSRs (RM-II Block Offsets 0x78, 0xB8, ... , 0x438)'
 > '22:31', 'Keep-alive Transmission Interval', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.18 Port n Link Timers Control 3 CSRs (RM-II Block Offsets 0x78, 0xB8, ... , 0x438)'
-478,480c1295,1298
+488,490c1295,1298
 < '4', 'Multiport', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
 < '20', 'Flow Arbitration Support', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2 Processing Elements Features CAR (Offset 0x10 Word 0)'
 < '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2 Processing Elements Features CAR (Configuration Space Offset 0x10)'
@@ -1742,7 +1736,7 @@
 > '19', 'Dev32 Support', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
 > '20', 'Flow Arbitration Support', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.1 Processing Elements Features CAR (Offset 0x10 Word 0)'
 > '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
-483,486c1301,1304
+493,496c1301,1304
 < '24', 'Flow Control Support', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2 Processing Elements Features CAR (Offset 0x10 Word 0)'
 < '25', 'Implementation-defined', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
 < '26', 'CRF Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '6.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
@@ -1752,11 +1746,11 @@
 > '25', 'Implementation-defined', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
 > '26', 'CRF Support', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
 > '27', 'Dev16 support', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.4.1 Processing Element Features CAR (Configuration Space Offset 0x10)'
-551c1369
+561c1369
 < '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
 ---
 > '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
-555,558c1373,1376
+565,568c1373,1376
 < '0', 'Block_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
@@ -1766,10 +1760,10 @@
 > '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '16:31', 'MaxMcastMasks', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
-566a1385,1386
+576a1385,1386
 > '26:27', 'LCS Disable', 'RapidIO Interconnect Specification Part 1: Input/Output Logical Specification', '5.5.1 Processing Element Logical Layer Control CSR (Configuration Space Offset 0x4C)'
 > '28', 'LCS Disable Present', 'RapidIO Interconnect Specification Part 1: Input/Output Logical Specification', '5.5.1 Processing Element Logical Layer Control CSR (Configuration Space Offset 0x4C)'
-575,576c1395,1398
+585,586c1395,1398
 < '8:15', 'Base_deviceID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.1 Base Device ID CSR (Configuration Space Offset 0x60)'
 < '16:31', 'Large_base_deviceID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.1 Base Device ID CSR (Configuration Space Offset 0x60)'
 ---
@@ -1777,12 +1771,12 @@
 > '16:31', 'Dev16_base_deviceID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.1 Base Device ID CSR (Configuration Space Offset 0x60)'
 > 'STD_REG', ' 0x64', 'Dev32 Base Device ID CSR'
 > '0:31', 'Dev32_Base_DeviceID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.2 Dev32 Base Device ID CSR (Configuration Space Offset 0x64)'
-578c1400,1401
+588c1400,1401
 < '16:31', 'Host_base_deviceID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.2 Host Base Device ID Lock CSR (Configuration Space Offset 0x68)'
 ---
 > '0:15', 'Host_base_Dev32ID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.3 Host Base Device ID Lock CSR (Configuration Space Offset 0x68)'
 > '16:31', 'Host_base_deviceID', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.3 Host Base Device ID Lock CSR (Configuration Space Offset 0x68)'
-580,589c1403,1414
+590,599c1403,1414
 < '0:31', 'component_tag', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.3 Component Tag CSR (Configuration Space Offset 0x6C)'
 < 'STD_REG', ' 0x70', 'Standard Route Configuration Destination ID Select CSR'
 < '0', 'Ext_config_en', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.4 Standard Route Configuration Destination ID Select CSR (Configuration Space Offset 0x70)'
@@ -1806,13 +1800,13 @@
 > '16:21', 'Config_output_port1_msb', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.6 Standard Route Cfg Port Select CSR (Configuration Space Offset 0x74)'
 > '22:23', 'Config_output_port1_lsb', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.6 Standard Route Cfg Port Select CSR (Configuration Space Offset 0x74)'
 > '24:31', 'Config_output_port', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.6 Standard Route Cfg Port Select CSR (Configuration Space Offset 0x74)'
-591c1416,1418
+601c1416,1418
 < '24:31', 'Default_output_port', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.6 Standard Route Default Port CSR (Configuration Space Offset 0x78)'
 ---
 > '0:3', 'Implementation Specific', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.7 Standard Route Default Port CSR (Configuration Space Offset 0x78)'
 > '22:23', 'Route Type', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.7 Standard Route Default Port CSR (Configuration Space Offset 0x78)'
 > '24:31', 'Default_output_port', 'RapidIO Interconnect Specification Part 3: Common Transport Specification', '3.5.7 Standard Route Default Port CSR (Configuration Space Offset 0x78)'
-593,596c1420,1423
+603,606c1420,1423
 < '0:15', 'Mcast_Mask', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.5 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.5 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.5 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
@@ -1822,7 +1816,7 @@
 > '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '31', 'Port_Present', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
-598,600c1425,1427
+608,610c1425,1427
 < '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.6 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.6 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.6 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
@@ -1830,7 +1824,7 @@
 > '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
-602,607c1429,1434
+612,617c1429,1434
 < '0:15', 'Assoc_Blksize', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.7 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '16:23', 'Ingress_Port', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.7 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '24', 'Large_Transport', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.7 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'

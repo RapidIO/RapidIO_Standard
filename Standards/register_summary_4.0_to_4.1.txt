@@ -64,14 +64,14 @@
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.9 Broadcast Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 0x400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 > '0x000E', '(Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4)', 'Broadcast Port Aggregation Mask x Set Register y CSR'
 > '0:31', 'PAG_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.10 Broadcast Port Aggregation Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*16*2^Mask_size) + (y*4))'
-694,696c706,708
+694c706
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.6 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
-< '0x000E', '(Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4)', 'Port n Multicast Mask x Clear Register y CSR'
-< '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 ---
 > '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.8 Broadcast Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 0x400) + (x*8*2^Mask_size) + (y*4))'
-> '0x000E', '(Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size', 'Port n Multicast Mask x Clear Register y CSR'
-> '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.15 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size)'
+696c708
+< '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.9 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
+---
+> '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.4.15 Port n Multicast Mask x Clear Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (4*2^Mask_size) + (y*4))'
 698c710,718
 < '0:31', 'Mcast_ctl', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.4.8 Port n Multicast Mask x Set Register y CSR (Offset = (Mask_Ptr * 400) + (x * 8*2^Mask_size) + (y*4))'
 ---
