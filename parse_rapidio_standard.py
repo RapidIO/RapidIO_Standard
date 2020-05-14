@@ -56,6 +56,7 @@ class RapidIOStandardParser(object):
         self.new_secs = []
         self.found_lp_serial_header = False
         self.multiple_reg_blocks = False
+        self.multiple_part_8_reg_blocks = False
         if rev is None:
             self.revision = "Unknown"
             result = re.search("([0-9]\.[0-9])", self.input_xml)
@@ -162,9 +163,36 @@ class RapidIOStandardParser(object):
             reg_cpy[4] = blk_id
             self.registers.append(reg_cpy)
 
+    def append_part8_regs(self, reg):
+        all_blk_ids = ["0x0007", "0x0017"]
+        non_hs_blk_ids = ["0x0007"]
+
+        section = reg[3]
+        bit_field = reg[6]
+
+        tgt_blks = non_hs_blk_ids
+        if ((section.find("Block Header") >= 0)
+            or (section.find("Block CAR") >= 0)
+            or (section.find("Target deviceID") >= 0)
+            or (section.find("Packet Time-to-live") >= 0)
+            or (section.find("Transmission Control") >= 0)
+            or (section.find("Link Uninit Discard Timer") >= 0)):
+            tgt_blks = all_blk_ids
+
+        if ((section.find("Port n Error Detect") >= 0)
+         or (section.find("Port n Error Rate Enable") >= 0)):
+            if ((bit_field.find("Link") >= 0)
+            and (bit_field.find("Uninit") >= 0)):
+                tgt_blks = all_blk_ids
+
+        for blk_id in tgt_blks:
+            reg_cpy = copy.deepcopy(reg)
+            reg_cpy[4] = blk_id
+            self.registers.append(reg_cpy)
+
     # Things get a bit complicated here. 
     #  
-    # The Rev 2.2 specifications consolidate the register definitions
+    # The Rev 2.2 specifications consolidate the Part 6 register definitions
     # separately from the block definitions, which makes it impossible to
     # determine which register belongs to what block based on context.
     #
@@ -178,8 +206,12 @@ class RapidIOStandardParser(object):
     # out which registers/bit fields appear in which register blocks,
     # and adds the registers/bit fields accordingly.
     #
-    # This clause also takes care of a couple of Multicast extensions additions
-    # to existing registers in the Routing Table registers block.
+    # This clause also takes care of some Part 11 Multicast extensions additions
+    # to existing registers in the Routing Table registers block.  Both were
+    # introduced in revision 3.2.
+    #
+    # And lastly in revision 3.2 and later, an additional "Hot Swap Only"
+    # register block was added to Part 8, via similar unparseable means.
 
     def append_register(self, reg):
         rm1_blk_ids = ["0x0001", "0x0002", "0x0003", "0x0009"]
@@ -248,6 +280,13 @@ class RapidIOStandardParser(object):
         if ((reg[0] == "2.2") and (self.register_block_id == "UNKNOWN")):
             self.append_rev2_regs(reg);
             return
+
+        if ((reg[0] >= "3.2") and (part.find("Part 8") >= 0)):
+            self.multiple_part_8_reg_blocks = True
+            self.append_part8_regs(reg)
+            return
+
+        self.multiple_part_8_reg_blocks = False
 
         # If the register offset definition is not one of the
         # Rev 3.2 (and later) Part 6 "Register Map" variations,
@@ -324,7 +363,8 @@ class RapidIOStandardParser(object):
                     self.register_block_id = 'UNKNOWN'
                 # Previous register field is always EF_PTR, which should be
                 # identified as part of this register block.
-                if not self.multiple_reg_blocks:
+                if (not self.multiple_reg_blocks
+                and not self.multiple_part_8_reg_blocks):
                     self.registers[-1][4] = self.register_block_id
             reg = [self.revision, self.part_name, self.chapter_name,
                    self.section_name, self.register_block_id]

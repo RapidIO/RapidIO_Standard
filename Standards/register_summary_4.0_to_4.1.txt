@@ -264,11 +264,11 @@
 > '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 > '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 > '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1215c1235
+1244c1264
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1225,1227c1245,1247
+1254,1256c1274,1276
 < '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 < '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 < '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
@@ -276,15 +276,15 @@
 > '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
 > '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1255c1275
+1284c1304
 < '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 ---
 > '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1257c1277
+1286c1306
 < '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 ---
 > '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1261,1263c1281,1283
+1290,1292c1310,1312
 < '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 < '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 < '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
@@ -292,15 +292,15 @@
 > '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 > '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 > '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1320c1340
+1349c1369
 < '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
 ---
 > '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
-1391c1411
+1420c1440
 < '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
 ---
 > '0', 'Simple_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.2 Switch Multicast Support CAR (Configuration Space Offset 0x30)'
-1395,1398c1415,1418
+1424,1427c1444,1447
 < '0', 'Block_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 < '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
@@ -310,7 +310,7 @@
 > '1', 'Per_Port_Assoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '2:15', 'MaxDestIDAssoc', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
 > '16:31', 'MaxMcastMasks', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.2.3 Switch Multicast Information CAR (Configuration Space Offset 0x38)'
-1442,1445c1462,1465
+1471,1474c1491,1494
 < '0:15', 'Mcast_Mask', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 < '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
@@ -320,7 +320,7 @@
 > '16:23', 'Egress_Port_Num', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '25:27', 'Mask_Cmd', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
 > '31', 'Port_Present', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.1 Multicast Mask Port CSR (Configuration Space Offset 0x80)'
-1447,1449c1467,1469
+1476,1478c1496,1498
 < '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 < '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
@@ -328,7 +328,7 @@
 > '0:7', 'Large_DestID', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '8:15', 'DestID', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
 > '16:31', 'Mcast_Mask_Num', 'RapidIO Interconnect Specification Part 11: Multicast and Port Aggregation Group Extensions Specification', '4.3.2 Multicast Associate Select CSR (Configuration Space Offset 0x84)'
-1451,1456c1471,1476
+1480,1485c1500,1505
 < '0:15', 'Assoc_Blksize', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '16:23', 'Ingress_Port', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
 < '24', 'Large_Transport', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.3.3 Multicast Associate Operation CSR (Configuration Space Offset 0x88)'
