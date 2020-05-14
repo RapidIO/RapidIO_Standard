@@ -2,86 +2,14 @@
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-48,50c48,50
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-78c78
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-80c80
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-84,86c84,86
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 137c137
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-147,149c147,149
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-177c177
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-179c179
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-183,185c183,185
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 220c220
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-230,232c230,232
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-260c260
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-262c262
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-266,268c266,268
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 332,333d331
 < '0x0007', ' 0x20', 'Logical/Transport Layer Dev32 Destination ID Capture CSR'
 < '0:31', 'Dev32 DestID', 'RapidIO Interconnect Specification Part 8: Error Management/Hot Swap Extensions Specification', '2.5.9 Logical/Transport Layer Dev32 Destination ID Capture CSR (Block Offset 0x20)'
@@ -89,30 +17,6 @@
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-493,495c491,493
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-523c521
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-525c523
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-529,531c527,529
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 536,538c534,536
 < '0x000A', '((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31))', 'Port n VCx BW Allocation Registers'
 < '0:15', 'Bandwidth Allocation', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
@@ -184,114 +88,18 @@
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-865,867c885,887
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-895c915
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-897c917
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-901,903c921,923
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 978c998
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-988,990c1008,1010
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1018c1038
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1020c1040
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1024,1026c1044,1046
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 1096c1116
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1106,1108c1126,1128
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1136c1156
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1138c1158
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1142,1144c1162,1164
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 1244c1264
 < '27', '10G Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
 ---
 > '27', 'BRC3 Retraining Enable', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', '7.6.9 Port n Control 2 CSRs (RM-I Block Offset 0x54, 74, ... , 234) (RM-II Block Offset 0x54, 94, ... , 414)'
-1254,1256c1274,1276
-< '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-< '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.2 Port n Error and Status CSRs (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
----
-> '5', 'Output Packet-dropped', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '6', 'Output Failed-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-> '7', 'Output Degraded-encountered', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x58, 78, ... , 238) (RM-II Block Offset 0x58, 98, ... , 418)'
-1284c1304
-< '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '13', 'Flow Control Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1286c1306
-< '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.2.2 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '15', 'Flow Arbitration Participant', 'RapidIO Interconnect Specification Part 9: Flow Control Logical Layer Extensions Specification', '4.3 Port n Control CSR (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-1290,1292c1310,1312
-< '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-< '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2.1 Port n Control CSRs (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
----
-> '28', 'Stop on Port Failed-encountered Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '29', 'Drop Packet Enable', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
-> '30', 'Port Lockout', 'RapidIO Interconnect Specification Part 8: Error Management Extensions Specification', '2.2 Additions to Existing Registers (RM-I Block Offset 0x5C, 7C, ... , 23C) (RM-II Block Offset 0x5C, 9C, ... , 41C)'
 1349c1369
 < '21', 'Multicast Support', 'RapidIO Interconnect Specification Part 11: Multicast Extensions Specification', '3.2.1 Processing Elements Features CAR (Configuration Space Offset 0x10)'
 ---
