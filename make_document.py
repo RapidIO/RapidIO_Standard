@@ -88,6 +88,15 @@ class WordEditor(object):
             self.add_reserved_row(table, prev_bit, self.next_bit - 1)
         return self.new_last_bit
 
+    def extract_part(self, part_string):
+        start = part_string.find("Part ")
+        if (start < 0):
+            raise ValueError("Could not find part in %s!" % part_string);
+        end = part_string[start:].find(":")
+        if (end < 0):
+            raise ValueError("Could not find end of part in %s!" % part_string);
+        return part_string[start:start + end]
+
     def create_document(self):
         document = Document()
 
@@ -136,7 +145,7 @@ class WordEditor(object):
                 row_cells = table.add_row().cells
                 row_cells[0].text = bit.bit_range
                 row_cells[1].text = bit.bit_name
-                row_cells[2].text = bit.spec_part
+                row_cells[2].text = self.extract_part(bit.spec_part)
                 row_cells[3].text = bit.spec_section
             if not last_bit == 32:
                 self.add_reserved_row(table, last_bit, 31)
