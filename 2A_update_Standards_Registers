@@ -1,0 +1,80 @@
+#!/bin/bash
+function check_rc(){
+        rc=$?
+        echo ---------------------------------------
+        if [[ $rc != 0 ]];
+        then
+                echo $1 ' FAILURE!'
+                exit $rc
+        else
+                echo $1 ' SUCCESS!'
+        fi
+        echo ---------------------------------------
+}
+
+./Python_Files/parse_rapidio_standard.py -f Standards_XML/RapidIO\ 1.3\ Specification\ Stack.xml -e -r 1.3 > Standards_Registers/registers_1.3.txt 2>&1
+check_rc registers_1.3
+./Python_Files/parse_rapidio_standard.py -f Standards_XML/Rev_2.2_specification_stack.xml -e -r 2.2 > Standards_Registers/registers_2.2.txt 2>&1
+check_rc registers_2.2
+./Python_Files/parse_rapidio_standard.py -f Standards_XML/RapidIO-Revision-3.2-Specification.xml -e -r 3.2 > Standards_Registers/registers_3.2.txt 2>&1
+check_rc registers_3.2
+./Python_Files/parse_rapidio_standard.py -f Standards_XML/RapidIO-Specification-4.0.xml -e -r 4.0 > Standards_Registers/registers_4.0.txt 2>&1
+check_rc registers_4.0
+./Python_Files/parse_rapidio_standard.py -f Standards_XML/RapidIO-Specification-4-1.xml -e -r 4.1 > Standards_Registers/registers_4.1.txt 2>&1
+check_rc registers_4.1
+
+./Python_Files/create_register_summary.py -r Standards_Registers/registers_1.3.txt -r Standards_Registers/manual_registers_1.3.txt > Standards_Registers/register_summary_1.3.txt
+check_rc 'Create 1.3 Register Summary text'
+
+./Python_Files/make_document.py -t Standards_Registers/register_summary_1.3.txt -w Standards_Registers/register_summary_1.3.docx
+check_rc 'Create 1.3 Register Summary MS Word file'
+
+./Python_Files/create_register_summary.py -r Standards_Registers/registers_1.3.txt -r Standards_Registers/registers_2.2.txt -r Standards_Registers/manual_registers_2.2.txt -t Standards_Translations/translate_1.3to2.2.txt > Standards_Registers/register_summary_2.2.txt
+check_rc 'Create 2.2 Register Summary text'
+
+./Python_Files/make_document.py -t Standards_Registers/register_summary_2.2.txt -w Standards_Registers/register_summary_2.2.docx
+check_rc 'Create 2.2 Register Summary MS Word file'
+
+./Python_Files/create_register_summary.py -r Standards_Registers/registers_3.2.txt -r Standards_Registers/manual_registers_3.2.txt -t Standards_Translations/translate_1.3to2.2.txt -t Standards_Translations/translate_2.2to3.2.txt > Standards_Registers/register_summary_3.2.txt
+check_rc 'Create 3.2 Register Summary text'
+
+./Python_Files/make_document.py -t Standards_Registers/register_summary_3.2.txt -w Standards_Registers/register_summary_3.2.docx
+check_rc 'Create 3.2 Register Summary MS Word file'
+
+./Python_Files/create_register_summary.py -r Standards_Registers/registers_4.0.txt -r Standards_Registers/manual_registers_4.0.txt > Standards_Registers/register_summary_4.0.txt
+check_rc 'Create 4.0 Register Summary text'
+
+./Python_Files/make_document.py -t Standards_Registers/register_summary_4.0.txt -w Standards_Registers/register_summary_4.0.docx
+check_rc 'Create 4.0 Register Summary MS Word file'
+
+./Python_Files/create_register_summary.py -r Standards_Registers/registers_4.1.txt -r Standards_Registers/manual_registers_4.1.txt > Standards_Registers/register_summary_4.1.txt
+check_rc 'Create 4.1 Register Summary text'
+
+./Python_Files/make_document.py -t Standards_Registers/register_summary_4.1.txt -w Standards_Registers/register_summary_4.1.docx
+check_rc 'Create 4.1 Register Summary MS Word file'
+
+# Create register summary diffs, to indicate which registers
+# changed between specification revisions.
+#
+# First, change all revision numbers to "test".  Otherwise
+# every line will differ because the revision numbers are
+# different.
+sed -i -r "s#'1.3'#'test'#g" Standards_Registers/register_summary_1.3.txt
+sed -i -r "s#'2.2'#'test'#g" Standards_Registers/register_summary_2.2.txt
+sed -i -r "s#'3.2'#'test'#g" Standards_Registers/register_summary_3.2.txt
+sed -i -r "s#'4.0'#'test'#g" Standards_Registers/register_summary_4.0.txt
+sed -i -r "s#'4.1'#'test'#g" Standards_Registers/register_summary_4.1.txt
+
+# Generate the diff files.
+diff Standards_Registers/register_summary_1.3.txt Standards_Registers/register_summary_2.2.txt > Standards_Registers/register_summary_1.3_to_2.2.txt
+diff Standards_Registers/register_summary_2.2.txt Standards_Registers/register_summary_3.2.txt > Standards_Registers/register_summary_2.2_to_3.2.txt
+diff Standards_Registers/register_summary_3.2.txt Standards_Registers/register_summary_4.0.txt > Standards_Registers/register_summary_3.2_to_4.0.txt
+diff Standards_Registers/register_summary_4.0.txt Standards_Registers/register_summary_4.1.txt > Standards_Registers/register_summary_4.0_to_4.1.txt
+
+# Lastly, return all revision numbers to their original values
+sed -i -r "s#'test'#'1.3'#g" Standards_Registers/register_summary_1.3.txt
+sed -i -r "s#'test'#'2.2'#g" Standards_Registers/register_summary_2.2.txt
+sed -i -r "s#'test'#'3.2'#g" Standards_Registers/register_summary_3.2.txt
+sed -i -r "s#'test'#'4.0'#g" Standards_Registers/register_summary_4.0.txt
+sed -i -r "s#'test'#'4.1'#g" Standards_Registers/register_summary_4.1.txt
+
