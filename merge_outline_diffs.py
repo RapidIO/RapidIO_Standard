@@ -303,6 +303,11 @@ def create_parser():
             action = 'store', type = 'float', default = 0.8,
             help = 'Percentage of tokens required to achieve a match',
             metavar = 'PCT')
+    parser.add_option('-o', '--output',
+            dest = 'output_file',
+            action = 'store', type = 'string', default = None,
+            help = 'Output file name.',
+            metavar = 'FILE')
     return parser
 
 def validate_options(options):
@@ -328,6 +333,10 @@ def validate_options(options):
         print "Confidence must be between 0.0 and 1.0."
         sys.exit()
 
+    if options.output_file is None:
+        print "Must enter output file name!"
+        sys.exit()
+
 def main(argv = None):
     logging.basicConfig(level=logging.WARN)
     parser = create_parser()
@@ -347,11 +356,7 @@ def main(argv = None):
                                       options.new_sections_file,
                                       options.manual_trans_file,
                                       options.confidence)
-    name = os.path.basename(os.path.normpath(options.outline_diff_filename))
-    path = os.path.dirname(options.outline_diff_filename)
-    name = "translate_" + name
-    output_file = os.path.join(path, name)
-    merger.print_translation(output_file)
+    merger.print_translation(options.output_file)
 
 if __name__ == '__main__':
     sys.exit(main())

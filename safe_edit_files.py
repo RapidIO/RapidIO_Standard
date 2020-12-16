@@ -147,13 +147,13 @@ def edit_manual_translations():
     revs = [tok.strip() for tok in rev.split("to")]
 
     chk_lines = {}
-    filepath = os.path.join("Standards", "manual_%s.txt" % rev)
+    filepath = os.path.join("Standards_Translations", "manual_%s.txt" % rev)
     with open(filepath) as f:
         chk_lines["original"] = f.readlines()
-    old_path = os.path.join("Standards", "outline_%s.txt" % revs[0])
+    old_path = os.path.join("Standards_Outlines", "outline_%s.txt" % revs[0])
     with open(old_path) as f:
         chk_lines["OLD"] = f.readlines()
-    new_path = os.path.join("Standards", "outline_%s.txt" % revs[1])
+    new_path = os.path.join("Standards_Outlines", "outline_%s.txt" % revs[1])
     with open(new_path) as f:
         chk_lines["NEW"] = f.readlines()
     edit_file(filepath, check_manual_translations, chk_lines)
