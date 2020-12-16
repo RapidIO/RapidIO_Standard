@@ -200,10 +200,10 @@ def edit_manual_requirements():
     rev = manual_requirements[idx]
 
     chk_lines = {}
-    filepath = os.path.join("Standards", "manual_reqts_%s.txt" % rev)
+    filepath = os.path.join("Standards_Requirements", "manual_reqts_%s.txt" % rev)
     with open(filepath) as f:
         chk_lines["original"] = f.readlines()
-    outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
+    outline_path = os.path.join("Standards_Outlines", "outline_%s.txt" % rev)
     with open(outline_path) as f:
         chk_lines["outline"] = f.readlines()
     edit_file(filepath, check_manual_requirements, chk_lines)
@@ -223,10 +223,10 @@ def edit_drop_requirements():
     rev = manual_requirements[idx]
 
     chk_lines = {}
-    filepath = os.path.join("Standards", "manual_drop_%s.txt" % rev)
+    filepath = os.path.join("Standards_Requirements", "manual_drop_%s.txt" % rev)
     with open(filepath) as f:
         chk_lines["original"] = f.readlines()
-    outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
+    outline_path = os.path.join("Standards_Outlines", "outline_%s.txt" % rev)
     with open(outline_path) as f:
         chk_lines["outline"] = f.readlines()
     edit_file(filepath, check_manual_requirements, chk_lines)
