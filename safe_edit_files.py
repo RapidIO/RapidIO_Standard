@@ -86,8 +86,8 @@ def edit_new_sections():
     if idx >= len(new_section_revisions):
         return
     rev = new_section_revisions[idx]
-    filepath = os.path.join("Standards", "new_sections_%s.txt" % rev)
-    outline_path = os.path.join("Standards", "outline_%s.txt" % rev)
+    filepath = os.path.join("Standards_Outlines", "new_sections_%s.txt" % rev)
+    outline_path = os.path.join("Standards_Outlines", "outline_%s.txt" % rev)
     with open(outline_path) as f:
         chk_lines = f.readlines()
     edit_file(filepath, check_new_sections, chk_lines)
