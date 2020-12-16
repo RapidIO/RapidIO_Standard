@@ -370,7 +370,7 @@ def edit_testcases():
     filepath = os.path.join("Testcases", testcases[keys[idx]][1])
     with open(filepath) as f:
         chk_lines["original"] = f.readlines()
-    chkpath = os.path.join("Historic_Checklists", "merged_sorted_db.txt")
+    chkpath = os.path.join("Compliance_Database", "merged_sorted_db.txt")
     chk_lines["uids"] = []
     with open(chkpath) as f:
         for line in f.readlines():
@@ -382,7 +382,7 @@ def review_requirements_check(unused, unused2):
     return READ_ONLY
 
 def review_requirements():
-    text_file_path = os.path.join("Historic_Checklists", "merged_sorted_db.txt")
+    text_file_path = os.path.join("Compliance_Database", "merged_sorted_db.txt")
     edit_file(text_file_path, review_requirements_check, {})
 
 def recover_spreadsheet():
