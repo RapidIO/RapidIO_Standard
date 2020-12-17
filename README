@@ -1,18 +1,136 @@
-There are currently two scripts which generate files.  They should
-be run in the following order:
+This directory contains the reviewed, approved and adopted
+Compliance Certification checklist for every revision of the
+RapidIO standard. The Compliance Certification Checklist is
+found in:
 
-check_all_outlines runs parse_rapidio_standard.py on all XML files for
-   RapidIO standard revisiions to create outlines, and then creates
-   files to capture the deltas between the different outlines.
-   This is a quick way to check what should have changed between
-   specification revisions, and can be used as the basis of
-   translation files between various revisions.
+Compliance_Database/merged_sorted_db.txt
 
-check_all_checklists runs parse_checklists.py on all checklist XML files,
-   and merges the results of the checklists and the outlines/requirements
-   into a single file (Historic_Checklists/merged_sorted_checklist.txt
+Testcase definitions for Part 1, 2, and 10 are found in the Testcases
+directory, along with a flow for testcase capture, and checking that all
+compliance requirements are covered by all testcases.  Refer to
+Testcases/README for more information.
 
-Both scripts should be executed in a Python 2.7 environment.
+==================================================================
+Installation
 
-To run the make_document.py register summary word document generation
-procedure, the python-docx package must be installed.
+Installation requires a python 2.7 environment with the following
+packages:
+- openpyxl - python support for Microsoft Excel (.xlsx) files
+- docx - python support for Microsoft Word (.docx) files
+
+==================================================================
+
+Usage Overview
+
+The Compliance Certification database is generated and updated
+automatically using the work flow implemented by the following
+bash scripts, which call python programs:
+
+01_update_Standards
+- Start with XML versions of each of the standards, as found
+  in Standards_XML
+- Generate the Standards_Outlines/outline_x.h.txt files.
+  These files contain every subheading for the named revision
+  of the standard.
+- Generate the Standards_Translations/x.ytoz.w_outline_diff.txt
+  files, to identify outline differences between two revisions.
+- Generate the Standards_Translations/all_translations.txt and
+  translate_x.xtoy.y.txt cross reference files, based on the
+  Standards_Translations/x.ytoz.w_outline_diff.txt and
+  Standards_Translations/manual_x.ytoz.w.txt files.
+  The translation files capture the subheading relationships between
+  different revisions of the standard, so that if a subheading number
+  or text changed, references to that subheading/number can be traced.
+  Most changed headings can be automatically identified.  Those which
+  cannot are managed by the Standards_Translations/manual_x.ytoz.w.txt
+  files.
+- Generate the Standards_Requirements/reqts_x.y.txt requirements files
+  for all new sections in each specification revision.  New sections
+  are identified by the Standards_Outlines/new_sections_x.y.txt files.
+  These requirements are extracted from XML files for each revision
+  of the standard.  The requirements are identified by keywords
+  such as "shall", "must", "should", and so forth.
+
+02_update_Checklists
+- Extract requirements from Historic Checklist documents, which
+  contain complete requirements for a subset of the parts for each
+  revision of the standard.
+- Some checklist items are optional.  Optionality is indicated by shading
+  in the original document, but the shading information is not found in the
+  XML versions.  Optional checklist items are therefore identified manually
+  using text files:
+  - rapidio_interop_checklist_rev2_2_optional.txt
+  - rev1_3_rio_chklist_optional.txt
+  - ErrorManagementChecklist_optional.txt
+
+03_update_Compliance
+- Merge the requirements from the Historic Checklist and
+  Standards_Requirements into a single text file, with consistent
+  references for each relevent specification revision to create
+  the Compliance_Database/merged_sorted_checklist.txt file.
+- The extracted requirements are incomplete, so there are two
+  additional files for each revision that allow requirements to
+  be added and dropped under human control:
+  - Standards_Requirements/manual_drop.x.y.txt
+    Drop these requirements from the automatically generated
+    requirements.
+  - Standards_Requirements/manual_reqts.x.y.txt
+    Add these requirements to the automatically generated
+    requirements.
+- Compare the Compliance_Database/merged_sorted_checklist.txt with
+  the Compliance_Database/merged_sorted_db.txt file, and merge in
+  any changes.
+  - The merged_sorted_db.txt file identifies each requirement with
+    a Unique ID that is guaranteed not to change.  This Unique ID
+    can be used as references within test plans, and enables automated
+    completeness and cross reference checking between test plans.
+
+Additional scripts are:
+
+2A_update_Standards_Registers
+- Update the register summaries for each revision of the standard.
+  Register summaries are found in
+  Standards_Registers/register_summary_x.y.txt.  Register
+  information is extracted from the XML file for each revision
+  of the standard, found in the Registers_XML directory.
+- Since information for some registers cannot be extracted
+  automatically due to document formatting peculiarities,
+  additional register fields can be added manually using the
+  Standards_Registers/manual_registers_x.y.txt files.
+  - These files are not directly supported by the "safe editing" utility
+    described in the next section.
+  - They can be editing using the following two step process:
+    - Edit the text file using "Convert a file to a spreadsheet"
+    - Convert the spreadsheet back to a text file using "Recover a spreadsheet"
+
+- Update register differences files for each revision of the
+  standard.  The register differences are found in
+  Standards_Registers/register_summary_x.y_to_z.w.txt.
+- Generate Microsoft Word tables of the registers and
+  register fields, as found in the
+  Standards_Registers/register_summary_x.y.docx
+
+edit_files_safely
+- There are quite a few files used to supply additional information
+  to each step of the flow.  These files have very specific formats,
+  and restrictions on character sets.
+- This script invokes a python utility that will allow editing these
+  text files as Microsoft Excel spreadsheet (.xlsx) files.
+- Once the file has been edited, close the spreadsheet and the
+  changes will be checked to ensure that they are correct and
+  well formatted.
+- If a defect is detected, the user has an opportunity to resume
+  editing the Excel spreadsheet and fixing the defect.
+- The files that should be edited this way include:
+  - Standards_Outlines/new_sections_x.y.txt
+  - Standards_Translations/manual_x.ytoz.w.txt
+  - Standards_Requirements/manual_reqts_x.y.txt
+  - Standards_Requirements/manual_drop_x.y.txt
+  - Standards_Registers/manual_registers_x.y.txt
+  - Historic_Checklists/rapidio_interop_checklist_rev2_2_optional.txt
+  - Historic_Checklists/rev1_3_rio_chklist_optional.txt
+  - Historic_Checklists/ErrorManagementChecklist_optional.txt
+- NOTE: There is no support for the Standards_Registers/manual_registers_x.y.txt
+        files.
+
+==================================================================

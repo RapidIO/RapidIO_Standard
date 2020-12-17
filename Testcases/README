@@ -12,7 +12,7 @@ FULLY DOCUMENTED TEST PLANS
 ---------------------------
 
 The test plan text files can be edited as spreadsheets using the 
-safe_edit_files.py executable, found in the directory above this one.
+edit_files_safely script, found in the directory above this one.
 
 There is no additional support for these files at this time.
 
