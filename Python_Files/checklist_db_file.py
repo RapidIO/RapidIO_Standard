@@ -15,11 +15,15 @@ import logging
 import copy
 from constants import *
 from create_translation import *
+from make_spreadsheet import ExcelEditor
 
 class ComplianceDBFile(object):
     DATABASE_HEADER = "Sentence, Sentence_num, Reference, Type, Revision, Part, Chapter, Section, FileName, Table_Name, Checklist_ID, Optional"
-    def __init__(self, database = ""):
+    COMPLIANCE_HEADER = "Reference, Sentence, Type, Optional, Part, Section"
+    def __init__(self, database = "", xl = ""):
         self.database_filepath = database
+        self.xl = ExcelEditor('', xl)
+        self.xl.text_filepath = xl
 
         self.db = {}
         self.db_revs = []
@@ -160,7 +164,65 @@ class ComplianceDBFile(object):
                             for e_rev in entry[TOK_IDX_DB_H_FIRST_REV]:
                                 rev_entry = entry[TOK_IDX_DB_H_FIRST_REV][e_rev]
                                 line = "%s, '%s'" % (line, "', '".join(rev_entry))
-                            print ("%s" % line)
+                            print("%s" % line)
+
+    def extract_part_number(self, part_header):
+        toks = [tok.strip() for tok in part_header.split(" ")]
+        num = ""
+        for tok_i, tok in enumerate(toks):
+            if tok == "Part":
+                num = toks[tok_i + 1]
+                break
+        if num == "":
+            raise ValueError("Could not find part number in '%s'" % part_header)
+        num = num.replace(":", "").strip()
+        return "Part " + str(int(num))
+
+    def extract_section_number(self, part_header):
+        return [tok.strip() for tok in part_header.split(" ")][0]
+
+    def write_compliance_checklist(self, target_rev):
+        if not target_rev in self.db_revs:
+            raise ValueError("Revision %s not found in database %s" % (rev, self.database_filepath))
+        print(self.COMPLIANCE_HEADER)
+        self.xl.header = [tok.strip() for tok in self.COMPLIANCE_HEADER.split(",")]
+        for rev in self.db_revs:
+            if rev > target_rev:
+                continue
+            for part in sorted(self.db[rev]):
+                for chap in sorted(self.db[rev][part]):
+                    for sect in sorted(self.db[rev][part][chap]):
+                        for sent_num in sorted(self.db[rev][part][chap][sect]):
+                            entry = self.db[rev][part][chap][sect][sent_num]
+                            logging.info('Entry: %s' % str(entry))
+                            if entry == {}:
+                                continue
+                            # If the requirement is for a later specification revision, skip it.
+                            if entry[TOK_IDX_DB_H_REVISION] > target_rev:
+                                continue
+                            if entry[TOK_IDX_DB_H_FIRST_REV][target_rev] == ['', '', '', '']:
+                                continue
+                            # Create the entry
+                            stuff = entry[TOK_IDX_DB_H_FIRST_REV][rev]
+                            part_no = self.extract_part_number(stuff[TOK_IDX_DB_H_FIRST_PART - TOK_IDX_DB_H_FIRST_REV])
+                            secn_no = self.extract_section_number(stuff[TOK_IDX_DB_H_FIRST_SECN - TOK_IDX_DB_H_FIRST_REV])
+                            optional = ""
+                            if entry[TOK_IDX_DB_H_OPTIONAL] == "OPTIONAL":
+                                optional = "OPTIONAL"
+
+                            toks = [entry[TOK_IDX_DB_H_CONST_REF],
+                                    entry[TOK_IDX_DB_H_SENTENCE],
+                                    entry[TOK_IDX_DB_H_TYPE],
+                                    optional,
+                                    part_no,
+                                    secn_no]
+                            self.xl.data.append(toks)
+                            print("'%s'" % "', '".join(toks))
+
+    def create_excel(self, target_rev, xl_filepath):
+        self.xl._create_excel()
+        self.xl._format_excel()
+        self.xl.write_excel()
 
 def create_parser():
     parser = OptionParser(description="Update checklist database file based on new merged_sorted_checklist.txt.")
@@ -169,6 +231,18 @@ def create_parser():
             action = 'store', type = 'string',
             default = 'Historic_Checklists/checklist_db.txt',
             help = 'Checklist database file created by this program.',
+            metavar = 'FILE')
+    parser.add_option('-r', '--revision',
+            dest = 'revision',
+            action = 'store', type = 'string',
+            default = 'NoRev',
+            help = 'Compliance checklist revision to be printed.',
+            metavar = 'FILE')
+    parser.add_option('-x', '--excel',
+            dest = 'xl_filepath',
+            action = 'store', type = 'string',
+            default = 'NoRev',
+            help = 'Compliance checklist revision to be printed.',
             metavar = 'FILE')
     return parser
 
@@ -196,8 +270,14 @@ def main(argv = None):
         print(e)
         sys.exit(-1)
 
-    db = ComplianceDBFile(options.database_filepath)
-    db.write_database()
+    db = ComplianceDBFile(options.database_filepath, options.xl_filepath)
+    if options.revision == "NoRev":
+        db.write_database()
+        return
+
+    db.write_compliance_checklist(options.revision)
+    if not options.xl_filepath == "":
+        db.create_excel(options.revision, options.xl_filepath)
 
 if __name__ == '__main__':
     sys.exit(main())

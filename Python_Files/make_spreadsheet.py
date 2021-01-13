@@ -37,10 +37,11 @@ class ExcelEditor(object):
         self.data = []
         self.lines = []
         if source == "text":
-            self._read_text()
-            self._create_excel()
-            self._format_excel()
-        else:
+            if not text == '':
+                self._read_text()
+                self._create_excel()
+                self._format_excel()
+        elif not excel == '':
             self._read_excel()
 
     def _stripped_tokens(self, line):

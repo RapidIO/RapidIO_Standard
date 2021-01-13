@@ -84,6 +84,9 @@ bash scripts, which call python programs:
     a Unique ID that is guaranteed not to change.  This Unique ID
     can be used as references within test plans, and enables automated
     completeness and cross reference checking between test plans.
+- Create complete compliance checklists, in text and Excel format,
+  for each revision of the specification.  These are the
+  Compliance_Database/Compliance_Checklist_x.y.txt and .xlsx files.
 
 Additional scripts are:
 
