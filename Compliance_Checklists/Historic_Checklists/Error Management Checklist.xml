@@ -1,0 +1,3246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.2-c001 63.139439, 2010/09/27-13:37:26        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <pdf:Producer>Acrobat Distiller 5.0.5 (Windows)</pdf:Producer>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/">
+         <xmp:CreateDate>2005-01-27T18:00:51Z</xmp:CreateDate>
+         <xmp:ModifyDate>2006-02-02T20:32:42Z</xmp:ModifyDate>
+         <xmp:MetadataDate>2006-02-02T20:32:42Z</xmp:MetadataDate>
+         <xmp:CreatorTool>FrameMaker 7.0</xmp:CreatorTool>
+      </rdf:Description>
+      <rdf:Description rdf:about=""
+            xmlns:dc="http://purl.org/dc/elements/1.1/">
+         <dc:format>xml</dc:format>
+         <dc:creator>
+            <rdf:Seq>
+               <rdf:li>Barry Wood</rdf:li>
+            </rdf:Seq>
+         </dc:creator>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">error_mgmt_chklst_060131.fm</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Error Management Certification Checklist">
+<destination structID="LinkTarget_98"/>
+<bookmark title="1 Error Management Behavioral Requirements List">
+<destination structID="LinkTarget_115"/>
+</bookmark>
+<bookmark title="2 Register Checklist">
+<destination structID="LinkTarget_580"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<Document xml:lang="en-US">
+<Article_A>
+<TextSection>
+<_Para_Body>RapidIO Trade Association</_Para_Body>
+
+<_Para_Body>Suite 325, 3925 W. Braker Lane</_Para_Body>
+
+<_Para_Body>Austin, TX 78759</_Para_Body>
+
+<_Para_Body>512-305-0070 Tel.</_Para_Body>
+
+<_Para_Body>512-305-0009 FAX.</_Para_Body>
+
+<_Para_Body/>
+
+<_Para_Body>TWG First Showing</_Para_Body>
+
+<_Para_Body>Item 06-02-00000.001 </_Para_Body>
+
+<_Para_Body/>
+
+<_Para_Body>Subject: Error Management Extensions Certification checklist</_Para_Body>
+
+<_Para_Body/>
+
+<_Para_Body>Background: Certification and interoperability checklist for the RapidIO specification Revision 1.3, part 8 ‘Error Management Extensions Specification’.</_Para_Body>
+
+<_Para_Body/>
+
+<_Para_Body>Contributors: Barry Wood, Tundra Semiconductor
+Russel Stuber, Xilinx
+Bertan Tezcan, IDT
+Trevor Hiatt, IDT</_Para_Body>
+
+<_Para_Body/>
+
+<_Para_Body/>
+
+<_Para_Body>Comment Expiration Date: N/A</_Para_Body>
+
+<_Para_Body/>
+
+<_Para_Body>Distribution: RapidIO TA Technical Working Group members</_Para_Body>
+
+<_ChpTitle>   </_ChpTitle>
+
+<_ChpTitle>   Error Management Certification Checklist
+<_Para_Body>This document contains the device inter-operability and certification checklists adhering to the RapidIO Interconnect Specification for devices supporting the RapidIO Interconnect Specification Part 8: Error Management Specification,Revision 1.3. </_Para_Body>
+
+<_Para_Body>Each checklist is contained within a table having 5 columns. The item number, ‘Item No.’ contains a number/letter combination which uniquely identifies the checklist item. A text description of the aspect of the RapidIO specification checked is kept in the ‘Compliance Item’ column. A reference to the specific section of the specification which contains the requirement occurs in the ‘Specification Reference’ column. The ‘Device Class’ column contains the list of device classes, as defined in the multicast extensions specification. </_Para_Body>
+
+<_Para_Body>The last column, ‘Inter-operability Item’, requires further explanation. This document defines three levels to which devices can be considered to meet the RapidIO specification. Inter-operability is the least stringent, requiring only that vendors demonstrate in some fashion that the functionality identified in the ‘Inter-operability Item’ column with the word ‘Inter-op’ can be made to work between two devices. An ‘Inter-op’ function does not need to be precisely compliant to the specification. Only those items marked as ‘Inter-op’ are required to claim interoperability. The next level, compliance, requires that all items in the checklist be demonstrated by the vendor, using a vendor developed test suite. The last level, certification, requires that all items in the checklist be demonstrated using a standard test suite.</_Para_Body>
+
+<_Para_Body>Some parts of the specification are optional, but still require check list items to be assigned to them. Those checklist items which pertain to optional portions of the specification are highlighted with a grey background. </_Para_Body>
+
+<_Para_Body>The data streaming inter-operability and certification checklist is broken down into sub-lists.</_Para_Body>
+
+<_Heading2>1  Error Management Behavioral Requirements List
+<_Para_Body>This section specifies behavioral requirements for a compliant device which supports Error Management functionality.</_Para_Body>
+
+<_Para_Body/>
+
+<_Fig-TB_holder>
+<Table>
+<TableTitle>
+<TR>
+<TH>
+<_TBTitle>Table 1. Error Management Behavioral Requirements Certification List</_TBTitle>
+</TH>
+</TR>
+</TableTitle>
+
+<TableHead>
+<TR>
+<TH>
+<_TBHead_C>Item no.</_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Compliance item</_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Specification reference</_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Device Class</_TBHead_C>
+
+<_TBHead_C></_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Inter-op Item</_TBHead_C>
+</TH>
+</TR>
+</TableHead>
+
+<TableBody>
+<TR>
+<TD>
+<_TBnum>1. </_TBnum>
+</TD>
+
+<TD>
+<_TBItem_L>The occurrence of a transmission error shall be logged by hardware by setting the appropriate error indication bit in the Port n Error Detect CSR. For more detail on which errors cause which bits to be set, refer to Table 2, item 12 in this document.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->2. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>When the bit corresponding to an error is set in the Port n Error Rate Enable CSR, that error is enabled for error capture and error counting.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->3. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>When the Capture Valid Info status bit is not set in the Port n Error Capture Attributes CSR, and the error detected is enabled in the Port n Error Rate Enable CSR, then up to the first 16 bytes of a packet header or the 4 bytes of the control symbol that have a detected error shall be saved to the Port n Error Capture CSRs, and the Capture Valid Info bit is set to 1.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->4. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Error Capture CSRs are not overwritten by error capture information when the Capture Valid Info bit is 1.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->5. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>No action shall be taken if the Error Rate Counter continues to exceed either the Error Rate Failed Threshold or Error Rate Degraded Threshold.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->6. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>No action shall be taken if the Error Rate Counter drops below either the Error Rate Failed Threshold or Error Rate Degraded threshold.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->7. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>The Error Rate Bias field determines the rate at which the Error Rate Counter is decremented.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->8. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>If the Error Rate Counter is less than the Error Rate Recovery value added to the Error Rate Failed Threshold Trigger, the Error Rate Counter shall increment when a physical layer error is detected whose associated enable bit is set in the Port n Error Rate Enable register.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.3
+Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->9. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>The Error Rate Counter shall not underflow or overflow.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->10. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>The Error Rate Counter can be reset at any time by software.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->11. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>When a logical or transport layer error is detected, the appropriate bit is set by the hardware in the Logical/Transport Layer Error Detect CSR. For more information, refer to table 2 item 4 of this document.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->12. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>An endpoint shall detect that, within a message transfer operation, following transmission of a response, a request is not received before a timeout period equal to the Port Response Time-out Control CSR expires.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->13. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>If an interrupt is not issued to the local system, then a Maintenance port-write operation is sent to a predetermined system host to notify software that an error has occurred.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->14. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Clearing the Port-write pending status bit indicates that the port-write has been received.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->15. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>The port write contains information as defined in Part 8, Table 1-2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->16. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>To create events for software test and debug, software must write to Logical/Transport Layer Error capture registers and then write the Logical/Transport Layer Error detect Register to trigger the error reporting mechanism.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->17. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Writing a ‘1’ to an enabled event in the Logical/Transport Layer Error Detect Register will cause the standard reporting mechanism to be triggered. </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->18. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>To create events for software test and debug, software must write the Port n Attributes Error Capture CSR to set the Capture Valid Info bit and then the packet/control symbol information in the other capture registers to trigger the error reporting mechanism.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->19. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Each write of a non-zero value to the Port n Error Detect CSR shall cause the Error Rate Counter to increment if the corresponding bit is enabled in the Port n Error Rate Enable CSR.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->20. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>When a port-write is generated, it is sent to the destination ID programmed in the Port-write Target Device ID CSR.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+</TableBody>
+</Table>
+</_Fig-TB_holder>
+
+<_Fig-TB_holder/>
+</_Heading2>
+
+<_Heading2>2  Register Checklist
+<_Para_Body>The register checklist describes the behavioral requirements for the Error Management Extensions register block.</_Para_Body>
+
+<_Fig-TB_holder>
+<Table>
+<TableTitle>
+<TR>
+<TH>
+<_TBTitle>Table 2. Error Management Register Requirements Certification List</_TBTitle>
+</TH>
+</TR>
+</TableTitle>
+
+<TableHead>
+<TR>
+<TH>
+<_TBHead_C>Item no.</_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Compliance item</_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Specification reference</_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Device Class</_TBHead_C>
+
+<_TBHead_C></_TBHead_C>
+</TH>
+
+<TH>
+<_TBHead_C>Inter-op Item</_TBHead_C>
+</TH>
+</TR>
+</TableHead>
+
+<TableBody>
+<TR>
+<TD>
+<_TBnum>1. </_TBnum>
+</TD>
+
+<TD>
+<_TBItem_L>When a device has an Error Management Extensions Block Header, the following bits are available in the Port n Control CSRs:</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>1A: Detail: Stop on Port Failed Encountered, Drop Packet Enable, and Port Lockout bits are bits 28, 29, and 30 in the Port n Control CSRs:</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>1B: Detail: Bits 28, 29, 30 are writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>1C: Detail: Bits 28 and 29 control behavior as described in section 1.2.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.4
+Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>1D: Detail: When Port Lockout is cleared, the packets that may be received and issued are controlled by the state of the Output Port Enable and Input Port Enable bits in the Port n Control CSR.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>1E: Detail: When Port Lockout is set, this port is stopped and is not enabled to issue or receive any packets; the input port can still follow the training procedure and can still send and respond to link requests, all received packets return packet-not-accepted control symbols to force an error condition to be signalled by the sending device.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->2. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>When a device has an Error Management Extensions Block Header, the following bits are available in the Port n Error and Status CSRs:</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2A: Detail: Output-Packet Dropped, Output Failed-encountered, and Output Degraded-encountered bits are bits 5, 6 and 7 in the Port n Error and Status CSRs:</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2B: Detail: Bits 5, 6 and 7 may be individually written with 1 to clear the bit 0.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2C: Detail: Bits 5, 6 and 7, once set, remain set until cleared as described in 2B above.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2D: Detail: If the output port in a switch has discarded a packet due to expiry of the Time-to-Live counter, the ‘Output Packet-dropped’ bit is set to 1.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.5
+Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2E: Detail: When the Error Rate Counter in the Port n Error Rate register exceeds the value of the Error Rate Degraded Threshold Trigger, the Output Degraded-encountered bit in the Port n Error and Status CSR shall be set.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.2
+Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2F: Detail: When the Error Rate Counter in the Port n Error Rate register exceeds the value of the Error Rate Failed Threshold Trigger, the Output Failed-encountered bit in the Port n Error and Status CSR shall be set.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.2
+Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2G: Detail: Transmission of a port write causes the port-write Pending status bit in the Port n Error and Status CSR to be set to 1.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.4
+Part 6, Sec. 6.5.2.5
+Part 6, Sec. 6.6.2.8
+Part 6, Sec. 6.7.2.4
+Part 6, Sec. 6.8.2.7
+Part 4, Sec. 5.5.2.5
+Part 4, Sec. 5.6.2.8
+Part 4, Sec. 5.7.2.4
+Part 4, Sec. 5.8.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>2H: Detail: Output Packet-Dropped bit in the Port n Error and Status CSR is set upon discard of a packet.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->3. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Error Management Extensions Block Header</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>3A: Detail: The Error Management Extensions Block Header register is read only.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>3B: Detail: The Error Management Extensions Block Header register EF_ID field value is 0x0007.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->4. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Logical/Transport Layer Error Detect CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4A: Detail: The Logical/Transport Layer Error Detect CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4B: Detail: The Logical/Transport Layer Error Detect CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4C: Detail: When an Error Response is received for an IO Logical Layer Request, the IO Error Response bit is set to 1 </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4D: Detail: When an Error Response is received for an MS Logical Layer Request, the Message Error Response bit is set to 1 </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4E: Detail: When an Error Response is received for a GSM Logical Layer Request, the GSM Error Response bit is set to 1 </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4F: Detail: When an MESSAGE packet data payload has an invalid size or segment, the Message Error Response bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4G: Detail: When a packet has illegal field values, but is otherwise supported, the Illegal Transaction Decode bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4H: Detail: When a packet has a destination ID that cannot be accepted by an endpoint, the Illegal Transaction Target Error bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4I: Detail: When a required message request has not been received within the specified time-out interval, the Message Request Time-out bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.2
+Part 8, Sec. 2.3.2.2
+Part 6, Sec. 6.5.2.3
+Part 6, Sec. 6.6.2.3
+Part 4, Sec. 5.5.2.3
+Part 4, Sec. 5.6.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4J: Detail: When a required response has not been received within the specified time-out interval, the Packet Response Time-out bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 1, 2, 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4K: Detail: When an unsolicited/unexpected response has been received, the Unsolicited Response bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4L: Detail: When an transaction is received that is not supported in the Destination Operations CAR, the Unsupported Transaction bit is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4M: Detail: To clear the Logical/Transport Layer Error Detect CSR, write all 0’s to the register.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4N: Detail: If all bits are 0 no information is latched in the Logical/Transport Layer Error information registers.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.2</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->4. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>4O: Detail: If any bit is set in the Logical/Transport Layer Error Detect CSR, and enabled in the Logical/Transport Layer Error Enable CSR, detection of other events will not cause new information to be latched in the Logical/Transport Layer Error information registers.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.1
+Part 8, Sec. 2.3.2.2
+Part 8, Sec. 2.3.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4P: Detail: If multiple enabled errors occur during the same clock cycle, multiple bits will be set in the detect register. The contents of the Logical/Transport Layer Capture registers are implementation dependent in this case.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4Q: Detail: The contents of the Logical/Transport Capture CSRs are valid if the bitwise AND of the Logical/Transport Layer Error Detect CSR and the Logical/Transport Layer Error Detect Enable CSR is not equal to 0.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>4R: Detail: Writing 0 to the Logical/Transport Detect CSR will clear the error detect bits and unlock the register and the Logical/Transport Error Capture CSRs.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->5. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Logical/Transport Layer Error Enable CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>5A: Detail: The Logical/Transport Layer Error Enable CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>5B: Detail: The Logical/Transport Layer Error Enable CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>5C: Detail: When a bit in the Logical/Transport Layer Error Enable CSR is set to 1, detection of the corresponding event in the Logical/Transport Layer Error Detect CSR will cause the Logical/Transport Layer Error information registers to lock, and all resources held by the transaction are freed.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.1
+Part 8, Sec. 2.3.2.3</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->6. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Logical/Transport Layer High Address Capture CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>6A: Detail: The Logical/Transport Layer High Address Capture CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>6B: Detail: The Logical/Transport Layer High Address Capture CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>6C: Detail: When an error is detected in a request packet which is enabled in the Logical/Transport Layer Error Enable CSR, the Logical/Transport Layer High Address Capture CSR is locked with the most significant 32 bits of the address in the erroneous request, for 66 or 50 bit addresses.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.4</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->7. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Logical/Transport Layer Address Capture CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>7A: Detail: The Logical/Transport Layer Address Capture CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>7B: Detail: The Logical/Transport Layer Address Capture CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>7C: Detail: When an error in a request packet which is enabled in the Logical/Transport Layer Error Enable CSR is detected, the Logical/Transport Layer Address Capture CSR is locked with the least significant 29 bits of the address and the extended address bits of the address in the erroneous request.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.5</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->8. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Logical/Transport Layer Device ID Capture CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.6</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>8A: Detail: The Logical/Transport Layer Device ID Capture CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.6</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>8B: Detail: The Logical/Transport Layer Device ID Capture CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.6</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>8C: Detail: When an error which is enabled in the Logical/Transport Layer Error Enable CSR is detected, the Logical/Transport Layer Device ID Capture CSR is locked with the source and destination ID of the erroneous packet.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.6</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->9. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Logical/Transport Layer Control Capture CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.7</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>9A: Detail: The Logical/Transport Layer Control Capture CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.7</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>9B: Detail: The Logical/Transport Layer Control Capture CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.7</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>9C: Detail: When an error is detected which is enabled in the Logical/Transport Layer Error Enable CSR, the Logical/Transport Layer Control Capture CSR is locked with the FTYPE and Transaction Type of the erroneous packet.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.7</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>9D: Detail: When an error is detected in a Message packet which is enabled in the Logical/Transport Layer Error Enable CSR, the Logical/Transport Layer Control Capture CSR is locked with the Letter, MBox and msgseg of the last Message request packet received for the mailbox which had an error.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.7</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>9E: Detail: If the situation in the Error Management Checklist Table 1, Item 12 is detected, the Logical/Transport Layer Control Capture CSR contains the ‘msg info’ field to capture the critical information of the last received (or sent) message segment before the timeout occurred.</_TBItem_L>
+
+<_TBItem_L>NOTE: No behavior specified as a response to the timeout.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.3.2
+Part 8, Sec.2.3.2.7</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Class 3</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->10. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port-write Target deviceID CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>10A: Detail: The Port-write Target deviceID CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>10B: Detail: The Port-write Target deviceID CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>10C: Detail: When a port-write is generated due to an enabled error in the Logical/Transport Layer Error Enable CSR or the Port n Error Detect CSR the destination ID in the port-write packet is controlled by the port-write target device-ID CSR.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>10D: Detail: When a port-write is generated due to an enabled error in the Logical/Transport Layer Error Enable CSR or the Port n Error Detect CSR the TT code in the port-write packet is controlled by the large-transport bit in the Port-write Target device-ID CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.8</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->11. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Packet time-to-live CSR (Required for Switches, optional for other devices)</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11A: Detail: The Packet time-to-live CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11B: Detail: The Packet Time-to-Live CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11C: Detail: The timeout corresponding to the maximum value of the Packet Time-to-Live CSR shall correspond to 100 msec +/- 34 msec.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11D: Detail: No packet will time out when the time-to-live value is 0.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11E: Detail: If a packet is buffered within a switch for longer than the time-to-live value, the packet is dropped.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11F: Detail: When a packet is dropped due to time-to-live expiry, the Output Packet-dropped bit is sent in the Port n Error and Status CSR.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>11G: Detail: If a packet remains in a switch longer than the Time-to-Live time specified by the Time-to-Live field of the Packet Time-to-Live CSR, the packet shall be discarded.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.5
+Part 8, Sec. 2.3.2.9</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->12. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Error Detect CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12A: Detail: The Port n Error Detect CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12B: Detail: The Port n Error Detect CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12C: Detail: When an S-bit error is detected, the ‘Received S-bit error’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12D: Detail: When a control symbol with a bad CRC value (serial) or a true complement mismatch (parallel) is received, the ‘Received corrupt control symbol’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12E: Detail: When an acknowledge control symbol with an unexpected ackID is received, the ‘Received acknowledge control symbol with unexpected ackID’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12F: Detail: When an packet-not-accepted control symbol is received, the ‘Received packet-not-accepted control symbol’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12G: Detail: When an packet with an unexpected ackID is received, the ‘Received packet with unexpected ackID’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12H: Detail: When a packet with incorrect CRC is received, the ‘Received packet with bad CRC’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12I: Detail: When an packet longer than 276 bytes is received, the ‘Received packet exceeds 276 bytes’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12J: Detail: When a link-response is received with an ackID value that is not outstanding, the ‘Non-outstanding ackID’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12K: Detail: When an unexpected packet or control symbol was received, the ‘Protocol Error’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12L: Detail: Parallel: When the FRAME signal is toggled on a non-32-bit boundary, the ‘Delineation Error’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12M: Detail: Serial: When the port receives an unaligned /SC/ or /PD/ or undefined code-group, the ‘Delineation Error’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12N: Detail: When an unexpected acknowledge control symbol is received, the ‘Unsolicited Acknowledge Control Symbol’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12O: Detail: When an acknowledge or link-response control symbol is not received in the period controlled by the Port Link Timeout Control CSR, the ‘Link Timeout’ bit field is set to 1</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>12P: Detail: Bits in the Port n Error Detect CSR are cleared by writing 0 to them.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->13. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Error Rate Enable CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.11</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>13A: Detail: The Port n Error Rate Enable CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.11</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>13B: Detail: The Port n Error Rate Enable CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.11</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>13C: Detail: Error conditions are enabled in the Port n Error Rate Enable CSR by setting the bit corresponding to the specific error condition to 1.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.11</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>13D: Detail: When an error condition that is enabled in the Port n Error Rate Enable CSR occurs, the error rate counter in the Port n Error Rate Threshold Register increments. </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.11</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->14. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Attributes Capture CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14A: Detail: The Port n Attributes Capture CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14B: Detail: The Port n Attributes Capture CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14C: Detail: When a packet related error condition that is enabled in the Port n Error Rate Enable CSR occurs, the info type field has a value of 0b00</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14D: Detail: When a control symbol related error condition that is enabled in the Port n Error Rate Enable CSR occurs, the info type field has a value of 0b01</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14E: Detail: When an implementation specific error condition that is enabled in the Port n Error Rate Enable CSR occurs, the info type field has a value of 0b10</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14F: Detail: When an error condition that is enabled in the Port n Error Rate Enable CSR occurs, the ‘error type’ field is set to the bit number in the Port n Error Detect CSR which corresponds to the error condition</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>14G: Detail: When an error condition that is enabled in the Port n Error Rate Enable CSR occurs, the Port n Error Capture Registers are locked and the Capture Valid Info bit is set in the Port n Error Capture Attributes CSR. In case of multiple detected errors during the same clock cycle one of the errors is reflected in the Error Type field of the Port n Attributes Capture CSR.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.12</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->15. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Packet/Control Symbol Capture 0 CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.13</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>15A: Detail: The Port n Packet/Control Symbol Capture 0 CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.13</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>15B: Detail: The Port n Packet/Control Symbol Capture 0 CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.13</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>15C: Detail: When a packet related error condition that is enabled in the Port n Error Rate Enable CSR occurs, the Port n Packet/Control Symbol Capture 0 CSR contains the first 4 bytes of the packet header.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.13</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>15D: Detail: When a control symbol related error condition that is enabled in the Port n Error Rate Enable CSR occurs, Port n Packet/Control Symbol Capture 0 CSR contains the complete control symbol information.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.13</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->16. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Packet Capture 1 CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.14</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>16A: Detail: The Port n Packet Capture 1 CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.14</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>16B: Detail: The Port n Packet Capture 1 CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.14</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>16C: Detail: When a packet related error condition that is enabled in the Port n Error Rate Enable CSR occurs, the Port n Packet Capture 1 CSR contains bytes 4 through 7 of the packet.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.14</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->17. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Packet Capture 2 CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.15</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>17A: Detail: The Port n Packet Capture 2 CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.15</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>17B: Detail: The Port n Packet Capture 2 CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.15</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>17C: Detail: When a packet related error condition that is enabled in the Port n Error Rate Enable CSR occurs, the Port n Packet Capture 2 CSR contains bytes 8 through 11 of the packet.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.15</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->18. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Packet Capture 3 CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.16</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>18A: Detail: The Port n Packet Capture 3 CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.16</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>18B: Detail: The Port n Packet Capture 3 CSR has a reset value of 0</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.16</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>18C: Detail: When a packet related error condition that is enabled in the Port n Error Rate Enable CSR occurs, the Port n Packet Capture 3 CSR contains bytes 12 through 15 of the packet.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.16</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->19. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Error Rate CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19A: Detail: The Port n Error Rate CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19B: Detail: The Port n Error Rate CSR has a reset value of 0x8000_0000</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19C: Detail: The Error Rate Bias field in the Port n Error Rate CSR causes the Error Rate Counter field in the Port n Error Rate CSR to decrement at the rate specified in Part 8, Table 2-21</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19D: Detail: The Error Rate Counter field in the Port n Error Rate CSR does not warp around to 0 once it achieves its maximum value. </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19E: Detail: In the Port n Error Rate CSR, the Error Rate Counter will not reach a value greater than the Error Rate Recovery Field added to the Error Rate Failed Threshold Trigger in the Port n Error Rate Threshold CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+
+<_TBItem_L>Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19F: Detail: The maximum value that the Error Rate Counter field in the Port n Error Rate CSR has attained is captured in the Peak Error Rate field of the Port n Error Rate CSR on the same clock cycle that the Error Rate Counter field achieved the maximum value.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>19G: Detail: The Error Rate Counter in the Port n Error Rate CSR increments by 1 for every error which is both detected and enabled in the Port n Error Rate Enable CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 2.3.2.11
+Part 8, Sec. 2.3.2.17</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBnum->20. </_TBnum->
+</TD>
+
+<TD>
+<_TBItem_L>Port n Error Rate Threshold CSR</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C>Interop</_TBItem_C>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20A: Detail: The Port n Error Rate Threshold CSR is writable</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20B: Detail: The Port n Error Rate Threshold CSR has a reset value of 0xFFFF_0000</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec.2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20C: Detail: When the Error Rate Count field in the Port n Error Rate CSR reaches the value programmed in the Error Rate Failed Threshold Trigger field in the Port n Error Rate Threshold CSR, the port behaves as defined in Part 8, Table 1-1 and the Output Failed-encountered bit in the Port n Error and Status CSR shall be set. APort-Failed Event is detected.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.2
+Part 8, Sec. 1.2.3
+Part 8, Sec. 1.2.4
+Part 8, Sec. 1.4
+Part 8, Sec. 2.3.2.17
+Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20D: Detail: The Error Rate Count field in the Port n Error Rate CSR reaches the value programmed in the Error Rate Degraded Threshold Trigger field in the Port n Error Rate Threshold CSR, a Port-degraded Event is detected.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.2
+Part 8, Sec. 1.2.3
+Part 8, Sec. 1.4
+Part 8, Sec. 2.3.2.17
+Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20E: Detail: If the Stop-on-Port-Failed-Encountered Enable bit is 0, and the Drop Packet Enable bit is 0, when the Port Failed Threshold is reached the port shall continue to attempt to transmit packets to the connected device.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.4
+Part 8, Sec. 2.2
+Part 8, Sec. 2.3.2.17
+Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20F: Detail: For switch devices, if the Stop-on-Port-Failed-Encountered Enable bit is 0, and the Drop Packet Enable bit is 1, when the Port Failed Threshold is reached the port shall drop packets which receive a Packet-not-Accepted control symbol. </_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.4
+Part 8, Sec. 2.2
+Part 8, Sec. 2.3.2.17
+Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20G: Detail: If the Stop-on-Port-Failed-Encountered Enable bit is 1, and the Drop Packet Enable bit is 0, when the Port Failed Threshold is reached the port shall stop attempting to transmit packets to the connected device. The output port will congest.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.4
+Part 8, Sec. 2.2
+Part 8, Sec. 2.3.2.17
+Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+
+<TR>
+<TD>
+<_TBItem_L>20H: Detail: If the Stop-on-Port-Failed-Encountered Enable bit is 1, and the Drop Packet Enable bit is 1, when the Port Failed Threshold is reached the port shall discard all output packets.</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_L>Part 8, Sec. 1.2.4
+Part 8, Sec. 2.2
+Part 8, Sec. 2.3.2.17
+Part 8, Sec. 2.3.2.18</_TBItem_L>
+</TD>
+
+<TD>
+<_TBItem_C>Generic</_TBItem_C>
+</TD>
+
+<TD>
+<_TBItem_C/>
+</TD>
+</TR>
+</TableBody>
+</Table>
+</_Fig-TB_holder>
+
+<_Fig-TB_holder/>
+</_Heading2>
+</_ChpTitle>
+</TextSection>
+</Article_A>
+</Document>
+</TaggedPDF-doc>

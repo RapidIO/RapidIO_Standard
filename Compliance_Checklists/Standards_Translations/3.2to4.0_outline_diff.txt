@@ -1,0 +1,48 @@
+430a431
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.10.3 IDLE3 Idle Sequence Selection'
+436a438,440
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.11.3 Ports Operating at 25.78125 Gbaud'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.11.3.1 Long run 25.78125 Gbaud training'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 5 64b/67b PCS and PMA Layers', '5.11.3.2 Short run 25.78125 Gbaud training'
+532c536
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.13 Error Detection and Recovery'
+---
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.13 Error Detection and Recovery for Reliable Transmission'
+547c551,552
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.14 Power Management'
+---
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.14 Error Detection and Recovery for Error Free Mode Link Operation'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 6 LP-Serial Protocol', '6.15 Power Management'
+600c605
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on VC  . #, see Table 7-31)))'
+---
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 7 LP-Serial Registers', '7.8.2.4 Port n VCx BW Allocation Registers (Block Offset ((((port number) + 1) * 0x20) + (offset based on  . VC #, see Table 7-31)))'
+851,853c856,858
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.1 Common to Level III Short run and Long run'
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.2 Application Goals for Level III Short Run'
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.3 Application Goals for Long Run'
+---
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.1 Common to Level III Short-reach and Long-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.2 Application Goals for Level III Short-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.2.3 Application Goals for Long-reach'
+858,859c863,864
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.1 Level III Short Run'
+< '3.2', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.2 Level III Long Run'
+---
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.1 Level III Short-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 12 Electrical Specification for 10.3125 and 12.5 Gbaud LP-Serial Links', '12.4.2 Level III Long-reach'
+862a868,881
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.1 References'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.2 Level IV Application Goals'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.2.1 Common to Level IV Short-reach and Long-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.2.2 Application Goals for Level IV Short-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.2.3 Application Goals for Long-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.3 Equalization'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.3.1 Receiver'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.3.2 Transmitter'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.4 Level IV Electrical Specification'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.4.1 Level IV Short-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.4.2 Level IV Long-reach'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.4.3 Level IV Transmitter Lane-to-Lane Skew'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.4.4 Receiver Input Lane-to-Lane Skew'
+> '4.0', 'RapidIO Interconnect Specification Part 6: LP-Serial Physical Layer Specification', 'Chapter 13 Electrical Specification for 25Gbaud LP-Serial Links', '13.4.5 Electrical IDLE'

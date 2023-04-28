@@ -1,0 +1,2 @@
+'TESTNAME', 'DESCRIPTION'
+'verify_port_init_state_machine', 'Run through all success, failure and configuration options for 1x/2x/Nx state machine initialization.'

@@ -1,0 +1,51 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Editor files
+*~
+*swp
+
+# Log files
+*.log
+
+# Debug output files
+*.output
+
+# Text editing files using Excel
+*.txt.xlsx
+
+# Eclipse-specific files
+.project
+.cproject
+.metadata/
+.settings/
+
+# ctags tags file
+tags
+html/
+latex/
+
+# make control files
+.makeTest
+.makeAll

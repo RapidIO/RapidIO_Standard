@@ -1,0 +1,22 @@
+#!/bin/bash
+function check_rc(){
+        rc=$?
+        echo ---------------------------------------
+        if [[ $rc != 0 ]];
+        then
+                echo $1 ' FAILURE!'
+                exit $rc
+        else
+                echo $1 ' SUCCESS!'
+        fi
+        echo ---------------------------------------
+}
+
+./Python_Files/parse_checklist.py -f Historic_Checklists/Error\ Management\ Checklist.xml -r 1.3 -o Historic_Checklists/ErrorManagementChecklist_optional.txt > Compliance_Database/ErrorManagementChecklist_Rev2.txt
+check_rc 'Parse ErrorManagementChecklist'
+./Python_Files/parse_checklist.py -f Historic_Checklists/Data\ Streaming\ Checklist.xml -r 1.3 > Compliance_Database/DataStreamingChecklist_Rev2.txt
+check_rc 'Parse DataStreamingChecklist'
+./Python_Files/parse_checklist.py -f Historic_Checklists/rev1_3_rio_chklist.xml -r 1.3 -o Historic_Checklists/rev1_3_rio_chklist_optional.txt > Compliance_Database/rev1_3_rio_chklist.txt
+check_rc 'Parse Rev1.3'
+./Python_Files/parse_checklist.py -f Historic_Checklists/rapidio_interop_checklist_rev2_2.xml -r 2.2 -p 6 -t -o Historic_Checklists/rapidio_interop_checklist_rev2_2_optional.txt > Compliance_Database/rapidio_interop_checklist_rev2_2.txt
+check_rc 'Parse Rev2.2Part6'
